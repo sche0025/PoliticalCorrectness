@@ -1,0 +1,11 @@
+#map{
+    width: 90vh ;
+    height:70vh ;
+
+}
+
+#content {
+    background: #fff;
+    height: 100%;
+    overflow:auto;
+}

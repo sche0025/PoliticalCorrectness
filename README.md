@@ -16,3 +16,5 @@ Pre-Requisite:
 Then input 'deactivate' to exit venv.
 5. in frontend and run **npm install** (to install all the frontend dependencies, this is currently unnecessary for backend developer)
 6. to run the backend, cd backend and run **python3.7 Main.py**
+
+Notice: to update the requirements.txt: run pip3 freeze > requirements.txt
