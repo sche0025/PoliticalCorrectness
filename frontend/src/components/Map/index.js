@@ -116,7 +116,6 @@ export default class GoogleMap extends React.Component {
 
         this.addMarkers(map)
 
-
     }
 
     addMarkers = () => {
@@ -160,7 +159,7 @@ export default class GoogleMap extends React.Component {
         })
 
         marker.addListener('click', function () {
-            // obj.codeAddress()
+            obj.codeAddress()
         })
 
     }

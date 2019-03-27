@@ -56,16 +56,18 @@ class Home extends React.Component {
                                 <span>Politicians</span>
                             </NavLink>
                         </Menu.Item>
-                        <SubMenu
-                            key="sub2"
-                            title={<span><Icon type="team"/><span>Team</span></span>}
-                        >
-                            <Menu.Item key="6">Team 1</Menu.Item>
-                            <Menu.Item key="8">Team 2</Menu.Item>
-                        </SubMenu>
-                        <Menu.Item key="9">
-                            <Icon type="file"/>
-                            <span>File</span>
+                        {/*<SubMenu*/}
+                        {/*key="sub2"*/}
+                        {/*title={<span><Icon type="team"/><span>Team</span></span>}*/}
+                        {/*>*/}
+                        {/*<Menu.Item key="6">Team 1</Menu.Item>*/}
+                        {/*<Menu.Item key="8">Team 2</Menu.Item>*/}
+                        {/*</SubMenu>*/}
+                        <Menu.Item key="4">
+                            <NavLink to={'/home/test'}>
+                                <Icon type="file"/>
+                                <span>Chart Test</span>
+                            </NavLink>
                         </Menu.Item>
                     </Menu>
                 </Sider>
@@ -83,7 +85,7 @@ class Home extends React.Component {
                     <Content style={{margin: '0 16px'}}>
 
 
-                        <div style={{margin: '0 16px', height:'85vh'}}>
+                        <div style={{margin: '0 16px', height: '85vh'}}>
                             {this.props.children}
                         </div>
                     </Content>
