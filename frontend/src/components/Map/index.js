@@ -83,7 +83,7 @@ export default class GoogleMap extends React.Component {
         var map;
         var AUSTRALIA_BOUNDS = {
             north: -11,
-            south: -42,
+            south: -43,
             west: 110,
             east: 154,
         };

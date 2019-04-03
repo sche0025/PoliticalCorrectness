@@ -1,0 +1,47 @@
+.table{
+    min-height: 82vh;
+    width: 95%;
+}
+
+/*.row {*/
+    /*height: 12vh;*/
+    /*color: red;*/
+/*}*/
+
+.ant-table-title{
+    height: 6vh;
+    color: blue;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table thead{
+    height: 6vh;
+    color: red;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/*thead[class*="ant-table-thead"] th{*/
+    /*background-color: yellow !important;*/
+/*}*/
+
+.table thead th{
+    height: 6vh;
+
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table tbody tr{
+    height: 13.7vh;
+    color: blue;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table tbody tr td{
+
+    text-align: center;
+    vertical-align: middle;
+}

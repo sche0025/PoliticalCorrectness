@@ -4,7 +4,7 @@ import 'antd/dist/antd.css';
 import './style.css';
 import logo from "../../assets/img/unimelbLogo.jpeg"
  import {BackTop} from 'antd'
-import PoliticianCard from '../../components/Politician/PoliticianCard.js'
+import PoliticianCards from '../../components/Politician/PoliticianCards.js'
 
 
 import {
@@ -30,11 +30,13 @@ export default class Heatmap extends React.Component {
                 </Breadcrumb>
 
                 <div id={'content'}>
-                    <div style={{padding: "15px"}}>
-                        <PoliticianCard />
+                    <div style={{padding: "15px",background: '#ECECEC' }}>
+
+                        <PoliticianCards />
+
                     </div>
                 </div>
-            <BackTop target={() =>document.getElementById('content')} />
+
             </Fragment>
 
         );

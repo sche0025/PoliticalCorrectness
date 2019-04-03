@@ -83,9 +83,7 @@ class Home extends React.Component {
                     </Header>
 
                     <Content style={{margin: '0 16px'}}>
-
-
-                        <div style={{margin: '0 16px', height: '85vh'}}>
+                        <div style={{margin: '0 16px', height: '95%'}}>
                             {this.props.children}
                         </div>
                     </Content>
