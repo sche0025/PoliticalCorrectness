@@ -31,7 +31,7 @@ export default class Dashboard extends React.Component {
                 <div style={{background: '#fff', height: '100%'}}>
                     <div style={{padding: "15px"}}>
                         <Row>
-                            <Col span={12} style={{background: "", minHeight: '100%'}}>
+                            <Col span={12} style={{background: "", height: '100%'}}>
                                 <Leaderboard/>
                             </Col>
                             <Col span={12}>

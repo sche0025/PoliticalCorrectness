@@ -60,12 +60,12 @@ export default class Leaderboard extends React.PureComponent {
 
     render() {
         return (
-            <Fragment>
+            <div >
                 <Table columns={this.columns} dataSource={data} pagination={false}
                        className={'table'} bordered={true}
                        title={() => 'Leaderboard'} showHeader={true}
                 />
-            </Fragment>
+            </div>
         );
     }
 }

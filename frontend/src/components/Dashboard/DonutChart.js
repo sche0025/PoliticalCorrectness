@@ -14,10 +14,10 @@ export default class DonutChart extends React.Component {
             exportEnabled: true,
             height:295,
             title: {
-                text: "Customer Satisfaction"
+                text: "Sentiment of Replies"
             },
             subtitles: [{
-                text: "71% Positive",
+                text: "40% Positive",
                 verticalAlign: "center",
                 fontSize: 24,
                 dockInsidePlotArea: true
@@ -31,8 +31,8 @@ export default class DonutChart extends React.Component {
                 yValueFormatString: "#,###'%'",
                 dataPoints: [
                     { name: "Unsatisfied", y: 5 },
-                    { name: "Very Unsatisfied", y: 31 },
-                    { name: "Very Satisfied", y: 40 },
+                    { name: "Neutral", y: 31 },
+                    { name: "Satisfied", y: 40 },
 
                 ]
             }]
