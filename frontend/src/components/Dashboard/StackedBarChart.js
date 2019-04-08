@@ -26,16 +26,19 @@ export default  class stackedBarChart extends React.Component {
         const options = {
             animationEnabled: true,
             exportEnabled: true,
-            height:295,
+            height:this.props.height,
             title: {
-                text: "Operating Expenses of ACME",
+                text: "Number of tweets from different states",
                 fontFamily: "verdana"
             },
             axisY: {
-                title: "in Eur",
-                prefix: "€",
+                title: "Number of tweets",
                 suffix: "k"
             },
+            axisX: [{
+                title: "States",
+                interval: 1
+            }],
             toolTip: {
                 shared: true,
                 reversed: true
@@ -50,27 +53,7 @@ export default  class stackedBarChart extends React.Component {
             data: [
                 {
                     type: "stackedColumn",
-                    name: "General",
-                    showInLegend: true,
-                    yValueFormatString: "#,###k",
-                    dataPoints: [
-                        { label: "Jan", y: 14 },
-                        { label: "Feb", y: 12 },
-                        { label: "Mar", y: 14 },
-                        { label: "Apr", y: 13 },
-                        { label: "May", y: 13 },
-                        { label: "Jun", y: 13 },
-                        { label: "Jul", y: 14 },
-                        { label: "Aug", y: 14 },
-                        { label: "Sept", y: 13 },
-                        { label: "Oct", y: 14 },
-                        { label: "Nov", y: 14 },
-                        { label: "Dec", y: 14 }
-                    ]
-                },
-                {
-                    type: "stackedColumn",
-                    name: "Marketing",
+                    name: "Neutral",
                     showInLegend: true,
                     yValueFormatString: "#,###k",
                     dataPoints: [
@@ -90,7 +73,7 @@ export default  class stackedBarChart extends React.Component {
                 },
                 {
                     type: "stackedColumn",
-                    name: "Sales",
+                    name: "Positive",
                     showInLegend: true,
                     yValueFormatString: "#,###k",
                     dataPoints: [
@@ -110,7 +93,7 @@ export default  class stackedBarChart extends React.Component {
                 },
                 {
                     type: "stackedColumn",
-                    name: "IT",
+                    name: "Negative",
                     showInLegend: true,
                     yValueFormatString: "#,###k",
                     dataPoints: [

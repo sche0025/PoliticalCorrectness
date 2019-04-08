@@ -18,14 +18,14 @@ export default  class LineChart extends React.Component {
 
             exportEnabled: true,
             theme: "light2", // "light1", "dark1", "dark2"
-            height:295,
+            height:this.props.height,
             title:{
-                text: "Bounce Rate by Week of Year"
+                text: "Number of tweets posted by politicians in past 7 days"
             },
             axisY: {
-                title: "Bounce Rate",
+                title: "Number of tweets",
                 includeZero: false,
-                suffix: "%"
+                suffix: "k"
             },
             axisX: {
                 title: "Week of Year",
@@ -34,7 +34,7 @@ export default  class LineChart extends React.Component {
             },
             data: [{
                 type: "line",
-                toolTipContent: "Week {x}: {y}%",
+                toolTipContent: "Week {y}K",
                 dataPoints: [
                     { x: 1, y: 64 },
                     { x: 2, y: 61 },

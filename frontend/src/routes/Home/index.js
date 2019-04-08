@@ -20,13 +20,28 @@ class Home extends React.Component {
     };
 
     onCollapse = (collapsed) => {
-        console.log(collapsed);
+
         this.setState({collapsed});
     }
 
-    render() {
-        console.log(this.props.children)
+    getActivatedKey = () => {
+        var path = window.location.pathname
+        console.log(path,path.endsWith('politician'))
+        if(path.endsWith('dashboard')){
+            return '1'
+        }else if(path.endsWith('map')){
+            return '2'
+        }else if(path.endsWith('politician')){
+            return '3'
+        }else if(path.endsWith('about')){
+            return '4'
+        }
+    }
 
+    render() {
+        console.log(window.location.pathname)
+        var defaultKey = this.getActivatedKey()
+        // console.log(defaultKey)
         return (
             <Layout style={{minHeight: '100vh'}}>
 
@@ -37,7 +52,7 @@ class Home extends React.Component {
                     onCollapse={this.onCollapse}
                 >
                     <div className="logo"><img className={"img"} src={logo} alt=""/></div>
-                    <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
+                    <Menu theme="dark" defaultSelectedKeys={[defaultKey]} mode="inline">
                         <Menu.Item key="1">
                             <NavLink to={'/home/dashboard'}>
                                 <Icon type="pie-chart"/>
@@ -45,25 +60,27 @@ class Home extends React.Component {
                             </NavLink>
                         </Menu.Item>
                         <Menu.Item key="2">
-                            <NavLink to={'/home/heatmap'}>
-                                <Icon type="pie-chart"/>
+                            <NavLink to={'/home/map'}>
+                                <Icon type="heat-map"/>
                                 <span>Map</span>
                             </NavLink>
                         </Menu.Item>
                         <Menu.Item key="3">
                             <NavLink to={'/home/politician'}>
-                                <Icon type="pie-chart"/>
+                                <Icon type="user"/>
                                 <span>Politicians</span>
                             </NavLink>
                         </Menu.Item>
-                        {/*<SubMenu*/}
-                        {/*key="sub2"*/}
-                        {/*title={<span><Icon type="team"/><span>Team</span></span>}*/}
-                        {/*>*/}
-                        {/*<Menu.Item key="6">Team 1</Menu.Item>*/}
-                        {/*<Menu.Item key="8">Team 2</Menu.Item>*/}
-                        {/*</SubMenu>*/}
+
+
                         <Menu.Item key="4">
+                            <NavLink to={'/home/about'}>
+                                <Icon type="team"/>
+                                <span>About Us</span>
+                            </NavLink>
+                        </Menu.Item>
+
+                        <Menu.Item key="5">
                             <NavLink to={'/home/test'}>
                                 <Icon type="file"/>
                                 <span>Chart Test</span>
@@ -75,7 +92,7 @@ class Home extends React.Component {
                     <Header style={{background: '#fff', padding: "0px 10px", textAlign: "right"}}>
                         <Row>
                             <Col>
-                                <span className={"text"}>  Welcome Richard</span>
+                                <span>  Welcome Richard</span>
                                 <a className={"text"} href={'#'}>Logout </a>
                             </Col>
 

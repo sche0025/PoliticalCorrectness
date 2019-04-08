@@ -20,15 +20,16 @@ const SubMenu = Menu.SubMenu;
 export default class Dashboard extends React.Component {
 
     render() {
+
         return (
             <Fragment>
 
                 <Breadcrumb style={{margin: '16px 0'}}>
-                    <Breadcrumb.Item>User</Breadcrumb.Item>
-                    <Breadcrumb.Item>Bill</Breadcrumb.Item>
+                    <Breadcrumb.Item>Home</Breadcrumb.Item>
+                    <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
                 </Breadcrumb>
 
-                <div style={{background: '#fff', height: '100%'}}>
+                <div style={{background: '#fff', height: '83vh'}}>
                     <div style={{padding: "15px"}}>
                         <Row>
                             <Col span={12} style={{background: "", height: '100%'}}>
@@ -38,7 +39,7 @@ export default class Dashboard extends React.Component {
 
                                 <Row style={{background: "", height: '27vh', minHeight: '300px'}}>
 
-                                    <LineChart/>
+                                    <LineChart height={295}/>
 
                                 </Row>
                                 <Row style={{background: "", height: '27vh', minHeight: '300px'}}>
@@ -52,7 +53,7 @@ export default class Dashboard extends React.Component {
                                 </Row>
 
                                 <Row style={{background: "", height: '27vh', minHeight: '300px'}}>
-                                    <StackedBarChart/>
+                                    <StackedBarChart height={295}/>
 
 
                                 </Row>

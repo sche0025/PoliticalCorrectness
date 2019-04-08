@@ -1,4 +1,5 @@
 .content {
     overflow: auto;
-    max-height: 100vh;
+    /*max-height: 100vh;*/
+    height: 83vh;
 }

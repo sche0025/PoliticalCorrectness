@@ -28,13 +28,12 @@
 
 .table thead th{
     height: 6vh;
-
     text-align: center;
     vertical-align: middle;
 }
 
 .table tbody tr{
-    height: 14vh;
+    height: 13.5vh;
     color: blue;
     text-align: center;
     vertical-align: middle;

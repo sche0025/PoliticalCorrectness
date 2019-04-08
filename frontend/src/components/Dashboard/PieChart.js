@@ -17,7 +17,7 @@ export default class PieChart extends React.Component {
             height:295,
 
             title:{
-                text: "Top Categories of New Year's Resolution"
+                text: "Replies across different parties"
             },
             data: [{
                 type: "pie",
@@ -29,9 +29,9 @@ export default class PieChart extends React.Component {
                 indexLabel: "{y}%",
                 indexLabelPlacement: "inside",
                 dataPoints: [
-                    { y: 32, label: "Health" },
-                    { y: 22, label: "Finance" },
-                    { y: 15, label: "Education" },
+                    { y: 32, label: "Labour" },
+                    { y: 22, label: "XX" },
+                    { y: 15, label: "National" },
                     { y: 19, label: "Career" },
                     { y: 5, label: "Family" },
                     { y: 7, label: "Real Estate" }
