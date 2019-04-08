@@ -1,6 +1,46 @@
 .card{
-    width: 100%;
-    height:25vh;
-    margin: 20px;
+    width: 97%;
+    height:30vh;
+    margin: 10px;
 
+}
+
+#cardList{
+    overflow: auto;
+    max-height: 83vh;
+}
+
+
+ .ant-back-top {
+    bottom: 80px;
+     right: 25%;
+}
+
+.heading {
+   padding: 5px;
+}
+
+.heading2 {
+    padding-top: 50px;
+    padding-left: 5px;
+}
+
+.heading-text{
+    font-size: 14pt;
+    color: black;
+    font-weight: bold;
+}
+
+.politician-text{
+    font-size: 14pt;
+    color: black;
+}
+
+.title{
+    font-size: 18pt;
+}
+
+.statistics{
+    padding-left: 30px;
+    padding-top: 50px;
 }

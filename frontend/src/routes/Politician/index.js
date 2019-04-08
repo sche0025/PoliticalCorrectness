@@ -4,8 +4,8 @@ import 'antd/dist/antd.css';
 import './style.css';
 import logo from "../../assets/img/unimelbLogo.jpeg"
  import {BackTop} from 'antd'
-import PoliticianCard from '../../components/Politician/PoliticianCard.js'
-
+import PoliticianCards from '../../components/Politician/PoliticianCards'
+import PoliticianFilter from '../../components/Politician/PoliticianFilter'
 
 import {
     Layout, Menu, Breadcrumb, Icon, Row, Col
@@ -20,21 +20,26 @@ export default class Heatmap extends React.Component {
 
 
     render() {
+
         return (
 
             <Fragment>
 
                 <Breadcrumb style={{margin: '16px 0'}}>
-                    <Breadcrumb.Item>User</Breadcrumb.Item>
-                    <Breadcrumb.Item>Bill</Breadcrumb.Item>
+                    <Breadcrumb.Item>Home</Breadcrumb.Item>
+                    <Breadcrumb.Item>Politicians</Breadcrumb.Item>
                 </Breadcrumb>
 
-                <div id={'content'}>
-                    <div style={{padding: "15px"}}>
-                        <PoliticianCard />
+                <div className={'content'}>
+                    <div style={{padding: "15px",background: '#ECECEC' }}>
+                        <Row>
+                            <Col span={18}> <PoliticianCards />  </Col>
+                            <Col span={6}>  <PoliticianFilter/>    </Col>
+                        </Row>
+
                     </div>
                 </div>
-            <BackTop target={() =>document.getElementById('content')} />
+
             </Fragment>
 
         );

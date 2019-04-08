@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react';
 import ReactDOM from 'react-dom';
-import Map from "../../routes/Heatmap";
+import Map from "../../routes/Map";
 import './style.css'
 
 export default class GoogleMap extends React.Component {
@@ -20,7 +20,9 @@ export default class GoogleMap extends React.Component {
     }
 
     renderMap = () => {
-        loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyBEGnKK5sbPBXi2tL4o7LFahhEniTaLQTY&callback=initMap")
+        var heatmap = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBEGnKK5sbPBXi2tL4o7LFahhEniTaLQTY&libraries=visualization&callback=initMap'
+        // loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyBEGnKK5sbPBXi2tL4o7LFahhEniTaLQTY&callback=initMap")
+        loadScript(heatmap)
         window.initMap = this.initMap
     }
 
@@ -52,7 +54,7 @@ export default class GoogleMap extends React.Component {
         console.log(this)
         // let newFun =  this.handleMouseover()
 
-        // var map = new window.google.maps.Map
+        // var map = new window.google.maps.GoogleMap
         //
         // var bounds = {
         //     north: -34.36,
@@ -83,7 +85,7 @@ export default class GoogleMap extends React.Component {
         var map;
         var AUSTRALIA_BOUNDS = {
             north: -11,
-            south: -42,
+            south: -43,
             west: 110,
             east: 154,
         };
@@ -104,6 +106,15 @@ export default class GoogleMap extends React.Component {
             minZoom:4.5,
             // maxZoom:5
         });
+
+       var heatmap = new window.google.maps.visualization.HeatmapLayer({
+            data: [ new window.google.maps.LatLng(-37.8, 144.989563)],
+            map: map
+        });
+
+        function toggleHeatmap() {
+            heatmap.setMap(heatmap.getMap() ? null : map);
+        }
 
         // map.fitBounds( new window.google.maps.LatLngBounds());
         this.setState({
@@ -167,6 +178,7 @@ export default class GoogleMap extends React.Component {
     render() {
         return (
             <Fragment>
+                <button onClick="toggleHeatmap()">Toggle Heatmap</button>
                 <div id={'map'}></div>
             </Fragment>
         );

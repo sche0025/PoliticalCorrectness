@@ -1,0 +1,50 @@
+
+.ant-carousel .slick-slide {
+    text-align: center;
+    height: 500px;
+    line-height: 500px;
+    background: #364d79;
+    overflow: hidden;
+}
+
+.ant-carousel .slick-slide h3 {
+    color: #fff;
+}
+
+.carousel {
+    margin:0 auto;
+}
+
+.about-content{
+    padding-top: 20px;
+}
+
+.about-font-heading{
+    font-size: 20pt;
+    color: black;
+    font-weight: bold;
+}
+
+.about-font-body{
+    font-size: 14pt;
+}
+
+.about-profile{
+    padding: 10px;
+}
+
+.profile-heading{
+    font-size: 15pt;
+    color: black;
+    font-weight: bold;
+}
+
+.profile-text{
+    padding-top: 4px;
+    font-size: 13pt;
+    color: black;
+}
+
+.avatar{
+    height: 287px;
+}

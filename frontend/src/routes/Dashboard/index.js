@@ -1,12 +1,16 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import './style.css';
-import logo from "../../assets/img/unimelbLogo.jpeg"
 
 import {
     Layout, Menu, Breadcrumb, Icon, Row, Col
 } from 'antd';
+import Leaderboard from '../../components/Dashboard/Leaderboard'
+import LineChart from '../../components/Dashboard/LineChart'
+import StackedBarChart from '../../components/Dashboard/StackedBarChart'
+import PieChart from '../../components/Dashboard/PieChart'
+import DonutChart from '../../components/Dashboard/DonutChart'
 
 const {
     Header, Content, Footer, Sider,
@@ -16,8 +20,52 @@ const SubMenu = Menu.SubMenu;
 export default class Dashboard extends React.Component {
 
     render() {
+
         return (
-           <div> This is dashboard</div>
+            <Fragment>
+
+                <Breadcrumb style={{margin: '16px 0'}}>
+                    <Breadcrumb.Item>Home</Breadcrumb.Item>
+                    <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
+                </Breadcrumb>
+
+                <div style={{background: '#fff', height: '83vh'}}>
+                    <div style={{padding: "15px"}}>
+                        <Row>
+                            <Col span={12} style={{background: "", height: '100%'}}>
+                                <Leaderboard/>
+                            </Col>
+                            <Col span={12}>
+
+                                <Row style={{background: "", height: '27vh', minHeight: '300px'}}>
+
+                                    <LineChart height={295}/>
+
+                                </Row>
+                                <Row style={{background: "", height: '27vh', minHeight: '300px'}}>
+                                    <Col span={12}>
+                                        <PieChart/>
+                                    </Col>
+                                    <Col span={12}>
+                                        <DonutChart/>
+                                    </Col>
+
+                                </Row>
+
+                                <Row style={{background: "", height: '27vh', minHeight: '300px'}}>
+                                    <StackedBarChart height={295}/>
+
+
+                                </Row>
+
+                            </Col>
+                        </Row>
+
+
+                    </div>
+                </div>
+
+            </Fragment>
         );
     }
 }
