@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 import ReactDOM from 'react-dom';
 import Map from "../../routes/Map";
-import './style.css'
+import './GoogleMap.css'
 
 export default class GoogleMap extends React.Component {
     constructor() {
@@ -146,12 +146,19 @@ export default class GoogleMap extends React.Component {
         this.addAMarker(-42.14, 146.54, 'Tasmania')
     }
 
+    getImg=()=>{
+        var img = 'https://pbs.twimg.com/profile_images/443165610524934145/ZZa43Ifa_400x400.jpeg'
+        var html =  '<div><img alt="example" src= '+img+' class="smallImg" /></div>'
+        console.log(html)
+        return html
+    }
+
     addAMarker = (lat, lng, text) => {
         let obj = this
-
+        // console.log(this.getImg())
         var infoWindow = new window.google.maps.InfoWindow(
             {
-                content: '<h1> ' + text + ' </h1>',
+                content: this.getImg(),
                 disableAutoPan: true
             }
         )
@@ -172,13 +179,11 @@ export default class GoogleMap extends React.Component {
         marker.addListener('click', function () {
             obj.codeAddress()
         })
-
     }
 
     render() {
         return (
             <Fragment>
-                <button onClick="toggleHeatmap()">Toggle Heatmap</button>
                 <div id={'map'}></div>
             </Fragment>
         );

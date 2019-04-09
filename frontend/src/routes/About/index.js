@@ -7,7 +7,7 @@ import {BackTop} from 'antd'
 import PoliticianCards from '../../components/Politician/PoliticianCards'
 import PoliticianFilter from '../../components/Politician/PoliticianFilter'
 import edward from '../../assets/img/edward.jpeg'
-import banner from '../../assets/img/melbourneunibanner.png'
+import banner from '../../assets/img/melbourneunib.png'
 
 import {
     Layout, Menu, Breadcrumb, Icon, Row, Col, Carousel
