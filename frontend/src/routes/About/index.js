@@ -102,7 +102,7 @@ export default class About extends React.Component {
                                         >
                                             <Row>
                                                 <Col span={8} className={'profile-heading'}>Name </Col>
-                                                <Col span={16} className={'profile-text'}>Zhihui (Carol) Cheng
+                                                <Col span={16} className={'profile-text'}>Zhihui(Carol) Cheng
                                                 </Col>
                                             </Row>
                                             <Row>
@@ -115,7 +115,7 @@ export default class About extends React.Component {
                                                 <Col span={8} className={'profile-heading'}>Linkedin </Col>
                                                 <Col span={16} className={'profile-text'}>
                                                     <a href={'https://www.linkedin.com/in/carolcheng123/'} target="_blank">
-                                                        Zhihui (Carol) Cheng
+                                                        Zhihui(Carol) Cheng
                                                     </a>
 
                                                 </Col>

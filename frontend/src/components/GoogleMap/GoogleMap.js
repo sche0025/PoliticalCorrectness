@@ -2,7 +2,7 @@ import React, {Fragment} from 'react';
 import ReactDOM from 'react-dom';
 import Map from "../../routes/Map";
 import './GoogleMap.css'
-
+import store from '../../store/index'
 export default class GoogleMap extends React.Component {
     constructor() {
         super();
@@ -182,6 +182,8 @@ export default class GoogleMap extends React.Component {
     }
 
     render() {
+
+        console.log(store.getState());
         return (
             <Fragment>
                 <div id={'map'}></div>
