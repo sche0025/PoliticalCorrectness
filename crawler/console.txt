@@ -1,0 +1,745 @@
+nohup: ignoring input
+Rate limit reached. Sleeping for: 71
+Rate limit reached. Sleeping for: 343
+Rate limit reached. Sleeping for: 315
+Rate limit reached. Sleeping for: 346
+Rate limit reached. Sleeping for: 324
+Rate limit reached. Sleeping for: 308
+Rate limit reached. Sleeping for: 316
+Rate limit reached. Sleeping for: 326
+Rate limit reached. Sleeping for: 325
+Rate limit reached. Sleeping for: 317
+Rate limit reached. Sleeping for: 351
+Rate limit reached. Sleeping for: 358
+Start restful crawling.
+============================================
+Process: 1/126
+Crawling tweets mentioned @AdamBandt.
+No more tweets found.
+In total 3105 tweets are stored in DB.
+-----
+============================================
+Process: 2/126
+Crawling tweets mentioned @AlanTudgeMP.
+No more tweets found.
+In total 235 tweets are stored in DB.
+-----
+============================================
+Process: 3/126
+Crawling tweets mentioned @AlboMP.
+No more tweets found.
+In total 4319 tweets are stored in DB.
+-----
+============================================
+Process: 4/126
+Crawling tweets mentioned @ALeighMP.
+No more tweets found.
+In total 2377 tweets are stored in DB.
+-----
+============================================
+Process: 5/126
+Crawling tweets mentioned @AlexHawkeMP.
+No more tweets found.
+In total 60 tweets are stored in DB.
+-----
+============================================
+Process: 6/126
+Crawling tweets mentioned @AmandaRishworth.
+No more tweets found.
+In total 253 tweets are stored in DB.
+-----
+============================================
+Process: 7/126
+Crawling tweets mentioned @andrewjgiles.
+============================================
+Process: 8/126
+Crawling tweets mentioned @AndrewLamingMP.
+No more tweets found.
+In total 227 tweets are stored in DB.
+-----
+============================================
+Process: 9/126
+Crawling tweets mentioned @AndrewWallaceMP.
+No more tweets found.
+In total 35 tweets are stored in DB.
+-----
+============================================
+Process: 10/126
+Crawling tweets mentioned @AngusTaylorMP.
+No more tweets found.
+In total 25584 tweets are stored in DB.
+-----
+============================================
+Process: 11/126
+Crawling tweets mentioned @Ann_SudmalisMP.
+No more tweets found.
+In total 41 tweets are stored in DB.
+-----
+============================================
+Process: 12/126
+Crawling tweets mentioned @AnneWerriwa.
+No more tweets found.
+In total 10 tweets are stored in DB.
+-----
+============================================
+Process: 13/126
+Crawling tweets mentioned @AnthonyByrne_MP.
+No more tweets found.
+In total 24 tweets are stored in DB.
+-----
+============================================
+Process: 14/126
+Crawling tweets mentioned @Barnaby_Joyce.
+No more tweets found.
+In total 10155 tweets are stored in DB.
+-----
+============================================
+Process: 15/126
+Crawling tweets mentioned @BertVanManen.
+No more tweets found.
+In total 12 tweets are stored in DB.
+-----
+============================================
+Process: 16/126
+Crawling tweets mentioned @billshortenmp.
+No more tweets found.
+In total 98641 tweets are stored in DB.
+-----
+============================================
+Process: 17/126
+Crawling tweets mentioned @BOConnorMP.
+============================================
+Process: 18/126
+Crawling tweets mentioned @Bowenchris.
+No more tweets found.
+In total 25877 tweets are stored in DB.
+-----
+============================================
+Process: 19/126
+Crawling tweets mentioned @BrianMitchellMP.
+No more tweets found.
+In total 186 tweets are stored in DB.
+-----
+============================================
+Process: 20/126
+Crawling tweets mentioned @BroadbentMP.
+No more tweets found.
+In total 5 tweets are stored in DB.
+-----
+============================================
+Process: 21/126
+Crawling tweets mentioned @CatherineKingMP.
+No more tweets found.
+In total 5626 tweets are stored in DB.
+-----
+============================================
+Process: 22/126
+Crawling tweets mentioned @ChrisCrewtherMP.
+No more tweets found.
+In total 655 tweets are stored in DB.
+-----
+============================================
+Process: 23/126
+Crawling tweets mentioned @ClareONeilMP.
+No more tweets found.
+In total 85 tweets are stored in DB.
+-----
+============================================
+Process: 24/126
+Crawling tweets mentioned @cporterwa.
+============================================
+Process: 25/126
+Crawling tweets mentioned @cpyne.
+No more tweets found.
+In total 2929 tweets are stored in DB.
+-----
+============================================
+Process: 26/126
+Crawling tweets mentioned @CraigKellyMP.
+No more tweets found.
+In total 514 tweets are stored in DB.
+-----
+============================================
+Process: 27/126
+Crawling tweets mentioned @D_LittleproudMP.
+No more tweets found.
+In total 3043 tweets are stored in DB.
+-----
+============================================
+Process: 28/126
+Crawling tweets mentioned @damiandrummp.
+No more tweets found.
+In total 63 tweets are stored in DB.
+-----
+============================================
+Process: 29/126
+Crawling tweets mentioned @DanTehanWannon.
+No more tweets found.
+In total 357 tweets are stored in DB.
+-----
+============================================
+Process: 30/126
+Crawling tweets mentioned @DarrenChesterMP.
+No more tweets found.
+In total 515 tweets are stored in DB.
+-----
+============================================
+Process: 31/126
+Crawling tweets mentioned @DaveGillespieMP.
+No more tweets found.
+In total 4 tweets are stored in DB.
+-----
+============================================
+Process: 32/126
+Crawling tweets mentioned @DavidColemanMP.
+No more tweets found.
+In total 635 tweets are stored in DB.
+-----
+============================================
+Process: 33/126
+Crawling tweets mentioned @drkerrynphelps.
+No more tweets found.
+In total 8636 tweets are stored in DB.
+-----
+============================================
+Process: 34/126
+Crawling tweets mentioned @Emma4Dobell.
+No more tweets found.
+In total 18 tweets are stored in DB.
+-----
+============================================
+Process: 35/126
+Crawling tweets mentioned @emmahusarmp.
+============================================
+Process: 36/126
+Crawling tweets mentioned @fitzhunter.
+No more tweets found.
+In total 1358 tweets are stored in DB.
+-----
+============================================
+Process: 37/126
+Crawling tweets mentioned @GaiBrodtmannMP.
+No more tweets found.
+In total 25 tweets are stored in DB.
+-----
+============================================
+Process: 38/126
+Crawling tweets mentioned @GChristensenMP.
+No more tweets found.
+In total 224 tweets are stored in DB.
+-----
+============================================
+Process: 39/126
+Crawling tweets mentioned @GrahamPerrettMP.
+No more tweets found.
+In total 491 tweets are stored in DB.
+-----
+============================================
+Process: 40/126
+Crawling tweets mentioned @GregHuntMP.
+No more tweets found.
+In total 5718 tweets are stored in DB.
+-----
+============================================
+Process: 41/126
+Crawling tweets mentioned @IanGoodenoughMP.
+No more tweets found.
+In total 37 tweets are stored in DB.
+-----
+============================================
+Process: 42/126
+Crawling tweets mentioned @JanePrentice_MP.
+No more tweets found.
+In total 48 tweets are stored in DB.
+-----
+============================================
+Process: 43/126
+Crawling tweets mentioned @JasonClareMP.
+No more tweets found.
+In total 307 tweets are stored in DB.
+-----
+============================================
+Process: 44/126
+Crawling tweets mentioned @JasonFalinskiMP.
+No more tweets found.
+In total 179 tweets are stored in DB.
+-----
+============================================
+Process: 45/126
+Crawling tweets mentioned @JasonWood_MP.
+No more tweets found.
+In total 124 tweets are stored in DB.
+-----
+============================================
+Process: 46/126
+Crawling tweets mentioned @JEChalmers.
+============================================
+Process: 47/126
+Crawling tweets mentioned @JElliotMP.
+No more tweets found.
+In total 22 tweets are stored in DB.
+-----
+============================================
+Process: 48/126
+Crawling tweets mentioned @JoanneRyanLalor.
+No more tweets found.
+In total 392 tweets are stored in DB.
+-----
+============================================
+Process: 49/126
+Crawling tweets mentioned @JohnAlexanderMP.
+No more tweets found.
+In total 2 tweets are stored in DB.
+-----
+============================================
+Process: 50/126
+Crawling tweets mentioned @JohnJMcVeigh.
+No more tweets found.
+In total 13 tweets are stored in DB.
+-----
+============================================
+Process: 51/126
+Crawling tweets mentioned @JoshFrydenberg.Rate limit reached. Sleeping for: 363
+Rate limit reached. Sleeping for: 320
+Rate limit reached. Sleeping for: 398
+Rate limit reached. Sleeping for: 357
+Rate limit reached. Sleeping for: 343
+
+No more tweets found.
+In total 29904 tweets are stored in DB.
+-----
+============================================
+Process: 52/126
+Crawling tweets mentioned @juliabanksmp.
+No more tweets found.
+In total 2191 tweets are stored in DB.
+-----
+============================================
+Process: 53/126
+Crawling tweets mentioned @JulianHillMP.
+No more tweets found.
+In total 141 tweets are stored in DB.
+-----
+============================================
+Process: 54/126
+Crawling tweets mentioned @JulianLeeser.
+No more tweets found.
+In total 33 tweets are stored in DB.
+-----
+============================================
+Process: 55/126
+Crawling tweets mentioned @JulieBishopMP.
+No more tweets found.
+In total 1420 tweets are stored in DB.
+-----
+============================================
+Process: 56/126
+Crawling tweets mentioned @JulieCollinsMP.
+No more tweets found.
+In total 1189 tweets are stored in DB.
+-----
+============================================
+Process: 57/126
+Crawling tweets mentioned @JulieOwensMP.
+No more tweets found.
+In total 110 tweets are stored in DB.
+-----
+============================================
+Process: 58/126
+Crawling tweets mentioned @karenandrewsmp.
+No more tweets found.
+In total 287 tweets are stored in DB.
+-----
+============================================
+Process: 59/126
+Crawling tweets mentioned @KateEllisMP.
+============================================
+Process: 60/126
+Crawling tweets mentioned @keithjpitt.
+No more tweets found.
+In total 124 tweets are stored in DB.
+-----
+============================================
+Process: 61/126
+Crawling tweets mentioned @KellyODwyer.
+No more tweets found.
+In total 1418 tweets are stored in DB.
+-----
+============================================
+Process: 62/126
+Crawling tweets mentioned @KenODowdMP.
+No more tweets found.
+In total 18 tweets are stored in DB.
+-----
+============================================
+Process: 63/126
+Crawling tweets mentioned @KenWyattMP.
+No more tweets found.
+In total 708 tweets are stored in DB.
+-----
+============================================
+Process: 64/126
+Crawling tweets mentioned @kevinandrewsmp.
+No more tweets found.
+In total 162 tweets are stored in DB.
+-----
+============================================
+Process: 65/126
+Crawling tweets mentioned @KevinHoganMP.
+No more tweets found.
+In total 29 tweets are stored in DB.
+-----
+============================================
+Process: 66/126
+Crawling tweets mentioned @LaundyCraigMP.
+No more tweets found.
+In total 213 tweets are stored in DB.
+-----
+============================================
+Process: 67/126
+Crawling tweets mentioned @LindaBurneyMP.
+============================================
+Process: 68/126
+Crawling tweets mentioned @LlewOBrienMP.
+No more tweets found.
+In total 68 tweets are stored in DB.
+-----
+============================================
+Process: 69/126
+Crawling tweets mentioned @LMChesters.
+No more tweets found.
+In total 280 tweets are stored in DB.
+-----
+============================================
+Process: 70/126
+Crawling tweets mentioned @LucyWicksMP.
+No more tweets found.
+In total 525 tweets are stored in DB.
+-----
+============================================
+Process: 71/126
+Crawling tweets mentioned @Luke_Hartsuyker.
+No more tweets found.
+In total 2 tweets are stored in DB.
+-----
+============================================
+Process: 72/126
+Crawling tweets mentioned @LukeHowarthMP.
+No more tweets found.
+In total 63 tweets are stored in DB.
+-----
+============================================
+Process: 73/126
+Crawling tweets mentioned @lukejgosling.
+No more tweets found.
+In total 49 tweets are stored in DB.
+-----
+============================================
+Process: 74/126
+Crawling tweets mentioned @M_McCormackMP.
+No more tweets found.
+In total 1854 tweets are stored in DB.
+-----
+============================================
+Process: 75/126
+Crawling tweets mentioned @MadeleineMHKing.
+No more tweets found.
+In total 83 tweets are stored in DB.
+-----
+============================================
+Process: 76/126
+Crawling tweets mentioned @MakeMayoMatter.
+No more tweets found.
+In total 996 tweets are stored in DB.
+-----
+============================================
+Process: 77/126
+Crawling tweets mentioned @MariaVamvakinou.
+No more tweets found.
+In total 36 tweets are stored in DB.
+-----
+============================================
+Process: 78/126
+Crawling tweets mentioned @Mark_Butler_MP.
+No more tweets found.
+In total 4329 tweets are stored in DB.
+-----
+============================================
+Process: 79/126
+Crawling tweets mentioned @MarkCoultonMP.
+No more tweets found.
+In total 18 tweets are stored in DB.
+-----
+============================================
+Process: 80/126
+Crawling tweets mentioned @markdreyfusQCMP.
+============================================
+Process: 81/126
+Crawling tweets mentioned @mattkeogh.
+No more tweets found.
+In total 70 tweets are stored in DB.
+-----
+============================================
+Process: 82/126
+Crawling tweets mentioned @Melissa4Durack.
+No more tweets found.
+In total 4988 tweets are stored in DB.
+-----
+============================================
+Process: 83/126
+Crawling tweets mentioned @MerylSwanson.
+No more tweets found.
+In total 33 tweets are stored in DB.
+-----
+============================================
+Process: 84/126
+Crawling tweets mentioned @MichaelDanbyMP.
+No more tweets found.
+In total 145 tweets are stored in DB.
+-----
+============================================
+Process: 85/126
+Crawling tweets mentioned @MichaelKeenanMP.
+No more tweets found.
+In total 51 tweets are stored in DB.
+-----
+============================================
+Process: 86/126
+Crawling tweets mentioned @MichaelSukkarMP.
+No more tweets found.
+In total 513 tweets are stored in DB.
+-----
+============================================
+Process: 87/126
+Crawling tweets mentioned @MikeKellyofEM.
+No more tweets found.
+In total 338 tweets are stored in DB.
+-----
+============================================
+Process: 88/126
+Crawling tweets mentioned @MiltonDickMP.
+============================================
+Process: 89/126
+Crawling tweets mentioned @mlandryMP.
+============================================
+Process: 90/126
+Crawling tweets mentioned @MRowlandMP.
+No more tweets found.
+In total 1192 tweets are stored in DB.
+-----
+============================================
+Process: 91/126
+Crawling tweets mentioned @MThistlethwaite.
+No more tweets found.
+In total 466 tweets are stored in DB.
+-----
+============================================
+Process: 92/126
+Crawling tweets mentioned @NickChampionMP.
+No more tweets found.
+In total 11 tweets are stored in DB.
+-----
+============================================
+Process: 93/126
+Crawling tweets mentioned @NicolleFlint.
+No more tweets found.
+In total 358 tweets are stored in DB.
+-----
+============================================
+Process: 94/126
+Crawling tweets mentioned @NolaMarinoMP.
+============================================
+Process: 95/126
+Crawling tweets mentioned @PatConroy1.
+No more tweets found.
+In total 80 tweets are stored in DB.
+-----
+============================================
+Process: 96/126
+Crawling tweets mentioned @PaulFletcherMP.
+No more tweets found.
+In total 1089 tweets are stored in DB.
+-----
+============================================
+Process: 97/126
+Crawling tweets mentioned @PeterDutton_MP.
+No more tweets found.
+In total 23578 tweets are stored in DB.
+-----
+============================================
+Process: 98/126
+Crawling tweets mentioned @PeterKhalilMP.
+No more tweets found.
+In total 273 tweets are stored in DB.
+-----
+============================================
+Process: 99/126
+Crawling tweets mentioned @RealBobKatter.
+No more tweets found.
+In total 131 tweets are stored in DB.
+-----
+============================================
+Process: 100/126
+Crawling tweets mentioned @RichardMarlesMP.
+No more tweets found.
+In total 387 tweets are stored in DB.
+-----
+============================================
+Process: 101/126
+Crawling tweets mentioned @RobMitchellMP.
+============================================
+Process: 102/126
+Crawling tweets mentioned @RossHartMP.
+No more tweets found.
+In total 83 tweets are stored in DB.Rate limit reached. Sleeping for: 341
+Rate limit reached. Sleeping for: 321
+Rate limit reached. Sleeping for: 321
+Rate limit reached. Sleeping for: 304
+Rate limit reached. Sleeping for: 303
+Rate limit reached. Sleeping for: 303
+Rate limit reached. Sleeping for: 295
+Rate limit reached. Sleeping for: 348
+
+-----
+============================================
+Process: 103/126
+Crawling tweets mentioned @RowanRamseyMP.
+No more tweets found.
+In total 6 tweets are stored in DB.
+-----
+============================================
+Process: 104/126
+Crawling tweets mentioned @ScottBuchholzMP.
+No more tweets found.
+In total 11 tweets are stored in DB.
+-----
+============================================
+Process: 105/126
+Crawling tweets mentioned @ScottMorrisonMP.
+No more tweets found.
+In total 110275 tweets are stored in DB.
+-----
+============================================
+Process: 106/126
+Crawling tweets mentioned @SharonBirdMP.
+No more tweets found.
+In total 92 tweets are stored in DB.
+-----
+============================================
+Process: 107/126
+Crawling tweets mentioned @SharonClaydon.
+No more tweets found.
+In total 126 tweets are stored in DB.
+-----
+============================================
+Process: 108/126
+Crawling tweets mentioned @ShayneNeumannMP.
+No more tweets found.
+In total 478 tweets are stored in DB.
+-----
+============================================
+Process: 109/126
+Crawling tweets mentioned @SHendersonMP.
+No more tweets found.
+In total 691 tweets are stored in DB.
+-----
+============================================
+Process: 110/126
+Crawling tweets mentioned @stemplemanmp.
+No more tweets found.
+In total 216 tweets are stored in DB.
+-----
+============================================
+Process: 111/126
+Crawling tweets mentioned @stephenjonesALP.
+No more tweets found.
+In total 2 tweets are stored in DB.
+-----
+============================================
+Process: 112/126
+Crawling tweets mentioned @stevegeorganas.
+No more tweets found.
+In total 168 tweets are stored in DB.
+-----
+============================================
+Process: 113/126
+Crawling tweets mentioned @SteveIronsMP.
+No more tweets found.
+In total 90 tweets are stored in DB.
+-----
+============================================
+Process: 114/126
+Crawling tweets mentioned @StevenCiobo.
+No more tweets found.
+In total 58 tweets are stored in DB.
+-----
+============================================
+Process: 115/126
+Crawling tweets mentioned @stuartrobertmp.
+No more tweets found.
+In total 438 tweets are stored in DB.
+-----
+============================================
+Process: 116/126
+Crawling tweets mentioned @SusanLambMP.
+No more tweets found.
+In total 341 tweets are stored in DB.
+-----
+============================================
+Process: 117/126
+Crawling tweets mentioned @sussanley.
+No more tweets found.
+In total 418 tweets are stored in DB.
+-----
+============================================
+Process: 118/126
+Crawling tweets mentioned @SwannyQLD.
+No more tweets found.
+In total 6621 tweets are stored in DB.
+-----
+============================================
+Process: 119/126
+Crawling tweets mentioned @tanya_plibersek.
+No more tweets found.
+In total 13405 tweets are stored in DB.
+-----
+============================================
+Process: 120/126
+Crawling tweets mentioned @terrimbutler.
+No more tweets found.
+In total 475 tweets are stored in DB.
+-----
+============================================
+Process: 122/126
+Crawling tweets mentioned @TimWilsonMP.
+Rate limit reached. Sleeping for: 100
+No more tweets found.
+In total 3484 tweets are stored in DB.
+-----
+============================================
+Process: 123/126
+Crawling tweets mentioned @Tony_Burke.
+No more tweets found.
+In total 4778 tweets are stored in DB.
+-----
+============================================
+Process: 124/126
+Crawling tweets mentioned @TonyAbbottMHR.
+Rate limit reached. Sleeping for: 159
+No more tweets found.
+In total 28620 tweets are stored in DB.
+-----
+============================================
+Process: 125/126
+Crawling tweets mentioned @TonySmithMP.
+No more tweets found.
+In total 21 tweets are stored in DB.
+-----
+============================================
+Process: 126/126
+Crawling tweets mentioned @WilkieMP.
+No more tweets found.
+In total 604 tweets are stored in DB.
+-----
+============================================
+Finished. Time used: 377.191235 mins
