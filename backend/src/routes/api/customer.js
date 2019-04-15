@@ -1,37 +1,20 @@
-let CustomerModel = require('../models/customerModel')
+let CustomerModel = require('../../models/customerModel')
 let express = require('express')
 let router = express.Router()
 
 
-
-// router.get('/customer/insert', (req, res) => {
-// //     // res.send('welcome customer')
-// //     if (!req.body) {
-// //         return res.status(400).send('body missing')
-// //     }
-// //
-// //     let user = {
-// //         name: "test chen",
-// //         email: '123@gmail.com',
-// //         age:99
-// //     }
-// //
-// //     let customer = new CustomerModel(user)
-// //
-// //     //
-// //     customer.save()
-// //         .then(doc => {
-// //
-// //             res.status(201).send(doc,'saved')
-// //         })
-// //         .catch(err => {
-// //                 res.status(500).json(err)
-// //             }
-// //         )
-// // })
-
-router.post('/customer',(req,res) =>{
- let newCustomer = CustomerModel();
+router.post('/customer/insert',(req,res) =>{
+    console.log(req.body)
+    CustomerModel.create(req.body)
+        .then((docs)=>{
+            if(docs) {
+                res.send('delete success');
+            } else {
+                reject({"success":false});
+            }
+        }).catch((err)=>{
+        reject(err);
+    })
 })
 
 router.get('/customer/removeone', (req, res) => {

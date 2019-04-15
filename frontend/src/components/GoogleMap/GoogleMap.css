@@ -10,3 +10,8 @@
     height: 100%;
     overflow:auto;
 }
+
+.smallImg{
+    height: 70px;
+    width: 70px;
+}
