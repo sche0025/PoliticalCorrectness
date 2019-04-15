@@ -4,6 +4,7 @@ import {Card, Input, Select, Radio, Button} from 'antd'
 import 'antd/dist/antd.css';
 import Row from "antd/es/grid/row";
 import Col from "antd/es/grid/col";
+import store from '../../store/index'
 import RadioGroup from "antd/es/radio/group";
 
 
@@ -11,7 +12,11 @@ export default class PoliticianFilter extends React.Component {
 
     constructor(props) {
         super(props)
-
+        this.state={
+            input:"",
+            party:"all",
+            gender:'all'
+        }
     }
 
     componentDidMount() {
@@ -20,6 +25,22 @@ export default class PoliticianFilter extends React.Component {
 
     handleChange = (value) => {
         console.log(`selected ${value}`);
+    }
+
+    handleInputChange = (e) =>{
+        this.setState({
+            input:e.target.value
+        })
+    }
+
+    handleSearch = ()=>{
+        const action = {
+            type: "UPDATE_INPUT",
+            value: this.state.input
+        };
+
+
+        store.dispatch(action)
     }
 
     render() {
@@ -33,8 +54,9 @@ export default class PoliticianFilter extends React.Component {
                     placeholder="input politician's name"
                     enterButton="Search"
                     size="large"
-                    onSearch={value => console.log(value)}
+                    onSearch={this.handleSearch}
                     className={'search'}
+                    onChange={(e)=>this.handleInputChange(e)}
                 />
 
                 <Select defaultValue="0" className={'select'} onChange={this.handleChange}

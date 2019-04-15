@@ -147,7 +147,7 @@ export default class GoogleMap extends React.Component {
     }
 
     getImg=()=>{
-        var img = 'https://pbs.twimg.com/profile_images/443165610524934145/ZZa43Ifa_400x400.jpeg'
+        var img = 'https://pbs.twimg.com/profile_images/1116081523394891776/AYnEcQnG_400x400.png'
         var html =  '<div><img alt="example" src= '+img+' class="smallImg" /></div>'
         console.log(html)
         return html
