@@ -55,7 +55,7 @@ export default class Leaderboard extends React.PureComponent {
             sorter: (a, b) => a.tr - b.tr,
         },
         {
-            title: 'Sentiment Score',
+            title: 'Sentiment(pro/neu/con)%',
             dataIndex: 'sc',
             width: 100,
 
@@ -71,7 +71,7 @@ export default class Leaderboard extends React.PureComponent {
         party: 'labor',
         tt: 62,
         tr: 38,
-        sc: 116,
+        sc: "61/10/29" ,
         avatar: this.getImg('https://pbs.twimg.com/profile_images/1116081523394891776/AYnEcQnG_400x400.png')
 
     }, {
@@ -83,7 +83,7 @@ export default class Leaderboard extends React.PureComponent {
         ,
         tt: 61,
         tr: 86,
-        sc: 181,
+        sc: "43/17/40" ,
         avatar: this.getImg('https://pbs.twimg.com/profile_images/1035037345588731909/i-QmXEp3_400x400.jpg')
 
     }, {
@@ -95,7 +95,7 @@ export default class Leaderboard extends React.PureComponent {
         ,
         tt: 63,
         tr: 84,
-        sc: 171,
+        sc: "66/10/11" ,
         avatar: this.getImg('https://pbs.twimg.com/profile_images/645213958861811712/VHhqGqrQ_200x200.jpg')
     }, {
         key: '4',
@@ -106,7 +106,7 @@ export default class Leaderboard extends React.PureComponent {
         ,
         tt: 69,
         tr: 85,
-        sc: 161,
+        sc: "33/30/34" ,
         avatar: this.getImg('https://pbs.twimg.com/profile_images/847583509757558784/V1l1tu2V_400x400.jpg')
     },
         {
@@ -118,7 +118,7 @@ export default class Leaderboard extends React.PureComponent {
             ,
             tt: 66,
             tr: 83,
-            sc: 116,
+            sc: "79/10/11" ,
             avatar: this.getImg('https://pbs.twimg.com/profile_images/750130479714545664/UZWiTi6v_400x400.jpg')
         }];
 

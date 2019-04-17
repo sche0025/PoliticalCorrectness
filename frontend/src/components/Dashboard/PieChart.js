@@ -14,10 +14,12 @@ export default class PieChart extends React.Component {
             animationEnabled: true,
             exportFileName: "New Year Resolutions",
             exportEnabled: true,
-            height:295,
+            height:this.props.height,
 
             title:{
-                text: "Replies across different parties"
+                verticalAlign: "top",
+                horizontalAlign:'center',
+                text: "Positive Replies to different parties"
             },
             data: [{
                 type: "pie",
@@ -29,12 +31,13 @@ export default class PieChart extends React.Component {
                 indexLabel: "{y}%",
                 indexLabelPlacement: "inside",
                 dataPoints: [
-                    { y: 32, label: "Labour" },
-                    { y: 22, label: "XX" },
-                    { y: 15, label: "National" },
-                    { y: 19, label: "Career" },
-                    { y: 5, label: "Family" },
-                    { y: 7, label: "Real Estate" }
+                    { y: 32, label: "Australian Greens" },
+                    { y: 22, label: "Australian Labor Party" },
+                    { y: 15, label: "Centre Alliance" },
+                    { y: 19, label: "Independent" },
+                    { y: 5, label: "Katter's Australian Party" },
+                    { y: 7, label: "Liberal Party of Australia" },
+                    { y: 7, label: "The Nationals" }
                 ]
             }]
         }

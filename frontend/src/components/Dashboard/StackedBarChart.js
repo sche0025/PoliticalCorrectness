@@ -57,18 +57,13 @@ export default  class stackedBarChart extends React.Component {
                     showInLegend: true,
                     yValueFormatString: "#,###k",
                     dataPoints: [
-                        { label: "Jan", y: 13 },
-                        { label: "Feb", y: 13 },
-                        { label: "Mar", y: 15 },
-                        { label: "Apr", y: 16 },
-                        { label: "May", y: 17 },
-                        { label: "Jun", y: 17 },
-                        { label: "Jul", y: 18 },
-                        { label: "Aug", y: 18 },
-                        { label: "Sept", y: 17 },
-                        { label: "Oct", y: 18 },
-                        { label: "Nov", y: 18 },
-                        { label: "Dec", y: 18 }
+                        { label: "New South Wales", y: 13 },
+                        { label: " Victoria", y: 13 },
+                        { label: "Queensland", y: 15 },
+                        { label: "South Australia", y: 16 },
+                        { label: "Tasmania", y: 17 },
+                        { label: "Western Australia", y: 17 },
+
                     ]
                 },
                 {
@@ -77,18 +72,13 @@ export default  class stackedBarChart extends React.Component {
                     showInLegend: true,
                     yValueFormatString: "#,###k",
                     dataPoints: [
-                        { label: "Jan", y: 13 },
-                        { label: "Feb", y: 13 },
-                        { label: "Mar", y: 15 },
-                        { label: "Apr", y: 15 },
-                        { label: "May", y: 15 },
-                        { label: "Jun", y: 15 },
-                        { label: "Jul", y: 16 },
-                        { label: "Aug", y: 17 },
-                        { label: "Sept", y: 17 },
-                        { label: "Oct", y: 18 },
-                        { label: "Nov", y: 19 },
-                        { label: "Dec", y: 20 },
+                        { label: "New South Wales", y: 13 },
+                        { label: " Victoria", y: 13 },
+                        { label: "Queensland", y: 15 },
+                        { label: "South Australia", y: 15 },
+                        { label: "Tasmania", y: 15 },
+                        { label: "Western Australia", y: 15 },
+
                     ]
                 },
                 {
@@ -97,18 +87,13 @@ export default  class stackedBarChart extends React.Component {
                     showInLegend: true,
                     yValueFormatString: "#,###k",
                     dataPoints: [
-                        { label: "Jan", y: 14 },
-                        { label: "Feb", y: 8 },
-                        { label: "Mar", y: 6 },
-                        { label: "Apr", y: 6 },
-                        { label: "May", y: 5 },
-                        { label: "Jun", y: 5 },
-                        { label: "Jul", y: 6 },
-                        { label: "Aug", y: 3 },
-                        { label: "Sept", y: 9 },
-                        { label: "Oct", y: 5 },
-                        { label: "Nov", y: 8 },
-                        { label: "Dec", y: 2 },
+                        { label: "New South Wales", y: 14 },
+                        { label: " Victoria", y: 8 },
+                        { label: "Queensland", y: 6 },
+                        { label: "South Australia", y: 6 },
+                        { label: "Tasmania", y: 5 },
+                        { label: "Western Australia", y: 5 },
+
                     ]
                 }]
         }

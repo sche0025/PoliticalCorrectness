@@ -1,5 +1,5 @@
 const defaultState = {
-    politicians:{
+    politiciansFilter:{
         input:'',
         party:'all',
         gender:'all'
@@ -12,9 +12,12 @@ export default (state=defaultState,action) =>{
     switch (action.type) {
         case "UPDATE_INPUT":
             var newState = state
-            newState.politicians.input = action.value
+            newState.politiciansFilter.input = action.value
             return newState
-            break;
+        case "UPDATE_PARTY":
+            var newState = state
+            newState.politiciansFilter.party = action.value
+            return newState
     }
     return state;
 }

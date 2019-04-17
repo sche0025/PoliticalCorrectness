@@ -30,7 +30,7 @@ export default class DonutChart extends React.Component {
                 indexLabel: "{name}: {y}",
                 yValueFormatString: "#,###'%'",
                 dataPoints: [
-                    { name: "Unsatisfied", y: 5 },
+                    { name: "Unsatisfied", y: 35 },
                     { name: "Neutral", y: 31 },
                     { name: "Satisfied", y: 40 },
 

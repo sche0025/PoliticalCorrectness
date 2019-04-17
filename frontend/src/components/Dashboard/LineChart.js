@@ -20,7 +20,7 @@ export default  class LineChart extends React.Component {
             theme: "light2", // "light1", "dark1", "dark2"
             height:this.props.height,
             title:{
-                text: "Number of tweets posted by politicians in past 7 days"
+                text: "Number of tweets posted by politicians in past 5 weeks"
             },
             axisY: {
                 title: "Number of tweets",
@@ -28,9 +28,9 @@ export default  class LineChart extends React.Component {
                 suffix: "k"
             },
             axisX: {
-                title: "Week of Year",
-                prefix: "W",
-                interval: 2
+                // title: "Week of Year",
+                prefix: "Week ",
+                interval: 4
             },
             data: [{
                 type: "line",

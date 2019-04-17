@@ -29,7 +29,7 @@ export default class Dashboard extends React.Component {
                     <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
                 </Breadcrumb>
 
-                <div style={{background: '#fff', height: '83vh'}}>
+                <div style={{background: '#fff', height: '100%'}}>
                     <div style={{padding: "15px"}}>
                         <Row>
                             <Col span={12} style={{background: "", height: '100%'}}>
@@ -44,7 +44,7 @@ export default class Dashboard extends React.Component {
                                 </Row>
                                 <Row style={{background: "", height: '27vh', minHeight: '300px'}}>
                                     <Col span={12}>
-                                        <PieChart/>
+                                        <PieChart height={295}/>
                                     </Col>
                                     <Col span={12}>
                                         <DonutChart/>
