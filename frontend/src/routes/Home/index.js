@@ -31,10 +31,12 @@ class Home extends React.Component {
             return '1'
         }else if(path.endsWith('map')){
             return '2'
-        }else if(path.endsWith('politician')){
+        }else if(path.endsWith('party')){
             return '3'
-        }else if(path.endsWith('about')){
+        }else if(path.endsWith('politician')){
             return '4'
+        }else if(path.endsWith('about')){
+            return '5'
         }
     }
 
@@ -66,21 +68,26 @@ class Home extends React.Component {
                             </NavLink>
                         </Menu.Item>
                         <Menu.Item key="3">
+                            <NavLink to={'/home/party'}>
+                                <Icon type="flag"/>
+                                <span>Parties</span>
+                            </NavLink>
+                        </Menu.Item>
+
+                        <Menu.Item key="4">
                             <NavLink to={'/home/politician'}>
                                 <Icon type="user"/>
                                 <span>Politicians</span>
                             </NavLink>
                         </Menu.Item>
-
-
-                        <Menu.Item key="4">
+                        <Menu.Item key="5">
                             <NavLink to={'/home/about'}>
                                 <Icon type="team"/>
                                 <span>About Us</span>
                             </NavLink>
                         </Menu.Item>
 
-                        <Menu.Item key="5">
+                        <Menu.Item key="6">
                             <NavLink to={'/home/test'}>
                                 <Icon type="file"/>
                                 <span>Chart Test</span>

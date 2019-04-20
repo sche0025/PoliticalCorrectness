@@ -1,15 +1,16 @@
 import React, {Fragment} from 'react'
-import './PoliticianCard.css'
+import './PartyCard.css'
 import {Card, BackTop,Statistic} from 'antd'
 import 'antd/dist/antd.css';
 import Row from "antd/es/grid/row";
 import Col from "antd/es/grid/col";
-import PoliticalModal from './PoliticianModal'
+import PartyModal from './PartyModal'
 import store from '../../store/index'
+import green from '../../assets/img/partyFlags/green.png'
 import {Link} from "react-router-dom";
 
 
-export default class PoliticianCards extends React.Component {
+export default class PartyCards extends React.Component {
 
     constructor(props) {
         super(props)
@@ -28,20 +29,20 @@ export default class PoliticianCards extends React.Component {
 
 
     getTitleLink = (name )=>{
-        return <PoliticalModal name = {name+" test user"} />
+        return <PartyModal name = {name+" test party"} />
 
     }
 
 
     getCards = () => {
 
-        var testList = [1, 2, 3, 4, 5]
+        var testList = [1, 2, 3, 4, 5,6]
 
 
-        return testList.map(politician => (
+        return testList.map(party => (
             // console.log('1')
             <Card
-                title={this.getTitleLink(politician)}
+                title={this.getTitleLink(party)}
                 bordered={false}
 
                 loading={false}
@@ -50,7 +51,7 @@ export default class PoliticianCards extends React.Component {
             >
                 <Row>
                     <Col span={6}>
-                        <img src="https://pbs.twimg.com/profile_images/1116081523394891776/AYnEcQnG_400x400.png"
+                        <img src={green}
                              style={{width: '95%', height: '20vh'}}
                         />
                     </Col>

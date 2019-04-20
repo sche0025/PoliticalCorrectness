@@ -35,7 +35,7 @@ export default class About extends React.Component {
         })
 
         if(this.state.count ==4){
-            alert("智慧姐姐真是厉害！")
+            alert("智慧姐姐真是厉害!\nCarol is incredibly smart!")
         }
     }
 
@@ -62,7 +62,7 @@ export default class About extends React.Component {
                                       autoplayInterval={'100'}
                             >
                                 <div><img alt="example"
-                                          className={'img'}
+                                          className={'about-img'}
                                           src={banner}/>
                                 </div>
                                 <div><h3>2</h3></div>

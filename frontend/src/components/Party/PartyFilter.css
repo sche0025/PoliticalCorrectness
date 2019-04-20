@@ -1,0 +1,24 @@
+.filters{
+    margin: 10px;
+}
+
+.select{
+    padding-top: 10px;
+    width: 100%;
+}
+
+.search{
+    padding-top: 10px;
+
+}
+
+.radio-group{
+
+    width: 100%;
+}
+
+.button{
+    left: 15px;
+    height: 37px;
+    width: 25%;
+}

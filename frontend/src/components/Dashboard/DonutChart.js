@@ -12,7 +12,7 @@ export default class DonutChart extends React.Component {
         const options = {
             animationEnabled: true,
             exportEnabled: true,
-            height:295,
+            height:this.props.height,
             title: {
                 text: "Sentiment of Replies"
             },

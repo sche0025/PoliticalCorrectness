@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react'
-import './PoliticianModal.css'
+import './PartyModal.css'
 import {Card, Input, Select, Radio, Button, Modal, Statistic} from 'antd'
 import 'antd/dist/antd.css';
 import Row from "antd/es/grid/row";
@@ -10,7 +10,7 @@ import BarChart from '../Dashboard/StackedBarChart'
 import DonutChart from '../Dashboard/DonutChart'
 
 
-export default class PoliticianModal extends React.Component {
+export default class PartyModal extends React.Component {
 
     constructor(props) {
         super(props)

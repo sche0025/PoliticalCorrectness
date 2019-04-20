@@ -7,7 +7,7 @@ let router = express.Router()
 router.get('/tweets/find', (req, res) => {
 
     // console.log('wow')
-    TweetsModel.find({Screen_Name:'11'})
+    TweetsModel.find()
         .then((data)=>{
             res.send(data)
         })

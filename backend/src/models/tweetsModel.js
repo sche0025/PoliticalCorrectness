@@ -1,8 +1,8 @@
 let mongoose = require('mongoose')
 
-mongoose.connect('mongodb+srv://chen:123@nlptest-r26bl.gcp.mongodb.net/test?retryWrites=true')
-// mongoose.connect('mongodb://admin:12345678@203.101.224.144/admin')
-
+// mongoose.connect('mongodb+srv://chen:123@nlptest-r26bl.gcp.mongodb.net/test?retryWrites=true')
+var db = mongoose.connect('mongodb://admin:123@115.146.85.107/admin', { useNewUrlParser: true })
+// console.log("db:")
 let TweetsSchema = new mongoose.Schema({
     // name:String,
     // email:{

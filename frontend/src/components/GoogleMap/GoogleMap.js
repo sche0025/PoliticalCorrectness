@@ -157,6 +157,7 @@ export default class GoogleMap extends React.Component {
         this.addAMarker(-32.50, 146.29, 'New South Wales')
         this.addAMarker(-19.64, 133.48, 'Northern Territory')
         this.addAMarker(-42.14, 146.54, 'Tasmania')
+        this.addAMarker(-35, 149.54, 'Canberra')
     }
 
     getImg = (img) => {

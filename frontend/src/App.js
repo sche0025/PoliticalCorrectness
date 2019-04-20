@@ -6,6 +6,7 @@ import Home from './routes/Home/index'
 import Map from './routes/Map/index'
 import Dashboard from './routes/Dashboard/index'
 import Politician from './routes/Politician/index'
+import Party from './routes/Party/index'
 import About from './routes/About/index'
 import Test from './components/Test/index'
 import './App.css';
@@ -24,6 +25,7 @@ class App extends Component {
                         <Route path='/home/map' component={Map}/>
                         <Route path='/home/dashboard' component={Dashboard}/>
                         <Route path='/home/politician' component={Politician}/>
+                        <Route path='/home/party' component={Party}/>
                         <Route path='/home/about' component={About}/>
                         <Route path='/home/test' component={Test}/>
                         <Route exact path='/home' component={Dashboard}/>

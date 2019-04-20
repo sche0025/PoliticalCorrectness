@@ -47,7 +47,7 @@ export default class Dashboard extends React.Component {
                                         <PieChart height={295}/>
                                     </Col>
                                     <Col span={12}>
-                                        <DonutChart/>
+                                        <DonutChart height={295}/>
                                     </Col>
 
                                 </Row>
