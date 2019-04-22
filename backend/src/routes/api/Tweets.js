@@ -1,6 +1,7 @@
 let TweetsModel = require('../../models/tweetsModel')
 let express = require('express')
 let router = express.Router()
+let test = require( '../../../public/assets/jsonformatter')
 
 
 // GET
@@ -57,6 +58,22 @@ router.get('/tweets/findone', (req, res) => {
         .then((doc) => {
             if (doc) {
                 res.send(doc)
+            } else {
+                console.log("no data exist for this id");
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+})
+
+//test
+router.get('/geojson', (req, res) => {
+
+    TweetsModel.find({ age:25 })
+        .then((doc) => {
+            if (doc) {
+                res.send(test)
             } else {
                 console.log("no data exist for this id");
             }

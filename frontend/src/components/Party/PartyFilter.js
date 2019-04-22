@@ -88,13 +88,8 @@ export default class PartyFilter extends React.Component {
                 </Select>
 
                 <div style={{paddingTop: 10}}>
-                    <RadioGroup style={{display: 'inline'}} defaultValue="a" size="large" className={'radio-group'}>
-                        <RadioButton value="a">All</RadioButton>
-                        <RadioButton value="m">Male</RadioButton>
-                        <RadioButton value="f">Female</RadioButton>
-                    </RadioGroup>
 
-                    <Button className={'button'} type="primary">Reset</Button>
+                    <Button className={'filter_button'} type="primary">Reset</Button>
                 </div>
             </div>
         );

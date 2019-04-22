@@ -21,4 +21,5 @@
     left: 15px;
     height: 37px;
     width: 25%;
+    min-width: 60px;
 }

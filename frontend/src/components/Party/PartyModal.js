@@ -6,8 +6,10 @@ import Row from "antd/es/grid/row";
 import Col from "antd/es/grid/col";
 import {Link} from "react-router-dom";
 import WordCloud from 'react-d3-cloud';
-import BarChart from '../Dashboard/StackedBarChart'
-import DonutChart from '../Dashboard/DonutChart'
+import BarChart from '../Charts/StackedBarChart'
+import DonutChart from '../Charts/DonutChart'
+import DoubleLineChart from '../Charts/DoubleLineChart'
+
 
 
 export default class PartyModal extends React.Component {
@@ -94,7 +96,7 @@ export default class PartyModal extends React.Component {
                         <Row>
                             <Col span={6}>
                                 <div className={'profile'}>
-                                    <img src="https://pbs.twimg.com/profile_images/1116081523394891776/AYnEcQnG_400x400.png"
+                                    <img src={this.props.flag}
                                          className={'profileImg'}
                                     />
 
@@ -156,6 +158,15 @@ export default class PartyModal extends React.Component {
                                                 height={350}
                                             />
                                         </div>
+
+                                        <div className={'word-cloud'}>
+                                            <div className={'details-heading'}>How did internet users think of him/her in the past 7 days?
+                                            </div>
+                                            <div className={'word-cloud'}>
+                                                <DoubleLineChart height={450}/>
+                                            </div>
+                                        </div>
+
                                     </Row>
 
                                 </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import './style.css';
+import moment from 'moment'
 import logo from "../../assets/img/unimelbLogo.jpeg"
 
 import {
@@ -19,11 +20,12 @@ class Home extends React.Component {
         collapsed: false,
     };
 
+    //side bar collapse
     onCollapse = (collapsed) => {
-
         this.setState({collapsed});
     }
 
+    // get default highlighted NavLink
     getActivatedKey = () => {
         var path = window.location.pathname
         console.log(path,path.endsWith('politician'))
@@ -40,8 +42,16 @@ class Home extends React.Component {
         }
     }
 
+    //Get the date of update
+    getLastUpdateTime=()=>{
+        var today = moment().format('MMMM Do YYYY');
+        return 'Last updated on '+ today
+    }
+
+
     render() {
-        console.log(window.location.pathname)
+
+
         var defaultKey = this.getActivatedKey()
         // console.log(defaultKey)
         return (
@@ -96,9 +106,10 @@ class Home extends React.Component {
                     </Menu>
                 </Sider>
                 <Layout>
-                    <Header style={{background: '#fff', padding: "0px 10px", textAlign: "right"}}>
+                    <Header style={{background: '#fff', padding: "0px 10px"}}>
                         <Row>
-                            <Col>
+                            <Col span={12} className={'updateTime'}> {this.getLastUpdateTime()} </Col>
+                            <Col span={12} style={{textAlign: "right"}}>
                                 <span>  Welcome Richard</span>
                                 <a className={"text"} href={'#'}>Logout </a>
                             </Col>

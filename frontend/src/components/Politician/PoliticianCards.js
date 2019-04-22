@@ -27,12 +27,14 @@ export default class PoliticianCards extends React.Component {
     }
 
 
+    //get the link of the title
     getTitleLink = (name )=>{
         return <PoliticalModal name = {name+" test user"} />
 
     }
 
 
+    //render all politicians
     getCards = () => {
 
         var testList = [1, 2, 3, 4, 5]

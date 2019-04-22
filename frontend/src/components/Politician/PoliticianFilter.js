@@ -27,6 +27,7 @@ export default class PoliticianFilter extends React.Component {
         console.log(`selected ${value}`);
     }
 
+
     handleInputChange = (e) =>{
         this.setState({
             input:e.target.value

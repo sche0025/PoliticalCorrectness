@@ -6,7 +6,12 @@ import Row from "antd/es/grid/row";
 import Col from "antd/es/grid/col";
 import PartyModal from './PartyModal'
 import store from '../../store/index'
-import green from '../../assets/img/partyFlags/green.png'
+import greenFlag from '../../assets/img/partyFlags/green.png'
+import caFlag from '../../assets/img/partyFlags/ca.png'
+import kapFlag from '../../assets/img/partyFlags/kap.png'
+import laborFlag from '../../assets/img/partyFlags/labor.png'
+import liberalFlag from '../../assets/img/partyFlags/liberal.png'
+import natinalsFlag from '../../assets/img/partyFlags/nationals.jpg'
 import {Link} from "react-router-dom";
 
 
@@ -28,15 +33,47 @@ export default class PartyCards extends React.Component {
     }
 
 
-    getTitleLink = (name )=>{
-        return <PartyModal name = {name+" test party"} />
+    getTitleLink = (party )=>{
+        return <PartyModal name = {party.name}
+        flag = {party.flag}
+        />
 
     }
 
 
     getCards = () => {
+        var green = {
+            flag:greenFlag,
+            name:'Australian Greens'
+        }
 
-        var testList = [1, 2, 3, 4, 5,6]
+        var ca = {
+            flag:caFlag,
+            name:'Centre Alliance'
+        }
+
+        var labor = {
+            flag:laborFlag,
+            name:'Australian Labor Party'
+        }
+
+        var kap = {
+            flag:kapFlag,
+            name:"1 Katter's Australian Party"
+        }
+
+        var liberal = {
+            flag:liberalFlag,
+            name:'Liberal Party of Australia'
+        }
+
+        var natinals = {
+            flag:natinalsFlag,
+            name:'The Nationals'
+        }
+
+
+        var testList = [green,ca,labor,kap,liberal,natinals]
 
 
         return testList.map(party => (
@@ -44,31 +81,30 @@ export default class PartyCards extends React.Component {
             <Card
                 title={this.getTitleLink(party)}
                 bordered={false}
-
                 loading={false}
                 className={'card'}
 
             >
                 <Row>
                     <Col span={6}>
-                        <img src={green}
+                        <img src={party.flag}
                              style={{width: '95%', height: '20vh'}}
                         />
                     </Col>
                     <Col span={18}>
                         <Col span={12}>
-                            <Row className={'heading'}>
-                                <Col span={8} className={'heading-text'}> Tweeter</Col>
-                                <Col span={16} className={'politician-text'}> @scottMorison</Col>
-                            </Row>
-                            <Row className={'heading'}>
-                                <Col span={8} className={'heading-text'}> For</Col>
-                                <Col span={16} className={'politician-text'}> Canberra</Col>
-                            </Row>
-                            <Row className={'heading'}>
-                                <Col span={8} className={'heading-text'}> Party</Col>
-                                <Col span={16} className={'politician-text'}> Labour</Col>
-                            </Row>
+                            {/*<Row className={'heading'}>*/}
+                                {/*<Col span={8} className={'heading-text'}> Tweeter</Col>*/}
+                                {/*<Col span={16} className={'politician-text'}> @scottMorison</Col>*/}
+                            {/*</Row>*/}
+                            {/*<Row className={'heading'}>*/}
+                                {/*<Col span={8} className={'heading-text'}> For</Col>*/}
+                                {/*<Col span={16} className={'politician-text'}> Canberra</Col>*/}
+                            {/*</Row>*/}
+                            {/*<Row className={'heading'}>*/}
+                                {/*<Col span={8} className={'heading-text'}> Party</Col>*/}
+                                {/*<Col span={16} className={'politician-text'}> Labour</Col>*/}
+                            {/*</Row>*/}
                         </Col>
                         <Col span={12}>
                             <Col span={12}>
@@ -93,7 +129,6 @@ export default class PartyCards extends React.Component {
                 </Row>
             </Card>
         ))
-
     }
 
     handleStoreChange = () => {
@@ -111,21 +146,6 @@ export default class PartyCards extends React.Component {
             <div id={'cardList'}>
 
                 {this.getCards()}
-                {/*<Card title="Card title" bordered={false} className={'card'} loading={false}>*/}
-
-                {/*</Card>*/}
-                {/*<Card title="Card title" bordered={false} className={'card'} loading={false}>*/}
-
-                {/*</Card>*/}
-                {/*<Card title="Card title" bordered={false} className={'card'} loading={false}>*/}
-
-                {/*</Card>*/}
-                {/*<Card title="Card title" bordered={false} className={'card'} loading={false}>*/}
-
-                {/*</Card>*/}
-                {/*<Card title="Card title" bordered={false} className={'card                <div style={{background: '#ECECEC', padding: '30px'}} id={'cardList'}>        <div style={{background: '#ECECEC', padding: '30px'}} id={'cardList'}>        <div style={{background: '#ECECEC', padding: '30px'}} id={'cardList'}>        <div style={{background: '#ECECEC', padding: '30px'}} id={'cardList'}>        <div style={{background: '#ECECEC', padding: '30px'}} id={'cardList'}>        <div style={{background: '#ECECEC', padding: '30px'}} id={'cardList'}>        <div style={{background: '#ECECEC', padding: '30px'}} id={'cardList'}>        <div style={{background: '#ECECEC', padding: '30px'}} id={'cardList'}>        <div style={{background: '#ECECEC', padding: '30px'}} id={'cardList'}>        <div style={{background: '#ECECEC', padding: '30px'}} id={'cardList'}>        <div style={{background: '#ECECEC', padding: '30px'}} id={'cardList'}>        <div style={{background: '#ECECEC', padding: '30px'}} id={'cardList'}>        <div style={{background: '#ECECEC', padding: '30px'}} id={'cardList'}>        <div style={{background: '#ECECEC', padding: '30px'}} id={'cardList'}>        <div style={{background: '#ECECEC', padding: '30px'}} id={'cardList'}>        <div style={{background: '#ECECEC', padding: '30px'}} id={'cardList'}>        <div style={{background: '#ECECEC', padding: '30px'}} id={'cardList'}>        <div style={{background: '#ECECEC', padding: '30px'}} id={'cardList'}>        <div style={{background: '#ECECEC', padding: '30px'}} id={'cardList'}>        <div style={{background: '#ECECEC', padding: '30px'}} id={'cardList'}>        <div style={{background: '#ECECEC', padding: '30px'}} id={'cardList'}>        <div style={{background: '#ECECEC', padding: '30px'}} id={'cardList'}>        <div style={{background: '#ECECEC', padding: '30px'}} id={'cardList'}>        <div style={{background: '#ECECEC', padding: '30px'}} id={'cardList'}>        <div style={{background: '#ECECEC', padding: '30px'}} id={'cardList'}>ng={false}>*/}
-
-                {/*</Card>*/}
 
                 <BackTop target={() => document.getElementById('cardList')}/>
             </div>

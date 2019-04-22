@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Map from "../../routes/Map";
 import './GoogleMap.css'
 import store from '../../store/index'
+import test from '../../assets/GeoJson/E_FINAL_region'
 
 export default class GoogleMap extends React.Component {
     constructor() {
@@ -59,35 +60,6 @@ export default class GoogleMap extends React.Component {
 
         let obj = this
         console.log('what?',this)
-        // let newFun =  this.handleMouseover()
-
-        // var map = new window.google.maps.GoogleMap
-        //
-        // var bounds = {
-        //     north: -34.36,
-        //     south: -47.35,
-        //     west: 166.28,
-        //     east: -175.81,
-        // }
-        //
-        // bounds = new window.google.maps.LatLngBounds()
-        // (document.getElementById('map'), {
-        //         // center: {lat: -28.734968, lng: 133.489563},
-        //      center: {lat: -37.06, lng: 174.58},
-        //         zoom: 4.85,
-        //         draggable: true,
-        //         scrollwheel: true,
-        //         fullscreen: false,
-        //         streetViewControl: false,
-        //         fullscreenControl: false,
-        //         zoomControl: false,
-        //         restriction: {
-        //             latLngBounds: bounds,
-        //             strictBounds: false,
-        //         },
-        //
-        //     }
-        // )
 
         var map;
         var AUSTRALIA_BOUNDS = {
@@ -111,8 +83,27 @@ export default class GoogleMap extends React.Component {
             fullscreenControl: false,
             zoomControl: false,
             minZoom: 4.5,
-            // maxZoom:5
+
         });
+
+        // var data = {test};
+        //
+        // map.data.addGeoJson(data);
+        // var JSON_PATH = '../../assets/GeoJson/E_FINAL_region.json'
+        // var data = map.data.loadGeoJson(JSON_PATH)
+        map.data.addGeoJson(test);
+        map.data.setStyle(function(feature) {
+            return ({
+                fillColor: feature.getProperty('color'),
+                strokeWeight: 1,
+
+            });
+        });
+
+        map.data.addListener('click', function(event) {
+            alert('this is a constituency')
+            // console.log(event.feature.getProperty("event"))
+        })
 
 
         var heatmap = new window.google.maps.visualization.HeatmapLayer({

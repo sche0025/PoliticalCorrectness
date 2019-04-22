@@ -7,10 +7,10 @@ import {
     Layout, Menu, Breadcrumb, Icon, Row, Col
 } from 'antd';
 import Leaderboard from '../../components/Dashboard/Leaderboard'
-import LineChart from '../../components/Dashboard/LineChart'
-import StackedBarChart from '../../components/Dashboard/StackedBarChart'
-import PieChart from '../../components/Dashboard/PieChart'
-import DonutChart from '../../components/Dashboard/DonutChart'
+import LineChart from '../../components/Charts/LineChart'
+import StackedBarChart from '../../components/Charts/StackedBarChart'
+import PieChart from '../../components/Charts/PieChart'
+import DonutChart from '../../components/Charts/DonutChart'
 
 const {
     Header, Content, Footer, Sider,
@@ -37,12 +37,12 @@ export default class Dashboard extends React.Component {
                             </Col>
                             <Col span={12}>
 
-                                <Row style={{background: "", height: '27vh', minHeight: '300px'}}>
+                                <Row className={'chart-container'}>
 
                                     <LineChart height={295}/>
 
                                 </Row>
-                                <Row style={{background: "", height: '27vh', minHeight: '300px'}}>
+                                <Row className={'chart-container'}>
                                     <Col span={12}>
                                         <PieChart height={295}/>
                                     </Col>
@@ -52,10 +52,8 @@ export default class Dashboard extends React.Component {
 
                                 </Row>
 
-                                <Row style={{background: "", height: '27vh', minHeight: '300px'}}>
+                                <Row className={'chart-container'}>
                                     <StackedBarChart height={295}/>
-
-
                                 </Row>
 
                             </Col>
