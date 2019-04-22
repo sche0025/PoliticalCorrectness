@@ -7,10 +7,10 @@ import {
     Layout, Menu, Breadcrumb, Icon, Row, Col
 } from 'antd';
 import Leaderboard from '../../components/Dashboard/Leaderboard'
-import LineChart from '../../components/Dashboard/LineChart'
-import StackedBarChart from '../../components/Dashboard/StackedBarChart'
-import PieChart from '../../components/Dashboard/PieChart'
-import DonutChart from '../../components/Dashboard/DonutChart'
+import LineChart from '../../components/Charts/LineChart'
+import StackedBarChart from '../../components/Charts/StackedBarChart'
+import PieChart from '../../components/Charts/PieChart'
+import DonutChart from '../../components/Charts/DonutChart'
 
 const {
     Header, Content, Footer, Sider,
@@ -29,7 +29,7 @@ export default class Dashboard extends React.Component {
                     <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
                 </Breadcrumb>
 
-                <div style={{background: '#fff', height: '83vh'}}>
+                <div style={{background: '#fff', height: '100%'}}>
                     <div style={{padding: "15px"}}>
                         <Row>
                             <Col span={12} style={{background: "", height: '100%'}}>
@@ -37,25 +37,23 @@ export default class Dashboard extends React.Component {
                             </Col>
                             <Col span={12}>
 
-                                <Row style={{background: "", height: '27vh', minHeight: '300px'}}>
+                                <Row className={'chart-container'}>
 
                                     <LineChart height={295}/>
 
                                 </Row>
-                                <Row style={{background: "", height: '27vh', minHeight: '300px'}}>
+                                <Row className={'chart-container'}>
                                     <Col span={12}>
-                                        <PieChart/>
+                                        <PieChart height={295}/>
                                     </Col>
                                     <Col span={12}>
-                                        <DonutChart/>
+                                        <DonutChart height={295}/>
                                     </Col>
 
                                 </Row>
 
-                                <Row style={{background: "", height: '27vh', minHeight: '300px'}}>
+                                <Row className={'chart-container'}>
                                     <StackedBarChart height={295}/>
-
-
                                 </Row>
 
                             </Col>

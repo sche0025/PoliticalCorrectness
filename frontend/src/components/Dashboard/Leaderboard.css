@@ -1,6 +1,9 @@
 .table{
-    min-height: 82vh;
+    /*min-height: 82vh;*/
+    min-height: 900px;
+    max-height: 900px;
     width: 95%;
+    /*background-color: #bd2c00;*/
 }
 
 /*.row {*/
@@ -15,12 +18,12 @@
     vertical-align: middle;
 }
 
-.table thead{
-    height: 6vh;
-    color: red;
-    text-align: center;
-    vertical-align: middle;
-}
+/*.table thead{*/
+    /*height: 6vh;*/
+    /*color: red;*/
+    /*text-align: center;*/
+    /*vertical-align: middle;*/
+/*}*/
 
 /*thead[class*="ant-table-thead"] th{*/
     /*background-color: yellow !important;*/
@@ -33,7 +36,8 @@
 }
 
 .table tbody tr{
-    height: 13.5vh;
+    /*height: 13.5vh;*/
+    /*min-height: 260px;*/
     color: blue;
     text-align: center;
     vertical-align: middle;
@@ -43,4 +47,9 @@
 
     text-align: center;
     vertical-align: middle;
+}
+
+.leaderboard_img{
+    height: 11vh;
+    width: 130px;
 }

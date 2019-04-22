@@ -6,7 +6,9 @@ import Row from "antd/es/grid/row";
 import Col from "antd/es/grid/col";
 import {Link} from "react-router-dom";
 import WordCloud from 'react-d3-cloud';
-import BarChart from '../Dashboard/StackedBarChart'
+import BarChart from '../Charts/StackedBarChart'
+import DonutChart from '../Charts/DonutChart'
+import DoubleLineChart from '../Charts/DoubleLineChart'
 
 
 export default class PoliticianModal extends React.Component {
@@ -38,6 +40,7 @@ export default class PoliticianModal extends React.Component {
     handleChange = (value) => {
         console.log(`selected ${value}`);
     }
+
 
     render() {
 
@@ -92,7 +95,7 @@ export default class PoliticianModal extends React.Component {
                         <Row>
                             <Col span={6}>
                                 <div className={'profile'}>
-                                    <img src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+                                    <img src="https://pbs.twimg.com/profile_images/1116081523394891776/AYnEcQnG_400x400.png"
                                          className={'profileImg'}
                                     />
 
@@ -139,13 +142,8 @@ export default class PoliticianModal extends React.Component {
                                         </div>
 
                                         <div className={'details-heading'}>Do people in their local constituency agree/disagree with them?</div>
-                                        <div className={'word-cloud'}>
-                                            <WordCloud
-                                                data={data}
-                                                fontSizeMapper={fontSizeMapper}
-                                                width={1200}
-                                                height={350}
-                                            />
+                                        <div className={'detail-pieChart'}>
+                                            < DonutChart height={450}/>
                                         </div>
 
                                         <div className={'details-heading'}>Do people tweet about these things that politicians
@@ -158,6 +156,14 @@ export default class PoliticianModal extends React.Component {
                                                 width={1200}
                                                 height={350}
                                             />
+                                        </div>
+
+                                        <div className={'details-heading'}>How did internet users think of him/her in the past 7 days?
+                                        </div>
+                                        <div className={'word-cloud'}>
+                                          <DoubleLineChart height={450}
+                                          title={"How did internet users think of him/her in the past 7 days?"}
+                                          />
                                         </div>
                                     </Row>
 

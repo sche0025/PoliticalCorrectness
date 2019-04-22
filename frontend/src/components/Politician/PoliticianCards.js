@@ -5,6 +5,7 @@ import 'antd/dist/antd.css';
 import Row from "antd/es/grid/row";
 import Col from "antd/es/grid/col";
 import PoliticalModal from './PoliticianModal'
+import store from '../../store/index'
 import {Link} from "react-router-dom";
 
 
@@ -13,9 +14,12 @@ export default class PoliticianCards extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            politicians: []
-
+            politicians: [],
+            input:'',
+            party:"all",
+            gender:"all"
         };
+        store.subscribe(this.handleStoreChange);
     }
 
     componentDidMount() {
@@ -23,11 +27,14 @@ export default class PoliticianCards extends React.Component {
     }
 
 
+    //get the link of the title
     getTitleLink = (name )=>{
         return <PoliticalModal name = {name+" test user"} />
 
     }
 
+
+    //render all politicians
     getCards = () => {
 
         var testList = [1, 2, 3, 4, 5]
@@ -45,7 +52,7 @@ export default class PoliticianCards extends React.Component {
             >
                 <Row>
                     <Col span={6}>
-                        <img src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+                        <img src="https://pbs.twimg.com/profile_images/1116081523394891776/AYnEcQnG_400x400.png"
                              style={{width: '95%', height: '20vh'}}
                         />
                     </Col>
@@ -57,7 +64,7 @@ export default class PoliticianCards extends React.Component {
                             </Row>
                             <Row className={'heading'}>
                                 <Col span={8} className={'heading-text'}> For</Col>
-                                <Col span={16} className={'politician-text'}> Sydney</Col>
+                                <Col span={16} className={'politician-text'}> Canberra</Col>
                             </Row>
                             <Row className={'heading'}>
                                 <Col span={8} className={'heading-text'}> Party</Col>
@@ -90,7 +97,17 @@ export default class PoliticianCards extends React.Component {
 
     }
 
+    handleStoreChange = () => {
+        this.setState({
+            input: store.getState().politiciansFilter.input,
+            party: store.getState().politiciansFilter.party,
+            gender: store.getState().politiciansFilter.gender
+        })
+    };
+
     render() {
+
+        console.log(store.getState().politiciansFilter)
         return (
             <div id={'cardList'}>
 

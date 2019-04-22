@@ -1,0 +1,17 @@
+#map{
+    width: auto ;
+    margin-right: 10px;
+    height:81vh ;
+
+}
+
+#content {
+    background: #fff;
+    height: 100%;
+    overflow:auto;
+}
+
+.smallImg{
+    height: 70px;
+    width: 70px;
+}

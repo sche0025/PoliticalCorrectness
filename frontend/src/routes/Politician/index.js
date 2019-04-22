@@ -16,7 +16,7 @@ const {
 } = Layout;
 const SubMenu = Menu.SubMenu;
 
-export default class Heatmap extends React.Component {
+export default class Politician extends React.Component {
 
 
     render() {

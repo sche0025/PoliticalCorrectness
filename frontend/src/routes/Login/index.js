@@ -23,10 +23,11 @@ const imgs = [
 
 class LoginForm extends React.Component {
     state = {
-        focusItem: -1,   //保存当前聚焦的input
-        code: ''         //验证码
+        focusItem: -1,
+        code: ''
     }
 
+    //login
     loginSubmit = () => {
 
         this.setState({
@@ -86,8 +87,8 @@ class LoginForm extends React.Component {
 // @withRouter @inject('appStore') @observer
 class Login extends React.Component {
     state = {
-        showBox: 'login',   //展示当前表单
-        url: '',  //背景图片
+        showBox: 'login',
+        url: '',
         loading: false,
         loading2: false,
     }
@@ -95,19 +96,19 @@ class Login extends React.Component {
     componentDidMount() {
         const isLogin = this.props.appStore
         if (isLogin) {
-            this.props.history.go(1)     //当浏览器用后退按钮回到登录页时，判断登录页是否登录，是登录就重定向上个页面
-            // this.props.appStore.toggleLogin(false) //也可以设置退出登录
+            this.props.history.go(1)
+
         }
         this.initPage()
-        preloadingImages(imgs)  //预加载下一个页面的图片，预加载了第二次为什么还会去请求图片资源？
+        preloadingImages(imgs)
     }
 
     componentWillUnmount() {
-        this.particle && this.particle.destory()
-        notification.destroy()
+        // this.particle && this.particle.destory()
+        // notification.destroy()
     }
 
-    //载入页面时的一些处理
+
     initPage = () => {
         this.setState({
             loading: true
@@ -121,14 +122,14 @@ class Login extends React.Component {
         })
     }
 
-    //切换showbox
+
     switchShowBox = (box) => {
         this.setState({
             showBox: box
         })
     }
 
-    //登录的背景图太大，等载入完后再显示，实际上是图片预加载，
+    //preload img
     loadImageAsync(url) {
         return new Promise(function (resolve, reject) {
             const image = new Image();
@@ -136,7 +137,7 @@ class Login extends React.Component {
                 resolve(url);
             };
             image.onerror = function () {
-                console.log('图片载入错误')
+                console.log('error')
             };
             image.src = url;
         });

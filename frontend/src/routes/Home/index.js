@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import './style.css';
+import moment from 'moment'
 import logo from "../../assets/img/unimelbLogo.jpeg"
 
 import {
@@ -19,11 +20,12 @@ class Home extends React.Component {
         collapsed: false,
     };
 
+    //side bar collapse
     onCollapse = (collapsed) => {
-
         this.setState({collapsed});
     }
 
+    // get default highlighted NavLink
     getActivatedKey = () => {
         var path = window.location.pathname
         console.log(path,path.endsWith('politician'))
@@ -31,15 +33,25 @@ class Home extends React.Component {
             return '1'
         }else if(path.endsWith('map')){
             return '2'
-        }else if(path.endsWith('politician')){
+        }else if(path.endsWith('party')){
             return '3'
-        }else if(path.endsWith('about')){
+        }else if(path.endsWith('politician')){
             return '4'
+        }else if(path.endsWith('about')){
+            return '5'
         }
     }
 
+    //Get the date of update
+    getLastUpdateTime=()=>{
+        var today = moment().format('MMMM Do YYYY');
+        return 'Last updated on '+ today
+    }
+
+
     render() {
-        console.log(window.location.pathname)
+
+
         var defaultKey = this.getActivatedKey()
         // console.log(defaultKey)
         return (
@@ -66,21 +78,26 @@ class Home extends React.Component {
                             </NavLink>
                         </Menu.Item>
                         <Menu.Item key="3">
+                            <NavLink to={'/home/party'}>
+                                <Icon type="flag"/>
+                                <span>Parties</span>
+                            </NavLink>
+                        </Menu.Item>
+
+                        <Menu.Item key="4">
                             <NavLink to={'/home/politician'}>
                                 <Icon type="user"/>
                                 <span>Politicians</span>
                             </NavLink>
                         </Menu.Item>
-
-
-                        <Menu.Item key="4">
+                        <Menu.Item key="5">
                             <NavLink to={'/home/about'}>
                                 <Icon type="team"/>
                                 <span>About Us</span>
                             </NavLink>
                         </Menu.Item>
 
-                        <Menu.Item key="5">
+                        <Menu.Item key="6">
                             <NavLink to={'/home/test'}>
                                 <Icon type="file"/>
                                 <span>Chart Test</span>
@@ -89,9 +106,10 @@ class Home extends React.Component {
                     </Menu>
                 </Sider>
                 <Layout>
-                    <Header style={{background: '#fff', padding: "0px 10px", textAlign: "right"}}>
+                    <Header style={{background: '#fff', padding: "0px 10px"}}>
                         <Row>
-                            <Col>
+                            <Col span={12} className={'updateTime'}> {this.getLastUpdateTime()} </Col>
+                            <Col span={12} style={{textAlign: "right"}}>
                                 <span>  Welcome Richard</span>
                                 <a className={"text"} href={'#'}>Logout </a>
                             </Col>

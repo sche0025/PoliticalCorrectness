@@ -8,6 +8,10 @@ export default class Leaderboard extends React.PureComponent {
         super(props);
     }
 
+    getImg = (url) => {
+        return <img className={"leaderboard_img"} src={url}/>
+    }
+
     const
     columns = [
         {
@@ -21,7 +25,7 @@ export default class Leaderboard extends React.PureComponent {
         },
         {
             title: 'Avatar',
-            dataIndex: '',
+            dataIndex: 'avatar',
             width: 140,
         },
         {
@@ -51,17 +55,77 @@ export default class Leaderboard extends React.PureComponent {
             sorter: (a, b) => a.tr - b.tr,
         },
         {
-            title: 'Sentiment Score',
+            title: 'Sentiment(pro/neu/con)%',
             dataIndex: 'sc',
             width: 100,
 
             sorter: (a, b) => a.sc - b.sc,
         }];
 
+    var
+    data = [{
+        key: '1',
+        name: 'Scott Morrison',
+        age: 32,
+        tweetsCount: 2,
+        party: 'labor',
+        tt: 62,
+        tr: 38,
+        sc: "61/10/29" ,
+        avatar: this.getImg('https://pbs.twimg.com/profile_images/1116081523394891776/AYnEcQnG_400x400.png')
+
+    }, {
+        key: '2',
+        name: 'Jim Green',
+        age: 42,
+        tweetsCount: 33,
+        party: 'labor3'
+        ,
+        tt: 61,
+        tr: 86,
+        sc: "43/17/40" ,
+        avatar: this.getImg('https://pbs.twimg.com/profile_images/1035037345588731909/i-QmXEp3_400x400.jpg')
+
+    }, {
+        key: '3',
+        name: 'Joe Black',
+        age: 32,
+        tweetsCount: 41,
+        party: 'labor2'
+        ,
+        tt: 63,
+        tr: 84,
+        sc: "66/10/11" ,
+        avatar: this.getImg('https://pbs.twimg.com/profile_images/645213958861811712/VHhqGqrQ_200x200.jpg')
+    }, {
+        key: '4',
+        name: 'Jim Red',
+        age: 32,
+        tweetsCount: 35,
+        party: 'labor1'
+        ,
+        tt: 69,
+        tr: 85,
+        sc: "33/30/34" ,
+        avatar: this.getImg('https://pbs.twimg.com/profile_images/847583509757558784/V1l1tu2V_400x400.jpg')
+    },
+        {
+            key: '5',
+            name: 'Jim Red',
+            age: 32,
+            tweetsCount: 55,
+            party: 'labor1'
+            ,
+            tt: 66,
+            tr: 83,
+            sc: "79/10/11" ,
+            avatar: this.getImg('https://pbs.twimg.com/profile_images/750130479714545664/UZWiTi6v_400x400.jpg')
+        }];
+
     render() {
         return (
-            <div >
-                <Table columns={this.columns} dataSource={data} pagination={false}
+            <div>
+                <Table columns={this.columns} dataSource={this.data} pagination={false}
                        className={'table'} bordered={true}
                        title={() => 'Leaderboard'} showHeader={true}
                 />
@@ -71,55 +135,5 @@ export default class Leaderboard extends React.PureComponent {
 }
 
 
-const data = [{
-    key: '1',
-    name: 'John Brown',
-    age: 32,
-    tweetsCount: 2,
-    party: 'labor',
-    tt:62,
-    tr:38,
-    sc:116
 
-}, {
-    key: '2',
-    name: 'Jim Green',
-    age: 42,
-    tweetsCount: 33,
-    party: 'labor3'
-    ,
-    tt:61,
-    tr:86,
-    sc:181
-}, {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    tweetsCount: 41,
-    party: 'labor2'
-    ,
-    tt:63,
-    tr:84,
-    sc:171
-}, {
-    key: '4',
-    name: 'Jim Red',
-    age: 32,
-    tweetsCount: 35,
-    party: 'labor1'
-    ,
-    tt:69,
-    tr:85,
-    sc:161
-},
-    {
-        key: '5',
-        name: 'Jim Red',
-        age: 32,
-        tweetsCount: 55,
-        party: 'labor1'
-        ,
-        tt:66,
-        tr:83,
-        sc:116
-    }];
+
