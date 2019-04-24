@@ -5,8 +5,7 @@ const defaultState = {
         gender:'all'
     },
     map:{
-        loadedMap:null,
-        mapHasLoaded:false
+       constituency:''
     }
 
 }
@@ -26,6 +25,10 @@ export default (state=defaultState,action) =>{
             var newState = state
             newState.map.loadedMap = action.value
             newState.map.mapHasLoaded = true
+            return newState
+        case "MAP_UPDATE_DETAIL":
+            var newState = state
+            newState.map.constituency = action.value
             return newState
     }
     return state;

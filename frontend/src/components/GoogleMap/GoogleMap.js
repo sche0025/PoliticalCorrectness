@@ -4,6 +4,7 @@ import Map from "../../routes/Map";
 import './GoogleMap.css'
 import store from '../../store/index'
 // import geoJsonList from '../../index'
+import ReactDOMServer from 'react-dom/server';
 import wa from '../../assets/GeoJson/WA'
 import nsw from '../../assets/GeoJson/NSW'
 import ta from '../../assets/GeoJson/TA'
@@ -95,7 +96,6 @@ export default class GoogleMap extends React.Component {
             fullscreenControl: false,
             zoomControl: false,
             minZoom: 4.5,
-
         });
 
 
@@ -115,15 +115,19 @@ export default class GoogleMap extends React.Component {
         //
 
 
-        map.data.addListener('click', function (event) {
-            alert(event.feature.getProperty("Sortname"))
-            // console.log(event.feature.getProperty("event"))
-        })
 
         this.setState({
             map: map
         })
+    }
 
+
+    polygonLicked = (event)=>{
+        var action = {
+            value:event.feature.getProperty("Sortname"),
+            type:"MAP_UPDATE_DETAIL"
+        }
+        store.dispatch(action)
 
     }
 
@@ -155,9 +159,8 @@ export default class GoogleMap extends React.Component {
             map.data.overrideStyle(event.feature, {fillColor: 'blue'});
 
             infoWindow = new window.google.maps.InfoWindow;
-            infoWindow.setContent("wow");
+            infoWindow.setContent(me.getImg('https://pbs.twimg.com/profile_images/1116081523394891776/AYnEcQnG_400x400.png'));
             infoWindow.setPosition(event.latLng);
-            console.log(event.latLng);
             infoWindow.open(me.state.map)
         });
 
@@ -166,58 +169,71 @@ export default class GoogleMap extends React.Component {
             infoWindow.close()
         });
 
+
+        map.data.addListener('click', function (event) {
+            me.polygonLicked(event)
+        })
+
     }
 
-    addMarkers = () => {
-        let obj = this
+    // addMarkers = () => {
+    //     let obj = this
+    //
+    //     this.addAMarker(-19.64, 133.48, 'Northern Territory')
+    //     this.addAMarker(-26.16, 121.66, 'Western Australia')
+    //     this.addAMarker(-23.12, 143.89, 'Queensland')
+    //     this.addAMarker(-29.80, 134.71, 'South Australia')
+    //     this.addAMarker(-32.50, 146.29, 'New South Wales')
+    //     this.addAMarker(-19.64, 133.48, 'Northern Territory')
+    //     this.addAMarker(-42.14, 146.54, 'Tasmania')
+    //     this.addAMarker(-35, 149.54, 'Canberra')
+    // }
 
-        this.addAMarker(-19.64, 133.48, 'Northern Territory')
-        this.addAMarker(-26.16, 121.66, 'Western Australia')
-        this.addAMarker(-23.12, 143.89, 'Queensland')
-        this.addAMarker(-29.80, 134.71, 'South Australia')
-        this.addAMarker(-32.50, 146.29, 'New South Wales')
-        this.addAMarker(-19.64, 133.48, 'Northern Territory')
-        this.addAMarker(-42.14, 146.54, 'Tasmania')
-        this.addAMarker(-35, 149.54, 'Canberra')
-    }
 
     getImg = (img) => {
 
-        var html = '<div><img alt="example" src= ' + img + ' class="smallImg" /></div>'
-        console.log(html)
-        return html
+        var html = <div>
+
+            <img alt="example" src={img}  className="smallImg" />
+            <img alt="example" src={img}  className="smallImg" />
+        </div>
+
+       var stringHTML =  ReactDOMServer.renderToString(html)
+
+        // console.log(stringHTML)
+        return stringHTML
     }
 
-    addAMarker = (lat, lng, text) => {
-
-        let obj = this
-        // console.log(this.getImg())
-        var infoWindow = new window.google.maps.InfoWindow(
-            {
-                content: this.getImg('https://pbs.twimg.com/profile_images/1116081523394891776/AYnEcQnG_400x400.png'),
-                disableAutoPan: true
-            }
-        )
-
-        var marker = new window.google.maps.Marker({
-            position: {lat: lat, lng: lng},
-            map: this.state.map,
-        });
-
-        marker.addListener('mouseover', (function () {
-            infoWindow.open(obj.state.map, marker)
-        }))
-
-        marker.addListener('mouseout', (function () {
-            infoWindow.close()
-        }))
-
-        marker.addListener('click', (function () {
-            // obj.codeAddress()
-            obj.handleMarkerClicked()
-            // obj.showHeatPoints()
-        }))
-    }
+    // addAMarker = (lat, lng, text) => {
+    //
+    //     let obj = this
+    //     // console.log(this.getImg())
+    //     var infoWindow = new window.google.maps.InfoWindow(
+    //         {
+    //             content: this.getImg('https://pbs.twimg.com/profile_images/1116081523394891776/AYnEcQnG_400x400.png'),
+    //             disableAutoPan: true
+    //         }
+    //     )
+    //
+    //     var marker = new window.google.maps.Marker({
+    //         position: {lat: lat, lng: lng},
+    //         map: this.state.map,
+    //     });
+    //
+    //     marker.addListener('mouseover', (function () {
+    //         infoWindow.open(obj.state.map, marker)
+    //     }))
+    //
+    //     marker.addListener('mouseout', (function () {
+    //         infoWindow.close()
+    //     }))
+    //
+    //     marker.addListener('click', (function () {
+    //         // obj.codeAddress()
+    //         obj.handleMarkerClicked()
+    //         // obj.showHeatPoints()
+    //     }))
+    // }
 
     generateRandomData = () => {
         var datalist = []

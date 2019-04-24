@@ -60,7 +60,7 @@ class Home extends React.Component {
             <Layout style={{minHeight: '100vh'}}>
 
                 <Sider
-                    width={"15%"}
+                    width={"12%"}
                     collapsible
                     collapsed={this.state.collapsed}
                     onCollapse={this.onCollapse}
@@ -108,7 +108,9 @@ class Home extends React.Component {
                     </Menu>
                 </Sider>
                 <Layout>
-                    <Header style={{background: '#fff', padding: "0px 10px"}}>
+                    <Header style={{background: '#fff', padding: "0px 10px",
+                    maxWidth:'1800px'
+                    }}>
                         <Row>
                             {/*<Col span={18} >*/}
                             {/*<div className={'home-time'} >*/}
@@ -138,8 +140,10 @@ class Home extends React.Component {
                         </Row>
                     </Header>
 
-                    <Content style={{margin: '0 16px'}}>
-                        <div style={{margin: '0 16px', height: '100%', overflowY: 'hidden'}}>
+                    <Content style={{margin: '0 16px',maxWidth:'1800px'}}>
+                        <div style={{margin: '0 16px', height: '100%'
+                            ,overflowY: 'hidden'
+                            }}>
                             {this.props.children}
                         </div>
                     </Content>

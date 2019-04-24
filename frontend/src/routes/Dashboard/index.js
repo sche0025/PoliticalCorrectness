@@ -29,7 +29,9 @@ export default class Dashboard extends React.Component {
                     <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
                 </Breadcrumb>
 
-                <div style={{background: '#fff', height: '100%',minWidth:'1200px'}}>
+                <div style={{background: '#fff', height: '100%',minWidth:'1500px'
+               // , overflowX:'scroll'
+                }}>
                     <div style={{padding: "15px"}}>
                         <Row>
                             <Col span={12} style={{background: "", height: '100%'}}>
