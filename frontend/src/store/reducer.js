@@ -3,6 +3,10 @@ const defaultState = {
         input:'',
         party:'all',
         gender:'all'
+    },
+    map:{
+        loadedMap:null,
+        mapHasLoaded:false
     }
 
 }
@@ -17,6 +21,11 @@ export default (state=defaultState,action) =>{
         case "UPDATE_PARTY":
             var newState = state
             newState.politiciansFilter.party = action.value
+            return newState
+        case "SAVE_MAP":
+            var newState = state
+            newState.map.loadedMap = action.value
+            newState.map.mapHasLoaded = true
             return newState
     }
     return state;

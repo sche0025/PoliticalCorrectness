@@ -1,15 +1,13 @@
 .table{
     /*min-height: 82vh;*/
-    min-height: 900px;
-    max-height: 900px;
+    /*min-height: 900px;*/
+    /*max-height: 900px;*/
     width: 95%;
     /*background-color: #bd2c00;*/
+    /*height:100%*/
 }
 
-/*.row {*/
-    /*height: 12vh;*/
-    /*color: red;*/
-/*}*/
+
 
 .ant-table-title{
     height: 6vh;
@@ -18,16 +16,7 @@
     vertical-align: middle;
 }
 
-/*.table thead{*/
-    /*height: 6vh;*/
-    /*color: red;*/
-    /*text-align: center;*/
-    /*vertical-align: middle;*/
-/*}*/
 
-/*thead[class*="ant-table-thead"] th{*/
-    /*background-color: yellow !important;*/
-/*}*/
 
 .table thead th{
     height: 6vh;
@@ -37,7 +26,9 @@
 
 .table tbody tr{
     /*height: 13.5vh;*/
+    /*min-height: 1000px;*/
     /*min-height: 260px;*/
+
     color: blue;
     text-align: center;
     vertical-align: middle;
@@ -50,6 +41,7 @@
 }
 
 .leaderboard_img{
-    height: 11vh;
+    /*height: 11vh;*/
+    max-height: 120px;
     width: 130px;
 }

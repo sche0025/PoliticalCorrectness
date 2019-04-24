@@ -6,6 +6,9 @@ import { Provider} from 'react-redux'
 import {BrowserRouter} from 'react-router-dom'
 import * as serviceWorker from './serviceWorker';
 import store from './store'
+import oriGeoJsonList from './utils/GeojsonReader'
+const geoJsonList = oriGeoJsonList
+export default geoJsonList
 ReactDOM.render(
 
     <Provider store={store}>

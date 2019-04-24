@@ -4,6 +4,9 @@ import 'antd/dist/antd.css';
 import './style.css';
 import moment from 'moment'
 import logo from "../../assets/img/unimelbLogo.jpeg"
+import Datepicker from '../../components/Datepicker/Datepicker'
+import config from '../../config'
+
 
 import {
     Layout, Menu, Breadcrumb, Icon, Row, Col
@@ -28,29 +31,28 @@ class Home extends React.Component {
     // get default highlighted NavLink
     getActivatedKey = () => {
         var path = window.location.pathname
-        console.log(path,path.endsWith('politician'))
-        if(path.endsWith('dashboard')){
+        console.log(path, path.endsWith('politician'))
+        if (path.endsWith('dashboard')) {
             return '1'
-        }else if(path.endsWith('map')){
+        } else if (path.endsWith('map')) {
             return '2'
-        }else if(path.endsWith('party')){
+        } else if (path.endsWith('party')) {
             return '3'
-        }else if(path.endsWith('politician')){
+        } else if (path.endsWith('politician')) {
             return '4'
-        }else if(path.endsWith('about')){
+        } else if (path.endsWith('about')) {
             return '5'
         }
     }
 
     //Get the date of update
-    getLastUpdateTime=()=>{
-        var today = moment().format('MMMM Do YYYY');
-        return 'Last updated on '+ today
+    getLastUpdateTime = () => {
+        var today = moment().format(config.dateFormat);
+        return 'Last updated on ' + today
     }
 
 
     render() {
-
 
         var defaultKey = this.getActivatedKey()
         // console.log(defaultKey)
@@ -108,17 +110,36 @@ class Home extends React.Component {
                 <Layout>
                     <Header style={{background: '#fff', padding: "0px 10px"}}>
                         <Row>
-                            <Col span={12} className={'updateTime'}> {this.getLastUpdateTime()} </Col>
-                            <Col span={12} style={{textAlign: "right"}}>
-                                <span>  Welcome Richard</span>
-                                <a className={"text"} href={'#'}>Logout </a>
-                            </Col>
+                            {/*<Col span={18} >*/}
+                            {/*<div className={'home-time'} >*/}
+                            {/*<Datepicker/>*/}
+                            {/*</div>*/}
+                            {/*{this.getLastUpdateTime()}*/}
+                            {/*</Col>*/}
 
+                            {/*<Col span={6} style={{textAlign: "right"}}>*/}
+                            {/*<span>  Welcome Richard</span>*/}
+                            {/*<a className={"text"} href={'#'}>Logout </a>*/}
+                            {/*</Col>*/}
+
+                            <Col >
+                                <div className={'home-time'}>
+                                    <Datepicker/>
+                                </div>
+                                <div className={'home-time'}>
+                                    {this.getLastUpdateTime()}
+                                </div>
+
+                                <div className={'user'}>
+                                    <span>  Welcome Richard</span>
+                                    <a className={"text"} href={'#'}>Logout </a>
+                                </div>
+                            </Col>
                         </Row>
                     </Header>
 
                     <Content style={{margin: '0 16px'}}>
-                        <div style={{margin: '0 16px', height: '95%'}}>
+                        <div style={{margin: '0 16px', height: '100%', overflowY: 'hidden'}}>
                             {this.props.children}
                         </div>
                     </Content>

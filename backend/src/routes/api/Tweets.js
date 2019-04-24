@@ -8,7 +8,9 @@ let test = require( '../../../public/assets/jsonformatter')
 router.get('/tweets/find', (req, res) => {
 
     // console.log('wow')
-    TweetsModel.find()
+    TweetsModel.find(
+        // {In_Reply_to_Status_ID:"1115775761015640064"}
+    )
         .then((data)=>{
             res.send(data)
         })

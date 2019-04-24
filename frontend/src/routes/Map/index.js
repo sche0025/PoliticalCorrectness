@@ -28,7 +28,9 @@ export default class Map extends React.Component {
                     <Breadcrumb.Item>Map</Breadcrumb.Item>
                 </Breadcrumb>
 
-                <div style={{background: '#fff', height: '100%'}}>
+                <div style={{background: '#fff', height: '100%',minHeight:'700px',
+                    minWidth:'1000px'
+                }}>
                     <div style={{padding: "15px"}}>
                         <Row>
                             <Col span={15}> <GoogleMap/> </Col>

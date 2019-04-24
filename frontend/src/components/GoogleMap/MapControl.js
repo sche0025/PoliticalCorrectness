@@ -21,7 +21,7 @@ export default class MapControl extends React.Component {
         return (
 
             <Fragment>
-                <Row className={'map-heading'}>Please click the politician to see the details</Row>
+                <Row className={'map-heading'}>Please click the electorate to see the details</Row>
 
             </Fragment>
 

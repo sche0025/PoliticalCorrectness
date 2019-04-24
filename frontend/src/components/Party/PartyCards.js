@@ -88,7 +88,7 @@ export default class PartyCards extends React.Component {
                 <Row>
                     <Col span={6}>
                         <img src={party.flag}
-                             style={{width: '95%', height: '20vh'}}
+                             className={'card-img' }
                         />
                     </Col>
                     <Col span={18}>

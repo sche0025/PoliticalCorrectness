@@ -53,7 +53,7 @@ export default class PoliticianCards extends React.Component {
                 <Row>
                     <Col span={6}>
                         <img src="https://pbs.twimg.com/profile_images/1116081523394891776/AYnEcQnG_400x400.png"
-                             style={{width: '95%', height: '20vh'}}
+                             className={'card-img'}
                         />
                     </Col>
                     <Col span={18}>

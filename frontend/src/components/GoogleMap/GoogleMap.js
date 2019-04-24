@@ -3,7 +3,15 @@ import ReactDOM from 'react-dom';
 import Map from "../../routes/Map";
 import './GoogleMap.css'
 import store from '../../store/index'
-import test from '../../assets/GeoJson/E_FINAL_region'
+// import geoJsonList from '../../index'
+import wa from '../../assets/GeoJson/WA'
+import nsw from '../../assets/GeoJson/NSW'
+import ta from '../../assets/GeoJson/TA'
+import qld from '../../assets/GeoJson/QLD'
+import act from '../../assets/GeoJson/ACT'
+import vic from '../../assets/GeoJson/VIC'
+import sa from '../../assets/GeoJson/SA'
+import na from '../../assets/GeoJson/NA'
 
 export default class GoogleMap extends React.Component {
     constructor() {
@@ -11,16 +19,18 @@ export default class GoogleMap extends React.Component {
         this.state = {
             markers: [],
             map: null,
-            heatmap:null,
-            data:[]
-        }
+            heatmap: null,
+            data: []
 
-
+        };
     }
 
-
     componentDidMount() {
+
+        console.log(window.google);
+
         this.renderMap()
+
     }
 
     renderMap = () => {
@@ -59,18 +69,20 @@ export default class GoogleMap extends React.Component {
     initMap = () => {
 
         let obj = this
-        console.log('what?',this)
+        // console.log('what?',this)
 
         var map;
         var AUSTRALIA_BOUNDS = {
             north: -11,
-            south: -43,
+            south: -44.5,
             west: 110,
             east: 154,
         };
+
         var AUSTRALIA = {lat: -28.734968, lng: 133.489563};
         var map = new window.google.maps.Map(document.getElementById('map'), {
             center: AUSTRALIA,
+            disableDoubleClickZoom: true,
             restriction: {
                 latLngBounds: AUSTRALIA_BOUNDS,
                 strictBounds: false,
@@ -86,61 +98,79 @@ export default class GoogleMap extends React.Component {
 
         });
 
-        // var data = {test};
+
+        // map.data.addGeoJson(geoJsonList.wa);
+        // map.data.addGeoJson(geoJsonList.nsw);
+        // map.data.addGeoJson(geoJsonList.ta);
+        // map.data.addGeoJson(geoJsonList.qld);
+        // map.data.addGeoJson(geoJsonList.act);
+        // map.data.addGeoJson(geoJsonList.vic);
+        // map.data.addGeoJson(geoJsonList.sa);
+        // map.data.addGeoJson(geoJsonList.na);
+
+        this.loadGeojson(map)
+
+        // var features = map.data.addGeoJson(ta);
+        // console.log(features)
         //
-        // map.data.addGeoJson(data);
-        // var JSON_PATH = '../../assets/GeoJson/E_FINAL_region.json'
-        // var data = map.data.loadGeoJson(JSON_PATH)
-        map.data.addGeoJson(test);
-        map.data.setStyle(function(feature) {
-            return ({
-                fillColor: feature.getProperty('color'),
-                strokeWeight: 1,
 
-            });
-        });
 
-        map.data.addListener('click', function(event) {
-            alert('this is a constituency')
+        map.data.addListener('click', function (event) {
+            alert(event.feature.getProperty("Sortname"))
             // console.log(event.feature.getProperty("event"))
         })
 
-
-        var heatmap = new window.google.maps.visualization.HeatmapLayer({
-
-            // data: [new window.google.maps.LatLng(-37.8, 144.989563),new window.google.maps.LatLng(-38.8, 143.989563)],
-            data: this.state.data,
+        this.setState({
             map: map
+        })
+
+
+    }
+
+    loadGeojson=(map)=>{
+        var me = this
+        var infoWindow = null
+        var features = null;
+        map.data.addGeoJson(wa);
+        map.data.addGeoJson(na);
+        map.data.addGeoJson(nsw);
+        map.data.addGeoJson(ta);
+        map.data.addGeoJson(qld);
+        map.data.addGeoJson(act);
+        map.data.addGeoJson(vic);
+        map.data.addGeoJson(sa);
+        var features = map.data;
+
+        map.data.setStyle(function (feature) {
+            return ({
+                strokeWeight: 1,
+            });
         });
 
-        this.setState({
-            heatmap:heatmap
-        })
 
-        // function toggleHeatmap() {
-        //     heatmap.setMap(heatmap.getMap() ? null : map);
-        // }
+        map.data.addListener('mouseover', function(event) {
 
-        // map.fitBounds( new window.google.maps.LatLngBounds());
-        this.setState({
-            map: map
-        })
 
-        map.addListener('click', function (e) {
-            console.log(e.latLng.lat(), e.latLng.lng())
-        })
+            map.data.revertStyle();
+            map.data.overrideStyle(event.feature, {fillColor: 'blue'});
 
-        this.addMarkers(map)
+            infoWindow = new window.google.maps.InfoWindow;
+            infoWindow.setContent("wow");
+            infoWindow.setPosition(event.latLng);
+            console.log(event.latLng);
+            infoWindow.open(me.state.map)
+        });
+
+        map.data.addListener('mouseout', function(event) {
+            map.data.revertStyle();
+            infoWindow.close()
+        });
+
     }
 
     addMarkers = () => {
         let obj = this
 
-        // this.marker = new window.google.maps.Marker({
-        //     position: {lat: -19.64, lng: 133.48},
-        //     map: this.state.map,
-        // });
-        //
         this.addAMarker(-19.64, 133.48, 'Northern Territory')
         this.addAMarker(-26.16, 121.66, 'Western Australia')
         this.addAMarker(-23.12, 143.89, 'Queensland')
@@ -159,6 +189,7 @@ export default class GoogleMap extends React.Component {
     }
 
     addAMarker = (lat, lng, text) => {
+
         let obj = this
         // console.log(this.getImg())
         var infoWindow = new window.google.maps.InfoWindow(
@@ -173,11 +204,11 @@ export default class GoogleMap extends React.Component {
             map: this.state.map,
         });
 
-        marker.addListener('mouseover',( function () {
+        marker.addListener('mouseover', (function () {
             infoWindow.open(obj.state.map, marker)
         }))
 
-        marker.addListener('mouseout',( function () {
+        marker.addListener('mouseout', (function () {
             infoWindow.close()
         }))
 
@@ -190,23 +221,23 @@ export default class GoogleMap extends React.Component {
 
     generateRandomData = () => {
         var datalist = []
-        for(var i =0;i<200;i++){
+        for (var i = 0; i < 200; i++) {
             var lat = ((Math.floor(Math.random() * 1000) + 1) * 1 + 2000) / -100
             var lng = ((Math.floor(Math.random() * 35) + 1) + 115)
-            var newCor =    new window.google.maps.LatLng(lat, lng)
+            var newCor = new window.google.maps.LatLng(lat, lng)
             // console.log(lat,lng)
             datalist.push(newCor)
         }
         // console.log(datalist[0].lat,datalist[0].lng)
-    return datalist
+        return datalist
 
         // var a = new window.google.maps.LatLng(-37.8, 144.989563)
         // return  a
     }
 
-    handleMarkerClicked=()=>{
+    handleMarkerClicked = () => {
         console.log(this.state.heatmap)
-        this.state.heatmap.set('data',(this.generateRandomData()))
+        this.state.heatmap.set('data', (this.generateRandomData()))
         // var newHeatMap = this.state.heatmap
         // newHeatMap.set('data',this.generateRandomData())
         // this.setState({
@@ -215,10 +246,27 @@ export default class GoogleMap extends React.Component {
         // heatmap.set('radius', heatmap.get('radius') ? null : 20);
     }
 
+    componentWillUnmount() {
+        var me = this
+        var elem = document.querySelector('#my-google-script');
+        elem.parentNode.removeChild(elem);
+        // var elem1 = document.querySelector('#map');
+        // elem1.parentNode.removeChild(elem1);
+        //clear memory
+        this.state.map.data.forEach(function (feature) {
+
+            // console.log(feature);
+            me.state.map.data.remove(feature);
+
+        });
+       //
+       // window.google = null
+    }
+
+
     render() {
 
         // console.log(this.state.data);
-        // console.log(this.generateRandomNumber());
         return (
             <Fragment>
                 <div id={'map'}></div>
@@ -227,12 +275,14 @@ export default class GoogleMap extends React.Component {
     }
 }
 
-function loadScript(url) {
+var loadScript = (url) => {
     var index = document.getElementsByTagName('script')[0]
     var script = document.createElement('script')
+    script.setAttribute('id', 'my-google-script')
     script.src = url
     script.async = true
     script.defer = true
     index.parentNode.insertBefore(script, index)
 }
+
 

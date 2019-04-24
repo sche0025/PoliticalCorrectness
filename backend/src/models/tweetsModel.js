@@ -15,4 +15,4 @@ let TweetsSchema = new mongoose.Schema({
 
 })
 
-module.exports = mongoose.model('Tweet',TweetsSchema,'Tweets')
+module.exports = mongoose.model('Tweet',TweetsSchema,'Replies')

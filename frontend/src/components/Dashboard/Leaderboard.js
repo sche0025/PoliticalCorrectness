@@ -124,9 +124,10 @@ export default class Leaderboard extends React.PureComponent {
 
     render() {
         return (
-            <div>
+            <div style={{minHeight:"1000px"}}>
                 <Table columns={this.columns} dataSource={this.data} pagination={false}
-                       className={'table'} bordered={true}
+                       className={'table'}
+                       bordered={true}
                        title={() => 'Leaderboard'} showHeader={true}
                 />
             </div>

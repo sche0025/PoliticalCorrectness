@@ -2,7 +2,8 @@
     width: 97%;
     height:30vh;
     margin: 10px;
-
+    min-height: 300px;
+    min-width: 700px;
 }
 
 #cardList{
@@ -43,4 +44,12 @@
 .statistics{
     padding-left: 30px;
     padding-top: 50px;
+}
+
+.card-img{
+    height: 20vh;
+    width: 100%;
+    /*max-height: 180px;*/
+    min-height: 180px;
+
 }
