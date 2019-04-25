@@ -55,7 +55,7 @@ export default class Leaderboard extends React.PureComponent {
             sorter: (a, b) => a.tr - b.tr,
         },
         {
-            title: 'Sentiment(pro/neu/con)%',
+            title: 'Sentiment (pro/neu/con)%',
             dataIndex: 'sc',
             width: 100,
 

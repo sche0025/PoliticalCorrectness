@@ -1,5 +1,29 @@
+.map-control{
+    width: auto ;
+    margin-right: 10px;
+    height:81vh ;
+    min-height: 700px;
+}
+
 .map-heading{
     font-size: 15pt;
     color: black;
     font-weight: bold;
+}
+
+.mapControl-candidate{
+    height: 96%;
+    /*background-color: #d84743;*/
+    min-width: 420px;
+    overflow: auto;
+}
+
+.mapControl_img{
+    max-height: 80px;
+    width: 80px;
+}
+
+.map-table-header{
+    text-align: center;
+    vertical-align: middle;
 }

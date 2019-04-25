@@ -4,6 +4,7 @@ import {DatePicker} from 'antd'
 import moment from 'moment'
 import 'antd/dist/antd.css';
 import config from '../../config'
+import store from "../../store";
 
 export default class Datepicker extends React.Component {
 
@@ -15,6 +16,15 @@ export default class Datepicker extends React.Component {
         }
     }
 
+    handleDateChange = (value)=>{
+        var action = {
+            type:'CHANGE_DATE',
+            value:value
+        }
+
+        store.dispatch(action);
+    }
+
 
     disabledDate=(disabledDate) =>{
         // Can not select days before today and today
@@ -23,15 +33,15 @@ export default class Datepicker extends React.Component {
     }
 
     render() {
-        console.log(moment().format(config.dateFormat))
-
+        // console.log(moment().format(config.dateFormat))
+        console.log(store.getState());
         return (
             <div className={'datepicker'}>
                 <DatePicker
                     defaultValue={moment()}
                     format={config.dateFormat}
                     disabledDate={this.disabledDate}
-
+                    onChange={this.handleDateChange}
                 />
             </div>
         );

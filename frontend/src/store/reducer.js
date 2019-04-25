@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 const defaultState = {
     politiciansFilter:{
         input:'',
@@ -6,7 +8,8 @@ const defaultState = {
     },
     map:{
        constituency:''
-    }
+    },
+    date:moment()
 
 }
 
@@ -29,6 +32,10 @@ export default (state=defaultState,action) =>{
         case "MAP_UPDATE_DETAIL":
             var newState = state
             newState.map.constituency = action.value
+            return newState
+        case "CHANGE_DATE":
+            var newState = state
+            newState.date = action.value
             return newState
     }
     return state;

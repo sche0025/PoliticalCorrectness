@@ -124,7 +124,7 @@ class Home extends React.Component {
                             {/*<a className={"text"} href={'#'}>Logout </a>*/}
                             {/*</Col>*/}
 
-                            <Col >
+                            <Col>
                                 <div className={'home-time'}>
                                     <Datepicker/>
                                 </div>

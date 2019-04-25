@@ -5,11 +5,11 @@ import 'antd/dist/antd.css';
 import Row from "antd/es/grid/row";
 import Col from "antd/es/grid/col";
 import {Link} from "react-router-dom";
-import WordCloud from 'react-d3-cloud';
+
 import BarChart from '../Charts/StackedBarChart'
 import DonutChart from '../Charts/DonutChart'
 import DoubleLineChart from '../Charts/DoubleLineChart'
-
+import ReactWordcloud from 'react-wordcloud'
 
 
 export default class PartyModal extends React.Component {
@@ -44,6 +44,28 @@ export default class PartyModal extends React.Component {
 
 
     render() {
+
+        var options = {
+            colors: [
+                '#1f77b4',
+                '#ff7f0e',
+                '#2ca02c',
+                '#d62728',
+                '#9467bd',
+                '#8c564b',
+            ],
+            enableTooltip: true,
+            fontFamily: 'impact',
+            fontSizes: [5, 60],
+            fontStyle: 'normal',
+            fontWeight: 'normal',
+            padding: 1,
+            rotations: 3,
+            rotationAngles: [0, 90],
+            scale: 'sqrt',
+            spiral: 'archimedean',
+            transitionDuration: 1000,
+        }
 
         const data = [
             { text: 'Hey', value: 1000 },
@@ -129,11 +151,9 @@ export default class PartyModal extends React.Component {
                                     <Row>
                                         <div className={'details-heading'}>What's his/her most frequently used words?</div>
                                         <div className={'word-cloud'}>
-                                            <WordCloud
-                                                data={data}
-                                                fontSizeMapper={fontSizeMapper}
-                                                width={1200}
-                                                height={350}
+                                            <ReactWordcloud
+                                                words={data}
+                                                options={options}
                                             />
                                         </div>
 
@@ -151,11 +171,15 @@ export default class PartyModal extends React.Component {
                                             tweet too?
                                         </div>
                                         <div className={'word-cloud'}>
-                                            <WordCloud
-                                                data={data}
-                                                fontSizeMapper={fontSizeMapper}
-                                                width={1200}
-                                                height={350}
+                                            {/*<WordCloud*/}
+                                                {/*data={data}*/}
+                                                {/*fontSizeMapper={fontSizeMapper}*/}
+                                                {/*height={350}*/}
+                                            {/*/>*/}
+
+                                            <ReactWordcloud
+                                                words={data}
+                                                options={options}
                                             />
                                         </div>
 

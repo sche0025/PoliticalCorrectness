@@ -88,6 +88,7 @@ export default class GoogleMap extends React.Component {
                 latLngBounds: AUSTRALIA_BOUNDS,
                 strictBounds: false,
             },
+            mapTypeControl: false,
             zoom: 4.5,
             draggable: true,
             scrollwheel: true,
@@ -282,7 +283,7 @@ export default class GoogleMap extends React.Component {
 
     render() {
 
-        // console.log(this.state.data);
+
         return (
             <Fragment>
                 <div id={'map'}></div>
