@@ -50,6 +50,11 @@
     height: 287px;
 }
 
+.largeAvatar{
+    height: 800px;
+    width: 800px;
+}
+
 .about-img{
     height: 500px;
     width: 100%;

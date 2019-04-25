@@ -25,7 +25,9 @@ export default class About extends React.Component {
     constructor(props) {
         super()
         this.state = {
-            count: 0
+            count: 0,
+            edwardCount:0,
+            myClass:'avatar'
         }
     }
 
@@ -41,6 +43,19 @@ export default class About extends React.Component {
 
     handleSchoolClick = ()=>{
         window.open("https://eresearch.unimelb.edu.au/", "_blank")
+    }
+
+    handleMyEasterEgg = ()=>{
+        this.setState({
+            edwardCount: this.state.edwardCount + 1
+        })
+
+        if (this.state.edwardCount == 4) {
+            this.setState({
+                myClass:"largeAvatar"
+            })
+            console.log()
+        }
     }
 
     render() {
@@ -184,8 +199,10 @@ export default class About extends React.Component {
 
                                 <Col span={6} style={{padding: '15px'}}>
                                     <div style={{background: '#ECECEC', padding: '2px'}}>
-                                        <Card cover={<img alt="example" className={'avatar'}
-                                                          src={edward}/>}
+                                        <Card cover={<img alt="example" className={this.state.myClass}
+                                                          src={edward}
+                                                            onClick={this.handleMyEasterEgg}
+                                        />}
                                               bordered={true}
                                         >
                                             <Row>

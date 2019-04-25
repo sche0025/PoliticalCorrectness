@@ -1,6 +1,6 @@
 import React from 'react'
 import BGParticle from '../../utils/BGParticle'
-import {Form, Input, Row, Col, notification, message, Icon} from 'antd'
+import {Form, Input,Alert, Row, Col, notification, message, Icon} from 'antd'
 import './style.css'
 import {randomNum, calculateWidth} from '../../utils/utils'
 import PromptBox from '../../components/PromptBox'
@@ -21,77 +21,24 @@ const imgs = [
 ]
 
 
-class LoginForm extends React.Component {
-    state = {
-        focusItem: -1,
-        code: ''
-    }
-
-    //login
-    loginSubmit = () => {
-
-        this.setState({
-            focusItem: -1
-        })
-
-        this.props.obj.props.history.push("/home/dashboard")
-
-
-    }
-
-
-    render() {
-
-        return (
-            <div className={this.props.className}>
-                <h3 className='title'>Please Login</h3>
-                <Form>
-
-                    <Form.Item>
-                        <Input
-                            onFocus={() => this.setState({focusItem: 0})}
-                            onBlur={() => this.setState({focusItem: -1})}
-                            maxLength={16}
-                            placeholder='username'
-                            addonBefore={<span className='iconfont icon-User' style={styles.focus}/>}/>
-                    </Form.Item>
-
-                    <Form.Item>
-                        <Input
-                            onFocus={() => this.setState({focusItem: 0})}
-                            onBlur={() => this.setState({focusItem: -1})}
-                            maxLength={16}
-                            type='password'
-                            placeholder='password'
-                            addonBefore={<span className='iconfont icon-suo1' style={styles.focus}/>}
-                        />
-                    </Form.Item>
-
-
-                    <div>
-                        <button className='loginBtn' onClick={this.loginSubmit}>Login</button>
-
-                    </div>
-                </Form>
-                <div className='footer'>
-                    <div>Login Page</div>
-                </div>
-            </div>
-        )
-    }
-}
-
 // @inject('appStore') @observer @Form.create()
 
 
 // @withRouter @inject('appStore') @observer
 class Login extends React.Component {
-    state = {
-        showBox: 'login',
-        url: '',
-        loading: false,
-        loading2: false,
+    constructor(props){
+        super(props)
+        this.state = {
+            showBox: 'login',
+            url: '',
+            loading: false,
+            loading2: false,
+            account:"",
+            password:""
+        }
     }
+
+
 
     componentDidMount() {
         const isLogin = this.props.appStore
@@ -123,10 +70,28 @@ class Login extends React.Component {
     }
 
 
-    switchShowBox = (box) => {
+    loginSubmit = () => {
+        console.log(this.props)
+        if(this.state.password=='admin' &&this.state.account=='admin'){
+            message.success('Login successfully.')
+            localStorage.setItem("isLoggedIn",'true');
+            this.props.history.push("/home/dashboard")
+        }else {
+            return  message.error('Sorry, invalid combination, please try again.')
+        }
+    }
+
+    handleAccountChange = (e)=>{
+        console.log()
         this.setState({
-            showBox: box
+            account:e.target.value
         })
+    }
+
+    handlePasswordChange = (e) =>{
+     this.setState({
+         password:e.target.value
+     })
     }
 
     //preload img
@@ -156,10 +121,43 @@ class Login extends React.Component {
                         <div>
                             <div id='backgroundBox' style={styles.backgroundBox}/>
                             <div className='container'>
-                                <LoginForm
-                                    obj={this}
-                                    className={showBox === 'login' ? 'box showBox' : 'box hiddenBox'}
-                                    switchShowBox={this.switchShowBox}/>
+                                <div className={'box showbox'}>
+                                    <h3 className='title'>Please Login</h3>
+                                    <Form>
+
+                                        <Form.Item>
+                                            <Input
+                                                onFocus={() => this.setState({focusItem: 0})}
+                                                onBlur={() => this.setState({focusItem: -1})}
+                                                maxLength={16}
+                                                placeholder='username'
+                                                addonBefore={<span className='iconfont icon-User' style={styles.focus}/>}
+                                                onChange={(e)=>this.handleAccountChange(e)}
+                                            />
+                                        </Form.Item>
+
+                                        <Form.Item>
+                                            <Input
+                                                onFocus={() => this.setState({focusItem: 0})}
+                                                onBlur={() => this.setState({focusItem: -1})}
+                                                maxLength={16}
+                                                type='password'
+                                                placeholder='password'
+                                                onChange={(e)=>this.handlePasswordChange(e)}
+                                                addonBefore={<span className='iconfont icon-suo1' style={styles.focus}/>}
+                                            />
+                                        </Form.Item>
+
+
+                                        <div>
+                                            <button className='loginBtn' onClick={this.loginSubmit}>Login</button>
+
+                                        </div>
+                                    </Form>
+                                    <div className='footer'>
+                                        <div>Login Page</div>
+                                    </div>
+                                </div>
 
                             </div>
                         </div>

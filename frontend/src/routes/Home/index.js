@@ -12,6 +12,7 @@ import {
     Layout, Menu, Breadcrumb, Icon, Row, Col
 } from 'antd';
 import {NavLink} from "react-router-dom";
+import Redirect from "react-router-dom/es/Redirect";
 
 const {
     Header, Content, Footer, Sider,
@@ -19,6 +20,9 @@ const {
 const SubMenu = Menu.SubMenu;
 
 class Home extends React.Component {
+    constructor(props){
+        super(props)
+    }
     state = {
         collapsed: false,
     };
@@ -51,11 +55,18 @@ class Home extends React.Component {
         return 'Last updated on ' + today
     }
 
+    handleLogout=()=>{
+        // localStorage.setItem("isLoggedIn",'false');
+        localStorage.removeItem("isLoggedIn");
+        // this.props.history.push(`/target`)
+        window.location.reload();
+    }
 
     render() {
-
+        let isLoggedIn = localStorage.getItem("isLoggedIn");
+        if (isLoggedIn !='true') return <Redirect to='/'/>
         var defaultKey = this.getActivatedKey()
-        // console.log(defaultKey)
+        // console.log(isLoggedIn)
         return (
             <Layout style={{minHeight: '100vh'}}>
 
@@ -112,17 +123,6 @@ class Home extends React.Component {
                     maxWidth:'1800px'
                     }}>
                         <Row>
-                            {/*<Col span={18} >*/}
-                            {/*<div className={'home-time'} >*/}
-                            {/*<Datepicker/>*/}
-                            {/*</div>*/}
-                            {/*{this.getLastUpdateTime()}*/}
-                            {/*</Col>*/}
-
-                            {/*<Col span={6} style={{textAlign: "right"}}>*/}
-                            {/*<span>  Welcome Richard</span>*/}
-                            {/*<a className={"text"} href={'#'}>Logout </a>*/}
-                            {/*</Col>*/}
 
                             <Col>
                                 <div className={'home-time'}>
@@ -134,7 +134,7 @@ class Home extends React.Component {
 
                                 <div className={'user'}>
                                     <span>  Welcome Richard</span>
-                                    <a className={"text"} href={'#'}>Logout </a>
+                                    <a className={"text"} onClick={this.handleLogout}>Logout </a>
                                 </div>
                             </Col>
                         </Row>
