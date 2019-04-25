@@ -10,7 +10,7 @@ from tweepy import Cursor
 import pandas as pd
 import numpy as np
 from functools import reduce
-from pymongo import MongoClient
+from pymongo import MongoClient, UpdateOne
 from tweet_analyser import TweetAnalyser
 from multiprocessing import Process
 import threading
@@ -24,6 +24,12 @@ CONSUMER_KEY = "wWFHsJ71LrXoX0LRFNCVYxLoY"
 CONSUMER_SECRET = "dpOn4LvtZ0MqxgtFZB0XXFKz9wK7csAHLkusJ8JasUJIxFt6Qm"
 ACCESS_TOKEN = "1104525213847318529-S0OLx8OztXjSxeGCGITcGhVa2EMz5b"
 ACCESS_TOKEN_SECRET = "wEAjXPqWPygScOzAc8RRwiHzeg1G0mGVt20qZLoJGQuDe"
+
+# # Twitter API Keys-yiru
+# CONSUMER_KEY = '9uWwELoYRA4loNboCqe4P7XZD'
+# CONSUMER_SECRET = 'ZhIOn2XPAnVtDjbh4iVrANG4gq7zTCJdJZAAlDpPmKAFpNz4gF'
+# ACCESS_TOKEN = '2344719422-4a94VSU2kjHzgFp1Kap9uoAAvE5R2n9vb4H5Atz'
+# ACCESS_TOKEN_SECRET = 'O5H5r7QyOTct7yFFlePITJGcuIJPBmgyDBunIYRVjYELq'
 
 
 # # # # TWITTER AUTHENTICATER # # # #
@@ -48,32 +54,17 @@ class RestfulReplies(threading.Thread):
 
     """
 
-    def __init__(self, screen_name):
+    def __init__(self, screen_name, db_name, collection_name):
         """
         :param twitter_user:
         """
         # super().__init__()
         threading.Thread.__init__(self)
         self.auth = TwitterAuthenticator().authenticate_twitter_app()
-        self.twitter_client_api = API(self.auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True, timeout=200)
+        self.twitter_api = API(self.auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True, timeout=200)
         self.SCREEN_NAME = screen_name  # 'ScottMorrisonMP'
-
-    def save_data(self, df, collection_name):
-        """
-        The function is used to save data into MongoDB.
-
-        :param tweets: list
-            This list contains all crawled raw tweets.
-        :param collection_name: string
-            This string is used to define collection name.
-
-        :return: null
-        """
-        client = MongoClient('mongodb+srv://chen:123@nlptest-r26bl.gcp.mongodb.net/test?retryWrites=true')
-        # client = MongoClient('mongodb://admin:0m6UqUfE3qXZzoWb@SG-NLP-19409.servers.mongodirector.com:27017/')
-        db = client.test
-        collection = db[collection_name]
-        collection.insert_many(df.to_dict('records'))
+        self.db_name = db_name
+        self.collection_name = collection_name
 
     def run(self):
 
@@ -81,58 +72,42 @@ class RestfulReplies(threading.Thread):
         NUM_PER_QUERY = 100
         records_count = 0
 
-        # print('Start crawling replies.')
-
         while True:
             try:
-                replies = []  # Replies for one tweet
-                replies_info = {}  # Replies info
-                reply_tid = []
-                in_reply_to_tid = []
-                create_date = []
-                df = pd.DataFrame()
-                tweet_reply = self.twitter_client_api.search(q='to:' + self.SCREEN_NAME, result_type='recent',
-                                                             tweet_mode='extended', max_id=max_id, count=NUM_PER_QUERY)
-                if len(tweet_reply) == 0:
+                raw_tweets = self.twitter_api.search(q='to:' + self.SCREEN_NAME, result_type='mixed',
+                                                     tweet_mode='extended', max_id=max_id, count=NUM_PER_QUERY)
+                if len(raw_tweets) == 0:
                     print("No more replies found.")
                     print('In total {} replies are stored in DB.'.format(records_count))
                     print('-----')
                     break
 
-                for tweet in tweet_reply:
-                    if hasattr(tweet, 'in_reply_to_status_id_str') and tweet.in_reply_to_status_id_str != None:
-                        reply_tid.append(tweet.id_str)
-                        in_reply_to_tid.append(tweet.in_reply_to_status_id_str)
-                        create_date.append(tweet.created_at)
-                        replies_info['Re_tID'] = tweet.id_str
-                        replies_info['Re_Content'] = tweet.full_text
-                        replies_info['Hash_Tag'] = tweet.entities['hashtags']
-                        replies_info['Re_Sentiment'] = TweetAnalyser().analyze_sentiment(tweet.full_text)
-                        replies_info['Created_at'] = tweet.created_at
-                        replies_info['Screen_name'] = tweet.user.screen_name
-                        replies_info['Location'] = tweet.user.location
-                        replies_info['coordinates'] = tweet.coordinates
-                        replies.append(replies_info)
-                        replies_info = {}
-                max_id = tweet_reply[-1].id - 1
-                df['Reply_tID'] = reply_tid
-                df['Date'] = create_date
-                df['In_Reply_to_Status_ID'] = in_reply_to_tid
-                df['Reply_Content'] = replies
+                max_id = raw_tweets[-1].id - 1  # update max_id to crawler earlier data
+                df = TweetAnalyser().tweets_to_dataframe(raw_tweets)
+
                 if df.shape[0] != 0:
-                    self.save_data(df, 'Replies')
-                    records_count += len(reply_tid)
-                    # print('{} new replies stored.'.format(len(reply_tid)))
+                    TweetAnalyser().save_data(df, self.db_name, self.collection_name)
+                    # self.save_data(df, self.db_name, self.collection_name)
+                    records_count += df.shape[0]
 
-            except TweepError as e:
+            except TweepError as e1:
                 print('Restful reply error:')
-                print(e)
+                print(e1)
                 break
-                # if 'Failed to send request:' in e.reason:
-                #     print("Time out error caught. Sleep 180 seconds.")
-                #     time.sleep(180)
 
-        # df['Replies_Count'] = reply_count
-        # df['Avg_Reply_Sentiment'] = avg_sentiment
-        # df.to_csv('Replies_Info.csv', index=False)
+            except Exception as e2:
+                print(e2)
+                break
+
+
+if __name__ == "__main__":
+    temp_df = pd.read_csv('Politicians.csv', usecols=['ScreenName'])
+    politician_list = temp_df['ScreenName'].dropna().tolist()
+    for screen_name in politician_list[:1]:
+        print('============================================')
+        print('Process: {}/{}'.format(politician_list.index(screen_name) + 1, len(politician_list)))
+        restful_replies = RestfulReplies(screen_name, 'test', 'test')
+        print("Crawling replies to  {}.".format(screen_name))
+        restful_replies.start()
+        restful_replies.join()
         # df.to_json('Replies_Info.json', orient='records')
