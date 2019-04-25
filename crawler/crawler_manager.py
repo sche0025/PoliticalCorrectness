@@ -27,8 +27,8 @@ def find_data(collection_name):
 
     :return: null
     """
-    client = MongoClient('mongodb+srv://chen:123@nlptest-r26bl.gcp.mongodb.net/test?retryWrites=true')
-    # client = MongoClient('mongodb://admin:0m6UqUfE3qXZzoWb@SG-NLP-19409.servers.mongodirector.com:27017/')
+    # client = MongoClient('mongodb+srv://chen:123@nlptest-r26bl.gcp.mongodb.net/test?retryWrites=true')
+    client = MongoClient("mongodb://admin:123@115.146.85.107/")
     db = client.test
     collection = db[collection_name]
     return collection.find()
@@ -39,7 +39,7 @@ if __name__ == '__main__':
 
     temp_df = pd.read_csv('Politicians.csv', usecols=['ScreenName'])
     politician_list = temp_df['ScreenName'].dropna().tolist()
-    hashtag_list = ['#Election2019', '#nswpol', '#auspol', '#BuildingOurEconomy', '#budget2019', '#ausvote2019']
+    # hashtag_list = ['#Election2019', '#nswpol', '#auspol', '#BuildingOurEconomy', '#budget2019', '#ausvote2019']
 
     print("Start restful crawling.")
     # for hashtag in hashtag_list:
@@ -49,20 +49,20 @@ if __name__ == '__main__':
     #     print("Crawling tweets by {}.".format(hashtag))
     #     restful_hashtag.start()
     #     restful_hashtag.join()
-    for screen_name in politician_list[123:]:
+    for screen_name in politician_list:
         print('============================================')
-        print('Process: {}/{}'.format(politician_list.index(screen_name)+1, len(politician_list)))
-        restful_mentioned = RestfulByMentioned(screen_name)
-        # restful_replies = RestfulReplies(screen_name)
-        # restful_crawler = RestfulCrawler(screen_name)
+        print('Process: {}/{}'.format(politician_list.index(screen_name) + 1, len(politician_list)))
+        restful_mentioned = RestfulByMentioned(screen_name, 'capstone', 'mentioned')
+        restful_replies = RestfulReplies(screen_name, 'capstone', 'mentioned')
+        restful_crawler = RestfulCrawler(screen_name, 'capstone', 'Tweets')
         print("Crawling tweets mentioned {}.".format(screen_name))
         restful_mentioned.start()
-        # print("Crawling replies to {}.".format(screen_name))
-        # restful_replies.start()
-        # print("Crawling tweets from {}.".format(screen_name))
-        # restful_crawler.start()
-        # restful_replies.join()
-        # restful_crawler.join()
+        print("Crawling tweets from {}.".format(screen_name))
+        restful_crawler.start()
+        print("Crawling replies to {}.".format(screen_name))
+        restful_replies.start()
+        restful_replies.join()
+        restful_crawler.join()
         restful_mentioned.join()
 
     print('Finished. Time used: %f mins' % ((time.time() - start_time) / 60))
