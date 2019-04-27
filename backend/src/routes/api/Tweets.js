@@ -70,19 +70,81 @@ router.get('/tweets/findone', (req, res) => {
 })
 
 //test
-router.get('/geojson', (req, res) => {
+router.get('/getleaderboarddata', (req, res) => {
 
-    TweetsModel.find({ age:25 })
-        .then((doc) => {
-            if (doc) {
-                res.send(test)
-            } else {
-                console.log("no data exist for this id");
-            }
-        })
-        .catch((err) => {
-            console.log(err);
-        });
+  var
+    data = [{
+        key: '1',
+        name: 'Scott Morrison',
+        age: 32,
+        tweetsCount: 2,
+        party: 'labor',
+        tt: 62,
+        tr: 38,
+        sc: "61/10/29",
+        avatar: ('https://pbs.twimg.com/profile_images/1116081523394891776/AYnEcQnG_400x400.png')
+
+    }, {
+        key: '2',
+        name: 'Jim Green',
+        age: 42,
+        tweetsCount: 33,
+        party: 'labor3'
+        ,
+        tt: 61,
+        tr: 86,
+        sc: "43/17/40",
+        avatar: ('https://pbs.twimg.com/profile_images/1035037345588731909/i-QmXEp3_400x400.jpg')
+
+    }, {
+        key: '3',
+        name: 'Joe Black',
+        age: 32,
+        tweetsCount: 41,
+        party: 'labor2'
+        ,
+        tt: 63,
+        tr: 84,
+        sc: "66/10/11",
+        avatar: ('https://pbs.twimg.com/profile_images/645213958861811712/VHhqGqrQ_200x200.jpg')
+    }, {
+        key: '4',
+        name: 'Jim Red',
+        age: 32,
+        tweetsCount: 35,
+        party: 'labor1'
+        ,
+        tt: 69,
+        tr: 85,
+        sc: "33/30/34",
+        avatar: ('https://pbs.twimg.com/profile_images/847583509757558784/V1l1tu2V_400x400.jpg')
+    },
+        {
+            key: '5',
+            name: 'Jim Red',
+            age: 32,
+            tweetsCount: 55,
+            party: 'labor1'
+            ,
+            tt: 66,
+            tr: 83,
+            sc: "79/10/11",
+            avatar: ('https://pbs.twimg.com/profile_images/750130479714545664/UZWiTi6v_400x400.jpg')
+        }];
+
+    res.send(data)
+
+    // TweetsModel.find({ age:25 })
+    //     .then((doc) => {
+    //         if (doc) {
+    //             res.send(test)
+    //         } else {
+    //             console.log("no data exist for this id");
+    //         }
+    //     })
+    //     .catch((err) => {
+    //         console.log(err);
+    //     });
 })
 
 module.exports = router
