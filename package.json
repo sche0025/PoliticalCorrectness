@@ -1,0 +1,14 @@
+{
+  "name": "NLPProject",
+  "version": "1.0.0",
+  "description": "capstone_project",
+  "main": "index.js",
+  "repository": "https://github.com/sche0025/PoliticalCorrectness.git",
+  "license": "MIT",
+  "scripts": {
+    "start": "concurrently \"cd backend && yarn start\" \"cd frontend && yarn start1\""
+  },
+  "dependencies": {
+    "concurrently": "^4.1.0"
+  }
+}
