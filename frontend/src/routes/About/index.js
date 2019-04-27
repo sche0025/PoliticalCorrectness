@@ -7,6 +7,7 @@ import {BackTop} from 'antd'
 import PoliticianCards from '../../components/Politician/PoliticianCards'
 import PoliticianFilter from '../../components/Politician/PoliticianFilter'
 import edward from '../../assets/img/edward.jpeg'
+import daniel from '../../assets/img/DanielWu.jpg'
 import banner from '../../assets/img/melbourneunib.png'
 
 import {
@@ -23,11 +24,12 @@ const SubMenu = Menu.SubMenu;
 export default class About extends React.Component {
 
     constructor(props) {
-        super()
+        super(props)
         this.state = {
             count: 0,
             edwardCount:0,
-            myClass:'avatar'
+            // myClass:'avatar',
+            edwardAvatar:edward
         }
     }
 
@@ -52,7 +54,7 @@ export default class About extends React.Component {
 
         if (this.state.edwardCount == 4) {
             this.setState({
-                myClass:"largeAvatar"
+                edwardAvatar:daniel
             })
             console.log()
         }
@@ -78,15 +80,15 @@ export default class About extends React.Component {
                     <div style={{padding: "15px"}}>
                         <Row className={'carousel'}>
                             <Carousel autoplay effect={'fade'}
-                                      autoplayInterval={'100'}
+
                             >
                                 <div><img alt="example"
                                           className={'about-img'}
                                           onClick={this.handleSchoolClick}
                                           src={banner}/>
                                 </div>
-                                <div><h3>2</h3></div>
-                                <div><h3>3</h3></div>
+                                {/*<div><h3>2</h3></div>*/}
+                                {/*<div><h3>3</h3></div>*/}
 
                             </Carousel>
                         </Row>
@@ -199,8 +201,8 @@ export default class About extends React.Component {
 
                                 <Col span={6} style={{padding: '15px'}}>
                                     <div style={{background: '#ECECEC', padding: '2px'}}>
-                                        <Card cover={<img alt="example" className={this.state.myClass}
-                                                          src={edward}
+                                        <Card cover={<img alt="example" className={'avatar'}
+                                                          src={this.state.edwardAvatar}
                                                             onClick={this.handleMyEasterEgg}
                                         />}
                                               bordered={true}

@@ -71,7 +71,8 @@ class Home extends React.Component {
             <Layout style={{minHeight: '100vh'}}>
 
                 <Sider
-                    width={"12%"}
+                    width={250}
+                    // className={'sidebar'}
                     collapsible
                     collapsed={this.state.collapsed}
                     onCollapse={this.onCollapse}
