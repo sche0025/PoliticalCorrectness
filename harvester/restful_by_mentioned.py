@@ -83,14 +83,12 @@ class RestfulByMentioned(threading.Thread):
                     print('-----')
                     break
 
-                max_id = raw_tweets[-1].id - 1  # update max_id to crawler earlier data
+                max_id = raw_tweets[-1].id - 1  # update max_id to harvester earlier data
                 df = TweetAnalyser().tweets_to_dataframe(raw_tweets)
 
                 if df.shape[0] != 0:
                     records_count += df.shape[0]
-                    TweetAnalyser().save_data(df, self.db_name, self.collection_name)
-                    # self.save_data(df, self.db_name, self.collection_name)
-                    # print('{} new tweets stored.'.format(df.shape[0]))
+                    TweetAnalyser().save_data(df.to_dict('records'), self.db_name, self.collection_name)
 
             except TweepError as e1:
                 print('Restful by mentioned error:')
@@ -105,7 +103,7 @@ class RestfulByMentioned(threading.Thread):
 if __name__ == "__main__":
     temp_df = pd.read_csv('Politicians.csv', usecols=['ScreenName'])
     politician_list = temp_df['ScreenName'].dropna().tolist()
-    for screen_name in politician_list[:1]:
+    for screen_name in politician_list[55:58]:
         print('============================================')
         print('Process: {}/{}'.format(politician_list.index(screen_name) + 1, len(politician_list)))
         restful_mentioned = RestfulByMentioned(screen_name, 'test', 'test')

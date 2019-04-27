@@ -82,12 +82,11 @@ class RestfulHashtags(threading.Thread):
                     print('-----')
                     break
 
-                max_id = raw_tweets[-1].id - 1  # update max_id to crawler earlier data
+                max_id = raw_tweets[-1].id - 1  # update max_id to harvester earlier data
                 df = TweetAnalyser().tweets_to_dataframe(raw_tweets)
 
                 if df.shape[0] != 0:
-                    TweetAnalyser().save_data(df, self.db_name, self.collection_name)
-                    # self.save_data(df, self.db_name, self.collection_name)
+                    TweetAnalyser().save_data(df.to_dict('records'), self.db_name, self.collection_name)
                     records_count += df.shape[0]
 
             except TweepError as e:

@@ -44,6 +44,14 @@ class TweetAnalyser():
             return -1
 
     def tweets_to_dataframe(self, raw_tweets):
+        """
+        Convert raw data into structured data.
+        :param raw_tweets: Status
+            Status data from twitter API.
+
+        :return: dataframe
+            Structured dataframe.
+        """
         df = pd.DataFrame()
         contents = []
         tags = []
@@ -52,6 +60,7 @@ class TweetAnalyser():
         df['Screen_Name'] = np.array([tweet.user.screen_name for tweet in raw_tweets])
         df['Date'] = np.array([tweet.created_at for tweet in raw_tweets])
         for tweet in raw_tweets:
+            tags_single = []
             mentioned_single = [user['screen_name'] for user in tweet.entities['user_mentions']]
             mentioned.append(mentioned_single)
             if 'retweeted_status' in tweet._json:
@@ -59,13 +68,13 @@ class TweetAnalyser():
                     'RT @' + tweet._json['retweeted_status']['user']['screen_name'] + ': ' +
                     tweet._json['retweeted_status']['full_text'])
                 tags_single = [item['text'] for item in tweet._json['retweeted_status']['entities']['hashtags']]
-                tags.append(tags_single)
             else:
                 contents.append(tweet.full_text)
-                tags_single = [item['text'] for item in tweet.entities['hashtags']]
-                tags.append(tags_single)
+            tags_single.extend([item['text'] for item in tweet.entities['hashtags']])
+            tags_single = list(set(tags_single))
+            tags.append(tags_single)
         df['Tweets'] = contents
-        df['Hash_Tag'] = tags
+        df['Hashtags'] = tags  # name modified
         df['Mentioned_Screen_Name'] = mentioned
         df['Content_Sentiment'] = np.array([self.analyze_sentiment(tweet.full_text) for tweet in raw_tweets])
         df['Length'] = np.array([len(tweet.full_text) for tweet in raw_tweets])
@@ -79,14 +88,14 @@ class TweetAnalyser():
         df['Source'] = np.array([tweet.source for tweet in raw_tweets])
         return df
 
-    def save_data(self, df, db_name, collection_name):
+    def save_data(self, tweets_list, db_name, collection_name):
         """
         The function is used to update/insert data into MongoDB.
-        :param df: dataframe
-            This dataframe contains all preprocessed raw tweets.
-        :param db_name:
+        :param tweets_list: list
+            A list contains all preprocessed raw tweets.
+        :param db_name: str
             Specify the DB we want to store in.
-        :param collection_name:
+        :param collection_name: str
             Specify the collection we want to store in.
 
         :return: null
@@ -97,6 +106,23 @@ class TweetAnalyser():
         collection = db[collection_name]
         # collection.insert_many(df.to_dict('records'))
         operations = []
-        for item in df.to_dict('records'):
+        for item in tweets_list:
             operations.append(UpdateOne({'ID': item['ID']}, {'$set': item}, upsert=True))
         collection.bulk_write(operations, ordered=False)
+
+    def find_data(self, db_name, collection_name):
+        """
+        The function is used to show all the data stored in MongoDB.
+        :param db_name: str
+            Specify the DB we want to obtain data.
+        :param collection_name: str
+            Specify the collection we want to obtain data.
+
+        :return: list
+            A list of results.
+        """
+        # client = MongoClient('mongodb+srv://chen:123@nlptest-r26bl.gcp.mongodb.net/test?retryWrites=true')
+        client = MongoClient("mongodb://admin:123@115.146.85.107/")
+        db = client[db_name]
+        collection = db[collection_name]
+        return collection.find()
