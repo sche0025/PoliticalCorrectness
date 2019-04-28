@@ -166,7 +166,7 @@ export default class Leaderboard extends React.PureComponent {
     render() {
         var data = this.getData()
         return (
-            <div style={{minHeight: "1000px"}}>
+            <div style={{minWidth:'750px',height:'auto'}}>
                 <Spin tip="Loading..." spinning={this.state.isLeaderboardSpinning}>
                     <Table columns={this.columns} dataSource={data} pagination={false}
                            className={'table'}

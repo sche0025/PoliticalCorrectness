@@ -18,7 +18,7 @@
 
 .carousel {
     margin:0 auto;
-    min-width: 1380px;
+    min-width: 800px;
 }
 
 .about-content{
@@ -37,7 +37,7 @@
 
 .about-profile{
     padding: 10px;
-    min-width: 1400px;
+    min-width: 800px;
 }
 
 .profile-heading{
@@ -63,7 +63,7 @@
 
 .about-img{
     height: 500px;
-    min-width: 1400px;
+    min-width: 800px;
     width: 100%;
     cursor: pointer;
 }

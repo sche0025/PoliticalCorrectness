@@ -11,6 +11,7 @@ import LineChart from '../../components/Charts/LineChart'
 import StackedBarChart from '../../components/Charts/StackedBarChart'
 import PieChart from '../../components/Charts/PieChart'
 import DonutChart from '../../components/Charts/DonutChart'
+import 'bootstrap'
 
 const {
     Header, Content, Footer, Sider,
@@ -29,15 +30,15 @@ export default class Dashboard extends React.Component {
                     <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
                 </Breadcrumb>
 
-                <div style={{background: '#fff', height: '100%',minWidth:'1500px'
-               // , overflowX:'scroll'
+                <div style={{background: 'white', height: 'auto',minHeight:"720px"
+                    ,minWidth:'750px'
                 }}>
                     <div style={{padding: "15px"}}>
                         <Row>
-                            <Col span={12} style={{background: "", height: '100%'}}>
+                            <Col  style={{background: "", height: '100%',backdropColor:''}} lg={24} xxl={14}>
                                 <Leaderboard/>
                             </Col>
-                            <Col span={12}>
+                            <Col  style={{maxWidth:'1130px'}} lg={24} xxl={10}>
 
                                 <Row className={'chart-container'}>
 
@@ -45,10 +46,10 @@ export default class Dashboard extends React.Component {
 
                                 </Row>
                                 <Row className={'chart-container'}>
-                                    <Col span={12}>
+                                    <Col span={14}>
                                         <PieChart height={295}/>
                                     </Col>
-                                    <Col span={12}>
+                                    <Col span={10}>
                                         <DonutChart height={295}/>
                                     </Col>
 

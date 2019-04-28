@@ -9,6 +9,7 @@
 #cardList{
     overflow: auto;
     max-height: 83vh;
+    min-width: 700px;
 }
 
 

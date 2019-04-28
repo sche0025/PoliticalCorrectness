@@ -101,7 +101,7 @@ export default class About extends React.Component {
                             <div className={'about-font-heading'}>Project Team</div>
                             <div className={'about-profile'}>
 
-                                <Col span={6} style={{padding: '15px'}}>
+                                <Col lg={12} xxl={6}  style={{padding: '5px'}}>
                                     <div style={{background: '#ECECEC', padding: '2px'}}>
 
                                         <Card cover={
@@ -135,7 +135,7 @@ export default class About extends React.Component {
                                     </div>
                                 </Col>
 
-                                <Col span={6} style={{padding: '15px'}}>
+                                <Col lg={12} xxl={6}  style={{padding: '5px'}}>
                                     <div style={{background: '#ECECEC', padding: '2px'}}>
                                         <Card cover={<img
                                             alt="example" className={'avatar'}
@@ -168,7 +168,7 @@ export default class About extends React.Component {
                                     </div>
                                 </Col>
 
-                                <Col span={6} style={{padding: '15px'}}>
+                                <Col lg={12} xxl={6}  style={{padding: '5px'}}>
                                     <div style={{background: '#ECECEC', padding: '2px'}}>
                                         <Card cover={<img alt="example" className={'avatar'}
 
@@ -199,7 +199,7 @@ export default class About extends React.Component {
                                     </div>
                                 </Col>
 
-                                <Col span={6} style={{padding: '15px'}}>
+                                <Col lg={12} xxl={6}  style={{padding: '5px'}}>
                                     <div style={{background: '#ECECEC', padding: '2px'}}>
                                         <Card cover={<img alt="example" className={'avatar'}
                                                           src={this.state.edwardAvatar}

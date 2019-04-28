@@ -1,5 +1,10 @@
 .content {
     overflow: auto;
     /*max-height: 100vh;*/
-    height: 83vh;
+    /*height: 80vh;*/
+    /*min-height: 79vh;*/
+    minHeight:720px;
+    min-width: 1200px;
+    height: auto;
+    /*background-color: #bd2c00;*/
 }

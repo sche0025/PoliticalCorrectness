@@ -31,10 +31,10 @@ export default class Party extends React.Component {
                 </Breadcrumb>
 
                 <div className={'content'}>
-                    <div style={{padding: "15px",background: '#ECECEC' }}>
+                    <div style={{padding: "15px",background: '#ECECEC', }}>
                         <Row>
-                            <Col span={18}> <PartyCard />  </Col>
-                            <Col span={6}>  <PartyFilter/>    </Col>
+                            <Col lg={18} > <PartyCard />  </Col>
+                            <Col lg={6} > <PartyFilter/>    </Col>
                         </Row>
 
                     </div>

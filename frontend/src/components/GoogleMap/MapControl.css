@@ -1,8 +1,9 @@
 .map-control{
     width: auto ;
     margin-right: 10px;
-    height:81vh ;
-    min-height: 700px;
+    height:78vh ;
+    min-height: 620px;
+    margin-bottom: 50px;
 }
 
 .map-heading{

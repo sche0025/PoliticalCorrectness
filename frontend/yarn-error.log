@@ -1,8 +1,8 @@
 Arguments: 
-  /Users/mrhusky/.nvm/versions/node/v11.11.0/bin/node /usr/local/bin/yarn start2
+  /Users/mrhusky/.nvm/versions/node/v11.11.0/bin/node /usr/local/bin/yarn add bootstrap
 
 PATH: 
-  /var/folders/r_/hr_z1by1281_zt9cqy81b37m0000gn/T/yarn--1556346964638-0.3247001681422048:/Users/mrhusky/Documents/Unimelb/Capstone_Project/NLPProject/node_modules/.bin:/Users/mrhusky/.config/yarn/link/node_modules/.bin:/Users/mrhusky/Documents/Unimelb/Capstone_Project/NLPProject/node_modules/.bin:/Users/mrhusky/.config/yarn/link/node_modules/.bin:/Users/mrhusky/.nvm/versions/node/v11.11.0/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/mrhusky/.nvm/versions/node/v11.11.0/lib/node_modules/npm/bin/node-gyp-bin:/Users/mrhusky/.nvm/versions/node/v11.11.0/bin/node_modules/npm/bin/node-gyp-bin:/Users/mrhusky/.nvm/versions/node/v11.11.0/bin:/Library/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/mongodb/bin
+  /Users/mrhusky/.nvm/versions/node/v11.11.0/bin:/Library/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/mongodb/bin
 
 Yarn version: 
   1.13.0
@@ -14,17 +14,7 @@ Platform:
   darwin x64
 
 Trace: 
-  Invariant Violation: Script must exist
-      at invariant (/usr/local/lib/node_modules/yarn/lib/cli.js:2168:15)
-      at /usr/local/lib/node_modules/yarn/lib/cli.js:61348:11
-      at Generator.next (<anonymous>)
-      at step (/usr/local/lib/node_modules/yarn/lib/cli.js:304:30)
-      at /usr/local/lib/node_modules/yarn/lib/cli.js:322:14
-      at new Promise (<anonymous>)
-      at new F (/usr/local/lib/node_modules/yarn/lib/cli.js:5228:28)
-      at /usr/local/lib/node_modules/yarn/lib/cli.js:301:12
-      at runCommand (/usr/local/lib/node_modules/yarn/lib/cli.js:61413:23)
-      at Object.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:61512:14)
+  Error: EACCES: permission denied, rmdir '/Users/mrhusky/Documents/Unimelb/Capstone_Project/NLPProject/frontend/node_modules/.cache/babel-loader'
 
 npm manifest: 
   {
@@ -55,7 +45,6 @@ npm manifest:
     "scripts": {
       "start": "react-scripts start",
       "start1": "HOST=0.0.0.0 PORT=80 react-scripts start",
-      "start2": "",
       "build": "react-scripts build",
       "test": "react-scripts test",
       "eject": "react-scripts eject"

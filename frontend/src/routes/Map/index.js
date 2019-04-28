@@ -28,8 +28,9 @@ export default class Map extends React.Component {
                     <Breadcrumb.Item>Map</Breadcrumb.Item>
                 </Breadcrumb>
 
-                <div style={{background: '#fff', height: '100%',minHeight:'700px',
-                    minWidth:'1100px'
+                <div style={{background: '#fff', height: 'auto',minHeight:'660px'
+
+                    // minWidth:'1100px'
                 }}>
                     <div style={{padding: "15px"}}>
                         <Row>

@@ -33,8 +33,8 @@ export default class Politician extends React.Component {
                 <div className={'content'}>
                     <div style={{padding: "15px",background: '#ECECEC' }}>
                         <Row>
-                            <Col span={18}> <PoliticianCards />  </Col>
-                            <Col span={6}>  <PoliticianFilter/>    </Col>
+                            <Col  xl={18}><PoliticianCards />  </Col>
+                            <Col  xl={6}>  <PoliticianFilter/>    </Col>
                         </Row>
 
                     </div>

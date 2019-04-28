@@ -68,10 +68,10 @@ class Home extends React.Component {
         var defaultKey = this.getActivatedKey()
         // console.log(isLoggedIn)
         return (
-            <Layout style={{minHeight: '100vh'}}>
+            <Layout style={{height: '100vh'}}>
 
                 <Sider
-                    width={250}
+                    width={200}
                     // className={'sidebar'}
                     collapsible
                     collapsed={this.state.collapsed}
@@ -121,7 +121,7 @@ class Home extends React.Component {
                 </Sider>
                 <Layout>
                     <Header style={{background: '#fff', padding: "0px 10px",
-                    maxWidth:'1800px'
+                    // maxWidth:'1800px'
                     }}>
                         <Row>
 
@@ -141,9 +141,12 @@ class Home extends React.Component {
                         </Row>
                     </Header>
 
-                    <Content style={{margin: '0 16px',maxWidth:'1800px'}}>
+                    <Content style={{margin: '0 16px',maxHeight:"86vh",
+                        width:'95%'
+                    }}>
                         <div style={{margin: '0 16px', height: '100%'
-                            ,overflowY: 'hidden'
+                            ,overflow: "auto",
+                            // overflowY:'auto'
                             }}>
                             {this.props.children}
                         </div>
