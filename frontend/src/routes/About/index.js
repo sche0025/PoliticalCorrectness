@@ -72,7 +72,7 @@ export default class About extends React.Component {
                 </Breadcrumb>
 
                 <div
-                    style={{background: '#fff', overflow: 'auto', height: '83vh'}}
+                    style={{background: '#fff'}}
                     // className={'content'}
                 >
 

@@ -28,8 +28,8 @@ export default class Map extends React.Component {
                     <Breadcrumb.Item>Map</Breadcrumb.Item>
                 </Breadcrumb>
 
-                <div style={{background: '#fff', height: 'auto',minHeight:'660px'
 
+                <div style={{background: '#fff',width:'auto'
                     // minWidth:'1100px'
                 }}>
                     <div style={{padding: "15px"}}>
@@ -37,7 +37,6 @@ export default class Map extends React.Component {
                             <Col span={15}> <GoogleMap/> </Col>
                             <Col span={9}> <MapControl/></Col>
                         </Row>
-
                     </div>
                 </div>
             </Fragment>

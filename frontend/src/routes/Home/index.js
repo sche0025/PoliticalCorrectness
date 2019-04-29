@@ -141,19 +141,17 @@ class Home extends React.Component {
                         </Row>
                     </Header>
 
-                    <Content style={{margin: '0 16px',maxHeight:"86vh",
+                    <Content style={{margin: '0 16px',height:'auto',
                         width:'95%'
                     }}>
-                        <div style={{margin: '0 16px', height: '100%'
+                        <div style={{margin: '0 16px'
                             ,overflow: "auto",
                             // overflowY:'auto'
                             }}>
                             {this.props.children}
                         </div>
                     </Content>
-                    <Footer style={{textAlign: 'center'}}>
-                        NLP: Political Correctness ©2019 The University of Melbourne
-                    </Footer>
+
 
 
                 </Layout>
