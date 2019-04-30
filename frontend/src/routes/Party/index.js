@@ -10,6 +10,7 @@ import PartyFilter from '../../components/Party/PartyFilter'
 import {
     Layout, Menu, Breadcrumb, Icon, Row, Col
 } from 'antd';
+import PoliticianCards from "../Politician";
 
 const {
     Header, Content, Footer, Sider,
@@ -32,9 +33,9 @@ export default class Party extends React.Component {
 
                 <div className={'content'}>
                     <div style={{padding: "15px",background: '#ECECEC', }}>
-                        <Row>
-                            <Col lg={18} > <PartyCard />  </Col>
-                            <Col lg={6} > <PartyFilter/>    </Col>
+                        <Row className={'reverse-block'}>
+                            <Col xl={18} >   <PartyCard />  </Col>
+                            <Col  xl={6}>  <PartyFilter/>    </Col>
                         </Row>
 
                     </div>

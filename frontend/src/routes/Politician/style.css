@@ -8,3 +8,10 @@
     /*height: auto;*/
     /*background-color: #bd2c00;*/
 }
+
+@media only screen and (max-width: 1200px){
+    .reverse-block{
+        display: flex;
+        flex-direction:column-reverse;
+    }
+}

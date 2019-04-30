@@ -18,8 +18,9 @@
 }
 
 .button{
-    left: 15px;
-    height: 37px;
+    /*left: 15px;*/
+    /*height: 37px;*/
+    margin-top: 10px;
     width: 25%;
     min-width: 60px;
 }

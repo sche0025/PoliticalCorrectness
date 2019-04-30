@@ -6,7 +6,7 @@
   "repository": "https://github.com/sche0025/PoliticalCorrectness.git",
   "license": "MIT",
   "scripts": {
-    "start": "concurrently \"cd backend && yarn start\" \"cd frontend && yarn start1\""
+    "start": "concurrently \"cd backend && yarn run dev\" \"cd frontend && yarn start1\""
   },
   "dependencies": {
     "concurrently": "^4.1.0"

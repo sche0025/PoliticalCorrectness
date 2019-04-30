@@ -3,13 +3,14 @@
     height:30vh;
     margin: 10px;
     min-height: 300px;
-    min-width: 700px;
+    /*min-width: 600px;*/
 }
 
 #cardList{
     overflow: auto;
     max-height: 83vh;
-    min-width: 700px;
+    /*min-width: 600px;*/
+
 }
 
 

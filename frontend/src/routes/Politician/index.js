@@ -32,8 +32,9 @@ export default class Politician extends React.Component {
 
                 <div className={'content'}>
                     <div style={{padding: "15px",background: '#ECECEC' }}>
-                        <Row>
-                            <Col  xl={18}><PoliticianCards />  </Col>
+                        <Row className={'reverse-block'}>
+
+                            <Col xl={18} >   <PoliticianCards />  </Col>
                             <Col  xl={6}>  <PoliticianFilter/>    </Col>
                         </Row>
 
