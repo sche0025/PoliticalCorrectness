@@ -5,7 +5,7 @@ import 'antd/dist/antd.css';
 import Row from "antd/es/grid/row";
 import Col from "antd/es/grid/col";
 import {Link} from "react-router-dom";
-
+import PartyLeaderCard from './PartyLeaderCard'
 import BarChart from '../Charts/StackedBarChart'
 import DonutChart from '../Charts/DonutChart'
 import DoubleLineChart from '../Charts/DoubleLineChart'
@@ -17,57 +17,15 @@ export default class PartyModal extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            visible: false
+            visible: false,
+            data:[],
+            originData:[]
         }
 
     }
 
     componentDidMount() {
-
-    }
-
-    handleOpen = () => {
-        this.setState({
-            visible: true
-        })
-    }
-
-    handleCancel = () => {
-        this.setState({
-            visible: false
-        })
-    }
-
-    handleChange = (value) => {
-        console.log(`selected ${value}`);
-    }
-
-
-    render() {
-
-        var options = {
-            colors: [
-                '#1f77b4',
-                '#ff7f0e',
-                '#2ca02c',
-                '#d62728',
-                '#9467bd',
-                '#8c564b',
-            ],
-            enableTooltip: true,
-            fontFamily: 'impact',
-            fontSizes: [5, 60],
-            fontStyle: 'normal',
-            fontWeight: 'normal',
-            padding: 1,
-            rotations: 3,
-            rotationAngles: [0, 90],
-            scale: 'sqrt',
-            spiral: 'archimedean',
-            transitionDuration: 1000,
-        }
-
-        const data = [
+        const originData = [
             { text: 'Hey', value: 1000 },
             { text: 'lol', value: 200 },
             { text: 'first impression', value: 800 },
@@ -100,6 +58,95 @@ export default class PartyModal extends React.Component {
             { text: 'ducdsfsk', value: 101 },
         ];
 
+        this.setState({
+            originData:originData
+        })
+    }
+
+    handleOpen = () => {
+
+
+        this.setState({
+            visible: true
+        })
+    }
+
+    handleCancel = () => {
+        this.setState({
+            visible: false,
+            data:[]
+        })
+    }
+
+    handleChange = (value) => {
+        console.log(`selected ${value}`);
+    }
+
+
+    render() {
+
+        var data = []
+        var options = {
+            colors: [
+                '#1f77b4',
+                '#ff7f0e',
+                '#2ca02c',
+                '#d62728',
+                '#9467bd',
+                '#8c564b',
+            ],
+            enableTooltip: true,
+            fontFamily: 'impact',
+            fontSizes: [5, 60],
+            fontStyle: 'normal',
+            fontWeight: 'normal',
+            padding: 1,
+            rotations: 3,
+            rotationAngles: [0, 90],
+            scale: 'sqrt',
+            spiral: 'archimedean',
+            transitionDuration: 1000,
+        }
+
+
+        if(this.state.visible ===false){
+            data = []
+        }else{
+            data = [
+                { text: 'Hey', value: 1000 },
+                { text: 'lol', value: 200 },
+                { text: 'first impression', value: 800 },
+                { text: 'very cool', value: 10000 },
+                { text: 'duck', value: 10 },
+                { text: 'Hey2', value: 1000 },
+                { text: 'lo3l', value: 200 },
+                { text: 'fi1rst impression', value: 800 },
+                { text: 'ver3y cool', value: 10000 },
+                { text: 'du4ck', value: 10 },
+                { text: 'Heye', value: 1000 },
+                { text: 'loql', value: 200 },
+                { text: 'firdst impression', value: 800 },
+                { text: 'very cfool', value: 10000 },
+                { text: 'ducsk', value: 101 },
+                { text: 'He21y', value: 1000 },
+                { text: 'l312ol', value: 200 },
+                { text: 'firewrst impression', value: 800 },
+                { text: 'veqerry cool', value: 10000 },
+                { text: 'duwqreck', value: 10 },
+                { text: 'Hedsfy2', value: 1000 },
+                { text: 'loafg3l', value: 200 },
+                { text: 'fi1rfagst impression', value: 800 },
+                { text: 'verdsaf3y cool', value: 10000 },
+                { text: 'du4adsfck', value: 10 },
+                { text: 'Heyfgde', value: 1000 },
+                { text: 'loqgfdl', value: 200 },
+                { text: 'firdafdst impression', value: 800 },
+                { text: 'very sdafcfool', value: 10000 },
+                { text: 'ducdsfsk', value: 101 },
+            ];
+        }
+
+        console.log(data.length)
         const fontSizeMapper = word => Math.log2(word.value) * 5;
         return (
             <Fragment>
@@ -149,12 +196,49 @@ export default class PartyModal extends React.Component {
                             <Col span={18}>
                                 <div className={'details'}>
                                     <Row>
+                                        <div className={'details-heading'}>Who are the most popular leaders in this party?
+                                            <div className={'party-leaders'}>
+
+                                                <Row >
+                                                    <Col className="party-avatar-card" span={4}>
+                                                        <PartyLeaderCard/>
+                                                    </Col>
+                                                    <Col className="gutter-row" span={1}/>
+
+                                                    <Col className="party-avatar-card" span={4}>
+                                                        <PartyLeaderCard/>
+                                                    </Col>
+
+                                                    <Col className="gutter-row" span={1}/>
+
+                                                    <Col className="party-avatar-card" span={4}>
+                                                        <PartyLeaderCard/>
+                                                    </Col>
+                                                    <Col className="gutter-row" span={1}/>
+
+                                                    <Col className="party-avatar-card" span={4}>
+                                                        <PartyLeaderCard/>
+                                                    </Col>
+
+                                                    <Col className="gutter-row" span={1}/>
+
+                                                    <Col className="party-avatar-card" span={4}>
+                                                        <PartyLeaderCard/>
+                                                    </Col>
+                                                </Row>
+                                            </div>
+
+                                        </div>
+
+
                                         <div className={'details-heading'}>What's his/her most frequently used words?</div>
                                         <div className={'word-cloud'}>
-                                            <ReactWordcloud
-                                                words={data}
-                                                options={options}
-                                            />
+                                            {this.state.visible?
+                                                <ReactWordcloud
+                                                    words={data}
+                                                    options={options}
+                                                />:<div></div>
+                                            }
                                         </div>
 
                                         <div className={'details-heading'}>How do people think of him/her nationwide?</div>
@@ -177,10 +261,7 @@ export default class PartyModal extends React.Component {
                                                 {/*height={350}*/}
                                             {/*/>*/}
 
-                                            <ReactWordcloud
-                                                words={data}
-                                                options={options}
-                                            />
+
                                         </div>
 
                                         <div className={'word-cloud'}>

@@ -1,4 +1,5 @@
 .chart-container{
     height: 27vh;
-    min-height: 300px
+    min-height: 300px;
+    width:auto;
 }

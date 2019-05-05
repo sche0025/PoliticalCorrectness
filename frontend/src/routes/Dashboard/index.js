@@ -7,6 +7,7 @@ import {
     Layout, Menu, Breadcrumb, Icon, Row, Col
 } from 'antd';
 import Leaderboard from '../../components/Dashboard/Leaderboard'
+import TopicTable from '../../components/Dashboard/TopicTable.js'
 import LineChart from '../../components/Charts/LineChart'
 import StackedBarChart from '../../components/Charts/StackedBarChart'
 import PieChart from '../../components/Charts/PieChart'
@@ -46,10 +47,11 @@ export default class Dashboard extends React.Component {
 
                                 </Row>
                                 <Row className={'chart-container'}>
-                                    <Col span={14}>
-                                        <PieChart height={295}/>
+                                    <Col span={12}>
+                                        {/*<PieChart height={295}/>*/}
+                                        <TopicTable/>
                                     </Col>
-                                    <Col span={10}>
+                                    <Col span={12}>
                                         <DonutChart height={295}/>
                                     </Col>
 

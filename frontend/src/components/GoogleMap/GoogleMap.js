@@ -160,7 +160,9 @@ export default class GoogleMap extends React.Component {
             map.data.overrideStyle(event.feature, {fillColor: 'blue'});
 
             infoWindow = new window.google.maps.InfoWindow;
-            infoWindow.setContent(me.getImg('https://pbs.twimg.com/profile_images/1116081523394891776/AYnEcQnG_400x400.png'));
+            infoWindow.setContent(me.getImg('https://pbs.twimg.com/profile_images/1116081523394891776/AYnEcQnG_400x400.png')
+
+            );
             infoWindow.setPosition(event.latLng);
             infoWindow.open(me.state.map)
         });

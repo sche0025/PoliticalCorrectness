@@ -6,7 +6,7 @@ import moment from 'moment'
 import logo from "../../assets/img/unimelbLogo.jpeg"
 import Datepicker from '../../components/Datepicker/Datepicker'
 import config from '../../config'
-
+import store from '../../store/index'
 
 import {
     Layout, Menu, Breadcrumb, Icon, Row, Col
@@ -22,10 +22,13 @@ const SubMenu = Menu.SubMenu;
 class Home extends React.Component {
     constructor(props){
         super(props)
+
     }
     state = {
         collapsed: false,
+        count:0
     };
+
 
     //side bar collapse
     onCollapse = (collapsed) => {
@@ -35,7 +38,7 @@ class Home extends React.Component {
     // get default highlighted NavLink
     getActivatedKey = () => {
         var path = window.location.pathname
-        console.log(path, path.endsWith('politician'))
+        // console.log(path, path.endsWith('politician'))
         if (path.endsWith('dashboard')) {
             return '1'
         } else if (path.endsWith('map')) {
@@ -62,11 +65,21 @@ class Home extends React.Component {
         window.location.reload();
     }
 
+    componentDidMount() {
+        // var action = {type:"REFRESH_DASHBOARD"}
+        // store.dispatch(action)
+        var path = window.location.pathname
+        if (path.endsWith('dashboard')){
+            document.getElementById("dashboardLink").click()
+        }
+    }
+
     render() {
         let isLoggedIn = localStorage.getItem("isLoggedIn");
         if (isLoggedIn !='true') return <Redirect to='/'/>
         var defaultKey = this.getActivatedKey()
         // console.log(isLoggedIn)
+
         return (
             <Layout style={{height: '100vh'}}>
 
@@ -80,7 +93,7 @@ class Home extends React.Component {
                     <div className="logo"><img className={"img"} src={logo} alt=""/></div>
                     <Menu theme="dark" defaultSelectedKeys={[defaultKey]} mode="inline">
                         <Menu.Item key="1">
-                            <NavLink to={'/home/dashboard'}>
+                            <NavLink to={'/home/dashboard'} id={"dashboardLink"}>
                                 <Icon type="pie-chart"/>
                                 <span>Dashboard</span>
                             </NavLink>
@@ -124,7 +137,6 @@ class Home extends React.Component {
                     // maxWidth:'1800px'
                     }}>
                         <Row>
-
                             <Col>
                                 <div className={'home-time'}>
                                     <Datepicker/>

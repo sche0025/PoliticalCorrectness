@@ -9,13 +9,19 @@ const defaultState = {
     map:{
        constituency:''
     },
-    date:moment()
+    date:moment(),
+    count:0
 
 }
 
 export default (state=defaultState,action) =>{
 
     switch (action.type) {
+        case "REFRESH_DASHBOARD":
+            var newState = state
+            newState.count =  newState.count+1
+            return newState
+
         case "UPDATE_INPUT":
             var newState = state
             newState.politiciansFilter.input = action.value

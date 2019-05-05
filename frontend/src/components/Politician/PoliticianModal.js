@@ -10,7 +10,11 @@ import BarChart from '../Charts/StackedBarChart'
 import DonutChart from '../Charts/DonutChart'
 import DoubleLineChart from '../Charts/DoubleLineChart'
 import ReactWordcloud from 'react-wordcloud'
-
+import $ from 'jquery'
+// import ReactJQCloud from 'react-jqcloud'
+// import jQCloud from 'jqcloud2'
+import jQCloud from 'jqcloud2'
+// import jQCloud from '../../assets/wordcloud/jqcloud'/**/
 export default class PoliticianModal extends React.Component {
 
     constructor(props) {
@@ -22,7 +26,21 @@ export default class PoliticianModal extends React.Component {
     }
 
     componentDidMount() {
+        var words = [
+            {text: "Lorem", weight: 13},
+            {text: "Ipsum", weight: 10.5},
+            {text: "Dolor", weight: 9.4},
+            {text: "Sit", weight: 8},
+            {text: "Amet", weight: 6.2},
+            {text: "Consectetur", weight: 5},
+            {text: "Adipiscing", weight: 5},
+            /* ... */
+        ];
+       // jQCloud(words);
 
+        // $(document).ready(function() {
+        //     $("#demo").jQCloud(words);
+        // });
     }
 
     handleOpen = () => {
@@ -143,17 +161,19 @@ export default class PoliticianModal extends React.Component {
                                     </div>
                                 </div>
 
-
                             </Col>
                             <Col span={18}>
                                 <div className={'details'}>
                                     <Row>
                                         <div className={'details-heading'}>What's his/her most frequently used words?</div>
                                         <div className={'word-cloud'}>
-                                            <ReactWordcloud
-                                                words={data}
-                                                options={options}
-                                            />
+                                            {/*<ReactJQCloud word_array={data}/>*/}
+                                            {/*<ReactWordcloud*/}
+                                                {/*words={data}*/}
+                                                {/*options={options}*/}
+                                            {/*/>*/}
+                                    <div id={'demo'}></div>
+
                                         </div>
 
                                         <div className={'details-heading'}>How do people think of him/her nationwide?</div>
@@ -170,10 +190,10 @@ export default class PoliticianModal extends React.Component {
                                             tweet too?
                                         </div>
                                         <div className={'word-cloud'}>
-                                            <ReactWordcloud
-                                                words={data}
-                                                options={options}
-                                            />
+                                            {/*<ReactWordcloud*/}
+                                                {/*words={data}*/}
+                                                {/*options={options}*/}
+                                            {/*/>*/}
                                         </div>
 
                                         <div className={'details-heading'}>How did internet users think of him/her in the past 7 days?
@@ -195,3 +215,4 @@ export default class PoliticianModal extends React.Component {
     }
 
 }
+

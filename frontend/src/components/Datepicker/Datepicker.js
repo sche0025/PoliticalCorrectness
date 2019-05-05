@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react'
 import './Datepicker.css'
-import {DatePicker} from 'antd'
+import {DatePicker,Tooltip} from 'antd'
 import moment from 'moment'
 import 'antd/dist/antd.css';
 import config from '../../config'
@@ -37,12 +37,17 @@ export default class Datepicker extends React.Component {
         console.log(store.getState());
         return (
             <div className={'datepicker'}>
-                <DatePicker
-                    defaultValue={moment()}
-                    format={config.dateFormat}
-                    disabledDate={this.disabledDate}
-                    onChange={this.handleDateChange}
-                />
+                <Tooltip title="Select a date to see historical data"
+                         placement="right"
+                >
+                    <DatePicker
+                        defaultValue={moment()}
+                        format={config.dateFormat}
+                        disabledDate={this.disabledDate}
+                        onChange={this.handleDateChange}
+                    />
+                </Tooltip>
+
             </div>
         );
     }
