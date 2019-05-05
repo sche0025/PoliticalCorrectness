@@ -13,7 +13,7 @@ import ReactWordcloud from 'react-wordcloud'
 import $ from 'jquery'
 // import ReactJQCloud from 'react-jqcloud'
 // import jQCloud from 'jqcloud2'
-import jQCloud from 'jqcloud2'
+// import jQCloud from 'jqcloud2'
 // import jQCloud from '../../assets/wordcloud/jqcloud'/**/
 export default class PoliticianModal extends React.Component {
 
