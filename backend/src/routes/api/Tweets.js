@@ -1,20 +1,20 @@
 let TweetsModel = require('../../models/tweetsModel')
 let express = require('express')
 let router = express.Router()
-let test = require( '../../../public/assets/jsonformatter')
-
+let test = require('../../../public/assets/jsonformatter')
+let parser = require( '../../utils/dataParser')
 
 // GET
 router.get('/tweets/find', (req, res) => {
 
     // console.log('wow')
     TweetsModel.find(
-        // {In_Reply_to_Status_ID:"1115775761015640064"}
+        {}
     )
-        .then((data)=>{
+        .then((data) => {
             res.send(data)
         })
-        .catch((err)=>{
+        .catch((err) => {
             console.log(err);
         })
 })
@@ -23,32 +23,32 @@ router.get('/tweets/find', (req, res) => {
 router.get('/tweets/mapreduce', (req, res) => {
 
     var o = {}
-    o.map = function (){
-        emit(this.Screen_Name,this.Retweets)
+    o.map = function () {
+        emit(this.Screen_Name, this.Retweets)
     }
 
-    o.reduce = function(k,v){
+    o.reduce = function (k, v) {
         return Array.sum(v)
     }
 
     // console.log('wow')
     TweetsModel.mapReduce(o, function (err, results) {
-        if(err) throw err;
+        if (err) throw err;
         console.log(results)
     });
 
 })
 
-router.post('/tweets/insert',(req,res) =>{
+router.post('/tweets/insert', (req, res) => {
     console.log(req.body)
     TweetsModel.create(req.body)
-        .then((docs)=>{
-            if(docs) {
+        .then((docs) => {
+            if (docs) {
                 res.send('delete success');
             } else {
-                reject({"success":false});
+                reject({"success": false});
             }
-        }).catch((err)=>{
+        }).catch((err) => {
         reject(err);
     })
 })
@@ -56,7 +56,7 @@ router.post('/tweets/insert',(req,res) =>{
 //find based on criteria
 router.get('/tweets/findone', (req, res) => {
 
-    TweetsModel.find({ age:25 })
+    TweetsModel.find({age: 25})
         .then((doc) => {
             if (doc) {
                 res.send(doc)
@@ -69,82 +69,52 @@ router.get('/tweets/findone', (req, res) => {
         });
 })
 
-//test
-router.get('/getleaderboarddata', (req, res) => {
+//get data for leaderboard
+router.get('/getleaderboarddata/:date', (req, res) => {
+    console.log(req.params.date)
+    var searchDate = req.params.date
 
-  var
-    data = [{
-        key: '1',
-        name: 'Scott Morrison',
-        age: 32,
-        tweetsCount: 2,
-        party: 'labor',
-        tt: 62,
-        tr: 38,
-        sc: "61/10/29",
-        avatar: ('https://pbs.twimg.com/profile_images/1116081523394891776/AYnEcQnG_400x400.png')
 
-    }, {
-        key: '2',
-        name: 'Jim Green',
-        age: 42,
-        tweetsCount: 33,
-        party: 'labor3'
-        ,
-        tt: 61,
-        tr: 86,
-        sc: "43/17/40",
-        avatar: ('https://pbs.twimg.com/profile_images/1035037345588731909/i-QmXEp3_400x400.jpg')
+    TweetsModel.find({date: searchDate})
+        .then((data) => {
+            if (data) {
+                console.log("searchDate", searchDate)
+                var leaderBoardData = parser.getLeaderboardData(data)
 
-    }, {
-        key: '3',
-        name: 'Joe Black',
-        age: 32,
-        tweetsCount: 41,
-        party: 'labor2'
-        ,
-        tt: 63,
-        tr: 84,
-        sc: "66/10/11",
-        avatar: ('https://pbs.twimg.com/profile_images/645213958861811712/VHhqGqrQ_200x200.jpg')
-    }, {
-        key: '4',
-        name: 'Jim Red',
-        age: 32,
-        tweetsCount: 35,
-        party: 'labor1'
-        ,
-        tt: 69,
-        tr: 85,
-        sc: "33/30/34",
-        avatar: ('https://pbs.twimg.com/profile_images/847583509757558784/V1l1tu2V_400x400.jpg')
-    },
-        {
-            key: '5',
-            name: 'Jim Red',
-            age: 32,
-            tweetsCount: 55,
-            party: 'labor1'
-            ,
-            tt: 66,
-            tr: 83,
-            sc: "79/10/11",
-            avatar: ('https://pbs.twimg.com/profile_images/750130479714545664/UZWiTi6v_400x400.jpg')
-        }];
+                res.send(leaderBoardData)
 
-    res.send(data)
+            } else {
+                console.log("no data exist for this id");
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 
-    // TweetsModel.find({ age:25 })
-    //     .then((doc) => {
-    //         if (doc) {
-    //             res.send(test)
-    //         } else {
-    //             console.log("no data exist for this id");
-    //         }
-    //     })
-    //     .catch((err) => {
-    //         console.log(err);
-    //     });
+})
+
+//get data for politicians
+router.get('/getpoliticiansdata/:date', (req, res) => {
+    console.log(req.params.date)
+    var searchDate = req.params.date
+
+
+    TweetsModel.find({date: searchDate})
+        .then((data) => {
+            if (data) {
+                console.log("searchDate", searchDate)
+                var leaderBoardData = parser.getPoliticiansData(data)
+
+                res.send(leaderBoardData)
+
+            } else {
+                console.log("no data exist for this id");
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+
 })
 
 module.exports = router

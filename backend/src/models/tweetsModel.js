@@ -15,4 +15,4 @@ let TweetsSchema = new mongoose.Schema({
 
 })
 
-module.exports = mongoose.model('Tweet',TweetsSchema,'Replies')
+module.exports = mongoose.model('Tweet',TweetsSchema,'sumP')

@@ -4,7 +4,8 @@ const app = express();
 const router = express.Router();
 const bodyparser = require('body-parser')
 // const customerRoute = require('./routes/api/customer')
-const tweetsRoute = require('./routes/api/Tweets')
+const tweetsRoute = require('./routes/api/tweets')
+const dailyRoute = require('./routes/api/daily')
 const PORT = process.env.PORT || 3001;
 
 const logger = (req,res,next) =>{
@@ -32,7 +33,7 @@ app.use(bodyparser.json())
 
 // app.use('/api',customerRoute)
 app.use('/api',tweetsRoute)
-
+app.use('/api',dailyRoute)
 // app.use((req, res, next) => {
 //     res.status(404).send('We think you are lost!')
 // })

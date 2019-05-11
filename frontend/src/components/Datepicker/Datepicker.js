@@ -19,7 +19,7 @@ export default class Datepicker extends React.Component {
     handleDateChange = (value)=>{
         var action = {
             type:'CHANGE_DATE',
-            value:value
+            value:moment(value).format(config.dateFormat)
         }
 
         store.dispatch(action);
@@ -41,6 +41,7 @@ export default class Datepicker extends React.Component {
                          placement="right"
                 >
                     <DatePicker
+                        allowClear={false}
                         defaultValue={moment()}
                         format={config.dateFormat}
                         disabledDate={this.disabledDate}

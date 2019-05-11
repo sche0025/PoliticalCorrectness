@@ -22,13 +22,19 @@ const SubMenu = Menu.SubMenu;
 class Home extends React.Component {
     constructor(props){
         super(props)
+        this.state = {
+           date:store.getState().date
+        };
 
     }
-    state = {
-        collapsed: false,
-        count:0
-    };
 
+
+    handleStoreChange = () => {
+        // console.log(store.getState())
+        this.setState({
+            date: store.getState().date
+        })
+    };
 
     //side bar collapse
     onCollapse = (collapsed) => {
@@ -72,9 +78,11 @@ class Home extends React.Component {
         if (path.endsWith('dashboard')){
             document.getElementById("dashboardLink").click()
         }
+
     }
 
     render() {
+        console.log(this.state.date)
         let isLoggedIn = localStorage.getItem("isLoggedIn");
         if (isLoggedIn !='true') return <Redirect to='/'/>
         var defaultKey = this.getActivatedKey()
@@ -93,7 +101,7 @@ class Home extends React.Component {
                     <div className="logo"><img className={"img"} src={logo} alt=""/></div>
                     <Menu theme="dark" defaultSelectedKeys={[defaultKey]} mode="inline">
                         <Menu.Item key="1">
-                            <NavLink to={'/home/dashboard'} id={"dashboardLink"}>
+                            <NavLink to={{pathname:'/home/dashboard', date:this.state.date}} id={"dashboardLink"} >
                                 <Icon type="pie-chart"/>
                                 <span>Dashboard</span>
                             </NavLink>
@@ -159,7 +167,7 @@ class Home extends React.Component {
                         <div style={{margin: '0 16px'
                             ,overflow: "auto",
                             // overflowY:'auto'
-                            }}>
+                            }} date="test">
                             {this.props.children}
                         </div>
                     </Content>

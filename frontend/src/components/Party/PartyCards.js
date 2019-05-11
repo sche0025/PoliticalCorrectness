@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react'
 import './PartyCard.css'
-import {Card, BackTop,Statistic} from 'antd'
+import {Card, BackTop, Statistic} from 'antd'
 import 'antd/dist/antd.css';
 import Row from "antd/es/grid/row";
 import Col from "antd/es/grid/col";
@@ -21,9 +21,9 @@ export default class PartyCards extends React.Component {
         super(props)
         this.state = {
             politicians: [],
-            input:'',
-            party:"all",
-            gender:"all"
+            input: '',
+            party: "all",
+            gender: "all"
         };
         store.subscribe(this.handleStoreChange);
     }
@@ -33,47 +33,47 @@ export default class PartyCards extends React.Component {
     }
 
 
-    getTitleLink = (party )=>{
-        return <PartyModal name = {party.name}
-        flag = {party.flag}
+    getTitleLink = (party) => {
+        return <PartyModal
+            name={party.name}
+            flag={party.flag}
         />
-
     }
 
 
     getCards = () => {
         var green = {
-            flag:greenFlag,
-            name:'Australian Greens'
+            flag: greenFlag,
+            name: 'Australian Greens'
         }
 
         var ca = {
-            flag:caFlag,
-            name:'Centre Alliance'
+            flag: caFlag,
+            name: 'Centre Alliance'
         }
 
         var labor = {
-            flag:laborFlag,
-            name:'Australian Labor Party'
+            flag: laborFlag,
+            name: 'Australian Labor Party'
         }
 
         var kap = {
-            flag:kapFlag,
-            name:"1 Katter's Australian Party"
+            flag: kapFlag,
+            name: "1 Katter's Australian Party"
         }
 
         var liberal = {
-            flag:liberalFlag,
-            name:'Liberal Party of Australia'
+            flag: liberalFlag,
+            name: 'Liberal Party of Australia'
         }
 
         var natinals = {
-            flag:natinalsFlag,
-            name:'The Nationals'
+            flag: natinalsFlag,
+            name: 'The Nationals'
         }
 
 
-        var testList = [green,ca,labor,kap,liberal,natinals]
+        var testList = [green, ca, labor, kap, liberal, natinals]
 
 
         return testList.map(party => (
@@ -88,39 +88,39 @@ export default class PartyCards extends React.Component {
                 <Row>
                     <Col span={6}>
                         <img src={party.flag}
-                             className={'card-img' }
+                             className={'card-img'}
                         />
                     </Col>
                     <Col span={18}>
                         <Col span={12}>
                             {/*<Row className={'heading'}>*/}
-                                {/*<Col span={8} className={'heading-text'}> Tweeter</Col>*/}
-                                {/*<Col span={16} className={'politician-text'}> @scottMorison</Col>*/}
+                            {/*<Col span={8} className={'heading-text'}> Tweeter</Col>*/}
+                            {/*<Col span={16} className={'politician-text'}> @scottMorison</Col>*/}
                             {/*</Row>*/}
                             {/*<Row className={'heading'}>*/}
-                                {/*<Col span={8} className={'heading-text'}> For</Col>*/}
-                                {/*<Col span={16} className={'politician-text'}> Canberra</Col>*/}
+                            {/*<Col span={8} className={'heading-text'}> For</Col>*/}
+                            {/*<Col span={16} className={'politician-text'}> Canberra</Col>*/}
                             {/*</Row>*/}
                             {/*<Row className={'heading'}>*/}
-                                {/*<Col span={8} className={'heading-text'}> Party</Col>*/}
-                                {/*<Col span={16} className={'politician-text'}> Labour</Col>*/}
+                            {/*<Col span={8} className={'heading-text'}> Party</Col>*/}
+                            {/*<Col span={16} className={'politician-text'}> Labour</Col>*/}
                             {/*</Row>*/}
                         </Col>
                         <Col span={12}>
                             <Col span={12}>
                                 <Row className={'heading'}>
-                                    <Statistic title="Tweets posted" value={112893} />
+                                    <Statistic title="Tweets posted" value={112893}/>
                                 </Row>
                                 <Row className={'heading2'}>
-                                    <Statistic title="Replies Received" value={112893} />
+                                    <Statistic title="Replies Received" value={112893}/>
                                 </Row>
                             </Col>
                             <Col span={12}>
                                 <Row className={'heading'}>
-                                    <Statistic title="Followers" value={112893} />
+                                    <Statistic title="Followers" value={112893}/>
                                 </Row>
                                 <Row className={'heading2'}>
-                                    <Statistic title="Mean Sentiment Score" value={93} suffix="/ 100" />
+                                    <Statistic title="Mean Sentiment Score" value={93} suffix="/ 100"/>
                                 </Row>
                             </Col>
                         </Col>

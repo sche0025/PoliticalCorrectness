@@ -30,7 +30,7 @@ export default class Test extends React.Component {
 
     }
 
-    postTest = () => {
+    test1 = () => {
         var me = this
         this.setState({
             isLoading:true
@@ -48,7 +48,7 @@ export default class Test extends React.Component {
 
 
 
-        axios.get('/api/tweets/find')
+        axios.get('/api/daily/retrieve')
             .then(function (response) {
                 console.log(response);
                 me.setState({
@@ -56,9 +56,16 @@ export default class Test extends React.Component {
                 })
 
                 var tweets = response.data
-            for(var i =0;i<tweets.length;i++){
-                console.log(tweets[i].ID,tweets[i].Reply_Content.Re_Content)
-            }
+            // for(var i =0;i<tweets.length;i++){
+            //
+            // }
+                console.log("test",response.data )
+                // var allData = response.data
+                // for(var i=0;i<allData.length;i++){
+                //    if(allData[i].date=="Apr-15-2019"){
+                //        console.log(allData[i].data)
+                //    }
+                // }
 
             })
             .catch(function (error) {
@@ -68,10 +75,9 @@ export default class Test extends React.Component {
 
     }
 
-    postTestt = () => {
-        axios.post('/api/tweets/insert', {
-            name: 'testpost',
-            age: 99
+    test2 = () => {
+        axios.get('/api/daily/find', {
+
         })
             .then(function (response) {
                 console.log(response);
@@ -85,21 +91,9 @@ export default class Test extends React.Component {
     }
 
 
-    postT = () => {
-        // axios.post('/api/customer/insert', {
-        //     name: 'testpost',
-        //     age: 99
-        // })
-        //     .then(function (response) {
-        //         console.log(response);
-        //     })
-        //     .catch(function (error) {
-        //         console.log(error);
-        //     });
+    test3 = () => {
 
-
-
-        axios.get('/api/customer/find')
+        axios.get('/api/daily/test')
             .then(function (response) {
                 console.log(response);
 
@@ -146,9 +140,9 @@ export default class Test extends React.Component {
             <div>
                 <h2>Bar Example (custom size)</h2>
                 <Bar/>
-                <Button loading={this.state.isLoading} onClick={this.postTest}> Test 1</Button>
-                <Button onClick={this.postT}> Test 2</Button>
-                <Button  onClick={this.postTestt}> Test 3</Button>
+                <Button loading={this.state.isLoading} onClick={this.test1}> Test 1</Button>
+                <Button onClick={this.test2}> Test 2</Button>
+                <Button  onClick={this.test3}> Test 3</Button>
                 <Button  onClick={this.mapReduce}> MapReduce</Button>
                 <div>
                     <Table columns={columns} dataSource={data} pagination={{ pageSize: 50 }} scroll={{ y: 240 }} />

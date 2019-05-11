@@ -19,7 +19,7 @@ export default  class DoubleLineChartLineChart extends React.Component {
                 text: this.props.title
             },
             axisY : {
-                title: "Number of Customers",
+                title: "Number of Replies",
                 includeZero: false
             },
             toolTip: {
@@ -27,7 +27,7 @@ export default  class DoubleLineChartLineChart extends React.Component {
             },
             data: [{
                 type: "spline",
-                name: "2016",
+                name: "Positive Replies",
                 showInLegend: true,
                 dataPoints: [
                     { y: 155, label: "Jan" },
@@ -46,7 +46,7 @@ export default  class DoubleLineChartLineChart extends React.Component {
             },
                 {
                     type: "spline",
-                    name: "2017",
+                    name: "Negative Replies",
                     showInLegend: true,
                     dataPoints: [
                         { y: 172, label: "Jan" },

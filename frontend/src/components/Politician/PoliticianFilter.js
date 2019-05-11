@@ -12,10 +12,10 @@ export default class PoliticianFilter extends React.Component {
 
     constructor(props) {
         super(props)
-        this.state={
-            input:"",
-            party:"all",
-            gender:'all'
+        this.state = {
+            input: "",
+            party: "all",
+            order: 'popularity'
         }
     }
 
@@ -28,54 +28,86 @@ export default class PoliticianFilter extends React.Component {
     }
 
 
-    handleInputChange = (e) =>{
+    handleInputChange = (e) => {
         this.setState({
-            input:e.target.value
+            input: e.target.value
         })
+
+        const action = {
+            type: "UPDATE_POLITICIAN_INPUT",
+            value: e.target.value
+        };
+        store.dispatch(action)
     }
 
-    handlePartyChange = (e) =>{
+    handlePartyChange = (e) => {
         // console.log(e)
         this.setState({
-            party:e
-        },()=>{
-            const action = {
-                type: "UPDATE_PARTY",
-                value: e
-            };
-            store.dispatch(action)
+            party: e
         })
+
+        const action = {
+            type: "UPDATE_POLITICIAN_PARTY",
+            value: e
+        };
+        store.dispatch(action)
     }
 
-    handleSearch = ()=>{
+    handleOrderChange = (e) => {
+        this.setState({
+            order: e
+        })
+
         const action = {
-            type: "UPDATE_INPUT",
-            value: this.state.input
+            type: "UPDATE_POLITICIAN_ORDER",
+            value: e
+        };
+        store.dispatch(action)
+    }
+
+    handleResetClick = () => {
+        this.setState({
+            input: "",
+            party: "all",
+            order: 'popularity'
+        })
+        const action = {
+            type: "UPDATE_POLITICIAN_RESET",
         };
         store.dispatch(action)
     }
 
     render() {
-        // console.log(this.state)
+
         const Search = Input.Search;
         const Option = Select.Option;
-        const RadioButton = Radio.Button;
-        const RadioGroup = Radio.Group;
+        // const RadioButton = Radio.Button;
+        // const RadioGroup = Radio.Group;
         return (
             <div className={'filters'}>
+                <div>Filters</div>
+                {/*<Search*/}
+                {/*placeholder="input politician's name"*/}
+                {/*enterButton="Search"*/}
+                {/*size="large"*/}
+                {/*onSearch={this.handleSearch}*/}
+                {/*className={'search'}*/}
+                {/*onChange={(e)=>this.handleInputChange(e)}*/}
+                {/*/>*/}
+
                 <Search
                     placeholder="input politician's name"
-                    enterButton="Search"
+                    value={this.state.input}
                     size="large"
-                    onSearch={this.handleSearch}
                     className={'search'}
-                    onChange={(e)=>this.handleInputChange(e)}
+                    onChange={(e) => this.handleInputChange(e)}
+                    allowClear={true}
                 />
 
-                <Select defaultValue="0" className={'select'} onChange={this.handleChange}
+                <Select className={'select'}
                         size={'large'}
-                        defaultValue={'all'}
-                        onChange={(e)=>this.handlePartyChange(e)}
+                        value={this.state.party}
+                        onChange={(e) => this.handlePartyChange(e)}
                 >
                     <Option value="all">All</Option>
                     <Option value="ag">Australian Greens</Option>
@@ -87,14 +119,28 @@ export default class PoliticianFilter extends React.Component {
                     <Option value="tn">The Nationals</Option>
                 </Select>
 
-                <div style={{paddingTop: 10}}>
-                    <RadioGroup style={{display: 'inline'}} defaultValue="a" size="large" className={'radio-group'}>
-                        <RadioButton value="a">All</RadioButton>
-                        <RadioButton value="m">Male</RadioButton>
-                        <RadioButton value="f">Female</RadioButton>
-                    </RadioGroup>
+                <div>Sort by</div>
+                <Select className={'select'}
+                        size={'large'}
+                        placeholder="Select an order"
+                    // defaultValue={'popularity'}
+                        value={this.state.order}
+                        onChange={(e) => this.handleOrderChange(e)}
+                >
+                    <Option value="popularity">Popularity</Option>
+                    <Option value="posts">Total Number of Posts</Option>
+                    <Option value="replies">Total Number of Replies</Option>
+                    <Option value="followers">Total Number of Followers</Option>
+                </Select>
 
-                    <Button className={'button'} type="primary">Reset</Button>
+                <div style={{paddingTop: 10}}>
+                    {/*<RadioGroup style={{display: 'inline'}} defaultValue="a" size="large" className={'radio-group'}>*/}
+                    {/*<RadioButton value="a">All</RadioButton>*/}
+                    {/*<RadioButton value="m">Male</RadioButton>*/}
+                    {/*<RadioButton value="f">Female</RadioButton>*/}
+                    {/*</RadioGroup>*/}
+
+                    <Button className={'button'} type="primary" onClick={this.handleResetClick}>Reset</Button>
                 </div>
             </div>
         );

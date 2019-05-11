@@ -13,6 +13,7 @@ import StackedBarChart from '../../components/Charts/StackedBarChart'
 import PieChart from '../../components/Charts/PieChart'
 import DonutChart from '../../components/Charts/DonutChart'
 import 'bootstrap'
+import store from "../../store";
 
 const {
     Header, Content, Footer, Sider,
@@ -21,10 +22,33 @@ const SubMenu = Menu.SubMenu;
 
 export default class Dashboard extends React.Component {
 
+    constructor(props){
+        super(props);
+        this.state = {
+            date:store.getState().date
+        };
+        store.subscribe(this.handleStoreChange);
+    }
+
+    componentDidMount() {
+        console.log("dashboard rendered")
+    }
+
+    handleStoreChange = () => {
+
+        if(this.state.date != store.getState().date){
+            this.setState({
+                date: store.getState().date
+            })
+        }
+    };
+
     render() {
 
         return (
             <Fragment>
+
+                {/*<div>{this.state.date}</div>*/}
 
                 <Breadcrumb style={{margin: '16px 0'}}>
                     <Breadcrumb.Item>Home</Breadcrumb.Item>
@@ -37,20 +61,18 @@ export default class Dashboard extends React.Component {
                     <div style={{padding: "15px"}}>
                         <Row>
                             <Col  style={{background: "",backdropColor:''}} lg={24} xxl={14}>
-                                <Leaderboard/>
+                                <Leaderboard date = {this.state.date}/>
                             </Col>
                             <Col  style={{maxWidth:'1130px'}} lg={24} xxl={10}>
 
                                 <Row className={'chart-container'}>
-
                                     <LineChart height={295}/>
-
                                 </Row>
                                 <Row className={'chart-container'}>
                                     <Col span={12}>
-                                        {/*<PieChart height={295}/>*/}
                                         <TopicTable/>
                                     </Col>
+
                                     <Col span={12}>
                                         <DonutChart height={295}/>
                                     </Col>

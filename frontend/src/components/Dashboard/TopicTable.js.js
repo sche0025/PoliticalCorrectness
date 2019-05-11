@@ -29,21 +29,21 @@ export default class TopicTable extends React.Component {
             title: '#',
             render: (text, record, index) => `${index + 1}`,
             width: 10,
-            // specify the condition of filtering result
-            // here is that finding the name started with `value`
-
-        },{
-            title: 'Topic',
+        },
+            {
+            title: 'Topics of Politicians',
             dataIndex: 'topic',
             render: text => <a href="javascript:;">{text}</a>,
         },  {
-            title: 'Popularity',
+            title: 'Topics of Politicians',
             dataIndex: 'popularity',
         }];
 
         const data = [{
             key: '1',
-            topic: 'John Brown',
+            topic: <div style={{whiteSpace: "nowrap",textOverflow: "ellipsis",maxWidth:"120px"
+                ,overflow: "hidden"
+            } }>Jim Gree dsfzsf ds fdn fsdf sdfdf</div>,
 
             popularity: 33,
         }, {
@@ -72,7 +72,7 @@ export default class TopicTable extends React.Component {
         return (
            <Fragment>
                <Table columns={columns} dataSource={data} pagination={false}
-                      size={"small"}  title={() => 'Trending Topics'} showHeader={true}
+                      size={"small"}  title={() =><div> Trending Topics</div>} showHeader={true}
 
                />
 

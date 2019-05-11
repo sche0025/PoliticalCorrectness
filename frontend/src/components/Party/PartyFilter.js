@@ -12,9 +12,9 @@ export default class PartyFilter extends React.Component {
 
     constructor(props) {
         super(props)
-        this.state={
-            input:"",
-            order:"",
+        this.state = {
+            input: "",
+            order: "",
 
         }
     }
@@ -27,17 +27,23 @@ export default class PartyFilter extends React.Component {
         console.log(`selected ${value}`);
     }
 
-    handleInputChange = (e) =>{
+    handleInputChange = (e) => {
         this.setState({
-            input:e.target.value
+            input: e.target.value
+        },()=>{
+            const action = {
+                type: "UPDATE_PARTY_INPUT",
+                value: this.state.input
+            };
+            store.dispatch(action)
         })
     }
 
-    handlePartyChange = (e) =>{
+    handlePartyChange = (e) => {
         // console.log(e)
         this.setState({
-            order:e
-        },()=>{
+            order: e
+        }, () => {
             const action = {
                 type: "UPDATE_PARTY_ORDER",
                 value: e
@@ -46,12 +52,8 @@ export default class PartyFilter extends React.Component {
         })
     }
 
-    handleSearch = ()=>{
-        const action = {
-            type: "UPDATE_PARTY_INPUT",
-            value: this.state.input
-        };
-        store.dispatch(action)
+    handleSearch = () => {
+
     }
 
     render() {
@@ -62,33 +64,40 @@ export default class PartyFilter extends React.Component {
         const RadioGroup = Radio.Group;
         return (
             <div className={'filters'}>
+                <div>Filter</div>
                 <Search
                     placeholder="input politician's name"
-                    enterButton="Search"
+                    onSearch={value => console.log(value)}
                     size="large"
-                    onSearch={this.handleSearch}
                     className={'search'}
                     onChange={(e)=>this.handleInputChange(e)}
                 />
 
-                <Select  className={'select'}
+                {/*<Select  className={'select'}*/}
+                {/*size={'large'}*/}
+                {/*placeholder="Select an order"*/}
+                {/*>*/}
+                {/*<Option value="all">All</Option>*/}
+                {/*<Option value="ag">Australian Greens</Option>*/}
+                {/*<Option value="alp">Australian Labor Party</Option>*/}
+                {/*<Option value="ca">Centre Alliance</Option>*/}
+                {/*<Option value="i">Independent</Option>*/}
+                {/*<Option value="kap">Katter's Australian Party</Option>*/}
+                {/*<Option value="lpa">Liberal Party of Australia</Option>*/}
+                {/*<Option value="tn">The Nationals</Option>*/}
+                {/*</Select>*/}
+                <div>Sort by</div>
+                <Select className={'select'}
                         size={'large'}
-
-                        // onChange={(e)=>this.handlePartyChange(e)}
                         placeholder="Select an order"
                 >
-                    <Option value="all">All</Option>
-                    <Option value="ag">Australian Greens</Option>
-                    <Option value="alp">Australian Labor Party</Option>
-                    <Option value="ca">Centre Alliance</Option>
-                    <Option value="i">Independent</Option>
-                    <Option value="kap">Katter's Australian Party</Option>
-                    <Option value="lpa">Liberal Party of Australia</Option>
-                    <Option value="tn">The Nationals</Option>
+                    <Option value="popularity">Popularity</Option>
+                    <Option value="posts">Total Number of Posts</Option>
+                    <Option value="replies">Total Number of Replies</Option>
+                    <Option value="followers">Total Number of Followers</Option>
                 </Select>
 
                 <div style={{paddingTop: 10}}>
-
                     <Button className={'filter_button'} type="primary">Reset</Button>
                 </div>
             </div>
