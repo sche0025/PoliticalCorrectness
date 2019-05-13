@@ -4,8 +4,8 @@ const app = express();
 const router = express.Router();
 const bodyparser = require('body-parser')
 // const customerRoute = require('./routes/api/customer')
-const tweetsRoute = require('./routes/api/tweets')
-const dailyRoute = require('./routes/api/daily')
+const tweetsRoute = require('./routes/api/Tweets')
+const dailyRoute = require('./routes/api/Daily')
 const PORT = process.env.PORT || 3001;
 
 const logger = (req,res,next) =>{
