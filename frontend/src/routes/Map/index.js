@@ -9,6 +9,8 @@ import MapControl from '../../components/GoogleMap/MapControl'
 import {
     Layout, Menu, Breadcrumb, Icon, Row, Col
 } from 'antd';
+import store from "../../store";
+import {getPoliticiansData} from "../../utils/api";
 
 const {
     Header, Content, Footer, Sider,
@@ -16,6 +18,51 @@ const {
 const SubMenu = Menu.SubMenu;
 
 export default class Map extends React.Component {
+
+    constructor(props){
+        super(props)
+        this.state={
+            date:store.getState().date,
+            data:[]
+        }
+
+        store.subscribe(this.handleStoreChange);
+    }
+
+    handleStoreChange = () => {
+        //
+        // console.log(this.state.input == store.getState().politiciansFilter.input )
+        // console.log(  this.state.party == store.getState().politiciansFilter.party )
+        // console.log(    this.state.order == store.getState().politiciansFilter.order)
+        // console.log(    this.state.order , store.getState().politiciansFilter.order)
+
+        if (store.getState().date != this.state.date) {
+            this.setState({
+                date: store.getState().date,
+
+            }, () => {
+                var me = this
+                getPoliticiansData(this.state.date).then((data) => {
+                    me.setState({
+                        data: data,
+                    })
+                })
+                console.log("map-politicians data loaded")
+
+
+            })
+        }
+        console.log("I should be later")
+
+
+
+
+    };
+
+    componentDidMount() {
+
+    }
+
 
 
     render() {
@@ -34,8 +81,8 @@ export default class Map extends React.Component {
                 }}>
                     <div style={{padding: "15px"}}>
                         <Row>
-                            <Col span={15}> <GoogleMap/> </Col>
-                            <Col span={9}> <MapControl/></Col>
+                            <Col span={15}> <GoogleMap data={this.state.data}/> </Col>
+                            <Col span={9}> <MapControl  data={this.state.data}/></Col>
                         </Row>
                     </div>
                 </div>

@@ -4,14 +4,15 @@ import config from "../config";
 const defaultState = {
     politiciansFilter:{
         input:'',
-        party:'all',
+        party:'',
         order:'popularity'
     },
     map:{
        constituency:''
     },
     date:moment().format(config.dateFormat),
-    count:0
+    count:0,
+    politiciansDate:[]
 
 }
 
@@ -40,6 +41,11 @@ export default (state=defaultState,action) =>{
             newState.politiciansFilter.order = "popularity"
             newState.politiciansFilter.input = ""
             newState.politiciansFilter.party = "all"
+        case "UPDATE_POLITICIAN_FILTERING":
+            var newState = state
+            newState.politiciansFilter.order = action.value.order
+            newState.politiciansFilter.input = action.value.input
+            newState.politiciansFilter.party = action.value.party
 
             return newState
         case "SAVE_MAP":
@@ -56,6 +62,11 @@ export default (state=defaultState,action) =>{
             newState.date = action.value
             console.log(action.value)
             // console.log(newState)
+            return newState
+        case "GET_POLITICIAN_DATA_SUCCESS":
+            var newState = state
+            state.politiciansDate = action.value
+            console.log(newState)
             return newState
     }
     return state;

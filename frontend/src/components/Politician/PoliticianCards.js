@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react'
 import './PoliticianCard.css'
-import {Card, BackTop,Statistic,Spin} from 'antd'
+import {Card, BackTop, Statistic, Spin} from 'antd'
 import 'antd/dist/antd.css';
 import Row from "antd/es/grid/row";
 import Col from "antd/es/grid/col";
@@ -11,6 +11,7 @@ import {Link} from "react-router-dom";
 import connect from "react-redux/es/connect/connect";
 import defaultImg from '../../assets/img/defaultImg.png'
 import {getPoliticiansData} from "../../utils/api";
+import {calculateSentimentScore} from "../../utils/utils";
 
 
 export default class PoliticianCards extends React.Component {
@@ -19,12 +20,12 @@ export default class PoliticianCards extends React.Component {
         super(props)
         this.state = {
             politicians: [],
-            input:'',
-            party:"all",
-            order:"popularity",
-            isSpinning:true,
+            input: '',
+            party: "",
+            order: "popularity",
+            isSpinning: true,
             date: store.getState().date,
-            data:[]
+            data: []
         };
         store.subscribe(this.handleStoreChange);
     }
@@ -36,23 +37,30 @@ export default class PoliticianCards extends React.Component {
         // console.log(    this.state.order == store.getState().politiciansFilter.order)
         // console.log(    this.state.order , store.getState().politiciansFilter.order)
 
-        if(store.getState().date !=this.state.date){
+        if (store.getState().date != this.state.date) {
             this.setState({
-                date:store.getState().date
-            },()=>{
+                date: store.getState().date,
+                isSpinning: true
+            }, () => {
                 var me = this
                 getPoliticiansData(this.state.date).then((data) => {
                     me.setState({
                         data: data,
-                        isSpinning: false
+                        isSpinning: false,
+                        input:store.getState().politiciansFilter.input,
+                        party:store.getState().politiciansFilter.party
                     })
                 })
                 console.log("politicians data loaded")
-                console.log(this.state.data)
+
 
             })
         }
+        console.log("I should be later")
 
+        this.setState({
+
+        })
         // if(this.state.input == store.getState().politiciansFilter.input &&
         //     this.state.party == store.getState().politiciansFilter.party &&
         //     this.state.order == store.getState().politiciansFilter.order
@@ -71,14 +79,6 @@ export default class PoliticianCards extends React.Component {
 
     };
 
-    calculateSentimentScore = (politician) => {
-        var score =
-            (politician.Sentiment_Pos*1) +
-            (politician.Sentiment_Neu*0.2) -
-            (politician.Sentiment_Neg*0.4)
-
-        return parseInt(score,10)
-    }
 
     componentDidMount() {
         console.log(this.state.date)
@@ -90,27 +90,112 @@ export default class PoliticianCards extends React.Component {
             })
         })
         console.log("politicians data loaded")
-        console.log(this.state.data)
+        // console.log(this.state.data)
     }
 
 
     //get the link of the title
-    getTitleLink = (politician )=>{
-        return <PoliticalModal politician = {politician} />
+    getTitleLink = (politician) => {
+        return <PoliticalModal politician={politician}/>
 
     }
 
+    filterData = ()=>{
+        var originData = this.state.data
+        var input = store.getState().politiciansFilter.input
+        var party = store.getState().politiciansFilter.party
+        var order = store.getState().politiciansFilter.order
+
+        var result = originData.filter(politician => politician.Name.toLowerCase().includes(input.toLowerCase()));
+        var result = result.filter(politician => politician.Party.toLowerCase().includes(party.toLowerCase()));
+
+
+        var sortedResult =  this.customisedSort(result,order)
+        // console.log(sortedResult)
+        return sortedResult
+    }
+
+    customisedSort=(result,order)=>{
+
+        switch (order) {
+            case "popularity":
+                result.sort(function (a, b) {
+                    return (
+                        (
+                            calculateSentimentScore(b)
+                        )
+                        -
+                        (
+                            calculateSentimentScore(a)
+                        )
+                    )
+                })
+                return result
+
+            case "posts":
+                result.sort(function (a, b) {
+                    return (
+                        (
+                            b.Tweets_Count
+                        )
+                        -
+                        (
+                            a.Tweets_Count
+                        )
+                    )
+                })
+                return result
+
+            case "replies":
+
+                result.sort(function (a, b) {
+                    return (
+                        (
+                            b.Reply_Count
+                        )
+                        -
+                        (
+                            a.Reply_Count
+                        )
+                    )
+                })
+                return result
+
+            case "followers":
+                result.sort(function (a, b) {
+                    return (
+                        (
+                            b.Followers_Count
+                        )
+                        -
+                        (
+                            a.Followers_Count
+                        )
+                    )
+                })
+                return result
+
+            default:
+                return result
+        }
+    }
 
     //render all politicians
     getCards = () => {
-
-        // var testList = [1, 2, 3, 4, 5]
-        console.log(this.state.data)
-        if(this.state.data == [] || !this.state.data){
+        if( this.state.isSpinning){
             return []
         }
-        console.log(this.state.data.length)
-        return this.state.data.map(politician => (
+        // var testList = [1, 2, 3, 4, 5]
+        // console.log(this.state.data)
+        if (this.state.data == [] || !this.state.data) {
+            return []
+        }
+        // console.log(this.state.data.length)
+
+
+        var filteredData =  this.filterData(  )
+
+        return filteredData.map(politician => (
 
             <Card
                 title={this.getTitleLink(politician)}
@@ -122,7 +207,9 @@ export default class PoliticianCards extends React.Component {
             >
                 <Row>
                     <Col span={6}>
-                        <img src={politician.Avatar} alt={"../../assets/img/defaultImg.png"}
+                        <img src={politician.Avatar}
+                             alt={"../../assets/img/defaultImg.png"}
+                             onerror={defaultImg}
                              className={'card-img'}
                         />
                     </Col>
@@ -144,18 +231,18 @@ export default class PoliticianCards extends React.Component {
                         <Col span={12}>
                             <Col span={12}>
                                 <Row className={'heading'}>
-                                    <Statistic title="Tweets posted" value={politician.Tweets_Count} />
+                                    <Statistic title="Tweets posted" value={politician.Tweets_Count}/>
                                 </Row>
                                 <Row className={'heading2'}>
-                                    <Statistic title="Replies Received" value={politician.Reply_Count} />
+                                    <Statistic title="Replies Received" value={politician.Reply_Count}/>
                                 </Row>
                             </Col>
                             <Col span={12}>
                                 <Row className={'heading'}>
-                                    <Statistic title="Followers" value={politician.Followers_Count} />
+                                    <Statistic title="Followers" value={politician.Followers_Count}/>
                                 </Row>
                                 <Row className={'heading2'}>
-                                    <Statistic title="Sentiment Score" value={this.calculateSentimentScore(politician)} />
+                                    <Statistic title="Sentiment Score" value={calculateSentimentScore(politician)}/>
                                 </Row>
                             </Col>
                         </Col>
@@ -168,16 +255,16 @@ export default class PoliticianCards extends React.Component {
     }
 
 
-
     render() {
 
         console.log(store.getState().politiciansFilter)
+        console.log(this.state.isSpinning)
         return (
             <div id={'cardList'}>
                 <Spin spinning={this.state.isSpinning}>
-                {this.getCards()}
+                    {this.getCards()}
 
-                <BackTop target={() => document.getElementById('cardList')}/>
+                    <BackTop target={() => document.getElementById('cardList')}/>
                 </Spin>
             </div>
         )

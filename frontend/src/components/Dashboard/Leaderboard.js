@@ -4,6 +4,9 @@ import './Leaderboard.css'
 import {Table, Divider, Tag} from 'antd';
 import Spin from "antd/es/spin";
 import {getLeaderboardData} from "../../utils/api";
+import Icon from "antd/es/icon";
+import Tooltip from "antd/es/tooltip";
+import {calculateSentimentScore} from "../../utils/utils";
 
 export default class Leaderboard extends React.PureComponent {
     constructor(props) {
@@ -53,14 +56,7 @@ export default class Leaderboard extends React.PureComponent {
         );
     }
 
-    calculateSentimentScore = (politician) => {
-       var score =
-        (politician.Sentiment_Pos*1) +
-        (politician.Sentiment_Neu*0.2) -
-        (politician.Sentiment_Neg*0.4)
 
-        return parseInt(score,10)
-    }
 
     getData = () => {
         const data = [];
@@ -74,7 +70,7 @@ export default class Leaderboard extends React.PureComponent {
                 party: oriData[i].Party,
                 tt: oriData[i].Total_Tweets,
                 tr: oriData[i].Reply_Count,
-                sc: this.calculateSentimentScore(oriData[i]),
+                sc: calculateSentimentScore(oriData[i]),
                 avatar: this.getImg(oriData[i].Avatar)
             });
         }
@@ -125,7 +121,11 @@ export default class Leaderboard extends React.PureComponent {
             sorter: (a, b) => a.tr - b.tr,
         },
         {
-            title: 'Sentiment (pro/neu/con)%',
+            title: <div>Sentiment score
+                <Tooltip title={"This is calculated by: Positive_Comment * 1 + Neutral_Comment * 0.2 - Negative_Comment*0.5"}>
+                    <Icon style={{paddingLeft:"3px"}} type="question-circle"/>
+                </Tooltip>
+            </div>,
             dataIndex: 'sc',
             width: 100,
             defaultSortOrder: 'descend',

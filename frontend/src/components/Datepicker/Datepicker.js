@@ -1,28 +1,34 @@
 import React, {Fragment} from 'react'
 import './Datepicker.css'
-import {DatePicker,Tooltip} from 'antd'
+import {DatePicker,Tooltip,Button} from 'antd'
 import moment from 'moment'
 import 'antd/dist/antd.css';
 import config from '../../config'
 import store from "../../store";
+import {changeDate} from "../../actions/actions";
+import connect from "react-redux/es/connect/connect";
+import Icon from "antd/es/icon";
 
-export default class Datepicker extends React.Component {
+class Datepicker extends React.Component {
 
 
     constructor(props) {
         super(props)
         this.state={
-
+            date:store.getState().date
         }
     }
 
     handleDateChange = (value)=>{
-        var action = {
-            type:'CHANGE_DATE',
-            value:moment(value).format(config.dateFormat)
-        }
 
-        store.dispatch(action);
+        // this.props.changeDate(moment(value).format(config.dateFormat))
+        this.setState({
+            date:moment(value).format(config.dateFormat)
+        })
+    }
+
+    handleDateSubmit = ()=>{
+        this.props.changeDate(this.state.date)
     }
 
 
@@ -37,9 +43,7 @@ export default class Datepicker extends React.Component {
         console.log(store.getState());
         return (
             <div className={'datepicker'}>
-                <Tooltip title="Select a date to see historical data"
-                         placement="right"
-                >
+
                     <DatePicker
                         allowClear={false}
                         defaultValue={moment()}
@@ -47,6 +51,9 @@ export default class Datepicker extends React.Component {
                         disabledDate={this.disabledDate}
                         onChange={this.handleDateChange}
                     />
+
+                <Tooltip title="Select a date to see historical data" placement="right">
+                    <Button type={'primary'} onClick={this.handleDateSubmit}><Icon type={"search"}/></Button>
                 </Tooltip>
 
             </div>
@@ -54,3 +61,12 @@ export default class Datepicker extends React.Component {
     }
 
 }
+
+const mapDispatchToProps = (dispatch) => {
+
+    return {
+        changeDate: (date) => dispatch(changeDate(date))
+    }
+};
+
+export default connect(null, mapDispatchToProps)(Datepicker)

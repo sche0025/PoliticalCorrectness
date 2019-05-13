@@ -21,7 +21,8 @@
 .button{
     /*left: 15px;*/
     /*height: 37px;*/
+    margin-right: 10px;
     margin-top: 10px;
     width: 25%;
-    min-width: 60px;
+    min-width: 70px;
 }

@@ -70,7 +70,7 @@ export default class Dashboard extends React.Component {
                                 </Row>
                                 <Row className={'chart-container'}>
                                     <Col span={12}>
-                                        <TopicTable/>
+                                        <TopicTable date = {this.state.date}/>
                                     </Col>
 
                                     <Col span={12}>

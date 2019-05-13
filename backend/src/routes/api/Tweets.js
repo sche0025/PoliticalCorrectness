@@ -76,6 +76,7 @@ router.get('/getleaderboarddata/:date', (req, res) => {
 
 
     TweetsModel.find({date: searchDate})
+
         .then((data) => {
             if (data) {
                 console.log("searchDate", searchDate)
@@ -95,6 +96,30 @@ router.get('/getleaderboarddata/:date', (req, res) => {
 
 //get data for politicians
 router.get('/getpoliticiansdata/:date', (req, res) => {
+    console.log(req.params.date)
+    var searchDate = req.params.date
+
+
+    TweetsModel.find({date: searchDate})
+        .then((data) => {
+            if (data) {
+                console.log("searchDate", searchDate)
+                var leaderBoardData = parser.getPoliticiansData(data)
+
+                res.send(leaderBoardData)
+
+            } else {
+                console.log("no data exist for this id");
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+
+})
+
+//get data for dashboardDonut
+router.get('/dashboardDonut', (req, res) => {
     console.log(req.params.date)
     var searchDate = req.params.date
 

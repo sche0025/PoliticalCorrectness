@@ -11,6 +11,7 @@ import DonutChart from '../Charts/DonutChart'
 import DoubleLineChart from '../Charts/DoubleLineChart'
 import ReactWordcloud from 'react-wordcloud'
 import $ from 'jquery'
+import {calculateSentimentScore} from "../../utils/utils";
 // import ReactJQCloud from 'react-jqcloud'
 // import jQCloud from 'jqcloud2'
 // import jQCloud from 'jqcloud2'
@@ -60,6 +61,7 @@ export default class PoliticianModal extends React.Component {
     }
 
 
+
     render() {
 
         var options = {
@@ -85,36 +87,7 @@ export default class PoliticianModal extends React.Component {
         }
 
         const data = [
-            {text: 'Hey', value: 1000},
-            {text: 'lol', value: 200},
-            {text: 'first impression', value: 800},
-            {text: 'very cool', value: 10000},
-            {text: 'duck', value: 10},
-            {text: 'Hey2', value: 1000},
-            {text: 'lo3l', value: 200},
-            {text: 'fi1rst impression', value: 800},
-            {text: 'ver3y cool', value: 10000},
-            {text: 'du4ck', value: 10},
-            {text: 'Heye', value: 1000},
-            {text: 'loql', value: 200},
-            {text: 'firdst impression', value: 800},
-            {text: 'very cfool', value: 10000},
-            {text: 'ducsk', value: 101},
-            {text: 'He21y', value: 1000},
-            {text: 'l312ol', value: 200},
-            {text: 'firewrst impression', value: 800},
-            {text: 'veqerry cool', value: 10000},
-            {text: 'duwqreck', value: 10},
-            {text: 'Hedsfy2', value: 1000},
-            {text: 'loafg3l', value: 200},
-            {text: 'fi1rfagst impression', value: 800},
-            {text: 'verdsaf3y cool', value: 10000},
-            {text: 'du4adsfck', value: 10},
-            {text: 'Heyfgde', value: 1000},
-            {text: 'loqgfdl', value: 200},
-            {text: 'firdafdst impression', value: 800},
-            {text: 'very sdafcfool', value: 10000},
-            {text: 'ducdsfsk', value: 101},
+
         ];
 
         const fontSizeMapper = word => Math.log2(word.value) * 5;
@@ -136,7 +109,7 @@ export default class PoliticianModal extends React.Component {
                             <Col span={6}>
                                 <div className={'profile'}>
                                     <img
-                                        src="https://pbs.twimg.com/profile_images/1116081523394891776/AYnEcQnG_400x400.png"
+                                        src={this.props.politician.Avatar}
                                         className={'profileImg'}
                                     />
 
@@ -144,18 +117,18 @@ export default class PoliticianModal extends React.Component {
                                     <div className={'statistics'}>
                                         <Col span={12}>
                                             <Row className={'heading'}>
-                                                <Statistic title="Tweets posted" value={112893}/>
+                                                <Statistic title="Tweets posted" value={this.props.politician.Tweets_Count}/>
                                             </Row>
                                             <Row className={'heading2'}>
-                                                <Statistic title="Replies Received" value={112893}/>
+                                                <Statistic title="Replies Received" value={this.props.politician.Reply_Count}/>
                                             </Row>
                                         </Col>
                                         <Col span={12}>
                                             <Row className={'heading'}>
-                                                <Statistic title="Followers" value={112893}/>
+                                                <Statistic title="Followers" value={this.props.politician.Followers_Count}/>
                                             </Row>
                                             <Row className={'heading2'}>
-                                                <Statistic title="Mean Sentiment Score" value={93} suffix="/ 100"/>
+                                                <Statistic title="Sentiment Score" value={calculateSentimentScore(this.props.politician)} />
                                             </Row>
                                         </Col>
 
@@ -170,7 +143,15 @@ export default class PoliticianModal extends React.Component {
                                         <div className={'details-heading'}>What's his/her most frequently used words?
                                         </div>
                                         <div className={'word-cloud'}>
-
+                                            <div className={'word-cloud'}>
+                                                {this.state.visible ?
+                                                    <ReactWordcloud
+                                                        words={this.props.politician.Word_Cloud}
+                                                        options={options}
+                                                        fontSizeMapper={fontSizeMapper}
+                                                    /> : <div></div>
+                                                }
+                                            </div>
 
 
 
@@ -186,7 +167,9 @@ export default class PoliticianModal extends React.Component {
                                         <div className={'details-heading'}>How do people think of him/her nationwide?
                                         </div>
                                         <div className={'detail-pieChart'}>
-                                            < DonutChart height={450}/>
+                                            < DonutChart height={450} pos={this.props.politician.Sentiment_Pos}
+                                                         neg={this.props.politician.Sentiment_Neg}
+                                                         neu={this.props.politician.Sentiment_Neu}/>
                                         </div>
 
                                         <div className={'details-heading'}>What are the sentiment scores of his posts in

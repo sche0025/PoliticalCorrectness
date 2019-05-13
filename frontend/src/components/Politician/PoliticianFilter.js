@@ -14,7 +14,7 @@ export default class PoliticianFilter extends React.Component {
         super(props)
         this.state = {
             input: "",
-            party: "all",
+            party: "",
             order: 'popularity'
         }
     }
@@ -33,24 +33,24 @@ export default class PoliticianFilter extends React.Component {
             input: e.target.value
         })
 
-        const action = {
-            type: "UPDATE_POLITICIAN_INPUT",
-            value: e.target.value
-        };
-        store.dispatch(action)
+        // const action = {
+        //     type: "UPDATE_POLITICIAN_INPUT",
+        //     value: e.target.value
+        // };
+        // store.dispatch(action)
     }
 
     handlePartyChange = (e) => {
         // console.log(e)
         this.setState({
-            party: e
+            party: e.target.value
         })
 
-        const action = {
-            type: "UPDATE_POLITICIAN_PARTY",
-            value: e
-        };
-        store.dispatch(action)
+        // const action = {
+        //     type: "UPDATE_POLITICIAN_PARTY",
+        //     value: e
+        // };
+        // store.dispatch(action)
     }
 
     handleOrderChange = (e) => {
@@ -58,21 +58,31 @@ export default class PoliticianFilter extends React.Component {
             order: e
         })
 
-        const action = {
-            type: "UPDATE_POLITICIAN_ORDER",
-            value: e
-        };
-        store.dispatch(action)
+        // const action = {
+        //     type: "UPDATE_POLITICIAN_ORDER",
+        //     value: e
+        // };
+        // store.dispatch(action)
     }
 
     handleResetClick = () => {
         this.setState({
             input: "",
-            party: "all",
+            party: "",
             order: 'popularity'
+        },()=>{
+            this.handleSearch()
         })
+    }
+
+    handleSearch = ()=>{
         const action = {
-            type: "UPDATE_POLITICIAN_RESET",
+            type: "UPDATE_POLITICIAN_FILTERING",
+            value: {
+                input:this.state.input,
+                party:this.state.party,
+                order:this.state.order
+            }
         };
         store.dispatch(action)
     }
@@ -95,29 +105,40 @@ export default class PoliticianFilter extends React.Component {
                 {/*onChange={(e)=>this.handleInputChange(e)}*/}
                 {/*/>*/}
 
-                <Search
-                    placeholder="input politician's name"
+                <Input
+                    placeholder="input politician name"
                     value={this.state.input}
                     size="large"
                     className={'search'}
                     onChange={(e) => this.handleInputChange(e)}
                     allowClear={true}
+                    onPressEnter={this.handleSearch}
                 />
 
-                <Select className={'select'}
-                        size={'large'}
-                        value={this.state.party}
-                        onChange={(e) => this.handlePartyChange(e)}
-                >
-                    <Option value="all">All</Option>
-                    <Option value="ag">Australian Greens</Option>
-                    <Option value="alp">Australian Labor Party</Option>
-                    <Option value="ca">Centre Alliance</Option>
-                    <Option value="i">Independent</Option>
-                    <Option value="kap">Katter's Australian Party</Option>
-                    <Option value="lpa">Liberal Party of Australia</Option>
-                    <Option value="tn">The Nationals</Option>
-                </Select>
+                <Input
+                    placeholder="input party name"
+                    value={this.state.party}
+                    size="large"
+                    className={'search'}
+                    onChange={(e) => this.handlePartyChange(e)}
+                    allowClear={true}
+                    onPressEnter={this.handleSearch}
+                />
+
+                {/*<Select className={'select'}*/}
+                        {/*size={'large'}*/}
+                        {/*value={this.state.party}*/}
+                        {/*onChange={(e) => this.handlePartyChange(e)}*/}
+                {/*>*/}
+                    {/*<Option value="all">All</Option>*/}
+                    {/*<Option value="ag">Australian Greens</Option>*/}
+                    {/*<Option value="alp">Australian Labor Party</Option>*/}
+                    {/*<Option value="ca">Centre Alliance</Option>*/}
+                    {/*<Option value="i">Independent</Option>*/}
+                    {/*<Option value="kap">Katter's Australian Party</Option>*/}
+                    {/*<Option value="lpa">Liberal Party of Australia</Option>*/}
+                    {/*<Option value="tn">The Nationals</Option>*/}
+                {/*</Select>*/}
 
                 <div>Sort by</div>
                 <Select className={'select'}
@@ -127,7 +148,7 @@ export default class PoliticianFilter extends React.Component {
                         value={this.state.order}
                         onChange={(e) => this.handleOrderChange(e)}
                 >
-                    <Option value="popularity">Popularity</Option>
+                    <Option value="popularity">Sentiment Score</Option>
                     <Option value="posts">Total Number of Posts</Option>
                     <Option value="replies">Total Number of Replies</Option>
                     <Option value="followers">Total Number of Followers</Option>
@@ -139,7 +160,7 @@ export default class PoliticianFilter extends React.Component {
                     {/*<RadioButton value="m">Male</RadioButton>*/}
                     {/*<RadioButton value="f">Female</RadioButton>*/}
                     {/*</RadioGroup>*/}
-
+                    <Button className={'button'} type="primary" onClick={this.handleSearch}>Search</Button>
                     <Button className={'button'} type="primary" onClick={this.handleResetClick}>Reset</Button>
                 </div>
             </div>

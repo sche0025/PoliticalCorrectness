@@ -12,7 +12,20 @@ export function getLeaderboardData(date) {
 }
 
 export function getPoliticiansData(date) {
+    console.log("start calling db")
     return axios.get(`/api/getpoliticiansdata/`+date)
+        .then(response => {
+            console.log('getpoliticiansdata', response.data);
+            return response.data;
+        })
+        .catch(error => {
+            return error.message;
+        });
+}
+
+export function getTopicTableData(date) {
+    console.log("start calling db")
+    return axios.get(`/api/toptags/`+date)
         .then(response => {
             console.log('getpoliticiansdata', response.data);
             return response.data;

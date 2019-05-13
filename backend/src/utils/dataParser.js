@@ -10,13 +10,13 @@ module.exports = {
                     (
                         1 * (a.Sentiment_Pos) +
                         0.2 * (a.Sentiment_Neu) -
-                        0.4 * (a.Sentiment_Neg)
+                        0.5 * (a.Sentiment_Neg)
                     )
                     -
                     (
                         1 * (b.Sentiment_Pos) +
                         0.2 * (b.Sentiment_Neu) -
-                        0.4 * (b.Sentiment_Neg)
+                        0.5 * (b.Sentiment_Neg)
                     )
                 )
             })
@@ -26,6 +26,17 @@ module.exports = {
     },
 
     getPoliticiansData: (data) => {
+        let politicians;
+        if (data[0]) {
+            // console.log(data[0])
+            // var politicians = data[0]
+            politicians = JSON.parse(JSON.stringify(data[0])).data
+
+            return politicians
+        }
+    },
+
+    getDonutDate: (data) => {
         let politicians;
         if (data[0]) {
             // console.log(data[0])
