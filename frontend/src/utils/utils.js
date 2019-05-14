@@ -16,6 +16,15 @@ export function calculateSentimentScore(politician) {
   return parseInt(score,10)
 }
 
+export function calculatePartySentimentScore(politician) {
+  var score =
+      (politician.Sentiment_Pos*1) +
+      (politician.Sentiment_Neu*0.2) -
+      (politician.Sentiment_Neg*0.5)
+
+  return parseInt(score,10)
+}
+
 export function customisedSort(lists,criterion) {
   lists.sort(function (a, b) {
     return (

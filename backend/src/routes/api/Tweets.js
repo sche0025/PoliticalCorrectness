@@ -158,6 +158,37 @@ router.get('/getpoliticiansdata/:date', (req, res) => {
 
 })
 
+//get data for politicians
+router.get('/getpartydata/:date', (req, res) => {
+    console.log(req.params.date)
+    var searchDate = req.params.date
+
+
+    TweetsModel.find(
+        {}, {
+            sumParty: {$elemMatch: {date: searchDate}}
+            // Top_Tags_of_Users: {$elemMatch: {date: searchDate}}
+        }
+    )
+        .then((data) => {
+            // res.send(data)
+
+            if (JSON.parse(JSON.stringify(data[0])).sumParty) {
+                console.log("searchDate", searchDate)
+
+                res.send(JSON.parse(JSON.stringify(data[0])).sumParty[0].data)
+
+            } else {
+                console.log("no data exist for this id");
+                res.send([])
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+
+})
+
 //get data for dashboardDonut
 router.get('/dashboardDonut/:date', (req, res) => {
     console.log(req.params.date)

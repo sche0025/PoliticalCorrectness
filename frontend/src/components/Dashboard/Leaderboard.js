@@ -68,7 +68,7 @@ export default class Leaderboard extends React.PureComponent {
                 // age: oriData[i].age,
                 // tweetsCount: oriData[i].tweetsCount,
                 party: oriData[i].Party,
-                tt: oriData[i].Total_Tweets,
+                tt: oriData[i].Tweets_Count,
                 tr: oriData[i].Reply_Count,
                 sc: calculateSentimentScore(oriData[i]),
                 avatar: this.getImg(oriData[i].Avatar)

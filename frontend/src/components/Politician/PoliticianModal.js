@@ -27,21 +27,7 @@ export default class PoliticianModal extends React.Component {
     }
 
     componentDidMount() {
-        var words = [
-            {text: "Lorem", weight: 13},
-            {text: "Ipsum", weight: 10.5},
-            {text: "Dolor", weight: 9.4},
-            {text: "Sit", weight: 8},
-            {text: "Amet", weight: 6.2},
-            {text: "Consectetur", weight: 5},
-            {text: "Adipiscing", weight: 5},
-            /* ... */
-        ];
-        // jQCloud(words);
 
-        // $(document).ready(function() {
-        //     $("#demo").jQCloud(words);
-        // });
     }
 
     handleOpen = () => {
@@ -148,7 +134,7 @@ export default class PoliticianModal extends React.Component {
                                                     <ReactWordcloud
                                                         words={this.props.politician.Word_Cloud}
                                                         options={options}
-                                                        fontSizeMapper={fontSizeMapper}
+                                                        // fontSizeMapper={fontSizeMapper}
                                                     /> : <div></div>
                                                 }
                                             </div>

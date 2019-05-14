@@ -82,7 +82,7 @@ export default class Map extends React.Component {
 
 
                 <div style={{background: '#fff',width:'auto'
-                    ,minWidth:'1150px'
+                    ,minWidth:'1300px'
                 }}>
                     <div style={{padding: "15px"}}>
                         <Row>

@@ -23,6 +23,18 @@ export function getPoliticiansData(date) {
         });
 }
 
+export function getPartyData(date) {
+    console.log("start calling db")
+    return axios.get(`/api/getpartydata/`+date)
+        .then(response => {
+            // console.log('getPartyData', response.data);
+            return response.data;
+        })
+        .catch(error => {
+            return error.message;
+        });
+}
+
 export function getTopicTableData(date) {
     console.log("start calling db")
     return axios.get(`/api/toptags/`+date)

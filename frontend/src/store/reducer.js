@@ -7,6 +7,10 @@ const defaultState = {
         party:'',
         order:'popularity'
     },
+    partyFilter:{
+        input:'',
+        order:'popularity'
+    },
     map:{
        constituency:''
     },

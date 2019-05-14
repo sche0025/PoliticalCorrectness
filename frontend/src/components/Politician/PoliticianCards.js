@@ -61,21 +61,7 @@ export default class PoliticianCards extends React.Component {
         this.setState({
 
         })
-        // if(this.state.input == store.getState().politiciansFilter.input &&
-        //     this.state.party == store.getState().politiciansFilter.party &&
-        //     this.state.order == store.getState().politiciansFilter.order
-        // ){
-        //     console.log("no changes")
-        //
-        // }else{
-        //     console.log("changes")
-        //
-        //     this.setState({
-        //         input: store.getState().politiciansFilter.input,
-        //         party: store.getState().politiciansFilter.party,
-        //         order: store.getState().politiciansFilter.order
-        //     })
-        // }
+
 
     };
 
@@ -90,14 +76,13 @@ export default class PoliticianCards extends React.Component {
             })
         })
         console.log("politicians data loaded")
-        // console.log(this.state.data)
+
     }
 
 
     //get the link of the title
     getTitleLink = (politician) => {
         return <PoliticalModal politician={politician}/>
-
     }
 
     filterData = ()=>{

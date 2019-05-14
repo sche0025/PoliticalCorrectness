@@ -2,6 +2,7 @@ import React, {Fragment} from 'react';
 import ReactDOM from 'react-dom';
 import Map from "../../routes/Map";
 import './GoogleMap.css'
+import {Popover, notification} from 'antd'
 import store from '../../store/index'
 // import geoJsonList from '../../index'
 import ReactDOMServer from 'react-dom/server';
@@ -16,6 +17,7 @@ import na from '../../assets/GeoJson/NA'
 
 import {getLeaderboardData} from "../../utils/api";
 import {calculateSentimentScore} from "../../utils/utils";
+
 
 export default class GoogleMap extends React.Component {
     constructor() {
@@ -128,10 +130,135 @@ export default class GoogleMap extends React.Component {
         // console.log(features)
         //
 
+        var centerControlDiv = document.createElement('div');
+        var centerControl = this.CenterControl(centerControlDiv, map);
+
+        centerControlDiv.index = 1;
+        // var marker = new window.google.maps.Marker({
+        //     position: window.google.maps.ControlPosition.BOTTOM_LEFT,
+        //     map: map,
+        //     title: 'Uluru (Ayers Rock)'
+        // });
+        //
+        // var infowindow = new window.google.maps.InfoWindow({
+        //     content: "test"
+        // });
+        // marker.addListener('click', function() {
+        //     infowindow.open(map, marker);
+        // });
+
+        map.controls[window.google.maps.ControlPosition.LEFT_BOTTOM].push(centerControlDiv);
 
         this.setState({
             map: map
         })
+    }
+
+
+    CenterControl = (controlDiv, map) => {
+        var me = this
+        // Set CSS for the control border.
+        var controlUI = document.createElement('div');
+        controlUI.style.backgroundColor = '#fff';
+        controlUI.style.border = '2px solid #fff';
+        controlUI.style.borderRadius = '3px';
+        controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+        controlUI.style.cursor = 'pointer';
+        controlUI.style.marginBottom = '22px';
+        controlUI.style.textAlign = 'center';
+        controlUI.title = 'Click to recenter the map';
+        controlDiv.appendChild(controlUI);
+
+        const content = (
+            <div>
+                <p>Content</p>
+                <p>Content</p>
+            </div>
+        );
+        // Set CSS for the control interior.
+        var controlText = document.createElement('div');
+        controlText.style.color = 'rgb(25,25,25)';
+        controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+        controlText.style.fontSize = '16px';
+        controlText.style.lineHeight = '38px';
+        controlText.style.paddingLeft = '5px';
+        controlText.style.paddingRight = '5px';
+        controlText.innerHTML = 'See statistics';
+        controlUI.appendChild(controlText);
+
+
+        var infoWindow = new window.google.maps.InfoWindow(
+            {
+                content: this.getTextInfowindow(),
+                disableAutoPan: true
+            }
+        )
+
+        // marker.addListener('mouseover', (function () {
+        //     infoWindow.open(obj.state.map, marker)
+        // }))
+        //
+        // marker.addListener('mouseout', (function () {
+        //     infoWindow.close()
+        // }))
+        // Setup the click event listeners: simply set the map to Chicago.
+        controlUI.addEventListener('click', function () {
+            me.openNotification()
+        });
+
+    }
+
+    openNotification = () => {
+        notification.open({
+            message: <span className={"statistics"}>Potential Winners of each party</span>,
+            description: this.getStatistics(),
+            duration: 0
+        });
+    };
+
+    getStatistics = () => {
+
+        var winnerParties = this.getWinners()
+        // return winnerParties.map((partyInfo)=>{
+        //     var string = partyInfo[0] + " "+ partyInfo[1]
+        //     return <div style={{padding:"5px"}} className={"statistics"}>{string}</div>
+        // })
+        var i =0;
+        return <table style={{width: "100%"}} className={"statistics"}>
+            <tr>
+                <td>#</td>
+                <td>Party</td>
+                <td>Number of Winners</td>
+            </tr>
+            {
+                winnerParties.map(partyIfo => {
+                    i ++
+                    var partyName =  "."+partyIfo[0]
+                    var count = partyIfo[1]
+                    return <tr>
+                        <td>{i}</td>
+                        <td>{partyName}</td>
+                        <td>{count}</td>
+                    </tr>
+
+                })
+            }
+
+        </table>
+
+    }
+
+    getTextInfowindow = () => {
+
+        var html = <div>
+            WOW
+
+        </div>
+
+        var stringHTML = ReactDOMServer.renderToString(html)
+
+        // console.log(stringHTML)
+        return stringHTML
     }
 
 
@@ -304,17 +431,20 @@ export default class GoogleMap extends React.Component {
 
             regions = Array.from(regions);
             var regionMap = {}
-            regions.map((region)=>{
+            regions.map((region) => {
                 regionMap[region] = []
             })
             politicians.map((politician) => {
-                regionMap[politician.Electoral_District.toLowerCase()].push({party:politician.Party,sc: calculateSentimentScore(politician)})
+                regionMap[politician.Electoral_District.toLowerCase()].push({
+                    party: politician.Party,
+                    sc: calculateSentimentScore(politician)
+                })
             })
 
             for (let key in regionMap) {
                 // check if the property/key is defined in the object itself, not in parent
                 if (regionMap.hasOwnProperty(key)) {
-                   regionMap[key].sort(function (a, b) {
+                    regionMap[key].sort(function (a, b) {
                         return (
                             (
                                 b.sc
@@ -329,12 +459,12 @@ export default class GoogleMap extends React.Component {
             }
             var result = {}
 
-            for( let key in regionMap){
-                console.log( regionMap[key][0].party)
+            for (let key in regionMap) {
+                // console.log(regionMap[key][0].party)
                 var curParty = regionMap[key][0].party
-                if(!result.hasOwnProperty(curParty)){
+                if (!result.hasOwnProperty(curParty)) {
                     result[curParty] = 1
-                }else{
+                } else {
                     result[curParty] = result[curParty] + 1
                 }
             }
@@ -346,15 +476,23 @@ export default class GoogleMap extends React.Component {
             //         result[region] = result[region] + 1
             //     }
             // })
+            var sortedResult = [];
+            for (var party in result) {
+                sortedResult.push([party, result[party]]);
+            }
 
-            console.log("regions:",result )
+            sortedResult.sort(function (a, b) {
+                return b[1] - a[1];
+            });
+            return sortedResult
+            // console.log("regions:", result)
         }
 
     }
 
     render() {
-        console.log("map loaded", this.state.politiciansData)
-        this.getWinners()
+        // console.log("map loaded", this.state.politiciansData)
+
         return (
             <Fragment>
                 <div id={'map'}></div>
