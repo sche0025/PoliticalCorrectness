@@ -9,14 +9,15 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 export default class DonutChart extends React.Component {
 
-    getCenterText = (pos, neg, neu) => {
-        var largest =Math.max(pos, neg, neu)
+    getCenterText = (pos, neu, neg) => {
+        var largest =Math.max(pos, neu, neg)
         var text = ""
 
         if(pos+neg+neu ==0){
             return "No Reply"
         }
         console.log(pos/(pos+neg+neu))
+        console.log(largest,pos,neu,neu)
         if (largest == pos) {
             return parseInt(100*pos/(pos+neg+neu),10)+"% Positive"
         } else if (largest == neu) {

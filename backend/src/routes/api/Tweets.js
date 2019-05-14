@@ -19,6 +19,27 @@ router.get('/tweets/find', (req, res) => {
         })
 })
 
+router.get('/tweets/test1/:date', (req, res) => {
+    console.log(req.params.date)
+    var searchDate = req.params.date
+
+
+    TweetsModel.find(
+        {}, {
+            "sumPolitician": {$elemMatch: {date: searchDate}}
+            // Top_Tags_of_Users: {$elemMatch: {date: searchDate}}
+        },{}
+    )
+        .then((data) => {
+
+            res.send(
+                JSON.parse(JSON.stringify(data[0])).sumPolitician[0].data
+            )
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+})
 
 router.get('/tweets/mapreduce', (req, res) => {
 
@@ -75,17 +96,26 @@ router.get('/getleaderboarddata/:date', (req, res) => {
     var searchDate = req.params.date
 
 
-    TweetsModel.find({date: searchDate})
-
+    TweetsModel.find(
+        {}, {
+            sumPolitician: {$elemMatch: {date: searchDate}}
+            // Top_Tags_of_Users: {$elemMatch: {date: searchDate}}
+        }
+    )
         .then((data) => {
-            if (data) {
-                console.log("searchDate", searchDate)
-                var leaderBoardData = parser.getLeaderboardData(data)
+            if ( JSON.parse(JSON.stringify(data[0])).sumPolitician) {
+                console.log("getleaderboarddata", searchDate)
+                console.log("getleaderboarddata", data)
+
+                var leaderBoardData = parser.getLeaderboardData(
+                    JSON.parse(JSON.stringify(data[0])).sumPolitician[0].data
+                )
 
                 res.send(leaderBoardData)
 
             } else {
                 console.log("no data exist for this id");
+                res.send([])
             }
         })
         .catch((err) => {
@@ -100,16 +130,26 @@ router.get('/getpoliticiansdata/:date', (req, res) => {
     var searchDate = req.params.date
 
 
-    TweetsModel.find({date: searchDate})
+    TweetsModel.find(
+        {}, {
+            sumPolitician: {$elemMatch: {date: searchDate}}
+            // Top_Tags_of_Users: {$elemMatch: {date: searchDate}}
+        }
+    )
         .then((data) => {
-            if (data) {
+            if (JSON.parse(JSON.stringify(data[0])).sumPolitician) {
                 console.log("searchDate", searchDate)
-                var leaderBoardData = parser.getPoliticiansData(data)
+                // var politiciansData = parser.getPoliticiansData(
+                //     JSON.parse(JSON.stringify(data[0])).sumPolitician[0].data
+                // )
 
-                res.send(leaderBoardData)
+                // res.send(JSON.parse(JSON.stringify(data[0])).sumPolitician[0].data)
+                // res.send(  JSON.parse(JSON.stringify(data[0])).sumPolitician[0].data)
+                res.send(JSON.parse(JSON.stringify(data[0])).sumPolitician[0].data)
 
             } else {
                 console.log("no data exist for this id");
+                res.send([])
             }
         })
         .catch((err) => {
@@ -119,21 +159,29 @@ router.get('/getpoliticiansdata/:date', (req, res) => {
 })
 
 //get data for dashboardDonut
-router.get('/dashboardDonut', (req, res) => {
+router.get('/dashboardDonut/:date', (req, res) => {
     console.log(req.params.date)
     var searchDate = req.params.date
 
 
-    TweetsModel.find({date: searchDate})
+    TweetsModel.find(
+        {}, {
+            sumPolitician: {$elemMatch: {date: searchDate}}
+            // Top_Tags_of_Users: {$elemMatch: {date: searchDate}}
+        }
+    )
         .then((data) => {
-            if (data) {
+            if (JSON.parse(JSON.stringify(data[0])).sumPolitician) {
                 console.log("searchDate", searchDate)
-                var leaderBoardData = parser.getPoliticiansData(data)
+                var donutData = parser.getDonutData(
+                   JSON.parse(JSON.stringify(data[0])).sumPolitician[0].data
+                )
 
-                res.send(leaderBoardData)
+                res.send(donutData)
 
             } else {
                 console.log("no data exist for this id");
+                res.send([])
             }
         })
         .catch((err) => {

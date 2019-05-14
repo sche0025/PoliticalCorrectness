@@ -101,18 +101,23 @@ export default class PoliticianCards extends React.Component {
     }
 
     filterData = ()=>{
-        var originData = this.state.data
-        var input = store.getState().politiciansFilter.input
-        var party = store.getState().politiciansFilter.party
-        var order = store.getState().politiciansFilter.order
+        if(this.state.data){
+            var originData = this.state.data
+            var input = store.getState().politiciansFilter.input
+            var party = store.getState().politiciansFilter.party
+            var order = store.getState().politiciansFilter.order
 
-        var result = originData.filter(politician => politician.Name.toLowerCase().includes(input.toLowerCase()));
-        var result = result.filter(politician => politician.Party.toLowerCase().includes(party.toLowerCase()));
+            var result = originData.filter(politician => politician.Name.toLowerCase().includes(input.toLowerCase()));
+            var result = result.filter(politician => politician.Party.toLowerCase().includes(party.toLowerCase()));
 
 
-        var sortedResult =  this.customisedSort(result,order)
-        // console.log(sortedResult)
-        return sortedResult
+            var sortedResult =  this.customisedSort(result,order)
+            // console.log(sortedResult)
+            return sortedResult
+        }else {
+            return []
+        }
+
     }
 
     customisedSort=(result,order)=>{

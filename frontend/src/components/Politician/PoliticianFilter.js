@@ -13,9 +13,9 @@ export default class PoliticianFilter extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            input: "",
-            party: "",
-            order: 'popularity'
+            input: store.getState().politiciansFilter.input,
+            party: store.getState().politiciansFilter.party,
+            order: store.getState().politiciansFilter.order
         }
     }
 

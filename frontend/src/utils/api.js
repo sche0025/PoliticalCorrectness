@@ -34,3 +34,15 @@ export function getTopicTableData(date) {
             return error.message;
         });
 }
+
+export function getDonutData(date) {
+    console.log("start calling db")
+    return axios.get(`/api/dashboardDonut/`+date)
+        .then(response => {
+            console.log('getDonutData', response.data);
+            return response.data;
+        })
+        .catch(error => {
+            return error.message;
+        });
+}

@@ -53,17 +53,24 @@ router.get('/toptags/:date', (req, res) => {
         // {}, {'Top_Tags_of_Politicians.date':"Apr-14-2019"}
     )
         .then((data) => {
-            console.log(JSON.parse(JSON.stringify(data[0])).Top_Tags_of_Politicians[0].data)
+            if(JSON.parse(JSON.stringify(data[0])).Top_Tags_of_Politicians){
+                console.log(JSON.parse(JSON.stringify(data[0])).Top_Tags_of_Politicians[0].data)
 
-            res.send({
-                p_tag:JSON.parse(JSON.stringify(data[0])).Top_Tags_of_Politicians[0].data,
-                u_tag:JSON.parse(JSON.stringify(data[0])).Top_Tags_of_Users[0].data
-            })
+                res.send({
+                    p_tag:JSON.parse(JSON.stringify(data[0])).Top_Tags_of_Politicians[0].data,
+                    u_tag:JSON.parse(JSON.stringify(data[0])).Top_Tags_of_Users[0].data
+                })
+            } else {
+                console.log("no data exist for this id");
+                res.send([])
+            }
+
             // console.log(data)
             // globalData = data
         })
         .catch((err) => {
             console.log(err);
+
         })
 
 })

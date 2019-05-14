@@ -14,6 +14,7 @@ import PieChart from '../../components/Charts/PieChart'
 import DonutChart from '../../components/Charts/DonutChart'
 import 'bootstrap'
 import store from "../../store";
+import DashboardDonutChart from "../../components/Dashboard/DashboardDonutChart";
 
 const {
     Header, Content, Footer, Sider,
@@ -74,7 +75,7 @@ export default class Dashboard extends React.Component {
                                     </Col>
 
                                     <Col span={12}>
-                                        <DonutChart height={295}/>
+                                        <DashboardDonutChart height={295}/>
                                     </Col>
 
                                 </Row>

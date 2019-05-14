@@ -1,9 +1,9 @@
 module.exports = {
     getLeaderboardData: (data) => {
-        if (data[0]) {
+        if (data) {
             // console.log(data[0])
             // var politicians = data[0]
-            let politicians = JSON.parse(JSON.stringify(data[0])).data
+            let politicians = data
             // console.log(politicians)
             politicians.sort(function (a, b) {
                 return (
@@ -27,23 +27,32 @@ module.exports = {
 
     getPoliticiansData: (data) => {
         let politicians;
-        if (data[0]) {
+        if (data) {
             // console.log(data[0])
             // var politicians = data[0]
-            politicians = JSON.parse(JSON.stringify(data[0])).data
+            politicians = JSON.parse(JSON.stringify(data)).data
 
             return politicians
         }
     },
 
-    getDonutDate: (data) => {
-        let politicians;
-        if (data[0]) {
+    getDonutData: (data) => {
+
+        if (data) {
             // console.log(data[0])
             // var politicians = data[0]
-            politicians = JSON.parse(JSON.stringify(data[0])).data
+            var pos = 0;
+            var neu = 0;
+            var neg = 0;
+            data.map((politician)=>{
+                pos += politician.Sentiment_Pos;
+                neu += politician.Sentiment_Neu;
+                neg += politician.Sentiment_Neg;
+            })
 
-            return politicians
+            return {pos:pos,neu:neu,neg:neg}
+        }else {
+            return {pos:0,neu:0,neg:0}
         }
     }
 

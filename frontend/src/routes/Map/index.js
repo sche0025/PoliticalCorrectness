@@ -60,7 +60,12 @@ export default class Map extends React.Component {
     };
 
     componentDidMount() {
-
+        var me = this
+        getPoliticiansData(this.state.date).then((data) => {
+            me.setState({
+                data: data,
+            })
+        })
     }
 
 
@@ -81,8 +86,8 @@ export default class Map extends React.Component {
                 }}>
                     <div style={{padding: "15px"}}>
                         <Row>
-                            <Col span={15}> <GoogleMap data={this.state.data}/> </Col>
-                            <Col span={9}> <MapControl  data={this.state.data}/></Col>
+                            <Col span={14}> <GoogleMap data={this.state.data}/> </Col>
+                            <Col span={10}> <MapControl  data={this.state.data}/></Col>
                         </Row>
                     </div>
                 </div>

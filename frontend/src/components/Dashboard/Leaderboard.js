@@ -144,7 +144,7 @@ export default class Leaderboard extends React.PureComponent {
                     <Table columns={this.columns} dataSource={data} pagination={false}
                            className={'table'}
                            bordered={true}
-                           title={() => 'Leaderboard'} showHeader={true}
+                           title={() => <div> Leaderboard</div>} showHeader={true}
                     />
                 </Spin>
             </div>

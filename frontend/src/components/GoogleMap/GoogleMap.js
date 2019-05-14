@@ -14,6 +14,9 @@ import vic from '../../assets/GeoJson/VIC'
 import sa from '../../assets/GeoJson/SA'
 import na from '../../assets/GeoJson/NA'
 
+import {getLeaderboardData} from "../../utils/api";
+import {calculateSentimentScore} from "../../utils/utils";
+
 export default class GoogleMap extends React.Component {
     constructor() {
         super();
@@ -21,9 +24,19 @@ export default class GoogleMap extends React.Component {
             markers: [],
             map: null,
             heatmap: null,
-            data: []
+            data: [],
+            politiciansData: []
 
         };
+    }
+
+    componentWillReceiveProps(nextProps) {
+
+        this.setState(
+            {
+                politiciansData: nextProps.data
+            }
+        );
     }
 
     componentDidMount() {
@@ -116,23 +129,22 @@ export default class GoogleMap extends React.Component {
         //
 
 
-
         this.setState({
             map: map
         })
     }
 
 
-    polygonLicked = (event)=>{
+    polygonLicked = (event) => {
         var action = {
-            value:event.feature.getProperty("Sortname"),
-            type:"MAP_UPDATE_DETAIL"
+            value: event.feature.getProperty("Sortname"),
+            type: "MAP_UPDATE_DETAIL"
         }
         store.dispatch(action)
 
     }
 
-    loadGeojson=(map)=>{
+    loadGeojson = (map) => {
         var me = this
         var infoWindow = null
         var features = null;
@@ -152,24 +164,24 @@ export default class GoogleMap extends React.Component {
             });
         });
 
-
-        map.data.addListener('mouseover', function(event) {
+        //
+        map.data.addListener('mouseover', function (event) {
 
 
             map.data.revertStyle();
             map.data.overrideStyle(event.feature, {fillColor: 'blue'});
 
-            infoWindow = new window.google.maps.InfoWindow;
-            infoWindow.setContent(me.getImg('https://pbs.twimg.com/profile_images/1116081523394891776/AYnEcQnG_400x400.png')
-
-            );
-            infoWindow.setPosition(event.latLng);
-            infoWindow.open(me.state.map)
+            // infoWindow = new window.google.maps.InfoWindow;
+            // infoWindow.setContent(me.getImg('https://pbs.twimg.com/profile_images/1116081523394891776/AYnEcQnG_400x400.png')
+            //
+            // );
+            // infoWindow.setPosition(event.latLng);
+            // infoWindow.open(me.state.map)
         });
 
-        map.data.addListener('mouseout', function(event) {
+        map.data.addListener('mouseout', function (event) {
             map.data.revertStyle();
-            infoWindow.close()
+            // infoWindow.close()
         });
 
 
@@ -197,11 +209,11 @@ export default class GoogleMap extends React.Component {
 
         var html = <div>
 
-            <img alt="example" src={img}  className="smallImg" />
-            <img alt="example" src={img}  className="smallImg" />
+            <img alt="example" src={img} className="smallImg"/>
+            <img alt="example" src={img} className="smallImg"/>
         </div>
 
-       var stringHTML =  ReactDOMServer.renderToString(html)
+        var stringHTML = ReactDOMServer.renderToString(html)
 
         // console.log(stringHTML)
         return stringHTML
@@ -278,14 +290,71 @@ export default class GoogleMap extends React.Component {
             me.state.map.data.remove(feature);
 
         });
-       //
-       // window.google = null
+        //
+        // window.google = null
     }
 
+    getWinners = () => {
+        var politicians = this.state.politiciansData
+        var regions = new Set()
+        if (politicians && politicians != []) {
+            politicians.map((politician) => {
+                regions.add(politician.Electoral_District.toLowerCase())
+            })
+
+            regions = Array.from(regions);
+            var regionMap = {}
+            regions.map((region)=>{
+                regionMap[region] = []
+            })
+            politicians.map((politician) => {
+                regionMap[politician.Electoral_District.toLowerCase()].push({party:politician.Party,sc: calculateSentimentScore(politician)})
+            })
+
+            for (let key in regionMap) {
+                // check if the property/key is defined in the object itself, not in parent
+                if (regionMap.hasOwnProperty(key)) {
+                   regionMap[key].sort(function (a, b) {
+                        return (
+                            (
+                                b.sc
+                            )
+                            -
+                            (
+                                a.sc
+                            )
+                        )
+                    })
+                }
+            }
+            var result = {}
+
+            for( let key in regionMap){
+                console.log( regionMap[key][0].party)
+                var curParty = regionMap[key][0].party
+                if(!result.hasOwnProperty(curParty)){
+                    result[curParty] = 1
+                }else{
+                    result[curParty] = result[curParty] + 1
+                }
+            }
+
+            // regionMap.map(region =>{
+            //     if(!result.hasOwnProperty(region)){
+            //         result[region] = 1
+            //     }else{
+            //         result[region] = result[region] + 1
+            //     }
+            // })
+
+            console.log("regions:",result )
+        }
+
+    }
 
     render() {
-
-
+        console.log("map loaded", this.state.politiciansData)
+        this.getWinners()
         return (
             <Fragment>
                 <div id={'map'}></div>
