@@ -79,7 +79,7 @@ export default class PoliticianModal extends React.Component {
         const fontSizeMapper = word => Math.log2(word.value) * 5;
         return (
             <Fragment>
-                <Link onClick={this.handleOpen} className={'title'}>{this.props.politician.Name}</Link>
+                <Link onClick={this.handleOpen} className={'title'} to={"#"}>{this.props.politician.Name} </Link>
                 <Modal
                     title={this.props.politician.Name}
                     visible={this.state.visible}

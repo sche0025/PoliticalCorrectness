@@ -6,16 +6,11 @@ import Row from "antd/es/grid/row";
 import Col from "antd/es/grid/col";
 import PartyModal from './PartyModal'
 import store from '../../store/index'
-import greenFlag from '../../assets/img/partyFlags/green.png'
-import caFlag from '../../assets/img/partyFlags/ca.png'
-import kapFlag from '../../assets/img/partyFlags/kap.png'
-import laborFlag from '../../assets/img/partyFlags/labor.png'
-import liberalFlag from '../../assets/img/partyFlags/liberal.png'
-import natinalsFlag from '../../assets/img/partyFlags/nationals.jpg'
+
 import {Link} from "react-router-dom";
 import {getPartyData, getpartysData} from "../../utils/api";
 import defaultImg from "../../assets/img/defaultImg.png";
-import {calculateSentimentScore} from "../../utils/utils";
+import {calculateSentimentScore, getPartyFlag} from "../../utils/utils";
 
 
 export default class PartyCards extends React.Component {
@@ -116,7 +111,7 @@ export default class PartyCards extends React.Component {
             >
                 <Row>
                     <Col span={6}>
-                        <img src={party.Avatar}
+                        <img src={getPartyFlag(party.Party)}
                         
                              onerror={defaultImg}
                              className={'card-img'}

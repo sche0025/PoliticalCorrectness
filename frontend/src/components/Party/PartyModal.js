@@ -10,7 +10,7 @@ import BarChart from '../Charts/StackedBarChart'
 import DonutChart from '../Charts/DonutChart'
 import DoubleLineChart from '../Charts/DoubleLineChart'
 import ReactWordcloud from 'react-wordcloud'
-import {calculateSentimentScore} from "../../utils/utils";
+import {calculateSentimentScore, getPartyFlag} from "../../utils/utils";
 // import testdata from './word_cloud_one_day'
 
 export default class PartyModal extends React.Component {
@@ -96,7 +96,7 @@ export default class PartyModal extends React.Component {
                         <Row>
                             <Col span={6}>
                                 <div className={'profile'}>
-                                    <img src={this.props.flag}
+                                    <img src={getPartyFlag(this.props.party.Party)}
                                          className={'profileImg'}
                                     />
                                     <div className={'statistics'}>

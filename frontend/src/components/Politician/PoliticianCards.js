@@ -151,15 +151,15 @@ export default class PoliticianCards extends React.Component {
                 })
                 return result
 
-            case "followers":
+            case "likes":
                 result.sort(function (a, b) {
                     return (
                         (
-                            b.Followers_Count
+                            b.Likes_Count
                         )
                         -
                         (
-                            a.Followers_Count
+                            a.Likes_Count
                         )
                     )
                 })
@@ -190,7 +190,7 @@ export default class PoliticianCards extends React.Component {
             <Card
                 title={this.getTitleLink(politician)}
                 bordered={false}
-
+                key={politician.Name}
                 loading={false}
                 className={'card'}
 
@@ -229,7 +229,7 @@ export default class PoliticianCards extends React.Component {
                             </Col>
                             <Col span={12}>
                                 <Row className={'heading'}>
-                                    <Statistic title="Followers" value={politician.Followers_Count}/>
+                                    <Statistic title="Likes" value={politician.Likes_Count}/>
                                 </Row>
                                 <Row className={'heading2'}>
                                     <Statistic title="Sentiment Score" value={calculateSentimentScore(politician)}/>

@@ -9,13 +9,13 @@ module.exports = {
                 return (
                     (
                         1 * (a.Sentiment_Pos) +
-                        0.2 * (a.Sentiment_Neu) -
+                        0.1 * (a.Sentiment_Neu) -
                         0.5 * (a.Sentiment_Neg)
                     )
                     -
                     (
                         1 * (b.Sentiment_Pos) +
-                        0.2 * (b.Sentiment_Neu) -
+                        0.1 * (b.Sentiment_Neu) -
                         0.5 * (b.Sentiment_Neg)
                     )
                 )
