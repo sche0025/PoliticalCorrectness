@@ -91,7 +91,6 @@ export default class DonutChart extends React.Component {
                 type: "doughnut",
                 indexLabelPlacement: "inside",
                 showInLegend: false,
-
                 indexLabel: "{name}: {y}",
                 // yValueFormatString: "#,###'%'",
                 dataPoints: [
