@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react'
 import './Datepicker.css'
-import {DatePicker,Tooltip,Button} from 'antd'
+import {DatePicker,Tooltip,Button,message} from 'antd'
 import moment from 'moment'
 import 'antd/dist/antd.css';
 import config from '../../config'
@@ -24,6 +24,9 @@ class Datepicker extends React.Component {
         // this.props.changeDate(moment(value).format(config.dateFormat))
         this.setState({
             date:moment(value).format(config.dateFormat)
+        },()=>{
+            message.success("Date updated, now you are viewing the data from "+this.state.date)
+            this.props.changeDate(this.state.date)
         })
     }
 
@@ -44,6 +47,7 @@ class Datepicker extends React.Component {
         return (
             <div className={'datepicker'}>
 
+                <Tooltip title="Select a date to see historical data" placement="right">
                     <DatePicker
                         allowClear={false}
                         defaultValue={moment()}
@@ -51,10 +55,10 @@ class Datepicker extends React.Component {
                         disabledDate={this.disabledDate}
                         onChange={this.handleDateChange}
                     />
-
-                <Tooltip title="Select a date to see historical data" placement="right">
-                    <Button type={'primary'} onClick={this.handleDateSubmit}><Icon type={"search"}/></Button>
                 </Tooltip>
+                {/*<Tooltip title="Select a date to see historical data" placement="right">*/}
+                    {/*<Button type={'primary'} onClick={this.handleDateSubmit}><Icon type={"search"}/></Button>*/}
+                {/*</Tooltip>*/}
 
             </div>
         );

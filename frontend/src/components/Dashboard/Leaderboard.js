@@ -6,7 +6,7 @@ import Spin from "antd/es/spin";
 import {getLeaderboardData} from "../../utils/api";
 import Icon from "antd/es/icon";
 import Tooltip from "antd/es/tooltip";
-import {calculateSentimentScore} from "../../utils/utils";
+import {calculateReplyCount, calculateSentimentScore} from "../../utils/utils";
 
 export default class Leaderboard extends React.PureComponent {
     constructor(props) {
@@ -69,7 +69,7 @@ export default class Leaderboard extends React.PureComponent {
                 // tweetsCount: oriData[i].tweetsCount,
                 party: oriData[i].Party,
                 tt: oriData[i].Tweets_Count,
-                tr: oriData[i].Reply_Count,
+                tr: calculateReplyCount(oriData[i]),
                 sc: calculateSentimentScore(oriData[i]),
                 avatar: this.getImg(oriData[i].Avatar)
             });

@@ -34,6 +34,15 @@ export function calculateSentimentScore(politician) {
   return parseInt(score,10)
 }
 
+export function calculateReplyCount(politician) {
+  var score =
+      (politician.Sentiment_Pos) +
+      (politician.Sentiment_Neu) +
+      (politician.Sentiment_Neg)
+
+  return parseInt(score,10)
+}
+
 export function getPartyFlag(partyName) {
 
   switch (partyName.trim().toLowerCase()) {

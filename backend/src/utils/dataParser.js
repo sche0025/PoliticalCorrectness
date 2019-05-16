@@ -25,6 +25,29 @@ module.exports = {
         }
     },
 
+    sortParty: (parties) => {
+        if (parties) {
+
+            parties.sort((a, b) => {
+                    return (
+                        (b.Sentiment_Pos + b.Sentiment_Neu + b.Sentiment_Neg)
+                        -
+                        (a.Sentiment_Pos + a.Sentiment_Neu + a.Sentiment_Neg)
+                    )
+                }
+            )
+
+            try{
+                return [parties[0],parties[1],parties[2],parties[3],parties[4]]
+            }catch (e) {
+                console.log("cannot retrieve first 5 ")
+                return []
+            }
+
+        } else {
+            return []
+        }
+    },
     getPoliticiansData: (data) => {
         let politicians;
         if (data) {
@@ -44,15 +67,15 @@ module.exports = {
             var pos = 0;
             var neu = 0;
             var neg = 0;
-            data.map((politician)=>{
+            data.map((politician) => {
                 pos += politician.Sentiment_Pos;
                 neu += politician.Sentiment_Neu;
                 neg += politician.Sentiment_Neg;
             })
 
-            return {pos:pos,neu:neu,neg:neg}
-        }else {
-            return {pos:0,neu:0,neg:0}
+            return {pos: pos, neu: neu, neg: neg}
+        } else {
+            return {pos: 0, neu: 0, neg: 0}
         }
     }
 
@@ -63,4 +86,11 @@ var last = function last(array, n) {
     if (n == null) return array[array.length - 1];
     return array.slice(Math.max(array.length - n, 0));
 };
+
+var first = function last(array, n) {
+    if (array == null) return void 0;
+    if (n == null) return array[array.length - 1];
+    return array.slice(Math.max( 0,array.length - n));
+};
+
 

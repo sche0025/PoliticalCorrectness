@@ -58,3 +58,15 @@ export function getDonutData(date) {
             return error.message;
         });
 }
+
+export function getDashboardBarChartData(date) {
+    console.log("start calling db")
+    return axios.get(`/api/getleaderboardbarchartdata/`+date)
+        .then(response => {
+            console.log('getDonutData', response.data);
+            return response.data;
+        })
+        .catch(error => {
+            return error.message;
+        });
+}

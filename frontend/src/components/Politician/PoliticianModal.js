@@ -11,7 +11,7 @@ import DonutChart from '../Charts/DonutChart'
 import DoubleLineChart from '../Charts/DoubleLineChart'
 import ReactWordcloud from 'react-wordcloud'
 import $ from 'jquery'
-import {calculateSentimentScore} from "../../utils/utils";
+import {calculateReplyCount, calculateSentimentScore} from "../../utils/utils";
 // import ReactJQCloud from 'react-jqcloud'
 // import jQCloud from 'jqcloud2'
 // import jQCloud from 'jqcloud2'
@@ -79,110 +79,121 @@ export default class PoliticianModal extends React.Component {
         const fontSizeMapper = word => Math.log2(word.value) * 5;
         return (
             <Fragment>
+
                 <Link onClick={this.handleOpen} className={'title'} to={"#"}>{this.props.politician.Name} </Link>
-                <Modal
-                    title={this.props.politician.Name}
-                    visible={this.state.visible}
-                    onCancel={this.handleCancel}
-                    footer={null}
-                    className={'modal'}
-                    centered={true}
-                    width={'85%'}
-                >
+                {this.state.visible?
+                    <Modal
+                        title={this.props.politician.Name}
+                        visible={this.state.visible}
+                        onCancel={this.handleCancel}
+                        footer={null}
+                        className={'modal'}
+                        centered={true}
+                        width={'85%'}
+                    >
 
-                    <div className={'contain'}>
-                        <Row>
-                            <Col span={6}>
-                                <div className={'profile'}>
-                                    <img
-                                        src={this.props.politician.Avatar}
-                                        className={'profileImg'}
-                                    />
+                        <div className={'contain'}>
+                            <Row>
+                                <Col span={6}>
+                                    <div className={'profile'}>
+                                        <img
+                                            src={this.props.politician.Avatar}
+                                            className={'profileImg'}
+                                        />
 
 
-                                    <div className={'statistics'}>
-                                        <Col span={12}>
-                                            <Row className={'heading'}>
-                                                <Statistic title="Tweets posted" value={this.props.politician.Tweets_Count}/>
-                                            </Row>
-                                            <Row className={'heading2'}>
-                                                <Statistic title="Replies Received" value={this.props.politician.Reply_Count}/>
-                                            </Row>
-                                        </Col>
-                                        <Col span={12}>
-                                            <Row className={'heading'}>
-                                                <Statistic title="Followers" value={this.props.politician.Followers_Count}/>
-                                            </Row>
-                                            <Row className={'heading2'}>
-                                                <Statistic title="Sentiment Score" value={calculateSentimentScore(this.props.politician)} />
-                                            </Row>
-                                        </Col>
+                                        <div className={'statistics'}>
+                                            <Col span={12}>
+                                                <Row className={'heading'}>
+                                                    <Statistic title="Tweets posted"
+                                                               value={this.props.politician.Tweets_Count}/>
+                                                </Row>
+                                                <Row className={'heading2'}>
+                                                    <Statistic title="Replies Received"
+                                                               value={calculateReplyCount(this.props.politician)}/>
+                                                </Row>
+                                            </Col>
+                                            <Col span={12}>
+                                                <Row className={'heading'}>
+                                                    <Statistic title="Followers"
+                                                               value={this.props.politician.Followers_Count}/>
+                                                </Row>
+                                                <Row className={'heading2'}>
+                                                    <Statistic title="Sentiment Score"
+                                                               value={calculateSentimentScore(this.props.politician)}/>
+                                                </Row>
+                                            </Col>
 
-                                    </div>
-                                </div>
-
-                            </Col>
-                            <Col span={18}>
-                                <div className={'details'}>
-
-                                    <Row>
-                                        <div className={'details-heading'}>What's his/her most frequently used words?
                                         </div>
-                                        <div className={'word-cloud'}>
+                                    </div>
+
+                                </Col>
+                                <Col span={18}>
+                                    <div className={'details'}>
+
+                                        <Row>
+                                            <div className={'details-heading'}>What's his/her most frequently used
+                                                words?
+                                            </div>
                                             <div className={'word-cloud'}>
-                                                {this.state.visible ?
-                                                    <ReactWordcloud
-                                                        words={this.props.politician.Word_Cloud}
-                                                        options={options}
-                                                        // fontSizeMapper={fontSizeMapper}
-                                                    /> : <div></div>
-                                                }
+                                                <div className={'word-cloud'}>
+                                                    {this.state.visible ?
+                                                        <ReactWordcloud
+                                                            words={this.props.politician.Word_Cloud}
+                                                            options={options}
+                                                            // fontSizeMapper={fontSizeMapper}
+                                                        /> : <div></div>
+                                                    }
+                                                </div>
+
+
                                             </div>
 
+                                            <div className={'details-heading'}>How do people from different
+                                                constituencies
+                                                think of him/her nationwide?
+                                            </div>
+                                            <div className={'detail-barChart'}>
+                                                <BarChart height={450}/>
+                                            </div>
 
+                                            <div className={'details-heading'}>How do people think of him/her
+                                                nationwide?
+                                            </div>
+                                            <div className={'detail-pieChart'}>
+                                                < DonutChart height={450} pos={this.props.politician.Sentiment_Pos}
+                                                             neg={this.props.politician.Sentiment_Neg}
+                                                             neu={this.props.politician.Sentiment_Neu}/>
+                                            </div>
 
-                                        </div>
+                                            <div className={'details-heading'}>What are the sentiment scores of his
+                                                posts in
+                                                the past 7 days?
+                                            </div>
+                                            <div className={'word-cloud'}>
+                                                <DoubleLineChart height={450}
+                                                                 title={"How did internet users think of him/her in the past 7 days?"}
+                                                />
+                                            </div>
 
-                                        <div className={'details-heading'}>How do people from different constituencies
-                                            think of him/her nationwide?
-                                        </div>
-                                        <div className={'detail-barChart'}>
-                                            <BarChart height={450}/>
-                                        </div>
+                                            <div className={'details-heading'}>How did internet users think of him/her
+                                                in
+                                                the past 7 days?
+                                            </div>
+                                            <div className={'word-cloud'}>
+                                                <DoubleLineChart height={450}
+                                                                 title={"How did internet users think of him/her in the past 7 days?"}
+                                                />
+                                            </div>
 
-                                        <div className={'details-heading'}>How do people think of him/her nationwide?
-                                        </div>
-                                        <div className={'detail-pieChart'}>
-                                            < DonutChart height={450} pos={this.props.politician.Sentiment_Pos}
-                                                         neg={this.props.politician.Sentiment_Neg}
-                                                         neu={this.props.politician.Sentiment_Neu}/>
-                                        </div>
+                                        </Row>
 
-                                        <div className={'details-heading'}>What are the sentiment scores of his posts in
-                                            the past 7 days?
-                                        </div>
-                                        <div className={'word-cloud'}>
-                                            <DoubleLineChart height={450}
-                                                             title={"How did internet users think of him/her in the past 7 days?"}
-                                            />
-                                        </div>
-
-                                        <div className={'details-heading'}>How did internet users think of him/her in
-                                            the past 7 days?
-                                        </div>
-                                        <div className={'word-cloud'}>
-                                            <DoubleLineChart height={450}
-                                                             title={"How did internet users think of him/her in the past 7 days?"}
-                                            />
-                                        </div>
-
-                                    </Row>
-
-                                </div>
-                            </Col>
-                        </Row>
-                    </div>
-                </Modal>
+                                    </div>
+                                </Col>
+                            </Row>
+                        </div>
+                    </Modal>:<div></div>
+                }
             </Fragment>
         )
     }

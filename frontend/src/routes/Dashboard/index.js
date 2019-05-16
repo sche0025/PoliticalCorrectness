@@ -15,6 +15,7 @@ import DonutChart from '../../components/Charts/DonutChart'
 import 'bootstrap'
 import store from "../../store";
 import DashboardDonutChart from "../../components/Dashboard/DashboardDonutChart";
+import DashboardStackedBarChart from "../../components/Dashboard/DashboardStackedBarChart";
 
 const {
     Header, Content, Footer, Sider,
@@ -81,7 +82,8 @@ export default class Dashboard extends React.Component {
                                 </Row>
 
                                 <Row className={'chart-container'}>
-                                    <StackedBarChart height={295}/>
+                                    <DashboardStackedBarChart height={295}/>
+                                    {/*<StackedBarChart height={295}/>*/}
                                 </Row>
 
                             </Col>

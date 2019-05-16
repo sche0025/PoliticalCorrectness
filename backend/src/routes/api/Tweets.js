@@ -2,7 +2,7 @@ let TweetsModel = require('../../models/tweetsModel')
 let express = require('express')
 let router = express.Router()
 let test = require('../../../public/assets/jsonformatter')
-let parser = require( '../../utils/dataParser')
+let parser = require('../../utils/dataParser')
 
 // GET
 router.get('/tweets/find', (req, res) => {
@@ -25,15 +25,13 @@ router.get('/tweets/test1/:date', (req, res) => {
 
 
     TweetsModel.find(
-        {}, {
-            "sumPolitician": {$elemMatch: {date: searchDate}}
-            // Top_Tags_of_Users: {$elemMatch: {date: searchDate}}
-        },{}
+        {date: searchDate}, {"data.sumPolitician": 1}
     )
         .then((data) => {
 
             res.send(
-                JSON.parse(JSON.stringify(data[0])).sumPolitician[0].data
+                // JSON.parse(JSON.stringify(data[0])).sumPolitician[0].data
+                data
             )
         })
         .catch((err) => {
@@ -97,29 +95,28 @@ router.get('/getleaderboarddata/:date', (req, res) => {
 
 
     TweetsModel.find(
-        {}, {
-            sumPolitician: {$elemMatch: {date: searchDate}}
-            // Top_Tags_of_Users: {$elemMatch: {date: searchDate}}
-        }
+        // {}, {sumPolitician: {$elemMatch: {date: searchDate}}}
+        {date: searchDate}, {"data.sumPolitician": 1}
     )
         .then((data) => {
-            if ( JSON.parse(JSON.stringify(data[0])).sumPolitician) {
+            if (true) {
                 console.log("getleaderboarddata", searchDate)
-                console.log("getleaderboarddata", data)
+                // console.log("getleaderboarddata", data)
 
                 var leaderBoardData = parser.getLeaderboardData(
-                    JSON.parse(JSON.stringify(data[0])).sumPolitician[0].data
+                    JSON.parse(JSON.stringify(data[0])).data.sumPolitician
                 )
 
                 res.send(leaderBoardData)
 
             } else {
-                console.log("no data exist for this id");
+                console.log("no data exist for this id-leaderboard");
                 res.send([])
             }
         })
         .catch((err) => {
             console.log(err);
+            res.send([])
         });
 
 })
@@ -131,13 +128,12 @@ router.get('/getpoliticiansdata/:date', (req, res) => {
 
 
     TweetsModel.find(
-        {}, {
-            sumPolitician: {$elemMatch: {date: searchDate}}
-            // Top_Tags_of_Users: {$elemMatch: {date: searchDate}}
-        }
+        {date: searchDate}, {"data.sumPolitician": 1}
+        // {}, {sumPolitician: {$elemMatch: {date: searchDate}}}
+
     )
         .then((data) => {
-            if (JSON.parse(JSON.stringify(data[0])).sumPolitician) {
+            if (JSON.parse(JSON.stringify(data[0])).data.sumPolitician) {
                 console.log("searchDate", searchDate)
                 // var politiciansData = parser.getPoliticiansData(
                 //     JSON.parse(JSON.stringify(data[0])).sumPolitician[0].data
@@ -145,14 +141,15 @@ router.get('/getpoliticiansdata/:date', (req, res) => {
 
                 // res.send(JSON.parse(JSON.stringify(data[0])).sumPolitician[0].data)
                 // res.send(  JSON.parse(JSON.stringify(data[0])).sumPolitician[0].data)
-                res.send(JSON.parse(JSON.stringify(data[0])).sumPolitician[0].data)
+                res.send(JSON.parse(JSON.stringify(data[0])).data.sumPolitician)
 
             } else {
-                console.log("no data exist for this id");
+                console.log("no data exist for this id -  politiciandata");
                 res.send([])
             }
         })
         .catch((err) => {
+            res.send([])
             console.log(err);
         });
 
@@ -165,26 +162,25 @@ router.get('/getpartydata/:date', (req, res) => {
 
 
     TweetsModel.find(
-        {}, {
-            sumParty: {$elemMatch: {date: searchDate}}
-            // Top_Tags_of_Users: {$elemMatch: {date: searchDate}}
-        }
+        // {}, {sumParty: {$elemMatch: {date: searchDate}}}
+        {date: searchDate}, {"data.sumParty": 1}
     )
         .then((data) => {
             // res.send(data)
 
-            if (JSON.parse(JSON.stringify(data[0])).sumParty) {
+            if (JSON.parse(JSON.stringify(data[0])).data.sumParty) {
                 console.log("searchDate", searchDate)
 
-                res.send(JSON.parse(JSON.stringify(data[0])).sumParty[0].data)
+                res.send(JSON.parse(JSON.stringify(data[0])).data.sumParty)
 
             } else {
-                console.log("no data exist for this id");
+                console.log("no data exist for this id - partydata");
                 res.send([])
             }
         })
         .catch((err) => {
             console.log(err);
+            res.send([])
         });
 
 })
@@ -196,27 +192,56 @@ router.get('/dashboardDonut/:date', (req, res) => {
 
 
     TweetsModel.find(
-        {}, {
-            sumPolitician: {$elemMatch: {date: searchDate}}
-            // Top_Tags_of_Users: {$elemMatch: {date: searchDate}}
-        }
+        // {}, {sumPolitician: {$elemMatch: {date: searchDate}}}
+        {date: searchDate}, {"data.sumPolitician": 1}
     )
         .then((data) => {
-            if (JSON.parse(JSON.stringify(data[0])).sumPolitician) {
+            if (true) {
                 console.log("searchDate", searchDate)
                 var donutData = parser.getDonutData(
-                   JSON.parse(JSON.stringify(data[0])).sumPolitician[0].data
+                    JSON.parse(JSON.stringify(data[0])).data.sumPolitician
                 )
 
                 res.send(donutData)
 
             } else {
-                console.log("no data exist for this id");
+                console.log("no data exist for this id -dashvoarddonut");
                 res.send([])
             }
         })
         .catch((err) => {
             console.log(err);
+            res.send([])
+        });
+
+})
+
+//get data for leaderboard-stack
+router.get('/getleaderboardbarchartdata/:date', (req, res) => {
+    console.log(req.params.date)
+    var searchDate = req.params.date
+
+
+    TweetsModel.find(
+        // {}, {sumParty: {$elemMatch: {date: searchDate}}}
+        {date: searchDate}, {"data.sumParty": 1}
+    )
+        .then((data) => {
+            // res.send(data)
+
+            if (JSON.parse(JSON.stringify(data[0])).data.sumParty) {
+                console.log("searchDate", searchDate)
+                var sortedParty = parser.sortParty(JSON.parse(JSON.stringify(data[0])).data.sumParty)
+                res.send(sortedParty)
+                // res.send(JSON.parse(JSON.stringify(data[0])).data.sumParty)
+            } else {
+                console.log("no data exist for this id - getleaderboardbarchartdata");
+                res.send([])
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+            res.send([])
         });
 
 })

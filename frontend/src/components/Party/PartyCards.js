@@ -10,7 +10,7 @@ import store from '../../store/index'
 import {Link} from "react-router-dom";
 import {getPartyData, getpartysData} from "../../utils/api";
 import defaultImg from "../../assets/img/defaultImg.png";
-import {calculateSentimentScore, getPartyFlag} from "../../utils/utils";
+import {calculateReplyCount, calculateSentimentScore, getPartyFlag} from "../../utils/utils";
 
 
 export default class PartyCards extends React.Component {
@@ -138,7 +138,7 @@ export default class PartyCards extends React.Component {
                                     <Statistic title="Tweets posted" value={party.Tweets_Count}/>
                                 </Row>
                                 <Row className={'heading2'}>
-                                    <Statistic title="Replies Received" value={party.Reply_Count}/>
+                                    <Statistic title="Replies Received" value={calculateReplyCount(party)}/>
                                 </Row>
                             </Col>
                             <Col span={12}>

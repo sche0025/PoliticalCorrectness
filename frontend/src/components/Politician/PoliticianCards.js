@@ -11,7 +11,7 @@ import {Link} from "react-router-dom";
 import connect from "react-redux/es/connect/connect";
 import defaultImg from '../../assets/img/defaultImg.png'
 import {getPoliticiansData} from "../../utils/api";
-import {calculateSentimentScore} from "../../utils/utils";
+import {calculateReplyCount, calculateSentimentScore} from "../../utils/utils";
 
 
 export default class PoliticianCards extends React.Component {
@@ -141,11 +141,11 @@ export default class PoliticianCards extends React.Component {
                 result.sort(function (a, b) {
                     return (
                         (
-                            b.Reply_Count
+                            b.Mentioned_Count
                         )
                         -
                         (
-                            a.Reply_Count
+                            a.Mentioned_Count
                         )
                     )
                 })
@@ -155,11 +155,11 @@ export default class PoliticianCards extends React.Component {
                 result.sort(function (a, b) {
                     return (
                         (
-                            b.Likes_Count
+                            calculateReplyCount(b)
                         )
                         -
                         (
-                            a.Likes_Count
+                            calculateReplyCount(a)
                         )
                     )
                 })
@@ -224,7 +224,7 @@ export default class PoliticianCards extends React.Component {
                                     <Statistic title="Tweets posted" value={politician.Tweets_Count}/>
                                 </Row>
                                 <Row className={'heading2'}>
-                                    <Statistic title="Replies Received" value={politician.Reply_Count}/>
+                                    <Statistic title="Replies Received" value={calculateReplyCount(politician)}/>
                                 </Row>
                             </Col>
                             <Col span={12}>
