@@ -2,8 +2,9 @@ import React, {Fragment} from 'react'
 import './Datepicker.css'
 import {DatePicker,Tooltip,Button,message} from 'antd'
 import moment from 'moment'
-import 'antd/dist/antd.css';
 import config from '../../config'
+import 'antd/dist/antd.css';
+
 import store from "../../store";
 import {changeDate} from "../../actions/actions";
 import connect from "react-redux/es/connect/connect";
@@ -37,23 +38,25 @@ class Datepicker extends React.Component {
 
     disabledDate=(disabledDate) =>{
         // Can not select days before today and today
-        return disabledDate && (disabledDate < moment(config.dataStartingDate) || disabledDate > moment());
+        return disabledDate && (disabledDate < moment(config.dataStartingDate) || disabledDate > moment().subtract(1,"days"));
         // moment(config.dataStartingDate).format('MMMM Do YYYY')
     }
 
     render() {
-        // console.log(moment().format(config.dateFormat))
-        console.log(store.getState());
+
+        // console.log()
+        // console.log(store.getState());
         return (
             <div className={'datepicker'}>
 
                 <Tooltip title="Select a date to see historical data" placement="right">
                     <DatePicker
                         allowClear={false}
-                        defaultValue={moment()}
+                        defaultValue={moment().subtract(1,"days")}
                         format={config.dateFormat}
                         disabledDate={this.disabledDate}
                         onChange={this.handleDateChange}
+                        showToday={false}
                     />
                 </Tooltip>
                 {/*<Tooltip title="Select a date to see historical data" placement="right">*/}

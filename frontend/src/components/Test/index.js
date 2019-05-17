@@ -3,6 +3,9 @@ import Bar from './script'
 import axios from 'axios'
 import {Button} from "antd";
 import { Table } from 'antd';
+import store from '../../store'
+import config from '../../config'
+import moment from 'moment'
 
 export default class Test extends React.Component {
 
@@ -31,46 +34,8 @@ export default class Test extends React.Component {
     }
 
     test1 = () => {
-        var me = this
-        this.setState({
-            isLoading:true
-        })
-        // axios.post('/api/customer/insert', {
-        //     name: 'testpost',
-        //     age: 99
-        // })
-        //     .then(function (response) {
-        //         console.log(response);
-        //     })
-        //     .catch(function (error) {
-        //         console.log(error);
-        //     });
-
-
-
-        axios.get('/api/daily/retrieve')
-            .then(function (response) {
-                console.log(response);
-                me.setState({
-                    isLoading:false
-                })
-
-                var tweets = response.data
-            // for(var i =0;i<tweets.length;i++){
-            //
-            // }
-                console.log("test",response.data )
-                // var allData = response.data
-                // for(var i=0;i<allData.length;i++){
-                //    if(allData[i].date=="Apr-15-2019"){
-                //        console.log(allData[i].data)
-                //    }
-                // }
-
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        console.log(    moment(store.getState().date).subtract(2,'days').format(config.dateFormat)   )
+        console.log(   moment().subtract(1,"days")   )
 
 
     }

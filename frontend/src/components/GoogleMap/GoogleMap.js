@@ -210,7 +210,7 @@ export default class GoogleMap extends React.Component {
 
     openNotification = () => {
         notification.open({
-            message: <span className={"statistics"}>Potential Winners of each party</span>,
+            message: <span className={"statistics"}>Potential number of winners of each party(by constituency)</span>,
             description: this.getStatistics(),
             duration: 0
         });

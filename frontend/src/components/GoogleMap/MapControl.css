@@ -24,12 +24,13 @@
     /*height: auto;*/
     /*width: 80px;*/
 
-    min-width: 50px;
-    min-height: 50px;
+    /*min-width: 50px;*/
+    /*min-height: 50px;*/
 
-    max-width: 100px;
-    max-height: 80px;
-    height: 25%;
+    /*max-width: 100px;*/
+    /*max-height: 80px;*/
+
+    height: 90px;
     width: 100%;
 }
 

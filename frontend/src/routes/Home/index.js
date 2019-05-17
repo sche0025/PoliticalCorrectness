@@ -60,7 +60,7 @@ class Home extends React.Component {
 
     //Get the date of update
     getLastUpdateTime = () => {
-        var today = moment().format(config.dateFormat);
+        var today = moment().subtract(1,"days").format(config.dateFormat);
         return 'Last updated on ' + today
     }
 

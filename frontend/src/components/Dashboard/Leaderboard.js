@@ -113,7 +113,7 @@ export default class Leaderboard extends React.PureComponent {
             sorter: (a, b) => a.tt - b.tt,
         },
         {
-            title: 'Total Replies',
+            title: 'Virtual Votes Received',
             dataIndex: 'tr',
             width: 100,
 
@@ -121,8 +121,8 @@ export default class Leaderboard extends React.PureComponent {
             sorter: (a, b) => a.tr - b.tr,
         },
         {
-            title: <div>Sentiment score
-                <Tooltip title={"This is calculated by: Positive_Comment * 1 + Neutral_Comment * 0.2 - Negative_Comment*0.5"}>
+            title: <div>Sentiment Score
+                <Tooltip title={"This is calculated by: Positive_Comment * 1 + Neutral_Comment * 0.1 - Negative_Comment*0.5"}>
                     <Icon style={{paddingLeft:"3px"}} type="question-circle"/>
                 </Tooltip>
             </div>,

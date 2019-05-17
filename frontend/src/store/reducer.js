@@ -14,7 +14,8 @@ const defaultState = {
     map:{
        constituency:''
     },
-    date:moment().format(config.dateFormat),
+    // date:moment().format(config.dateFormat),
+    date:(moment().subtract(1, "days")).format(config.dateFormat),
     count:0,
     politiciansDate:[]
 

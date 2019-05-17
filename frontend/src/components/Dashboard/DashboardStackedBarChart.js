@@ -90,7 +90,7 @@ export default class DashboardStackedBarChart extends React.Component {
                         type: "stackedColumn",
                         name: "Positive",
                         showInLegend: true,
-                        yValueFormatString: "#,###k",
+                        yValueFormatString: "#,###",
                         dataPoints: [
                             {label: oriData[0].Party, y: oriData[0].Sentiment_Pos},
                             {label: oriData[1].Party, y: oriData[1].Sentiment_Pos},
@@ -104,7 +104,7 @@ export default class DashboardStackedBarChart extends React.Component {
                         type: "stackedColumn",
                         name: "Negative",
                         showInLegend: true,
-                        yValueFormatString: "#,###k",
+                        yValueFormatString: "#,###",
                         dataPoints: [
                             {label: oriData[0].Party, y: oriData[0].Sentiment_Neg},
                             {label: oriData[1].Party, y: oriData[1].Sentiment_Neg},
@@ -128,12 +128,12 @@ export default class DashboardStackedBarChart extends React.Component {
             exportEnabled: true,
             height: this.props.height,
             title: {
-                text: "Number of tweets from different states",
+                text: "Number of virtual votes for different parties",
                 fontFamily: "verdana"
             },
             axisY: {
-                title: "Number of tweets",
-                suffix: "k"
+                title: "Number of votes",
+                // suffix: "k"
             },
             axisX: [{
                 title: "States",

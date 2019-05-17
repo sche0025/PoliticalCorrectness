@@ -7,15 +7,14 @@ import {
     Layout, Menu, Breadcrumb, Icon, Row, Col
 } from 'antd';
 import Leaderboard from '../../components/Dashboard/Leaderboard'
-import TopicTable from '../../components/Dashboard/TopicTable.js'
+import TopicTable from '../../components/Dashboard/TopicTable'
 import LineChart from '../../components/Charts/LineChart'
-import StackedBarChart from '../../components/Charts/StackedBarChart'
-import PieChart from '../../components/Charts/PieChart'
-import DonutChart from '../../components/Charts/DonutChart'
+
 import 'bootstrap'
 import store from "../../store";
 import DashboardDonutChart from "../../components/Dashboard/DashboardDonutChart";
 import DashboardStackedBarChart from "../../components/Dashboard/DashboardStackedBarChart";
+import DashboardLineChart from "../../components/Dashboard/DashboardLineChart";
 
 const {
     Header, Content, Footer, Sider,
@@ -68,7 +67,8 @@ export default class Dashboard extends React.Component {
                             <Col  style={{maxWidth:'1130px'}} lg={24} xxl={10}>
 
                                 <Row className={'chart-container'}>
-                                    <LineChart height={295}/>
+
+                                    <DashboardLineChart height={295}/>
                                 </Row>
                                 <Row className={'chart-container'}>
                                     <Col span={12}>

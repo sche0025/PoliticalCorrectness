@@ -16,6 +16,8 @@ import UAP from '../assets/img/partyFlags/UAP.png'
 import VS from '../assets/img/partyFlags/VS.png'
 import WAP from '../assets/img/partyFlags/WAP.png'
 import ASP from '../assets/img/partyFlags/ASP.png'
+import moment from 'moment'
+import config from '../config'
 function accMul(arg1, arg2) {
   let m = 0;
   const s1 = arg1.toString();
@@ -117,6 +119,26 @@ export function customisedSort(lists,criterion) {
   return lists
 }
 
+export function getPastDayList(date) {
+
+  var endDate = moment(date)
+  var dateList = []
+  for (var i =0;i<7;i++){
+    if(i==0){
+      dateList.push(endDate.subtract(0,'days').format(config.dateFormat))
+    }else {
+      dateList.push(endDate.subtract(1,'days').format(config.dateFormat))
+    }
+
+
+    console.log(endDate.format(config.dateFormat))
+    console.log(config.dataStartingDate)
+    if(endDate.format(config.dateFormat)==moment(config.dataStartingDate).format(config.dateFormat)){
+      break;
+    }
+  }
+  return dateList
+}
 
 
 export function randomNum(min, max) {

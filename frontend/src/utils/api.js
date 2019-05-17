@@ -63,10 +63,37 @@ export function getDashboardBarChartData(date) {
     console.log("start calling db")
     return axios.get(`/api/getleaderboardbarchartdata/`+date)
         .then(response => {
-            console.log('getDonutData', response.data);
+            console.log('getDashboardBarChartData', response.data);
             return response.data;
         })
         .catch(error => {
             return error.message;
         });
+}
+
+export function getDashboardLineChartData(dateList) {
+    console.log(dateList)
+    console.log("start calling db")
+    // return axios.get('/api/daily/getleaderboardlinechartdata/')
+    //     .then(response => {
+    //         console.log('getDashboardLineChartData', response.data);
+    //         return response.data;
+    //     })
+    //     .catch(error => {
+    //         return error.message;
+    //     });
+
+    return axios({
+        method: 'post',
+        url: "/api/daily/getleaderboardlinechartdata",
+        data: dateList,
+        config:{headers:{'Content-Type':'application/json'}}
+    }).then((response) => {
+        return response.data
+        console.log('getDashboardLineChartData', response.data);
+    }).catch((error) => {
+        console.log('error', error.message)
+    });
+
+
 }

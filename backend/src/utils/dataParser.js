@@ -77,6 +77,31 @@ module.exports = {
         } else {
             return {pos: 0, neu: 0, neg: 0}
         }
+    },
+
+    getPastDaysTotal: (dataForSevenDays) => {
+        dataForSevenDays = JSON.parse(JSON.stringify(dataForSevenDays))
+        // var pos = 0
+        // var neu = 0
+        // var neg = 0
+        var resultList = []
+        if (dataForSevenDays) {
+            dataForSevenDays.map((dataADay)=>{
+                var infoADay = {date:dataADay.date,pos:0,neu:0,neg:0}
+                dataADay.data.dailyPolitician.map((aSentiment)=>{
+
+                    infoADay.pos = infoADay.pos+aSentiment.Sentiment_Pos
+                    infoADay.neu = infoADay.neu+aSentiment.Sentiment_Neu
+                    infoADay.neg = infoADay.neg+aSentiment.Sentiment_Neg
+
+                })
+                resultList.push(infoADay)
+            })
+            console.log("7days,",resultList)
+            return resultList
+        } else {
+            return []
+        }
     }
 
 };

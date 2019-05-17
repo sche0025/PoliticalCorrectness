@@ -1,3 +1,5 @@
+let parser = require('../../utils/dataParser')
+
 let DailyModel = require('../../models/dailyModel')
 let express = require('express')
 let router = express.Router()
@@ -24,10 +26,16 @@ router.get('/daily/retrieve', (req, res) => {
 
 router.get('/daily/find', (req, res) => {
 
-    console.log('wow')
+    console.log(req.body)
     DailyModel.find(
-        {}
-        // {}, {'Top_Tags_of_Politicians.date':"Apr-14-2019"}
+
+        {
+            "date": {$in: ["Apr-13-2019","Apr-14-2019" ]}},{
+            "data.dailyPolitician.Sentiment_Pos":1,
+            "data.dailyPolitician.Sentiment_Neu":1,
+            "data.dailyPolitician.Sentiment_Neg":1
+        },
+
     )
         .then((data) => {
             res.send(data)
@@ -39,6 +47,31 @@ router.get('/daily/find', (req, res) => {
         })
 })
 
+router.post('/daily/getleaderboardlinechartdata/', (req, res) => {
+    console.log("past 7 days:",req.body)
+
+    DailyModel.find(
+
+
+        {   "date": {$in: req.body}},{
+            "date":1,
+            "data.dailyPolitician.Sentiment_Pos":1,
+            "data.dailyPolitician.Sentiment_Neu":1,
+            "data.dailyPolitician.Sentiment_Neg":1
+        },
+
+    )
+        .then((data) => {
+            // res.send(data)
+            var resultList = parser.getPastDaysTotal(data)
+            res.send(resultList)
+        })
+        .catch((err) => {
+            console.log(err);
+            res.send([])
+        })
+})
+
 
 router.get('/toptags/:date', (req, res) => {
 
@@ -46,19 +79,17 @@ router.get('/toptags/:date', (req, res) => {
     var searchDate = req.params.date
 
     DailyModel.find(
-        {}, {
-            Top_Tags_of_Politicians: {$elemMatch: {date: searchDate}},
-            Top_Tags_of_Users: {$elemMatch: {date: searchDate}}
-        }
-        // {}, {'Top_Tags_of_Politicians.date':"Apr-14-2019"}
+        // {}, {Top_Tags_of_Politicians: {$elemMatch: {date: searchDate}}, Top_Tags_of_Users: {$elemMatch: {date: searchDate}}}
+    {   "date": searchDate},{"data.Top_Tags_of_Politicians":1,"data.Top_Tags_of_Users":1}
+
     )
         .then((data) => {
-            if(JSON.parse(JSON.stringify(data[0])).Top_Tags_of_Politicians){
-                console.log(JSON.parse(JSON.stringify(data[0])).Top_Tags_of_Politicians[0].data)
+            if(JSON.parse(JSON.stringify(data[0])).data.Top_Tags_of_Politicians){
+                console.log(JSON.parse(JSON.stringify(data[0])).data.Top_Tags_of_Politicians)
 
                 res.send({
-                    p_tag:JSON.parse(JSON.stringify(data[0])).Top_Tags_of_Politicians[0].data,
-                    u_tag:JSON.parse(JSON.stringify(data[0])).Top_Tags_of_Users[0].data
+                    p_tag:JSON.parse(JSON.stringify(data[0])).data.Top_Tags_of_Politicians,
+                    u_tag:JSON.parse(JSON.stringify(data[0])).data.Top_Tags_of_Users
                 })
             } else {
                 console.log("no data exist for this id");
