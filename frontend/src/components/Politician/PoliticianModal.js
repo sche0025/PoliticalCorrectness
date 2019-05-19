@@ -11,7 +11,9 @@ import DonutChart from '../Charts/DonutChart'
 import DoubleLineChart from '../Charts/DoubleLineChart'
 import ReactWordcloud from 'react-wordcloud'
 import $ from 'jquery'
-import {calculateReplyCount, calculateSentimentScore} from "../../utils/utils";
+import {calculateReplyCount, calculateSentimentScore, getPastDayList} from "../../utils/utils";
+import { getPoliticianLinechartReceive} from "../../utils/api";
+import store from '../../store/index'
 // import ReactJQCloud from 'react-jqcloud'
 // import jQCloud from 'jqcloud2'
 // import jQCloud from 'jqcloud2'
@@ -21,7 +23,8 @@ export default class PoliticianModal extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            visible: false
+            visible: false,
+            repliesReceived:[]
         }
 
     }
@@ -34,6 +37,17 @@ export default class PoliticianModal extends React.Component {
         this.setState({
             visible: true
         })
+
+
+        var me = this
+        getPoliticianLinechartReceive(getPastDayList(store.getState().date),this.props.politician.ID).then((data) => {
+            me.setState({
+                repliesReceived: data,
+                isSpinning: false
+            })
+        })
+        console.log("repliesReceived data loaded")
+
     }
 
     handleCancel = () => {
@@ -46,10 +60,8 @@ export default class PoliticianModal extends React.Component {
         console.log(`selected ${value}`);
     }
 
-
-
     render() {
-
+        // console.log(this.state.repliesReceived)
         var options = {
             colors: [
                 '#1f77b4',
@@ -172,6 +184,7 @@ export default class PoliticianModal extends React.Component {
                                             </div>
                                             <div className={'word-cloud'}>
                                                 <DoubleLineChart height={450}
+                                                                 data={this.state.repliesReceived}
                                                                  title={"How did internet users think of him/her in the past 7 days?"}
                                                 />
                                             </div>

@@ -62,10 +62,12 @@ export default class DashboardLineChart extends React.Component {
         console.log(oriData)
         if(oriData && oriData !=0 ){
            var points=[]
-            oriData.map((infoADay)=>{
+            oriData.map((infoADay,i)=>{
+
                 points.push({
-                    x:moment(infoADay.date).toDate(),
-                    y:infoADay.pos+infoADay.neu+infoADay.neg
+                    x:i,
+                    y:infoADay.pos+infoADay.neu+infoADay.neg,
+                    label:infoADay.date
                 })
             })
             console.log(points)
@@ -97,7 +99,7 @@ export default class DashboardLineChart extends React.Component {
             axisX: {
                 // title: "Week of Year",
 
-                interval: 4
+                interval: 1
             },
             data: [{
                 type: "line",

@@ -96,14 +96,6 @@ export default class PoliticianFilter extends React.Component {
         return (
             <div className={'filters'}>
                 <div>Filters</div>
-                {/*<Search*/}
-                {/*placeholder="input politician's name"*/}
-                {/*enterButton="Search"*/}
-                {/*size="large"*/}
-                {/*onSearch={this.handleSearch}*/}
-                {/*className={'search'}*/}
-                {/*onChange={(e)=>this.handleInputChange(e)}*/}
-                {/*/>*/}
 
                 <Input
                     placeholder="input politician name"

@@ -246,4 +246,53 @@ router.get('/getleaderboardbarchartdata/:date', (req, res) => {
 
 })
 
+//get data for politicians
+router.post('/getpartytopleaders/', (req, res) => {
+
+    var searchDate =  req.body.date
+    var partyName =  req.body.party
+    console.log(searchDate,partyName)
+    // {date: searchDate,"data.sumPolitician.Party":"Australian Greens"},
+    // {"data.sumPolitician.$":1}
+    TweetsModel.aggregate(
+        [
+            { "$match": { "data.sumPolitician.Party": partyName,"date":{$in:[searchDate] }} },
+            { "$unwind": "$data" },
+            { "$unwind": "$date" },
+            { "$unwind": "$data.sumPolitician" },
+            { "$match": { "data.sumPolitician.Party": partyName }},
+            { "$group": {
+                    "_id": {
+                        "_id": "$_id",
+                        "storeId": "$data._id",
+                        "date":"$date"
+                    },
+
+                    "sumPolitician": { "$push": "$data.sumPolitician" }
+                }},
+            { "$group": {
+                    "_id": "$_id._id",
+
+                    "data": {
+                        "$push": {
+                            "date":"$_id.date",
+                            "_id": "$_id.storeId",
+                            "sumPolitician": "$sumPolitician"
+                        }
+                    }
+                }}
+        ]
+    )
+        .then((data) => {
+
+            var resultList = parser.getPartyTopLeaders(data)
+            res.send(resultList)
+        })
+        .catch((err) => {
+            res.send([])
+            console.log(err);
+        });
+
+})
+
 module.exports = router

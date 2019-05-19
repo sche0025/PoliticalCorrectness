@@ -37,9 +37,9 @@ module.exports = {
                 }
             )
 
-            try{
-                return [parties[0],parties[1],parties[2],parties[3],parties[4]]
-            }catch (e) {
+            try {
+                return [parties[0], parties[1], parties[2], parties[3], parties[4]]
+            } catch (e) {
                 console.log("cannot retrieve first 5 ")
                 return []
             }
@@ -86,22 +86,63 @@ module.exports = {
         // var neg = 0
         var resultList = []
         if (dataForSevenDays) {
-            dataForSevenDays.map((dataADay)=>{
-                var infoADay = {date:dataADay.date,pos:0,neu:0,neg:0}
-                dataADay.data.dailyPolitician.map((aSentiment)=>{
+            dataForSevenDays.map((dataADay) => {
+                var infoADay = {date: dataADay.date, pos: 0, neu: 0, neg: 0}
+                dataADay.data.dailyPolitician.map((aSentiment) => {
 
-                    infoADay.pos = infoADay.pos+aSentiment.Sentiment_Pos
-                    infoADay.neu = infoADay.neu+aSentiment.Sentiment_Neu
-                    infoADay.neg = infoADay.neg+aSentiment.Sentiment_Neg
+                    infoADay.pos = infoADay.pos + aSentiment.Sentiment_Pos
+                    infoADay.neu = infoADay.neu + aSentiment.Sentiment_Neu
+                    infoADay.neg = infoADay.neg + aSentiment.Sentiment_Neg
 
                 })
                 resultList.push(infoADay)
             })
-            console.log("7days,",resultList)
+            console.log("7days,", resultList)
             return resultList
         } else {
             return []
         }
+    },
+    getPoliticianDailyPost: (data, dateList) => {
+        var result = []
+        dateList.map((date) => {
+            // result[date] = {pos:0,neu:0,neg:0}
+            result.push({
+                date: date,
+                sc: {pos: 0, neu: 0, neg: 0}
+            })
+        })
+        // console.log(result)
+        data.map((InfoADay) => {
+            result.find(x => x.date === InfoADay.data[0].date).sc = {
+                pos: InfoADay.data[0].dailyPolitician[0].Sentiment_Pos,
+                neu: InfoADay.data[0].dailyPolitician[0].Sentiment_Neu,
+                neg: InfoADay.data[0].dailyPolitician[0].Sentiment_Neg,
+
+            }
+        })
+
+        return result.reverse()
+    },
+    getPartyTopLeaders: (oriData) => {
+        var politicians = oriData[0].data[0].sumPolitician
+        politicians.sort((a, b) => {
+            return (
+                (
+                    1 * (b.Sentiment_Pos) +
+                    0.1 * (b.Sentiment_Neu) -
+                    0.5 * (b.Sentiment_Neg)
+                )
+                -
+                (
+                    1 * (a.Sentiment_Pos) +
+                    0.1 * (a.Sentiment_Neu) -
+                    0.5 * (a.Sentiment_Neg)
+                )
+            )
+        })
+
+        return last(politicians.reverse(),3)
     }
 
 };
@@ -115,7 +156,7 @@ var last = function last(array, n) {
 var first = function last(array, n) {
     if (array == null) return void 0;
     if (n == null) return array[array.length - 1];
-    return array.slice(Math.max( 0,array.length - n));
+    return array.slice(Math.max(0, array.length - n));
 };
 
 

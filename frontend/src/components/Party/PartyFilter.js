@@ -13,8 +13,8 @@ export default class PartyFilter extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            input: "",
-            order: "",
+            input: store.getState().partyFilter.input,
+            order: store.getState().partyFilter.order
 
         }
     }
@@ -23,38 +23,46 @@ export default class PartyFilter extends React.Component {
 
     }
 
-    handleChange = (value) => {
-        console.log(`selected ${value}`);
-    }
 
     handleInputChange = (e) => {
         this.setState({
             input: e.target.value
-        },()=>{
-            const action = {
-                type: "UPDATE_PARTY_INPUT",
-                value: this.state.input
-            };
-            store.dispatch(action)
         })
     }
 
-    handlePartyChange = (e) => {
-        // console.log(e)
+    handleOrderChange = (e) => {
         this.setState({
             order: e
-        }, () => {
-            const action = {
-                type: "UPDATE_PARTY_ORDER",
-                value: e
-            };
-            store.dispatch(action)
+        })
+
+        // const action = {
+        //     type: "UPDATE_POLITICIAN_ORDER",
+        //     value: e
+        // };
+        // store.dispatch(action)
+    }
+
+    handleResetClick = () => {
+        this.setState({
+            input: "",
+
+            order: 'popularity'
+        },()=>{
+            this.handleSearch()
         })
     }
 
-    handleSearch = () => {
-
+    handleSearch = ()=>{
+        const action = {
+            type: "UPDATE_PARTY_FILTERING",
+            value: {
+                input:this.state.input,
+                order:this.state.order
+            }
+        };
+        store.dispatch(action)
     }
+
 
     render() {
         // console.log(this.state)
@@ -65,40 +73,39 @@ export default class PartyFilter extends React.Component {
         return (
             <div className={'filters'}>
                 <div>Filter</div>
-                <Search
-                    placeholder="input politician's name"
-                    onSearch={value => console.log(value)}
+                <Input
+                    placeholder="input party name"
+                    value={this.state.input}
                     size="large"
                     className={'search'}
-                    onChange={(e)=>this.handleInputChange(e)}
+                    onChange={(e) => this.handleInputChange(e)}
+                    allowClear={true}
+                    onPressEnter={this.handleSearch}
                 />
 
-                {/*<Select  className={'select'}*/}
-                {/*size={'large'}*/}
-                {/*placeholder="Select an order"*/}
-                {/*>*/}
-                {/*<Option value="all">All</Option>*/}
-                {/*<Option value="ag">Australian Greens</Option>*/}
-                {/*<Option value="alp">Australian Labor Party</Option>*/}
-                {/*<Option value="ca">Centre Alliance</Option>*/}
-                {/*<Option value="i">Independent</Option>*/}
-                {/*<Option value="kap">Katter's Australian Party</Option>*/}
-                {/*<Option value="lpa">Liberal Party of Australia</Option>*/}
-                {/*<Option value="tn">The Nationals</Option>*/}
-                {/*</Select>*/}
+
                 <div>Sort by</div>
                 <Select className={'select'}
                         size={'large'}
                         placeholder="Select an order"
+                    // defaultValue={'popularity'}
+                        value={this.state.order}
+                        onChange={(e) => this.handleOrderChange(e)}
                 >
-                    <Option value="popularity">Popularity</Option>
+                    <Option value="popularity">Sentiment Score</Option>
                     <Option value="posts">Total Number of Posts</Option>
                     <Option value="replies">Total Number of Replies</Option>
-                    <Option value="followers">Total Number of Followers</Option>
+                    <Option value="likes">Total Number of Likes</Option>
                 </Select>
 
                 <div style={{paddingTop: 10}}>
-                    <Button className={'filter_button'} type="primary">Reset</Button>
+                    {/*<RadioGroup style={{display: 'inline'}} defaultValue="a" size="large" className={'radio-group'}>*/}
+                    {/*<RadioButton value="a">All</RadioButton>*/}
+                    {/*<RadioButton value="m">Male</RadioButton>*/}
+                    {/*<RadioButton value="f">Female</RadioButton>*/}
+                    {/*</RadioGroup>*/}
+                    <Button className={'button'} type="primary" onClick={this.handleSearch}>Search</Button>
+                    <Button className={'button'} type="primary" onClick={this.handleResetClick}>Reset</Button>
                 </div>
             </div>
         );

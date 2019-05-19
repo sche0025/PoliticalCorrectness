@@ -22,7 +22,7 @@ const defaultState = {
 }
 
 export default (state=defaultState,action) =>{
-
+    console.log("action",action.type)
     switch (action.type) {
         // case "REFRESH_DASHBOARD":
         //     var newState = state
@@ -51,6 +51,12 @@ export default (state=defaultState,action) =>{
             newState.politiciansFilter.order = action.value.order
             newState.politiciansFilter.input = action.value.input
             newState.politiciansFilter.party = action.value.party
+            return newState
+        case "UPDATE_PARTY_FILTERING":
+            var newState = state
+            newState.partyFilter.order = action.value.order
+            newState.partyFilter.input = action.value.input
+            newState.partyFilter.party = action.value.party
 
             return newState
         case "SAVE_MAP":

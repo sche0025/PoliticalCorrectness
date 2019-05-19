@@ -8,7 +8,7 @@ import PartyModal from './PartyModal'
 import store from '../../store/index'
 
 import {Link} from "react-router-dom";
-import {getPartyData, getpartysData} from "../../utils/api";
+import {getPartyData} from "../../utils/api";
 import defaultImg from "../../assets/img/defaultImg.png";
 import {calculateReplyCount, calculateSentimentScore, getPartyFlag} from "../../utils/utils";
 
@@ -18,7 +18,7 @@ export default class PartyCards extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            partys: [],
+            parties: [],
             input: '',
 
             order: "popularity",
@@ -83,6 +83,90 @@ export default class PartyCards extends React.Component {
         />
     }
 
+    customisedSort=(result,order)=>{
+
+        switch (order) {
+            case "popularity":
+                result.sort(function (a, b) {
+                    return (
+                        (
+                            calculateSentimentScore(b)
+                        )
+                        -
+                        (
+                            calculateSentimentScore(a)
+                        )
+                    )
+                })
+                return result
+
+            case "posts":
+                result.sort(function (a, b) {
+                    return (
+                        (
+                            b.Tweets_Count
+                        )
+                        -
+                        (
+                            a.Tweets_Count
+                        )
+                    )
+                })
+                return result
+
+            case "replies":
+
+                result.sort(function (a, b) {
+                    return (
+                        (
+                            b.Mentioned_Count
+                        )
+                        -
+                        (
+                            a.Mentioned_Count
+                        )
+                    )
+                })
+                return result
+
+            case "likes":
+                result.sort(function (a, b) {
+                    return (
+                        (
+                            calculateReplyCount(b)
+                        )
+                        -
+                        (
+                            calculateReplyCount(a)
+                        )
+                    )
+                })
+                return result
+
+            default:
+                return result
+        }
+    }
+
+    filterData = ()=>{
+        if(this.state.data){
+            var originData = this.state.data
+            var input = store.getState().partyFilter.input
+
+            var order = store.getState().partyFilter.order
+
+            var result = originData.filter(party => party.Party.toLowerCase().includes(input.toLowerCase()));
+
+
+
+            var sortedResult =  this.customisedSort(result,order)
+            // console.log(sortedResult)
+            return sortedResult
+        }else {
+            return []
+        }
+
+    }
 
     getCards = () => {
         if( this.state.isSpinning){
@@ -96,15 +180,15 @@ export default class PartyCards extends React.Component {
         // console.log(this.state.data.length)
 
 
-        // var filteredData =  this.filterData(  )
-        var filteredData =  this.state.data
+        var filteredData =  this.filterData( )
+        // var filteredData =  this.state.data
 
-        return filteredData.map(party => (
+        return filteredData.map((party,key) => (
 
             <Card
                 title={this.getTitleLink(party)}
                 bordered={false}
-
+                key={key}
                 loading={false}
                 className={'card'}
 
@@ -143,7 +227,7 @@ export default class PartyCards extends React.Component {
                             </Col>
                             <Col span={12}>
                                 <Row className={'heading'}>
-                                    <Statistic title="Followers" value={party.Followers_Count}/>
+                                    <Statistic title="Likes" value={party.Likes_Count}/>
                                 </Row>
                                 <Row className={'heading2'}>
                                     <Statistic title="Sentiment Score" value={calculateSentimentScore(party)}/>

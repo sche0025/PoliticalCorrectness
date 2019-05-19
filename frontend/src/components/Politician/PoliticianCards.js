@@ -93,7 +93,7 @@ export default class PoliticianCards extends React.Component {
             var order = store.getState().politiciansFilter.order
 
             var result = originData.filter(politician => politician.Name.toLowerCase().includes(input.toLowerCase()));
-            var result = result.filter(politician => politician.Party.toLowerCase().includes(party.toLowerCase()));
+             result = result.filter(politician => politician.Party.toLowerCase().includes(party.toLowerCase()));
 
 
             var sortedResult =  this.customisedSort(result,order)
@@ -199,7 +199,7 @@ export default class PoliticianCards extends React.Component {
                     <Col span={6}>
                         <img src={politician.Avatar}
                              alt={"../../assets/img/defaultImg.png"}
-                             onerror={defaultImg}
+                             // onerror={defaultImg}
                              className={'card-img'}
                         />
                     </Col>
@@ -247,7 +247,7 @@ export default class PoliticianCards extends React.Component {
 
     render() {
 
-        console.log(store.getState().politiciansFilter)
+        console.log(store.getState())
         console.log(this.state.isSpinning)
         return (
             <div id={'cardList'}>

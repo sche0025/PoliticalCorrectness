@@ -4,6 +4,7 @@ import 'antd/dist/antd.css';
 import logo from "../../assets/img/unimelbLogo.jpeg"
 import GoogleMap from '../../components/GoogleMap/GoogleMap'
 import MapControl from '../../components/GoogleMap/MapControl'
+import './PartyLeaderCard.css'
 
 import {
     Layout, Menu, Breadcrumb, Icon, Row, Col, Card
@@ -17,22 +18,38 @@ const SubMenu = Menu.SubMenu;
 export default class PartyLeaderCard extends React.Component {
 
 
+    getRank = (key)=>{
+        switch (key) {
+            case 0:
+                return "1ST"
+            case 1:
+                return "2ND"
+            case 2:
+                return "3RD"
+            default:
+                return ""
+        }
+    }
     render() {
+
         return (
 
             <Fragment>
                 <Card
-                    title={<div style={{textAlign:"center"}}>
-                        Top 1
+                    title={<div style={{textAlign: "center"}}>
+                        {this.getRank(this.props.myKey)}
                     </div>}
                     className={'party-avatar'}
-                    cover={<img
+                    cover={
+                        <img
+                            className={"party-top-avatar"}
                         alt="example"
-
-                        src="https://media.licdn.com/dms/image/C5603AQElDhUZNAr7HA/profile-displayphoto-shrink_800_800/0?e=1560384000&v=beta&t=orOmI6holle_rLZUQd-hCNzMh8QBPN_jD-8qgSWzAAg"/>}
+                        src={this.props.img}
+                    />
+                    }
                     bordered={true}
                 >
-                    <div>sdsdasdasdfdfdfdfdf </div>
+                    <div className={"text-center"}>{this.props.name} <span style={{paddingLeft:"20px"}}>{this.props.sc}</span></div>
                 </Card>
 
             </Fragment>

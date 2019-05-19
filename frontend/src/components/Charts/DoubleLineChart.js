@@ -10,7 +10,27 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 export default  class DoubleLineChartLineChart extends React.Component {
 
 
+    getDataPoint = (type)=>{
+        if(this.props.data){
+            console.log(this.props.data)
+            var dataPoint = []
+            this.props.data.map((dataADay)=>{
+                dataPoint.push({
+                    label:dataADay.date,
+                    y:dataADay.sc[type]
+                })
+            })
+            console.log(dataPoint)
+            return dataPoint
+        }
+
+
+        return []
+    }
+
     render() {
+
+        console.log("data is",this.props.data)
 
         const options = {
             animationEnabled: true,
@@ -25,44 +45,23 @@ export default  class DoubleLineChartLineChart extends React.Component {
             toolTip: {
                 shared: true
             },
-            data: [{
-                type: "spline",
-                name: "Positive Replies",
-                showInLegend: true,
-                dataPoints: [
-                    { y: 155, label: "Jan" },
-                    { y: 150, label: "Feb" },
-                    { y: 152, label: "Mar" },
-                    { y: 148, label: "Apr" },
-                    { y: 142, label: "May" },
-                    { y: 150, label: "Jun" },
-                    { y: 146, label: "Jul" },
-                    { y: 149, label: "Aug" },
-                    { y: 153, label: "Sept" },
-                    { y: 158, label: "Oct" },
-                    { y: 154, label: "Nov" },
-                    { y: 150, label: "Dec" }
-                ]
-            },
+            data: [
                 {
                     type: "spline",
                     name: "Negative Replies",
                     showInLegend: true,
-                    dataPoints: [
-                        { y: 172, label: "Jan" },
-                        { y: 173, label: "Feb" },
-                        { y: 175, label: "Mar" },
-                        { y: 172, label: "Apr" },
-                        { y: 162, label: "May" },
-                        { y: 165, label: "Jun" },
-                        { y: 172, label: "Jul" },
-                        { y: 168, label: "Aug" },
-                        { y: 175, label: "Sept" },
-                        { y: 170, label: "Oct" },
-                        { y: 165, label: "Nov" },
-                        { y: 169, label: "Dec" }
-                    ]
-                }]
+                    dataPoints:    this.getDataPoint("neg")
+                },
+                {
+                type: "spline",
+                name: "Positive Replies",
+                showInLegend: true,
+                dataPoints:
+                    this.getDataPoint("pos")
+
+            }
+
+                ]
         }
 
         return(
