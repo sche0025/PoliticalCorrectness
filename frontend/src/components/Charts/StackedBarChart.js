@@ -22,7 +22,52 @@ export default  class stackedBarChart extends React.Component {
         }
         this.chart.render();
     }
+
+    getData = (type)=> {
+        // console.log(this.props.posList)
+        // for (var key in this.props.posList) {
+        //     console.log(key, this.props.posList[key]);
+        // }
+        var data = []
+
+        switch (type) {
+            case "pos":
+                data=this.props.posList
+                break
+            case "neg":
+                data=this.props.negList
+                break
+            case "neu":
+                data=this.props.neuList
+                break
+
+            default :
+                data = []
+        }
+
+
+        console.log(data)
+        var stateData = []
+        for (var key in data) {
+            console.log({label:key,y:data[key]})
+            stateData.push({label:key,y:data[key]})
+        }
+
+        // for(var i=0;i<data.length;i++){
+        //     stateData.push({label:     data.key ,y:  data.val})
+        // }
+        stateData.sort(function(a,b) {
+            var textA = a.label.toUpperCase();
+            var textB = b.label.toUpperCase();
+            return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+        });
+        console.log(type,stateData)
+        return stateData
+    }
+
     render() {
+
+        console.log("pos",this.props.posList,"neg",this.props.negList,"neu",this.props.neuList)
         const options = {
             animationEnabled: true,
             exportEnabled: true,
@@ -55,46 +100,22 @@ export default  class stackedBarChart extends React.Component {
                     type: "stackedColumn",
                     name: "Neutral",
                     showInLegend: true,
-                    yValueFormatString: "#,###k",
-                    dataPoints: [
-                        { label: "New South Wales", y: 13 },
-                        { label: " Victoria", y: 13 },
-                        { label: "Queensland", y: 15 },
-                        { label: "South Australia", y: 16 },
-                        { label: "Tasmania", y: 17 },
-                        { label: "Western Australia", y: 17 },
-
-                    ]
+                    yValueFormatString: "#,###",
+                    dataPoints: this.getData("neu")
                 },
                 {
                     type: "stackedColumn",
                     name: "Positive",
                     showInLegend: true,
-                    yValueFormatString: "#,###k",
-                    dataPoints: [
-                        { label: "New South Wales", y: 13 },
-                        { label: " Victoria", y: 13 },
-                        { label: "Queensland", y: 15 },
-                        { label: "South Australia", y: 15 },
-                        { label: "Tasmania", y: 15 },
-                        { label: "Western Australia", y: 15 },
-
-                    ]
+                    yValueFormatString: "#,###",
+                    dataPoints: this.getData("pos")
                 },
                 {
                     type: "stackedColumn",
                     name: "Negative",
                     showInLegend: true,
-                    yValueFormatString: "#,###k",
-                    dataPoints: [
-                        { label: "New South Wales", y: 14 },
-                        { label: " Victoria", y: 8 },
-                        { label: "Queensland", y: 6 },
-                        { label: "South Australia", y: 6 },
-                        { label: "Tasmania", y: 5 },
-                        { label: "Western Australia", y: 5 },
-
-                    ]
+                    yValueFormatString: "#,###",
+                    dataPoints: this.getData("neg")
                 }]
         }
         return(

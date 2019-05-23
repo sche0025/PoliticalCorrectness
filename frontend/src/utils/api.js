@@ -97,23 +97,42 @@ export function getDashboardLineChartData(dateList) {
 
 }
 
-export function getPoliticianLinechartReceive(dateList,politicianID) {
+// export function getPoliticianLinechartReceive(dateList,politicianID) {
+//     console.log(politicianID)
+//     console.log(dateList)
+//     var body = {dateList:dateList,politicianID:politicianID}
+//     console.log("start calling db")
+//     // return axios.get('/api/daily/getleaderboardlinechartdata/')
+//     //     .then(response => {
+//     //         console.log('getDashboardLineChartData', response.data);
+//     //         return response.data;
+//     //     })
+//     //     .catch(error => {
+//     //         return error.message;
+//     //     });
+//
+//     return axios({
+//         method: 'post',
+//         url: "/api/daily/getpoliticianlinechartreceive",
+//         data: body,
+//         config:{headers:{'Content-Type':'application/json'}}
+//     }).then((response) => {
+//         return response.data
+//         console.log('getpoliticianlinechartreceive', response.data);
+//     }).catch((error) => {
+//         console.log('error', error.message)
+//     });
+// }
+
+export function getPoliticianLinechartsInfo(dateList,politicianID) {
     console.log(politicianID)
     console.log(dateList)
     var body = {dateList:dateList,politicianID:politicianID}
     console.log("start calling db")
-    // return axios.get('/api/daily/getleaderboardlinechartdata/')
-    //     .then(response => {
-    //         console.log('getDashboardLineChartData', response.data);
-    //         return response.data;
-    //     })
-    //     .catch(error => {
-    //         return error.message;
-    //     });
 
     return axios({
         method: 'post',
-        url: "/api/daily/getpoliticianlinechartreceive",
+        url: "/api/daily/getpoliticianlinechart",
         data: body,
         config:{headers:{'Content-Type':'application/json'}}
     }).then((response) => {
@@ -124,23 +143,14 @@ export function getPoliticianLinechartReceive(dateList,politicianID) {
     });
 }
 
-export function getPoliticianLinechartPost(dateList,politicianID) {
-    console.log(politicianID)
-    console.log(dateList)
-    var body = {dateList:dateList,politicianID:politicianID}
-    console.log("start calling db")
-    // return axios.get('/api/daily/getleaderboardlinechartdata/')
-    //     .then(response => {
-    //         console.log('getDashboardLineChartData', response.data);
-    //         return response.data;
-    //     })
-    //     .catch(error => {
-    //         return error.message;
-    //     });
+export function getPartyLinechartsInfo(dateList,partyName) {
+
+    var body = {dateList:dateList,party:partyName}
+    console.log(body)
 
     return axios({
         method: 'post',
-        url: "/api/daily/getpoliticianlinechartreceive",
+        url: "/api/daily/getPartylinechart",
         data: body,
         config:{headers:{'Content-Type':'application/json'}}
     }).then((response) => {

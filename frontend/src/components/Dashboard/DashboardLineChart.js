@@ -60,7 +60,7 @@ export default class DashboardLineChart extends React.Component {
     getData=()=>{
         var oriData = this.state.data
         console.log(oriData)
-        if(oriData && oriData !=0 ){
+        if(oriData && oriData.length !=0 ){
            var points=[]
             oriData.map((infoADay,i)=>{
 

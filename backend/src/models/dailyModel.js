@@ -7,4 +7,5 @@ let DailySchema = new mongoose.Schema({
 
 })
 
-module.exports = mongoose.model('daily',DailySchema,'dailyHead')
+// module.exports = mongoose.model('daily',DailySchema,'dailyHead')
+module.exports = mongoose.model('daily',DailySchema,'dailyTest')

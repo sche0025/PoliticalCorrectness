@@ -12,7 +12,7 @@ import DoubleLineChart from '../Charts/DoubleLineChart'
 import ReactWordcloud from 'react-wordcloud'
 import $ from 'jquery'
 import {calculateReplyCount, calculateSentimentScore, getPastDayList} from "../../utils/utils";
-import { getPoliticianLinechartReceive} from "../../utils/api";
+import { getPoliticianLinechartReceive, getPoliticianLinechartsInfo} from "../../utils/api";
 import store from '../../store/index'
 // import ReactJQCloud from 'react-jqcloud'
 // import jQCloud from 'jqcloud2'
@@ -24,7 +24,8 @@ export default class PoliticianModal extends React.Component {
         super(props)
         this.state = {
             visible: false,
-            repliesReceived:[]
+            repliesReceived:[],
+            repliesPost:[]
         }
 
     }
@@ -34,19 +35,39 @@ export default class PoliticianModal extends React.Component {
     }
 
     handleOpen = () => {
-        this.setState({
-            visible: true
-        })
-
+        // this.setState({
+        //
+        // })
 
         var me = this
-        getPoliticianLinechartReceive(getPastDayList(store.getState().date),this.props.politician.ID).then((data) => {
+        // getPoliticianLinechartReceive(getPastDayList(store.getState().date),this.props.politician.ID).then((data) => {
+        //     me.setState({
+        //         repliesReceived: data,
+        //
+        //     })
+        // })
+
+        // getPoliticianLinechartPost(getPastDayList(store.getState().date),this.props.politician.ID).then((data) => {
+        //     me.setState({
+        //         repliesPost: data,
+        //
+        //     })
+        // })
+
+        getPoliticianLinechartsInfo(getPastDayList(store.getState().date),this.props.politician.ID).then((data) => {
             me.setState({
-                repliesReceived: data,
-                isSpinning: false
+                repliesReceived: data.receive,
+                tweetsPosted: data.post,
+                visible: true
             })
         })
-        console.log("repliesReceived data loaded")
+
+        // var promise1 =  getPoliticianLinechartReceive(getPastDayList(store.getState().date),this.props.politician.ID)
+        // var promise2 =  getPoliticianLinechartPost(getPastDayList(store.getState().date),this.props.politician.ID)
+        //
+        // Promise.all([promise1, promise2]).then(function(values) {
+        //     console.log("promise test",values);
+        // });
 
     }
 
@@ -61,7 +82,7 @@ export default class PoliticianModal extends React.Component {
     }
 
     render() {
-        // console.log(this.state.repliesReceived)
+        // console.log(this.state.data)
         var options = {
             colors: [
                 '#1f77b4',
@@ -127,8 +148,8 @@ export default class PoliticianModal extends React.Component {
                                             </Col>
                                             <Col span={12}>
                                                 <Row className={'heading'}>
-                                                    <Statistic title="Followers"
-                                                               value={this.props.politician.Followers_Count}/>
+                                                    <Statistic title="Likes"
+                                                               value={this.props.politician.Likes_Count}/>
                                                 </Row>
                                                 <Row className={'heading2'}>
                                                     <Statistic title="Sentiment Score"
@@ -166,7 +187,12 @@ export default class PoliticianModal extends React.Component {
                                                 think of him/her nationwide?
                                             </div>
                                             <div className={'detail-barChart'}>
-                                                <BarChart height={450}/>
+                                                <BarChart height={450}
+                                                    posList ={this.props.politician.State_Pos[0]}
+                                                    negList ={this.props.politician.State_Neg[0]}
+                                                    neuList ={this.props.politician.State_Neu[0]}
+
+                                                />
                                             </div>
 
                                             <div className={'details-heading'}>How do people think of him/her
@@ -178,9 +204,8 @@ export default class PoliticianModal extends React.Component {
                                                              neu={this.props.politician.Sentiment_Neu}/>
                                             </div>
 
-                                            <div className={'details-heading'}>What are the sentiment scores of his
-                                                posts in
-                                                the past 7 days?
+                                            <div className={'details-heading'}>How did internet users think of him/her
+                                                in the past 7 days?
                                             </div>
                                             <div className={'word-cloud'}>
                                                 <DoubleLineChart height={450}
@@ -189,13 +214,14 @@ export default class PoliticianModal extends React.Component {
                                                 />
                                             </div>
 
-                                            <div className={'details-heading'}>How did internet users think of him/her
-                                                in
-                                                the past 7 days?
+                                            <div className={'details-heading'}>
+
+                                                What are the sentiment scores of his posts in the past 7 days?
                                             </div>
                                             <div className={'word-cloud'}>
                                                 <DoubleLineChart height={450}
-                                                                 title={"How did internet users think of him/her in the past 7 days?"}
+                                                                 title={"What are the sentiment scores of his posts in the past 7 days?"}
+                                                                 data={this.state.tweetsPosted}
                                                 />
                                             </div>
 

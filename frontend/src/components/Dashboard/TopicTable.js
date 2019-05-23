@@ -64,8 +64,8 @@ export default class TopicTable extends React.Component {
                     key: i,
                     p_tag: <Tooltip title={
                         <Fragment>
-                            <span>{this.state.data.u_tag[i][0]+": "}</span>
-                            <span>{this.state.data.u_tag[i][1]}</span>
+                            <span>{this.state.data.p_tag[i][0]+": "}</span>
+                            <span>{this.state.data.p_tag[i][1]}</span>
                         </Fragment>
                     }>
                         <div className={"hashTag"}>{this.state.data.p_tag[i][0]}</div>

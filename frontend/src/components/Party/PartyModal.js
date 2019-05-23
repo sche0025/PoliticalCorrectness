@@ -11,7 +11,7 @@ import DonutChart from '../Charts/DonutChart'
 import DoubleLineChart from '../Charts/DoubleLineChart'
 import ReactWordcloud from 'react-wordcloud'
 import {calculateReplyCount, calculateSentimentScore, getPartyFlag, getPastDayList} from "../../utils/utils";
-import {getPoliticianLinechartReceive, getTopLeadersInParty} from "../../utils/api";
+import {getPartyLinechartsInfo, getPoliticianLinechartReceive, getTopLeadersInParty} from "../../utils/api";
 import store from "../../store";
 // import testdata from './word_cloud_one_day'
 
@@ -21,7 +21,9 @@ export default class PartyModal extends React.Component {
         super(props)
         this.state = {
             visible: false,
-            topLeaders:[]
+            topLeaders:[],
+            repliesReceived:[],
+            repliesPost:[]
         }
 
     }
@@ -45,7 +47,15 @@ export default class PartyModal extends React.Component {
                 // isSpinning: false
             })
         })
-        console.log("repliesReceived data loaded")
+
+        getPartyLinechartsInfo(getPastDayList(store.getState().date),this.props.party.Party).then((data) => {
+            console.log(data)
+            me.setState({
+                repliesReceived: data.receive,
+                tweetsPosted: data.post,
+            })
+        })
+
     }
 
     handleCancel = () => {
@@ -195,7 +205,9 @@ export default class PartyModal extends React.Component {
                                             </div>
                                             <div className={'detail-barChart'}>
                                                 <BarChart height={450}
-
+                                                          posList ={this.props.party.State_Pos[0]}
+                                                          negList ={this.props.party.State_Neg[0]}
+                                                          neuList ={this.props.party.State_Neu[0]}
                                                 />
                                             </div>
 
@@ -207,6 +219,7 @@ export default class PartyModal extends React.Component {
                                                              pos={this.props.party.Sentiment_Pos}
                                                              neg={this.props.party.Sentiment_Neg}
                                                              neu={this.props.party.Sentiment_Neu}
+
                                                 />
                                             </div>
 
@@ -222,24 +235,24 @@ export default class PartyModal extends React.Component {
                                             {/*/>*/}
                                             {/*</div>*/}
 
+                                            <div className={'details-heading'}>How did internet users think of the party in the past 7 days?
+                                            </div>
                                             <div className={'word-cloud'}>
-                                                <div className={'details-heading'}>What are the sentiment scores of
-                                                    posts that came
-                                                    from the party members in the past 7 days?
-                                                </div>
-                                                <div className={'word-cloud'}>
-                                                    <DoubleLineChart height={450}/>
-                                                </div>
+                                                <DoubleLineChart height={450}
+                                                                 data={this.state.repliesReceived}
+                                                                 title={"How did internet users think of the party in the past 7 days?"}
+                                                />
                                             </div>
 
+                                            <div className={'details-heading'}>
+
+                                                What are the sentiment scores of this party members' posts in the past 7 days?
+                                            </div>
                                             <div className={'word-cloud'}>
-                                                <div className={'details-heading'}>How did internet users think of the
-                                                    party
-                                                    in the past 7 days?
-                                                </div>
-                                                <div className={'word-cloud'}>
-                                                    <DoubleLineChart height={450}/>
-                                                </div>
+                                                <DoubleLineChart height={450}
+                                                                 title={"  What are the sentiment scores of this party members' posts in the past 7 days?"}
+                                                                 data={this.state.tweetsPosted}
+                                                />
                                             </div>
 
                                         </Row>

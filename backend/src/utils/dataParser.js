@@ -103,27 +103,46 @@ module.exports = {
             return []
         }
     },
-    getPoliticianDailyPost: (data, dateList) => {
-        var result = []
-        dateList.map((date) => {
-            // result[date] = {pos:0,neu:0,neg:0}
-            result.push({
-                date: date,
-                sc: {pos: 0, neu: 0, neg: 0}
-            })
-        })
-        // console.log(result)
-        data.map((InfoADay) => {
-            result.find(x => x.date === InfoADay.data[0].date).sc = {
-                pos: InfoADay.data[0].dailyPolitician[0].Sentiment_Pos,
-                neu: InfoADay.data[0].dailyPolitician[0].Sentiment_Neu,
-                neg: InfoADay.data[0].dailyPolitician[0].Sentiment_Neg,
+    // getPoliticianDailyPost: (data, dateList) => {
+    //     var result = []
+    //     dateList.map((date) => {
+    //         // result[date] = {pos:0,neu:0,neg:0}
+    //         result.push({
+    //             date: date,
+    //             sc: {pos: 0, neu: 0, neg: 0}
+    //         })
+    //     })
+    //     // console.log(result)
+    //     data.map((InfoADay) => {
+    //         result.find(x => x.date === InfoADay.data[0].date).sc = {
+    //             pos: InfoADay.data[0].dailyPolitician[0].Sentiment_Pos,
+    //             neu: InfoADay.data[0].dailyPolitician[0].Sentiment_Neu,
+    //             neg: InfoADay.data[0].dailyPolitician[0].Sentiment_Neg,
+    //
+    //         }
+    //     })
+    //
+    //     return result.reverse()
+    // },
 
-            }
-        })
+    getPoliticianDaily: (data, dateList) => {
+        var dailyData = {}
+        dailyData.post =  getDailyRestultForPolititian(data,dateList, "post")
+        dailyData.receive =  getDailyRestultForPolititian(data,dateList, "receive")
+        console.log(dailyData)
+        return dailyData
 
-        return result.reverse()
     },
+
+    getPartyDaily: (data, dateList) => {
+        var dailyData = {}
+        dailyData.post =  getDailyRestultForParty(data,dateList, "post")
+        dailyData.receive =  getDailyRestultForParty(data,dateList, "receive")
+        console.log(dailyData)
+        return dailyData
+
+    },
+
     getPartyTopLeaders: (oriData) => {
         var politicians = oriData[0].data[0].sumPolitician
         politicians.sort((a, b) => {
@@ -146,6 +165,72 @@ module.exports = {
     }
 
 };
+
+var getDailyRestultForPolititian = (data, dateList,type)=>{
+    var result = []
+    dateList.map((date) => {
+        // result[date] = {pos:0,neu:0,neg:0}
+        result.push({
+            date: date,
+            sc: {pos: 0, neu: 0, neg: 0}
+        })
+    })
+
+    if(type == "receive"){
+        data.map((InfoADay) => {
+            result.find(x => x.date === InfoADay.data[0].date).sc = {
+                pos: InfoADay.data[0].dailyPolitician[0].Sentiment_Pos,
+                neu: InfoADay.data[0].dailyPolitician[0].Sentiment_Neu,
+                neg: InfoADay.data[0].dailyPolitician[0].Sentiment_Neg,
+
+            }
+        })
+    }else if(type == "post"){
+        data.map((InfoADay) => {
+            result.find(x => x.date === InfoADay.data[0].date).sc = {
+                pos: InfoADay.data[0].dailyPolitician[0].Pol_Sentiment_Pos,
+                neu: InfoADay.data[0].dailyPolitician[0].Pol_Sentiment_Neu,
+                neg: Math.abs(InfoADay.data[0].dailyPolitician[0].Pol_Sentiment_Neg),
+
+            }
+        })
+    }
+
+    return result.reverse()
+}
+
+var getDailyRestultForParty = (data, dateList,type)=>{
+    var result = []
+    dateList.map((date) => {
+        // result[date] = {pos:0,neu:0,neg:0}
+        result.push({
+            date: date,
+            sc: {pos: 0, neu: 0, neg: 0}
+        })
+    })
+
+    if(type == "receive"){
+        data.map((InfoADay) => {
+            result.find(x => x.date === InfoADay.data[0].date).sc = {
+                pos: InfoADay.data[0].dailyParty[0].Sentiment_Pos,
+                neu: InfoADay.data[0].dailyParty[0].Sentiment_Neu,
+                neg: InfoADay.data[0].dailyParty[0].Sentiment_Neg,
+
+            }
+        })
+    }else if(type == "post"){
+        data.map((InfoADay) => {
+            result.find(x => x.date === InfoADay.data[0].date).sc = {
+                pos: InfoADay.data[0].dailyParty[0].Pol_Sentiment_Pos,
+                neu: InfoADay.data[0].dailyParty[0].Pol_Sentiment_Neu,
+                neg: Math.abs(InfoADay.data[0].dailyParty[0].Pol_Sentiment_Neg),
+
+            }
+        })
+    }
+    console.log(result)
+    return result.reverse()
+}
 
 var last = function last(array, n) {
     if (array == null) return void 0;

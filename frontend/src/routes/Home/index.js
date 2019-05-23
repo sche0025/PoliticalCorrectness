@@ -112,12 +112,6 @@ class Home extends React.Component {
                                 <span>Map</span>
                             </NavLink>
                         </Menu.Item>
-                        <Menu.Item key="3">
-                            <NavLink to={'/home/party'}>
-                                <Icon type="flag"/>
-                                <span>Parties</span>
-                            </NavLink>
-                        </Menu.Item>
 
                         <Menu.Item key="4">
                             <NavLink to={'/home/politician'}>
@@ -125,6 +119,15 @@ class Home extends React.Component {
                                 <span>Politicians</span>
                             </NavLink>
                         </Menu.Item>
+
+                        <Menu.Item key="3">
+                            <NavLink to={'/home/party'}>
+                                <Icon type="flag"/>
+                                <span>Parties</span>
+                            </NavLink>
+                        </Menu.Item>
+
+
                         <Menu.Item key="5">
                             <NavLink to={'/home/about'}>
                                 <Icon type="team"/>

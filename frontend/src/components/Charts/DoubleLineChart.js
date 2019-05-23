@@ -12,7 +12,7 @@ export default  class DoubleLineChartLineChart extends React.Component {
 
     getDataPoint = (type)=>{
         if(this.props.data){
-            console.log(this.props.data)
+            // console.log(this.props.data)
             var dataPoint = []
             this.props.data.map((dataADay)=>{
                 dataPoint.push({
@@ -20,7 +20,7 @@ export default  class DoubleLineChartLineChart extends React.Component {
                     y:dataADay.sc[type]
                 })
             })
-            console.log(dataPoint)
+            // console.log(dataPoint)
             return dataPoint
         }
 

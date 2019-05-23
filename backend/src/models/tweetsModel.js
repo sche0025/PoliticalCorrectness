@@ -15,4 +15,5 @@ let TweetsSchema = new mongoose.Schema({
 
 })
 
-module.exports = mongoose.model('Tweet',TweetsSchema,'sumHead')
+// module.exports = mongoose.model('Tweet',TweetsSchema,'sumHead')
+module.exports = mongoose.model('Tweet',TweetsSchema,'sumTest')
