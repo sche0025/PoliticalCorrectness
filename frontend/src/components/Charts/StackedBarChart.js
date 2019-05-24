@@ -50,7 +50,10 @@ export default  class stackedBarChart extends React.Component {
         var stateData = []
         for (var key in data) {
             console.log({label:key,y:data[key]})
-            stateData.push({label:key,y:data[key]})
+            if(key != 'Other Territories'){
+                stateData.push({label:key,y:data[key]})
+            }
+
         }
 
         // for(var i=0;i<data.length;i++){
@@ -78,7 +81,7 @@ export default  class stackedBarChart extends React.Component {
             },
             axisY: {
                 title: "Number of tweets",
-                suffix: "k"
+
             },
             axisX: [{
                 title: "States",

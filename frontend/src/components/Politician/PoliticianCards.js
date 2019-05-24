@@ -198,8 +198,8 @@ export default class PoliticianCards extends React.Component {
                 <Row>
                     <Col span={6}>
                         <img src={politician.Avatar}
-                             alt={"../../assets/img/defaultImg.png"}
-                             // onerror={defaultImg}
+                             // alt={"https://d2ogjlfjkptkow.cloudfront.net/assets/img/board-member-default-image.png"}
+                             onerror="this.src='https://d2ogjlfjkptkow.cloudfront.net/assets/img/board-member-default-image.png'"
                              className={'card-img'}
                         />
                     </Col>

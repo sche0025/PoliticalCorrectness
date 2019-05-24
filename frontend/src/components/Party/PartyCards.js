@@ -196,8 +196,8 @@ export default class PartyCards extends React.Component {
                 <Row>
                     <Col span={6}>
                         <img src={getPartyFlag(party.Party)}
-                        
-                             onerror={defaultImg}
+                             alt={defaultImg}
+                             // onerror={defaultImg}
                              className={'card-img'}
                         />
                     </Col>

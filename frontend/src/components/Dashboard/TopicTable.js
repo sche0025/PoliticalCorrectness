@@ -98,7 +98,7 @@ export default class TopicTable extends React.Component {
                 dataIndex: 'p_tag',
                 // render: text => <a href="javascript:;">{text}</a>,
             }, {
-                title: 'Topics of Politicians',
+                title: 'Topics of Citizens',
                 dataIndex: 'u_tag',
             }];
 
