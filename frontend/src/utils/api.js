@@ -12,7 +12,7 @@ export function getLeaderboardData(date) {
 }
 
 export function getPoliticiansData(date) {
-    console.log("start calling db")
+
     return axios.get(`/api/getpoliticiansdata/`+date)
         .then(response => {
             console.log('getpoliticiansdata', response.data);
@@ -24,7 +24,7 @@ export function getPoliticiansData(date) {
 }
 
 export function getPartyData(date) {
-    console.log("start calling db")
+
     return axios.get(`/api/getpartydata/`+date)
         .then(response => {
             // console.log('getPartyData', response.data);
@@ -36,7 +36,7 @@ export function getPartyData(date) {
 }
 
 export function getTopicTableData(date) {
-    console.log("start calling db")
+
     return axios.get(`/api/toptags/`+date)
         .then(response => {
             console.log('getpoliticiansdata', response.data);
@@ -48,7 +48,7 @@ export function getTopicTableData(date) {
 }
 
 export function getDonutData(date) {
-    console.log("start calling db")
+
     return axios.get(`/api/dashboardDonut/`+date)
         .then(response => {
             console.log('getDonutData', response.data);
@@ -60,7 +60,7 @@ export function getDonutData(date) {
 }
 
 export function getDashboardBarChartData(date) {
-    console.log("start calling db")
+
     return axios.get(`/api/getleaderboardbarchartdata/`+date)
         .then(response => {
             console.log('getDashboardBarChartData', response.data);
@@ -72,16 +72,7 @@ export function getDashboardBarChartData(date) {
 }
 
 export function getDashboardLineChartData(dateList) {
-    console.log(dateList)
-    console.log("start calling db")
-    // return axios.get('/api/daily/getleaderboardlinechartdata/')
-    //     .then(response => {
-    //         console.log('getDashboardLineChartData', response.data);
-    //         return response.data;
-    //     })
-    //     .catch(error => {
-    //         return error.message;
-    //     });
+
 
     return axios({
         method: 'post',
@@ -97,36 +88,9 @@ export function getDashboardLineChartData(dateList) {
 
 }
 
-// export function getPoliticianLinechartReceive(dateList,politicianID) {
-//     console.log(politicianID)
-//     console.log(dateList)
-//     var body = {dateList:dateList,politicianID:politicianID}
-//     console.log("start calling db")
-//     // return axios.get('/api/daily/getleaderboardlinechartdata/')
-//     //     .then(response => {
-//     //         console.log('getDashboardLineChartData', response.data);
-//     //         return response.data;
-//     //     })
-//     //     .catch(error => {
-//     //         return error.message;
-//     //     });
-//
-//     return axios({
-//         method: 'post',
-//         url: "/api/daily/getpoliticianlinechartreceive",
-//         data: body,
-//         config:{headers:{'Content-Type':'application/json'}}
-//     }).then((response) => {
-//         return response.data
-//         console.log('getpoliticianlinechartreceive', response.data);
-//     }).catch((error) => {
-//         console.log('error', error.message)
-//     });
-// }
 
 export function getPoliticianLinechartsInfo(dateList,politicianID) {
-    console.log(politicianID)
-    console.log(dateList)
+
     var body = {dateList:dateList,politicianID:politicianID}
     console.log("start calling db")
 
@@ -146,7 +110,6 @@ export function getPoliticianLinechartsInfo(dateList,politicianID) {
 export function getPartyLinechartsInfo(dateList,partyName) {
 
     var body = {dateList:dateList,party:partyName}
-    console.log(body)
 
     return axios({
         method: 'post',
@@ -155,7 +118,7 @@ export function getPartyLinechartsInfo(dateList,partyName) {
         config:{headers:{'Content-Type':'application/json'}}
     }).then((response) => {
         return response.data
-        console.log('getpoliticianlinechartreceive', response.data);
+
     }).catch((error) => {
         console.log('error', error.message)
     });
@@ -164,7 +127,6 @@ export function getPartyLinechartsInfo(dateList,partyName) {
 export function getTopLeadersInParty(party,date) {
 
     var body = {party:party,date:date}
-    console.log("start calling db")
 
     return axios({
         method: 'post',
@@ -173,7 +135,7 @@ export function getTopLeadersInParty(party,date) {
         config:{headers:{'Content-Type':'application/json'}}
     }).then((response) => {
         return response.data
-        console.log('getTopLeadersInParty', response.data);
+
     }).catch((error) => {
         console.log('error', error.message)
     });

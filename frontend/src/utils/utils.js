@@ -18,14 +18,7 @@ import WAP from '../assets/img/partyFlags/WAP.png'
 import ASP from '../assets/img/partyFlags/ASP.png'
 import moment from 'moment'
 import config from '../config'
-function accMul(arg1, arg2) {
-  let m = 0;
-  const s1 = arg1.toString();
-  const s2 = arg2.toString();
-  m += s1.split(".").length > 1 ? s1.split(".")[1].length : 0;
-  m += s2.split(".").length > 1 ? s2.split(".")[1].length : 0;
-  return Number(s1.replace(".", "")) * Number(s2.replace(".", "")) / 10 ** m;
-}
+
 
 export function calculateSentimentScore(politician) {
   var score =
@@ -85,38 +78,9 @@ export function getPartyFlag(partyName) {
     case "western australia party":
       return WAP
 
-
-
     default:
       return ""
   }
-
-
-}
-
-// export function calculatePartySentimentScore(politician) {
-//   var score =
-//       (politician.Sentiment_Pos*1) +
-//       (politician.Sentiment_Neu*0.1) -
-//       (politician.Sentiment_Neg*0.5)
-//
-//   return parseInt(score,10)
-// }
-
-export function customisedSort(lists,criterion) {
-  lists.sort(function (a, b) {
-    return (
-        (
-         a[criterion]
-        )
-        -
-        (
-          b[criterion]
-        )
-    )
-  })
-
-  return lists
 }
 
 export function getPastDayList(date) {

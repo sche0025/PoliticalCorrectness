@@ -1,23 +1,15 @@
-import React, {Fragment} from 'react';
-import ReactDOM from 'react-dom';
+import React, {Fragment} from 'react'
 import 'antd/dist/antd.css';
 import './style.css';
-import logo from "../../assets/img/unimelbLogo.jpeg"
- import {BackTop} from 'antd'
 import PoliticianCards from '../../components/Politician/PoliticianCards'
 import PoliticianFilter from '../../components/Politician/PoliticianFilter'
 
 import {
-    Layout, Menu, Breadcrumb, Icon, Row, Col
+  Breadcrumb, Row, Col
 } from 'antd';
 
-const {
-    Header, Content, Footer, Sider,
-} = Layout;
-const SubMenu = Menu.SubMenu;
 
 export default class Politician extends React.Component {
-
 
     render() {
 

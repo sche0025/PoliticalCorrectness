@@ -14,20 +14,15 @@ const defaultState = {
     map:{
        constituency:''
     },
-    // date:moment().format(config.dateFormat),
+    //default date: yesterday
     date:(moment().subtract(1, "days")).format(config.dateFormat),
     count:0,
     politiciansDate:[]
-
 }
 
 export default (state=defaultState,action) =>{
     console.log("action",action.type)
     switch (action.type) {
-        // case "REFRESH_DASHBOARD":
-        //     var newState = state
-        //     newState.count =  newState.count+1
-        //     return newState
 
         case "UPDATE_POLITICIAN_INPUT":
             var newState = state

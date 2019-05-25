@@ -150,11 +150,11 @@ export default class PartyModal extends React.Component {
                                         <div className={'statistics'}>
                                             <Col span={12}>
                                                 <Row className={'heading'}>
-                                                    <Statistic title="Tweets posted"
+                                                    <Statistic title="Total Posts"
                                                                value={this.props.party.Tweets_Count}/>
                                                 </Row>
                                                 <Row className={'heading2'}>
-                                                    <Statistic title="Replies Received"
+                                                    <Statistic title="Mentions"
                                                                value={calculateReplyCount(this.props.party)}/>
                                                 </Row>
                                             </Col>

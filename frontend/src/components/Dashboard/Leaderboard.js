@@ -106,14 +106,18 @@ export default class Leaderboard extends React.PureComponent {
             width: 100,
         },
         {
-            title: 'Total Tweets',
+            title: 'Total Posts',
             dataIndex: 'tt',
             width: 100,
 
             sorter: (a, b) => a.tt - b.tt,
         },
         {
-            title: 'Virtual Votes Received',
+            title: <div>Mentions
+                <Tooltip title={"The number of tweets which mentioned this politician."}>
+                    <Icon style={{paddingLeft:"3px"}} type="question-circle"/>
+                </Tooltip>
+            </div>,
             dataIndex: 'tr',
             width: 100,
 
@@ -122,7 +126,9 @@ export default class Leaderboard extends React.PureComponent {
         },
         {
             title: <div>Sentiment Score
-                <Tooltip title={"This is calculated by: Positive_Comment * 1 + Neutral_Comment * 0.1 - Negative_Comment*0.5"}>
+                <Tooltip title={"This is calculated by: Number of unique supporters * 1 " +
+                "+ Number of unique neutrals * 0.1 " +
+                "- Number of unique dissenters * 0.5"}>
                     <Icon style={{paddingLeft:"3px"}} type="question-circle"/>
                 </Tooltip>
             </div>,

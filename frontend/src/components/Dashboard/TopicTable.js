@@ -27,7 +27,6 @@ export default class TopicTable extends React.Component {
                 isSpinning: false
             })
         })
-        console.log("topicTable data loaded")
     }
 
     componentWillReceiveProps(nextProps) {
@@ -47,8 +46,6 @@ export default class TopicTable extends React.Component {
                     })
                 })
 
-
-                console.log("topicTable data loaded")
 
             }
         );
@@ -96,9 +93,9 @@ export default class TopicTable extends React.Component {
             {
                 title: 'Topics of Politicians',
                 dataIndex: 'p_tag',
-                // render: text => <a href="javascript:;">{text}</a>,
+
             }, {
-                title: 'Topics of Citizens',
+                title: 'Topics of Netizens',
                 dataIndex: 'u_tag',
             }];
 

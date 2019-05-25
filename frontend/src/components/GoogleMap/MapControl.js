@@ -144,7 +144,13 @@ export default class MapControl extends React.Component {
 
 
         {
-            title: 'Sentiment Score',
+            title: <div>Sentiment Score
+                <Tooltip title={"This is calculated by: Number of unique supporters * 1 " +
+                "+ Number of unique neutrals * 0.1 " +
+                "- Number of unique dissenters * 0.5"}>
+                    <Icon style={{paddingLeft:"3px"}} type="question-circle"/>
+                </Tooltip>
+            </div>,
             dataIndex: 'sc',
             width: 100,
             defaultSortOrder: 'descend',

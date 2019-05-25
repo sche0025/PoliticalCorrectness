@@ -210,7 +210,7 @@ export default class GoogleMap extends React.Component {
 
     openNotification = () => {
         notification.open({
-            message: <span className={"statistics"}>Potential number of winners of each party(by constituency)</span>,
+            message: <span className={"statistics"}>Potential number of winners of each party(by constituency) till {store.getState().date}</span>,
             description: this.getStatistics(),
             duration: 0
         });
@@ -219,10 +219,7 @@ export default class GoogleMap extends React.Component {
     getStatistics = () => {
 
         var winnerParties = this.getWinners()
-        // return winnerParties.map((partyInfo)=>{
-        //     var string = partyInfo[0] + " "+ partyInfo[1]
-        //     return <div style={{padding:"5px"}} className={"statistics"}>{string}</div>
-        // })
+
         var i =0;
         return <table style={{width: "100%"}} className={"statistics"}>
             <tr>
@@ -273,8 +270,7 @@ export default class GoogleMap extends React.Component {
 
     loadGeojson = (map) => {
         var me = this
-        var infoWindow = null
-        var features = null;
+
         map.data.addGeoJson(wa);
         map.data.addGeoJson(na);
         map.data.addGeoJson(nsw);
@@ -298,17 +294,11 @@ export default class GoogleMap extends React.Component {
             map.data.revertStyle();
             map.data.overrideStyle(event.feature, {fillColor: 'blue'});
 
-            // infoWindow = new window.google.maps.InfoWindow;
-            // infoWindow.setContent(me.getImg('https://pbs.twimg.com/profile_images/1116081523394891776/AYnEcQnG_400x400.png')
-            //
-            // );
-            // infoWindow.setPosition(event.latLng);
-            // infoWindow.open(me.state.map)
+
         });
 
         map.data.addListener('mouseout', function (event) {
             map.data.revertStyle();
-            // infoWindow.close()
         });
 
 
@@ -469,13 +459,7 @@ export default class GoogleMap extends React.Component {
                 }
             }
 
-            // regionMap.map(region =>{
-            //     if(!result.hasOwnProperty(region)){
-            //         result[region] = 1
-            //     }else{
-            //         result[region] = result[region] + 1
-            //     }
-            // })
+
             var sortedResult = [];
             for (var party in result) {
                 sortedResult.push([party, result[party]]);

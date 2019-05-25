@@ -128,11 +128,11 @@ export default class DashboardStackedBarChart extends React.Component {
             exportEnabled: true,
             height: this.props.height,
             title: {
-                text: "Number of virtual votes for different parties",
+                text: "Tweet users' sentiment distribution across different parties",
                 fontFamily: "verdana"
             },
             axisY: {
-                title: "Number of votes",
+                title: "Number of netizens",
                 // suffix: "k"
             },
             axisX: [{

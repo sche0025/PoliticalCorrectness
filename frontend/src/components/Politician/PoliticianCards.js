@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react'
 import './PoliticianCard.css'
-import {Card, BackTop, Statistic, Spin} from 'antd'
+import {Card, BackTop, Statistic, Spin,Icon,Tooltip} from 'antd'
 import 'antd/dist/antd.css';
 import Row from "antd/es/grid/row";
 import Col from "antd/es/grid/col";
@@ -12,6 +12,7 @@ import connect from "react-redux/es/connect/connect";
 import defaultImg from '../../assets/img/defaultImg.png'
 import {getPoliticiansData} from "../../utils/api";
 import {calculateReplyCount, calculateSentimentScore} from "../../utils/utils";
+
 
 
 export default class PoliticianCards extends React.Component {
@@ -206,7 +207,7 @@ export default class PoliticianCards extends React.Component {
                     <Col span={18}>
                         <Col span={12}>
                             <Row className={'heading'}>
-                                <Col span={8} className={'heading-text'}> Tweeter</Col>
+                                <Col span={8} className={'heading-text'}> Name</Col>
                                 <Col span={16} className={'politician-text'}> {politician.Name}</Col>
                             </Row>
                             <Row className={'heading'}>
@@ -221,10 +222,15 @@ export default class PoliticianCards extends React.Component {
                         <Col span={12}>
                             <Col span={12}>
                                 <Row className={'heading'}>
-                                    <Statistic title="Tweets posted" value={politician.Tweets_Count}/>
+                                    <Statistic title="Total Posts" value={politician.Tweets_Count}/>
                                 </Row>
                                 <Row className={'heading2'}>
-                                    <Statistic title="Replies Received" value={calculateReplyCount(politician)}/>
+                                    <Statistic title={<div>Mentions
+                                        <Tooltip title={"The number of tweets which mentioned this politician."}>
+                                            <Icon style={{paddingLeft:"3px"}} type="question-circle"/>
+                                        </Tooltip>
+                                    </div>}
+                                    value={calculateReplyCount(politician)}/>
                                 </Row>
                             </Col>
                             <Col span={12}>
@@ -232,7 +238,13 @@ export default class PoliticianCards extends React.Component {
                                     <Statistic title="Likes" value={politician.Likes_Count}/>
                                 </Row>
                                 <Row className={'heading2'}>
-                                    <Statistic title="Sentiment Score" value={calculateSentimentScore(politician)}/>
+                                    <Statistic title=<div>Sentiment Score
+                                        <Tooltip title={"This is calculated by: Number of unique supporters * 1 " +
+                                        "+ Number of unique neutrals * 0.1 " +
+                                        "- Number of unique dissenters * 0.5"}>
+                                            <Icon style={{paddingLeft:"3px"}} type="question-circle"/>
+                                        </Tooltip>
+                                    </div>value={calculateSentimentScore(politician)}/>
                                 </Row>
                             </Col>
                         </Col>

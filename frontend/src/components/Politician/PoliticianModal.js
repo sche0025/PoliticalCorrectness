@@ -138,11 +138,11 @@ export default class PoliticianModal extends React.Component {
                                         <div className={'statistics'}>
                                             <Col span={12}>
                                                 <Row className={'heading'}>
-                                                    <Statistic title="Tweets posted"
+                                                    <Statistic title="Total Posts"
                                                                value={this.props.politician.Tweets_Count}/>
                                                 </Row>
                                                 <Row className={'heading2'}>
-                                                    <Statistic title="Virtual Votes Received"
+                                                    <Statistic title="Mentions"
                                                                value={calculateReplyCount(this.props.politician)}/>
                                                 </Row>
                                             </Col>

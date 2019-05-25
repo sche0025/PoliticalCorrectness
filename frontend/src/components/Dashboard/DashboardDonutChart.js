@@ -79,7 +79,9 @@ export default class DonutChart extends React.Component {
             exportEnabled: true,
             height: this.props.height,
             title: {
-                text: "Sentiment of Replies"
+                text: "Tweet users' sentiment distribution",
+                fontSize: 22,
+                fontFamily: "verdana"
             },
             subtitles: [{
                 text: this.getCenterText(this.state.data.pos, this.state.data.neu, this.state.data.neg),

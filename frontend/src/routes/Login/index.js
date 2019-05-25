@@ -1,17 +1,9 @@
 import React from 'react'
-import BGParticle from '../../utils/BGParticle'
-import {Form, Input,Alert, Row, Col, notification, message, Icon} from 'antd'
+import {Form, Input ,message} from 'antd'
 import './style.css'
-import {randomNum, calculateWidth} from '../../utils/utils'
-import PromptBox from '../../components/PromptBox'
-import {withRouter} from 'react-router-dom'
-
-import Loading from '../../components/Loading'
 import Loading2 from '../../components/Loading2'
 import {preloadingImages} from '../../utils/utils'
-
 import 'animate.css'
-
 const url = 'https://github.com/zhangZhiHao1996/image-store/blob/master/react-admin-master/bg1.jpg?raw=true'
 const imgs = [
     'https://github.com/zhangZhiHao1996/image-store/blob/master/react-admin-master/slide1.jpg?raw=true',
@@ -20,11 +12,6 @@ const imgs = [
     'https://github.com/zhangZhiHao1996/image-store/blob/master/react-admin-master/slide4.jpg?raw=true'
 ]
 
-
-// @inject('appStore') @observer @Form.create()
-
-
-// @withRouter @inject('appStore') @observer
 class Login extends React.Component {
     constructor(props){
         super(props)
@@ -38,8 +25,6 @@ class Login extends React.Component {
         }
     }
 
-
-
     componentDidMount() {
         const isLogin = this.props.appStore
         if (isLogin) {
@@ -50,17 +35,10 @@ class Login extends React.Component {
         preloadingImages(imgs)
     }
 
-    componentWillUnmount() {
-        // this.particle && this.particle.destory()
-        // notification.destroy()
-    }
-
-
     initPage = () => {
         this.setState({
             loading: true
         })
-        // this.props.appStore.initUsers()
         this.loadImageAsync(url).then(url => {
             this.setState({
                 loading: false,
@@ -69,9 +47,9 @@ class Login extends React.Component {
         })
     }
 
-
+    //submit
     loginSubmit = () => {
-        console.log(this.props)
+
         if(this.state.password=='admin' &&this.state.account=='admin'){
             message.success('Login successfully.')
             localStorage.setItem("isLoggedIn",'true');
@@ -82,7 +60,7 @@ class Login extends React.Component {
     }
 
     handleAccountChange = (e)=>{
-        console.log()
+
         this.setState({
             account:e.target.value
         })
@@ -109,7 +87,7 @@ class Login extends React.Component {
     }
 
     render() {
-        const {showBox, loading} = this.state
+        const { loading} = this.state
         return (
             <div id='login-page'>
                 {
@@ -154,9 +132,9 @@ class Login extends React.Component {
 
                                         </div>
                                     </Form>
-                                    <div className='footer'>
-                                        <div>Login Page</div>
-                                    </div>
+                                    {/*<div className='footer'>*/}
+                                        {/*<div>Login Page</div>*/}
+                                    {/*</div>*/}
                                 </div>
 
                             </div>

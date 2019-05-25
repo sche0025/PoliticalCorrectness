@@ -1,5 +1,4 @@
 import React, {Fragment} from 'react';
-import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import './style.css';
 
@@ -8,18 +7,11 @@ import {
 } from 'antd';
 import Leaderboard from '../../components/Dashboard/Leaderboard'
 import TopicTable from '../../components/Dashboard/TopicTable'
-import LineChart from '../../components/Charts/LineChart'
-
 import 'bootstrap'
 import store from "../../store";
 import DashboardDonutChart from "../../components/Dashboard/DashboardDonutChart";
 import DashboardStackedBarChart from "../../components/Dashboard/DashboardStackedBarChart";
 import DashboardLineChart from "../../components/Dashboard/DashboardLineChart";
-
-const {
-    Header, Content, Footer, Sider,
-} = Layout;
-const SubMenu = Menu.SubMenu;
 
 export default class Dashboard extends React.Component {
 
@@ -35,8 +27,8 @@ export default class Dashboard extends React.Component {
         console.log("dashboard rendered")
     }
 
+    //handle date change
     handleStoreChange = () => {
-
         if(this.state.date != store.getState().date){
             this.setState({
                 date: store.getState().date
@@ -48,8 +40,6 @@ export default class Dashboard extends React.Component {
 
         return (
             <Fragment>
-
-                {/*<div>{this.state.date}</div>*/}
 
                 <Breadcrumb style={{margin: '16px 0'}}>
                     <Breadcrumb.Item>Home</Breadcrumb.Item>
@@ -83,7 +73,6 @@ export default class Dashboard extends React.Component {
 
                                 <Row className={'chart-container'}>
                                     <DashboardStackedBarChart height={295}/>
-                                    {/*<StackedBarChart height={295}/>*/}
                                 </Row>
 
                             </Col>

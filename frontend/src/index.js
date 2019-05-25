@@ -6,17 +6,11 @@ import {Provider} from 'react-redux'
 import {BrowserRouter} from 'react-router-dom'
 import * as serviceWorker from './serviceWorker';
 import store from './store'
-import oriGeoJsonList from './utils/GeojsonReader'
-// import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
-const geoJsonList = oriGeoJsonList
-export default geoJsonList
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
-            {/*<Provider {...store}>*/}
             <App/>
-            {/*</Provider>*/}
         </BrowserRouter>
     </Provider>
     , document.getElementById('root'));

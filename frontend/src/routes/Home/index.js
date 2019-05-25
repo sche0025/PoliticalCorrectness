@@ -37,7 +37,6 @@ class Home extends React.Component {
     // get default highlighted NavLink
     getActivatedKey = () => {
         var path = window.location.pathname
-        // console.log(path, path.endsWith('politician'))
         if (path.endsWith('dashboard')) {
             return '1'
         } else if (path.endsWith('map')) {
@@ -58,14 +57,11 @@ class Home extends React.Component {
     }
 
     handleLogout=()=>{
-        // localStorage.setItem("isLoggedIn",'false');
         localStorage.removeItem("isLoggedIn");
-        // this.props.history.push(`/target`)
         window.location.reload();
     }
 
     componentDidMount() {
-
         var path = window.location.pathname
         if (path.endsWith('dashboard')){
             document.getElementById("dashboardLink").click()
@@ -74,7 +70,6 @@ class Home extends React.Component {
     }
 
     render() {
-
         let isLoggedIn = localStorage.getItem("isLoggedIn");
         if (isLoggedIn !='true') return <Redirect to='/'/>
         var defaultKey = this.getActivatedKey()
@@ -148,7 +143,7 @@ class Home extends React.Component {
                                 </div>
 
                                 <div className={'user'}>
-                                    <span>  Welcome Richard</span>
+                                    <span>  Welcome Admin</span>
                                     <a className={"text"} onClick={this.handleLogout}>Logout </a>
                                 </div>
                             </Col>
@@ -165,9 +160,6 @@ class Home extends React.Component {
                             {this.props.children}
                         </div>
                     </Content>
-
-
-
                 </Layout>
             </Layout>
         );

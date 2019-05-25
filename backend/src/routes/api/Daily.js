@@ -59,6 +59,7 @@ router.post('/daily/getleaderboardlinechartdata/', (req, res) => {
     )
         .then((data) => {
             // res.send(data)
+
             var resultList = parser.getPastDaysTotal(data)
             res.send(resultList)
         })
