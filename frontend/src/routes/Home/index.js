@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import './style.css';
 import moment from 'moment'
@@ -9,7 +8,7 @@ import config from '../../config'
 import store from '../../store/index'
 
 import {
-    Layout, Menu, Breadcrumb, Icon, Row, Col
+    Layout, Menu, Icon, Row, Col
 } from 'antd';
 import {NavLink} from "react-router-dom";
 import Redirect from "react-router-dom/es/Redirect";
@@ -29,12 +28,6 @@ class Home extends React.Component {
     }
 
 
-    handleStoreChange = () => {
-        // console.log(store.getState())
-        this.setState({
-            date: store.getState().date
-        })
-    };
 
     //side bar collapse
     onCollapse = (collapsed) => {
@@ -72,8 +65,7 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        // var action = {type:"REFRESH_DASHBOARD"}
-        // store.dispatch(action)
+
         var path = window.location.pathname
         if (path.endsWith('dashboard')){
             document.getElementById("dashboardLink").click()
@@ -82,18 +74,17 @@ class Home extends React.Component {
     }
 
     render() {
-        console.log(this.state.date)
+
         let isLoggedIn = localStorage.getItem("isLoggedIn");
         if (isLoggedIn !='true') return <Redirect to='/'/>
         var defaultKey = this.getActivatedKey()
-        // console.log(isLoggedIn)
+
 
         return (
             <Layout style={{height: '100vh'}}>
 
                 <Sider
                     width={200}
-                    // className={'sidebar'}
                     collapsible
                     collapsed={this.state.collapsed}
                     onCollapse={this.onCollapse}
@@ -145,7 +136,7 @@ class Home extends React.Component {
                 </Sider>
                 <Layout>
                     <Header style={{background: '#fff', padding: "0px 10px",
-                    // maxWidth:'1800px'
+
                     }}>
                         <Row>
                             <Col>

@@ -133,11 +133,11 @@ export default class PartyCards extends React.Component {
                 result.sort(function (a, b) {
                     return (
                         (
-                            calculateReplyCount(b)
+                            b.Likes_Count
                         )
                         -
                         (
-                            calculateReplyCount(a)
+                            a.Likes_Count
                         )
                     )
                 })
