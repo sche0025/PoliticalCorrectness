@@ -76,11 +76,11 @@ export default  class stackedBarChart extends React.Component {
             exportEnabled: true,
             height:this.props.height,
             title: {
-                text: "Number of tweets from different states",
+                // text: "Number of tweets from different states",
                 fontFamily: "verdana"
             },
             axisY: {
-                title: "Number of tweets",
+                title: "Number of netizens",
 
             },
             axisX: [{

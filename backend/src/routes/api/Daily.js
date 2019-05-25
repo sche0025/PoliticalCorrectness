@@ -52,9 +52,7 @@ router.post('/daily/getleaderboardlinechartdata/', (req, res) => {
     DailyModel.find(
         {"date": {$in: req.body}}, {
             "date": 1,
-            "data.dailyPolitician.Sentiment_Pos": 1,
-            "data.dailyPolitician.Sentiment_Neu": 1,
-            "data.dailyPolitician.Sentiment_Neg": 1
+            "data.dailyPolitician.Mentioned_Count": 1,
         },
     )
         .then((data) => {
@@ -68,6 +66,30 @@ router.post('/daily/getleaderboardlinechartdata/', (req, res) => {
             res.send([])
         })
 })
+
+//
+// router.post('/daily/getleaderboardlinechartdata/', (req, res) => {
+//     console.log("past 7 days:", req.body)
+//
+//     DailyModel.find(
+//         {"date": {$in: req.body}}, {
+//             "date": 1,
+//             "data.dailyPolitician.Sentiment_Pos": 1,
+//             "data.dailyPolitician.Sentiment_Neu": 1,
+//             "data.dailyPolitician.Sentiment_Neg": 1
+//         },
+//     )
+//         .then((data) => {
+//             // res.send(data)
+//
+//             var resultList = parser.getPastDaysTotal(data)
+//             res.send(resultList)
+//         })
+//         .catch((err) => {
+//             console.log(err);
+//             res.send([])
+//         })
+// })
 
 router.post('/daily/getpoliticianlinechartreceive/', (req, res) => {
     console.log("past 7 days:", req.body)

@@ -222,10 +222,10 @@ export default class PoliticianCards extends React.Component {
                         <Col span={12}>
                             <Col span={12}>
                                 <Row className={'heading'}>
-                                    <Statistic title="Total Posts" value={politician.Tweets_Count}/>
+                                    <Statistic title={ <div className={"statistics-title"}> Total Posts </div>} value={politician.Tweets_Count}/>
                                 </Row>
                                 <Row className={'heading2'}>
-                                    <Statistic title={<div>Mentions
+                                    <Statistic title={<div className={"statistics-title"} >Mentions
                                         <Tooltip title={"The number of tweets which mentioned this politician."}>
                                             <Icon style={{paddingLeft:"3px"}} type="question-circle"/>
                                         </Tooltip>
@@ -235,10 +235,10 @@ export default class PoliticianCards extends React.Component {
                             </Col>
                             <Col span={12}>
                                 <Row className={'heading'}>
-                                    <Statistic title="Likes" value={politician.Likes_Count}/>
+                                    <Statistic title={ <div className={"statistics-title"}> Likes </div>} value={politician.Likes_Count}/>
                                 </Row>
                                 <Row className={'heading2'}>
-                                    <Statistic title=<div>Sentiment Score
+                                    <Statistic title=<div className={"statistics-title"}>Sentiment Score
                                         <Tooltip title={"This is calculated by: Number of unique supporters * 1 " +
                                         "+ Number of unique neutrals * 0.1 " +
                                         "- Number of unique dissenters * 0.5"}>

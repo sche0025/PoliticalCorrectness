@@ -142,7 +142,7 @@ export default class PoliticianFilter extends React.Component {
                 >
                     <Option value="popularity">Sentiment Score</Option>
                     <Option value="posts">Total Number of Posts</Option>
-                    <Option value="replies">Total Number of Replies</Option>
+                    <Option value="replies">Total Number of Mentions</Option>
                     <Option value="likes">Total Number of Likes</Option>
                 </Select>
 

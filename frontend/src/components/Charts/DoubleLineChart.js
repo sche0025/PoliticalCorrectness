@@ -39,7 +39,7 @@ export default  class DoubleLineChartLineChart extends React.Component {
                 text: this.props.title
             },
             axisY : {
-                title: "Number of Replies",
+                title: this.props.yTitle,
                 includeZero: false
             },
             toolTip: {

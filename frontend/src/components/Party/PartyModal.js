@@ -109,7 +109,7 @@ export default class PartyModal extends React.Component {
             ],
             enableTooltip: true,
             fontFamily: 'impact',
-            fontSizes: [5, 60],
+            fontSizes: [20, 80],
             fontStyle: 'normal',
             fontWeight: 'normal',
             padding: 1,
@@ -200,8 +200,8 @@ export default class PartyModal extends React.Component {
                                             </div>
 
                                             <div className={'details-heading'}>How do people from different
-                                                constituencies
-                                                think of the party?
+                                                state
+                                                think of this party?
                                             </div>
                                             <div className={'detail-barChart'}>
                                                 <BarChart height={450}
@@ -212,7 +212,7 @@ export default class PartyModal extends React.Component {
                                             </div>
 
                                             <div className={'details-heading'}>How do people think of the party
-                                                nationwide
+                                                overall?
                                             </div>
                                             <div className={'detail-pieChart'}>
                                                 < DonutChart height={450}
@@ -235,22 +235,22 @@ export default class PartyModal extends React.Component {
                                             {/*/>*/}
                                             {/*</div>*/}
 
-                                            <div className={'details-heading'}>How did internet users think of the party in the past 7 days?
+                                            <div className={'details-heading'}>How did people think of the party in the past 7 days?
                                             </div>
                                             <div className={'word-cloud'}>
                                                 <DoubleLineChart height={450}
                                                                  data={this.state.repliesReceived}
-                                                                 title={"How did internet users think of the party in the past 7 days?"}
+                                                                 yTitle={"Number of netizens"}
                                                 />
                                             </div>
 
                                             <div className={'details-heading'}>
 
-                                                What are the sentiment scores of this party members' posts in the past 7 days?
+                                                What were the sentiment scores of this party members' posts in the past 7 days?
                                             </div>
                                             <div className={'word-cloud'}>
                                                 <DoubleLineChart height={450}
-                                                                 title={"  What are the sentiment scores of this party members' posts in the past 7 days?"}
+                                                                 yTitle={"Number of tweets"}
                                                                  data={this.state.tweetsPosted}
                                                 />
                                             </div>

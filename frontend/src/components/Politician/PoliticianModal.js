@@ -94,11 +94,11 @@ export default class PoliticianModal extends React.Component {
             ],
             enableTooltip: true,
             fontFamily: 'impact',
-            fontSizes: [5, 60],
+            fontSizes: [20, 70],
             fontStyle: 'normal',
             fontWeight: 'normal',
             padding: 1,
-            rotations: 3,
+            rotations: 0,
             rotationAngles: [0, 90],
             scale: 'sqrt',
             spiral: 'archimedean',
@@ -183,8 +183,8 @@ export default class PoliticianModal extends React.Component {
                                             </div>
 
                                             <div className={'details-heading'}>How do people from different
-                                                constituencies
-                                                think of him/her nationwide?
+                                                states
+                                                think of him/her?
                                             </div>
                                             <div className={'detail-barChart'}>
                                                 <BarChart height={450}
@@ -196,7 +196,7 @@ export default class PoliticianModal extends React.Component {
                                             </div>
 
                                             <div className={'details-heading'}>How do people think of him/her
-                                                nationwide?
+                                                overall?
                                             </div>
                                             <div className={'detail-pieChart'}>
                                                 < DonutChart height={450} pos={this.props.politician.Sentiment_Pos}
@@ -204,23 +204,26 @@ export default class PoliticianModal extends React.Component {
                                                              neu={this.props.politician.Sentiment_Neu}/>
                                             </div>
 
-                                            <div className={'details-heading'}>How did internet users think of him/her
+                                            <div className={'details-heading'}>How did people think of him/her
                                                 in the past 7 days?
                                             </div>
                                             <div className={'word-cloud'}>
                                                 <DoubleLineChart height={450}
                                                                  data={this.state.repliesReceived}
-                                                                 title={"How did internet users think of him/her in the past 7 days?"}
+                                                                 yTitle = "Number of netizens"
+
+                                                                 // title={"How did internet users think of him/her in the past 7 days?"}
                                                 />
                                             </div>
 
                                             <div className={'details-heading'}>
 
-                                                What are the sentiment scores of his posts in the past 7 days?
+                                                What were the sentiment scores of his posts in the past 7 days?
                                             </div>
                                             <div className={'word-cloud'}>
                                                 <DoubleLineChart height={450}
-                                                                 title={"What are the sentiment scores of his posts in the past 7 days?"}
+                                                                 // title={"What are the sentiment scores of his posts in the past 7 days?"}
+                                                                 yTitle={"Number of Tweets"}
                                                                  data={this.state.tweetsPosted}
                                                 />
                                             </div>

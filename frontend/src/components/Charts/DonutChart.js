@@ -35,7 +35,7 @@ export default class DonutChart extends React.Component {
             exportEnabled: true,
             height: this.props.height,
             title: {
-                text: "Sentiment of Replies"
+                text: "Sentiment of Mentions"
             },
             subtitles: [{
                 text:  this.getCenterText(this.props.pos,this.props.neu,this.props.neg),

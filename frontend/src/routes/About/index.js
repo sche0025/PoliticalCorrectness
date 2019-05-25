@@ -150,7 +150,7 @@ export default class About extends React.Component {
                                             </Row>
                                             <Row>
                                                 <Col span={8} className={'profile-heading'}>Role </Col>
-                                                <Col span={16} className={'profile-text'}>Algorithm Engineer</Col>
+                                                <Col span={16} className={'profile-text'}>Data Engineer</Col>
 
                                             </Row>
 
@@ -182,7 +182,7 @@ export default class About extends React.Component {
                                             </Row>
                                             <Row>
                                                 <Col span={8} className={'profile-heading'}>Role </Col>
-                                                <Col span={16} className={'profile-text'}>Algorithm Engineer</Col>
+                                                <Col span={16} className={'profile-text'}>Data Analyst</Col>
                                             </Row>
 
                                             <Row>

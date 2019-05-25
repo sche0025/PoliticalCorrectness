@@ -220,11 +220,10 @@ export default class PartyCards extends React.Component {
                                 </Row>
                                 <Row className={'heading2'}>
                                     <Statistic title={<div>Mentions
-                                        <Tooltip title={"The number of tweets which mentioned this politician."}>
+                                        <Tooltip title={"The number of tweets which mentioned this party."}>
                                             <Icon style={{paddingLeft: "3px"}} type="question-circle"/>
                                         </Tooltip>
                                     </div>}
-
                                                value={calculateReplyCount(party)}/>
                                 </Row>
                             </Col>

@@ -90,9 +90,11 @@ module.exports = {
                 var infoADay = {date: dataADay.date, pos: 0, neu: 0, neg: 0}
                 dataADay.data.dailyPolitician.map((aSentiment) => {
 
-                    infoADay.pos = infoADay.pos + aSentiment.Sentiment_Pos
-                    infoADay.neu = infoADay.neu + aSentiment.Sentiment_Neu
-                    infoADay.neg = infoADay.neg + aSentiment.Sentiment_Neg
+                    infoADay.pos = infoADay.pos + aSentiment.Mentioned_Count
+
+                    // infoADay.pos = infoADay.pos + aSentiment.Sentiment_Pos
+                    // infoADay.neu = infoADay.neu + aSentiment.Sentiment_Neu
+                    // infoADay.neg = infoADay.neg + aSentiment.Sentiment_Neg
 
                 })
                 resultList.push(infoADay)
