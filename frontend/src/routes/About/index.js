@@ -9,6 +9,7 @@ import PoliticianFilter from '../../components/Politician/PoliticianFilter'
 import edward from '../../assets/img/edward.jpeg'
 import daniel from '../../assets/img/DanielWu.jpg'
 import banner from '../../assets/img/melbourneunib.png'
+import team from '../../assets/img/team.png'
 
 import {
     Layout, Menu, Breadcrumb, Icon, Row, Col, Carousel
@@ -87,14 +88,26 @@ export default class About extends React.Component {
                                           onClick={this.handleSchoolClick}
                                           src={banner}/>
                                 </div>
-                                {/*<div><h3>2</h3></div>*/}
+                                <div>
+                                    <img alt="example"
+                                         className={'about-img'}
+                                         src={team}/>
+                                </div>
                                 {/*<div><h3>3</h3></div>*/}
 
                             </Carousel>
                         </Row>
                         <Row className={'about-content'}>
                             <div className={'about-font-heading'}>About the Project</div>
-                            <div className={'about-font-body'}>Here's the introduction</div>
+                            <div className={'about-font-body'}>
+                                Our project aims to build a web application to analyze the popularity rating of the candidates of 2019 Australian
+                                election by leveraging the Nectar cloud platform and tweets data. The whole process involves system architecture
+                                design, environment deployment, data harvester, data analysis, and data visualization. We harvested around 5
+                                million data including tweets of 280 election candidates in 143 constituencies, tweets of Twitter users which
+                                mentioned the candidates and tweets which used the popular hashtags of the candidates. The data are cleaned before
+                                saved to MongoDB. Wide range of analysis was performed for different dimensions like date, politician, party,
+                                state, hashtag, and constituency. The analysis results are visualized in our web application.
+                            </div>
                         </Row>
 
                         <Row className={'about-content'}>

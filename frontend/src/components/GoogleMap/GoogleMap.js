@@ -103,14 +103,14 @@ export default class GoogleMap extends React.Component {
                 latLngBounds: AUSTRALIA_BOUNDS,
                 strictBounds: false,
             },
-            mapTypeControl: false,
+            mapTypeControl: true,
             zoom: 4.5,
             draggable: true,
             scrollwheel: true,
             fullscreen: false,
             streetViewControl: false,
             fullscreenControl: false,
-            zoomControl: false,
+            zoomControl: true,
             minZoom: 4.5,
         });
 
@@ -450,12 +450,15 @@ export default class GoogleMap extends React.Component {
             var result = {}
 
             for (let key in regionMap) {
-                // console.log(regionMap[key][0].party)
+                console.log(regionMap[key][0].sc)
+
                 var curParty = regionMap[key][0].party
-                if (!result.hasOwnProperty(curParty)) {
-                    result[curParty] = 1
-                } else {
-                    result[curParty] = result[curParty] + 1
+                if(regionMap[key][0].sc >0){
+                    if (!result.hasOwnProperty(curParty)) {
+                        result[curParty] = 1
+                    } else {
+                        result[curParty] = result[curParty] + 1
+                    }
                 }
             }
 

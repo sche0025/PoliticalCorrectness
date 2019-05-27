@@ -128,7 +128,7 @@ export default class DashboardStackedBarChart extends React.Component {
             exportEnabled: true,
             height: this.props.height,
             title: {
-                text: "Tweet users' sentiment distribution across different parties",
+                text: "Tweeter users' sentiment distribution for different parties",
                 fontFamily: "verdana"
             },
             axisY: {

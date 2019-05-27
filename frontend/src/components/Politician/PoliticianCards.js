@@ -6,10 +6,7 @@ import Row from "antd/es/grid/row";
 import Col from "antd/es/grid/col";
 import PoliticalModal from './PoliticianModal'
 import store from '../../store/index'
-import {Link} from "react-router-dom";
 
-import connect from "react-redux/es/connect/connect";
-import defaultImg from '../../assets/img/defaultImg.png'
 import {getPoliticiansData} from "../../utils/api";
 import {calculateReplyCount, calculateSentimentScore} from "../../utils/utils";
 
@@ -265,13 +262,11 @@ export default class PoliticianCards extends React.Component {
             <div id={'cardList'}>
                 <Spin spinning={this.state.isSpinning}>
                     {this.getCards()}
-
                     <BackTop target={() => document.getElementById('cardList')}/>
                 </Spin>
             </div>
         )
     }
-
 }
 
 // const mapStateToProps = (state) => {

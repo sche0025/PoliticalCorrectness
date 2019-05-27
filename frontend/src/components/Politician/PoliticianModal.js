@@ -46,7 +46,10 @@ export default class PoliticianModal extends React.Component {
         //
         //     })
         // })
+        me.setState({
 
+            visible: true
+        })
         // getPoliticianLinechartPost(getPastDayList(store.getState().date),this.props.politician.ID).then((data) => {
         //     me.setState({
         //         repliesPost: data,
