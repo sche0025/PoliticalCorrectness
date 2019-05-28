@@ -51,9 +51,9 @@ export default class DonutChart extends React.Component {
                 indexLabel: "{name}: {y}",
                 // yValueFormatString: "#,###'%'",
                 dataPoints: [
-                    {name: "Unsatisfied", y: this.props.neg},
-                    {name: "Neutral", y: this.props.neu},
-                    {name: "Satisfied", y: this.props.pos},
+                    {name: "Unsatisfied", y: this.props.neg,color:"#b35752"},
+                    {name: "Neutral", y: this.props.neu,    color: "#5a81b7"},
+                    {name: "Satisfied", y: this.props.pos,  color: "#8da259"},
 
                 ]
             }]

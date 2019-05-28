@@ -76,6 +76,7 @@ export default class DashboardStackedBarChart extends React.Component {
                         name: "Neutral",
                         showInLegend: true,
                         yValueFormatString: "#,###",
+                        color: "#5a81b7",
                         dataPoints: [
                             {label: oriData[0].Party, y: oriData[0].Sentiment_Neu},
                             {label: oriData[1].Party, y: oriData[1].Sentiment_Neu},
@@ -86,23 +87,11 @@ export default class DashboardStackedBarChart extends React.Component {
 
                         ]
                     },
-                    {
-                        type: "stackedColumn",
-                        name: "Positive",
-                        showInLegend: true,
-                        yValueFormatString: "#,###",
-                        dataPoints: [
-                            {label: oriData[0].Party, y: oriData[0].Sentiment_Pos},
-                            {label: oriData[1].Party, y: oriData[1].Sentiment_Pos},
-                            {label: oriData[2].Party, y: oriData[2].Sentiment_Pos},
-                            {label: oriData[3].Party, y: oriData[3].Sentiment_Pos},
-                            {label: oriData[4].Party, y: oriData[4].Sentiment_Pos},
 
-                        ]
-                    },
                     {
                         type: "stackedColumn",
                         name: "Negative",
+                        color:"#b35752",
                         showInLegend: true,
                         yValueFormatString: "#,###",
                         dataPoints: [
@@ -113,7 +102,23 @@ export default class DashboardStackedBarChart extends React.Component {
                             {label: oriData[4].Party, y: oriData[4].Sentiment_Neg},
 
                         ]
-                    }]
+                    },
+                    {
+                        type: "stackedColumn",
+                        name: "Positive",
+                        showInLegend: true,
+                        color:"#8da259",
+                        yValueFormatString: "#,###",
+                        dataPoints: [
+                            {label: oriData[0].Party, y: oriData[0].Sentiment_Pos},
+                            {label: oriData[1].Party, y: oriData[1].Sentiment_Pos},
+                            {label: oriData[2].Party, y: oriData[2].Sentiment_Pos},
+                            {label: oriData[3].Party, y: oriData[3].Sentiment_Pos},
+                            {label: oriData[4].Party, y: oriData[4].Sentiment_Pos},
+
+                        ]
+                    },
+                    ]
             return formatedData
         }
 
@@ -128,7 +133,7 @@ export default class DashboardStackedBarChart extends React.Component {
             exportEnabled: true,
             height: this.props.height,
             title: {
-                text: "Tweeter users' sentiment distribution for different parties",
+                text: "Twitter users' sentiment distribution for different parties",
                 fontFamily: "verdana"
             },
             axisY: {
@@ -150,6 +155,7 @@ export default class DashboardStackedBarChart extends React.Component {
                 cursor: "pointer",
                 itemclick: this.toggleDataSeries
             },
+
             data: this.getData()
 
 
@@ -158,9 +164,7 @@ export default class DashboardStackedBarChart extends React.Component {
             <Fragment>
 
                 <div className={'dashboardStackedBarChart'}>
-                    <CanvasJSChart options={options}
-                                   onRef={ref => this.chart = ref}
-                    />
+                    <CanvasJSChart options={options} onRef={ref => this.chart = ref}/>
                 </div>
             </Fragment>
 

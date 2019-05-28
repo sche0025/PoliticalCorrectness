@@ -79,7 +79,7 @@ export default class DonutChart extends React.Component {
             exportEnabled: true,
             height: this.props.height,
             title: {
-                text: "Tweeter users' sentiment distribution",
+                text: "Twitter users' sentiment distribution",
                 fontSize: 22,
                 fontFamily: "verdana"
             },
@@ -96,9 +96,9 @@ export default class DonutChart extends React.Component {
                 indexLabel: "{name}: {y}",
                 // yValueFormatString: "#,###'%'",
                 dataPoints: [
-                    {name: "Unsatisfied", y: this.state.data.neg},
-                    {name: "Neutral", y: this.state.data.neu},
-                    {name: "Satisfied", y: this.state.data.pos},
+                    {name: "Unsatisfied", y: this.state.data.neg,color:"#b35752"},
+                    {name: "Neutral", y: this.state.data.neu,    color: "#5a81b7"},
+                    {name: "Satisfied", y: this.state.data.pos,color: "#8da259"},
 
                 ]
             }]
@@ -111,9 +111,6 @@ export default class DonutChart extends React.Component {
                 <Spin spinning={this.state.isSpinning}>
                     <CanvasJSChart options={options}/>
                 </Spin>
-                /* onRef={ref => this.chart = ref} */
-                />
-                {/*You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods*/}
             </div>
         );
     }

@@ -7,17 +7,17 @@ import './LineChart.css'
 // var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-export default  class DoubleLineChartLineChart extends React.Component {
+export default class DoubleLineChartLineChart extends React.Component {
 
 
-    getDataPoint = (type)=>{
-        if(this.props.data){
+    getDataPoint = (type) => {
+        if (this.props.data) {
             // console.log(this.props.data)
             var dataPoint = []
-            this.props.data.map((dataADay)=>{
+            this.props.data.map((dataADay) => {
                 dataPoint.push({
-                    label:dataADay.date,
-                    y:dataADay.sc[type]
+                    label: dataADay.date,
+                    y: dataADay.sc[type]
                 })
             })
             // console.log(dataPoint)
@@ -30,15 +30,15 @@ export default  class DoubleLineChartLineChart extends React.Component {
 
     render() {
 
-        console.log("data is",this.props.data)
+        console.log("data is", this.props.data)
 
         const options = {
             animationEnabled: true,
-            height:this.props.height,
-            title:{
+            height: this.props.height,
+            title: {
                 text: this.props.title
             },
-            axisY : {
+            axisY: {
                 title: this.props.yTitle,
                 includeZero: false
             },
@@ -46,29 +46,31 @@ export default  class DoubleLineChartLineChart extends React.Component {
                 shared: true
             },
             data: [
+
                 {
                     type: "spline",
+                    name: "Positive Replies",
+                    showInLegend: true,
+                    color: "#5a81b7",
+                    dataPoints:
+                        this.getDataPoint("pos")
+
+                },   {
+                    type: "spline",
+                    color:"#8da259",
                     name: "Negative Replies",
                     showInLegend: true,
-                    dataPoints:    this.getDataPoint("neg")
-                },
-                {
-                type: "spline",
-                name: "Positive Replies",
-                showInLegend: true,
-                dataPoints:
-                    this.getDataPoint("pos")
+                    dataPoints: this.getDataPoint("neg")
+                }
 
-            }
-
-                ]
+            ]
         }
 
-        return(
-            <Fragment >
+        return (
+            <Fragment>
 
-                <div className={'DoublelineChart'} >
-                    <CanvasJSChart options = {options}
+                <div className={'DoublelineChart'}>
+                    <CanvasJSChart options={options}
 
                         /* onRef={ref => this.chart = ref} */
                     />

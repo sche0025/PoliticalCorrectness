@@ -89,7 +89,7 @@ export default class DashboardLineChart extends React.Component {
             // theme: "light2", // "light1", "dark1", "dark2"
             height:this.props.height,
             title:{
-                text: "Number of politician-related tweets posted from tweet users in past 7 days",
+                text: "Number of politician-related tweets posted from twitter users in past 7 days",
                 fontFamily: "verdana",
                 fontSize: 22,
             },

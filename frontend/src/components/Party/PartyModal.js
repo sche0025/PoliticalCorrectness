@@ -167,10 +167,8 @@ export default class PartyModal extends React.Component {
                                                                value={calculateSentimentScore(this.props.party)}/>
                                                 </Row>
                                             </Col>
-
                                         </div>
                                     </div>
-
 
                                 </Col>
                                 <Col span={18}>

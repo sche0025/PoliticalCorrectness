@@ -102,24 +102,29 @@ export default  class stackedBarChart extends React.Component {
                 {
                     type: "stackedColumn",
                     name: "Neutral",
+                    color: "#5a81b7",
                     showInLegend: true,
                     yValueFormatString: "#,###",
                     dataPoints: this.getData("neu")
                 },
-                {
-                    type: "stackedColumn",
-                    name: "Positive",
-                    showInLegend: true,
-                    yValueFormatString: "#,###",
-                    dataPoints: this.getData("pos")
-                },
+
                 {
                     type: "stackedColumn",
                     name: "Negative",
+                    color:"#b35752",
                     showInLegend: true,
                     yValueFormatString: "#,###",
                     dataPoints: this.getData("neg")
-                }]
+                },
+                {
+                    type: "stackedColumn",
+                    name: "Positive",
+                    color:"#8da259",
+                    showInLegend: true,
+                    yValueFormatString: "#,###",
+                    dataPoints: this.getData("pos")
+                }
+                ]
         }
         return(
             <Fragment >
