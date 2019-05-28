@@ -121,12 +121,6 @@ class Home extends React.Component {
                             </NavLink>
                         </Menu.Item>
 
-                        {/*<Menu.Item key="6">*/}
-                            {/*<NavLink to={'/home/test'}>*/}
-                                {/*<Icon type="file"/>*/}
-                                {/*<span>Chart Test</span>*/}
-                            {/*</NavLink>*/}
-                        {/*</Menu.Item>*/}
                     </Menu>
                 </Sider>
                 <Layout>
