@@ -38,7 +38,7 @@ class Datepicker extends React.Component {
 
     disabledDate=(disabledDate) =>{
         // Can not select days before today and today
-        return disabledDate && (disabledDate < moment(config.dataStartingDate) || disabledDate > moment().subtract(1,"days"));
+        return disabledDate && (disabledDate < moment(config.dataStartingDate) || disabledDate > moment().subtract(2,"days"));
         // moment(config.dataStartingDate).format('MMMM Do YYYY')
     }
 
@@ -52,7 +52,7 @@ class Datepicker extends React.Component {
                 <Tooltip title="Select a date to see historical data" placement="right">
                     <DatePicker
                         allowClear={false}
-                        defaultValue={moment().subtract(1,"days")}
+                        defaultValue={moment().subtract(2,"days")}
                         format={config.dateFormat}
                         disabledDate={this.disabledDate}
                         onChange={this.handleDateChange}
