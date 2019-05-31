@@ -232,7 +232,11 @@ export default class PoliticianCards extends React.Component {
                             </Col>
                             <Col span={12}>
                                 <Row className={'heading'}>
-                                    <Statistic title={ <div className={"statistics-title"}> Likes </div>} value={politician.Likes_Count}/>
+                                    <Statistic
+                                        // title={ <div className={"statistics-title"}> Likes </div>}
+                                        value={politician.Likes_Count}
+                                        title="Likes"
+                                    />
                                 </Row>
                                 <Row className={'heading2'}>
                                     <Statistic title=<div className={"statistics-title"}>Sentiment Score
