@@ -52,11 +52,18 @@ export default class TopicTable extends React.Component {
     }
 
     getData = () => {
-        // console.log(this.state.data)
+        console.log(this.state.data)
         var myData = []
 
         if (this.state.data.p_tag && this.state.data.p_tag) {
-            for (var i = 0; i < this.state.data.p_tag.length - 1; i++) {
+            var limit = 0
+            if(this.state.data.p_tag.length>5){
+                limit =1
+            }else {
+                limit = 0
+            }
+            for (var i = 0; i < this.state.data.p_tag.length - limit; i++) {
+
                 var newCol = {
                     key: i,
                     p_tag: <Tooltip title={
@@ -78,8 +85,11 @@ export default class TopicTable extends React.Component {
                 }
                 myData.push(newCol)
             }
-        }
 
+
+
+        }
+        console.log(myData)
         return myData
     }
 

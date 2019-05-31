@@ -145,7 +145,7 @@ class Home extends React.Component {
                     </Header>
 
                     <Content style={{margin: '0 16px',height:'auto',
-                        width:'95%'
+                        width:'98%'
                     }}>
                         <div style={{margin: '0 16px'
                             ,overflow: "auto",
