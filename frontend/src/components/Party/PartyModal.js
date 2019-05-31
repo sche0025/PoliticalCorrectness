@@ -239,6 +239,7 @@ export default class PartyModal extends React.Component {
                                                 <DoubleLineChart height={450}
                                                                  data={this.state.repliesReceived}
                                                                  yTitle={"Number of netizens"}
+                                                                 type={"replies"}
                                                 />
                                             </div>
 
@@ -250,6 +251,7 @@ export default class PartyModal extends React.Component {
                                                 <DoubleLineChart height={450}
                                                                  yTitle={"Number of tweets"}
                                                                  data={this.state.tweetsPosted}
+                                                                 type={"posts"}
                                                 />
                                             </div>
 

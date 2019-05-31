@@ -214,7 +214,7 @@ export default class PoliticianModal extends React.Component {
                                                 <DoubleLineChart height={450}
                                                                  data={this.state.repliesReceived}
                                                                  yTitle = "Number of netizens"
-
+                                                                 type={"replies"}
                                                                  // title={"How did internet users think of him/her in the past 7 days?"}
                                                 />
                                             </div>
@@ -228,6 +228,7 @@ export default class PoliticianModal extends React.Component {
                                                                  // title={"What are the sentiment scores of his posts in the past 7 days?"}
                                                                  yTitle={"Number of Tweets"}
                                                                  data={this.state.tweetsPosted}
+                                                                 type={"posts"}
                                                 />
                                             </div>
 

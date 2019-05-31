@@ -49,7 +49,7 @@ export default class DoubleLineChartLineChart extends React.Component {
 
                 {
                     type: "spline",
-                    name: "Positive Replies",
+                    name: "Positive "+this.props.type,
                     showInLegend: true,
                     color: "#5a81b7",
                     dataPoints:
@@ -58,7 +58,7 @@ export default class DoubleLineChartLineChart extends React.Component {
                 },   {
                     type: "spline",
                     color:"#8da259",
-                    name: "Negative Replies",
+                    name: "Negative "+this.props.type,
                     showInLegend: true,
                     dataPoints: this.getDataPoint("neg")
                 }
