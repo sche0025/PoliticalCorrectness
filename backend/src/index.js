@@ -19,10 +19,26 @@ app.use(function(req, res, next) {
     next();
 });
 
-// app.use((req,res,next) =>{
-//     console.log('received')
-//     next()
+
+
+// const http = require("http");
+//
+//
+// const server = http.createServer((req,res)=>{
+//
+//     if(req.url ==='/api/tweets/find'){
+//
+//
+//
+//     }
+//     if(req.url ==='/api/politicians/find'){
+//
+//     }
+//
 // })
+//
+// server.listen()
+
 
 // app.use(bodyparser.json);
 app.use(bodyparser.json())

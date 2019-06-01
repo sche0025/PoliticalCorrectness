@@ -174,7 +174,7 @@ export default class PartyModal extends React.Component {
                                 <Col span={18}>
                                     <div className={'details'}>
                                         <Row>
-                                            <div className={'details-heading'}>Who are the most popular leaders in this
+                                            <div className={'details-heading'}>Who are the most popular politicians in this
                                                 party?
                                                 <div className={'party-leaders'}>
                                                     {this.getTopLeaders()}
@@ -245,7 +245,7 @@ export default class PartyModal extends React.Component {
 
                                             <div className={'details-heading'}>
 
-                                                What were the sentiment scores of this party members' posts in the past 7 days?
+                                                What were the sentiment of this party members' posts in the past 7 days?
                                             </div>
                                             <div className={'word-cloud'}>
                                                 <DoubleLineChart height={450}

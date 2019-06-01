@@ -4,20 +4,33 @@ let router = express.Router()
 let test = require('../../../public/assets/jsonformatter')
 let parser = require('../../utils/dataParser')
 
-// GET
-router.get('/tweets/find', (req, res) => {
-
-    // console.log('wow')
-    TweetsModel.find(
-        {}
-    )
-        .then((data) => {
-            res.send(data)
-        })
-        .catch((err) => {
-            console.log(err);
-        })
-})
+// // find all tweets
+// router.get('/tweets/find', (req, res) => {
+//
+//     TweetsModel.find(
+//         {}
+//     )
+//         .then((data) => {
+//             res.send(data)
+//         })
+//         .catch((err) => {
+//             console.log(err);
+//         })
+// })
+//
+// // find all politicians
+// router.get('/politicians/find', (req, res) => {
+//
+//     TweetsModel.find(
+//         {}
+//     )
+//         .then((data) => {
+//             res.send(data)
+//         })
+//         .catch((err) => {
+//             console.log(err);
+//         })
+// })
 
 router.get('/tweets/test1/:date', (req, res) => {
     console.log(req.params.date)
@@ -249,38 +262,42 @@ router.get('/getleaderboardbarchartdata/:date', (req, res) => {
 //get data for politicians
 router.post('/getpartytopleaders/', (req, res) => {
 
-    var searchDate =  req.body.date
-    var partyName =  req.body.party
-    console.log(searchDate,partyName)
+    var searchDate = req.body.date
+    var partyName = req.body.party
+    console.log(searchDate, partyName)
     // {date: searchDate,"data.sumPolitician.Party":"Australian Greens"},
     // {"data.sumPolitician.$":1}
     TweetsModel.aggregate(
         [
-            { "$match": { "data.sumPolitician.Party": partyName,"date":{$in:[searchDate] }} },
-            { "$unwind": "$data" },
-            { "$unwind": "$date" },
-            { "$unwind": "$data.sumPolitician" },
-            { "$match": { "data.sumPolitician.Party": partyName }},
-            { "$group": {
+            {"$match": {"data.sumPolitician.Party": partyName, "date": {$in: [searchDate]}}},
+            {"$unwind": "$data"},
+            {"$unwind": "$date"},
+            {"$unwind": "$data.sumPolitician"},
+            {"$match": {"data.sumPolitician.Party": partyName}},
+            {
+                "$group": {
                     "_id": {
                         "_id": "$_id",
                         "storeId": "$data._id",
-                        "date":"$date"
+                        "date": "$date"
                     },
 
-                    "sumPolitician": { "$push": "$data.sumPolitician" }
-                }},
-            { "$group": {
+                    "sumPolitician": {"$push": "$data.sumPolitician"}
+                }
+            },
+            {
+                "$group": {
                     "_id": "$_id._id",
 
                     "data": {
                         "$push": {
-                            "date":"$_id.date",
+                            "date": "$_id.date",
                             "_id": "$_id.storeId",
                             "sumPolitician": "$sumPolitician"
                         }
                     }
-                }}
+                }
+            }
         ]
     )
         .then((data) => {

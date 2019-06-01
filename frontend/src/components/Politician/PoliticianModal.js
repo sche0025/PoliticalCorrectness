@@ -221,7 +221,7 @@ export default class PoliticianModal extends React.Component {
 
                                             <div className={'details-heading'}>
 
-                                                What were the sentiment scores of his posts in the past 7 days?
+                                                What were the sentiment of his posts in the past 7 days?
                                             </div>
                                             <div className={'word-cloud'}>
                                                 <DoubleLineChart height={450}
