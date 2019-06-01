@@ -20,12 +20,14 @@
 }
 
 .heading {
-   padding: 5px;
+    padding-top: 0px;
+    padding-left: 0px;
+
 }
 
 .heading2 {
     padding-top: 50px;
-    padding-left: 5px;
+    padding-left: 0px;
 
 }
 
@@ -60,6 +62,6 @@
 }
 
 .statistics-title{
-    padding: 2px;
+    padding: 0px;
     font-size: 12pt;
 }

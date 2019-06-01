@@ -284,6 +284,8 @@ export default class GoogleMap extends React.Component {
         map.data.setStyle(function (feature) {
             return ({
                 strokeWeight: 1,
+                // fillColor: "white",
+               fillOpacity:0.2
             });
         });
 
