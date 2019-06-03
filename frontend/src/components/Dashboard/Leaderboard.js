@@ -114,7 +114,7 @@ export default class Leaderboard extends React.PureComponent {
         },
         {
             title: <div>Mentions
-                <Tooltip title={"The number of tweets which mentioned this politician."}>
+                <Tooltip title={"The number of netizens who mentioned this politician."}>
                     <Icon style={{paddingLeft:"3px"}} type="question-circle"/>
                 </Tooltip>
             </div>,

@@ -223,7 +223,7 @@ export default class PoliticianCards extends React.Component {
                                 </Row>
                                 <Row className={'heading2'}>
                                     <Statistic title={<div className={"statistics-title"} >Mentions
-                                        <Tooltip title={"The number of tweets which mentioned this politician."}>
+                                        <Tooltip title={"The number of netizens who mentioned this politician."}>
                                             <Icon style={{paddingLeft:"3px"}} type="question-circle"/>
                                         </Tooltip>
                                     </div>}
