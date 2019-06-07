@@ -15,7 +15,7 @@ const defaultState = {
        constituency:''
     },
     //default date: yesterday
-    date:(moment().subtract(1, "days")).format(config.dateFormat),
+    date:moment(config.dataEndingDate).format(config.dateFormat),
     count:0,
     politiciansDate:[]
 }
