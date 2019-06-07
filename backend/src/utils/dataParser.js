@@ -1,10 +1,8 @@
 module.exports = {
     getLeaderboardData: (data) => {
         if (data) {
-            // console.log(data[0])
-            // var politicians = data[0]
+
             let politicians = data
-            // console.log(politicians)
             politicians.sort(function (a, b) {
                 return (
                     (
@@ -48,22 +46,11 @@ module.exports = {
             return []
         }
     },
-    getPoliticiansData: (data) => {
-        let politicians;
-        if (data) {
-            // console.log(data[0])
-            // var politicians = data[0]
-            politicians = JSON.parse(JSON.stringify(data)).data
-
-            return politicians
-        }
-    },
 
     getDonutData: (data) => {
 
         if (data) {
-            // console.log(data[0])
-            // var politicians = data[0]
+
             var pos = 0;
             var neu = 0;
             var neg = 0;
@@ -99,39 +86,18 @@ module.exports = {
                 })
                 resultList.push(infoADay)
             })
-            console.log("7days,", resultList)
+
             return resultList
         } else {
             return []
         }
     },
-    // getPoliticianDailyPost: (data, dateList) => {
-    //     var result = []
-    //     dateList.map((date) => {
-    //         // result[date] = {pos:0,neu:0,neg:0}
-    //         result.push({
-    //             date: date,
-    //             sc: {pos: 0, neu: 0, neg: 0}
-    //         })
-    //     })
-    //     // console.log(result)
-    //     data.map((InfoADay) => {
-    //         result.find(x => x.date === InfoADay.data[0].date).sc = {
-    //             pos: InfoADay.data[0].dailyPolitician[0].Sentiment_Pos,
-    //             neu: InfoADay.data[0].dailyPolitician[0].Sentiment_Neu,
-    //             neg: InfoADay.data[0].dailyPolitician[0].Sentiment_Neg,
-    //
-    //         }
-    //     })
-    //
-    //     return result.reverse()
-    // },
 
     getPoliticianDaily: (data, dateList) => {
         var dailyData = {}
         dailyData.post =  getDailyRestultForPolititian(data,dateList, "post")
         dailyData.receive =  getDailyRestultForPolititian(data,dateList, "receive")
-        console.log(dailyData)
+
         return dailyData
 
     },
@@ -140,7 +106,7 @@ module.exports = {
         var dailyData = {}
         dailyData.post =  getDailyRestultForParty(data,dateList, "post")
         dailyData.receive =  getDailyRestultForParty(data,dateList, "receive")
-        console.log(dailyData)
+
         return dailyData
 
     },
@@ -230,7 +196,7 @@ var getDailyRestultForParty = (data, dateList,type)=>{
             }
         })
     }
-    console.log(result)
+
     return result.reverse()
 }
 

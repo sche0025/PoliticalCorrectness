@@ -464,10 +464,11 @@ export default class GoogleMap extends React.Component {
                 }
             }
 
-
             var sortedResult = [];
             for (var party in result) {
+
                 sortedResult.push([party, result[party]]);
+
             }
 
             sortedResult.sort(function (a, b) {
