@@ -1,13 +1,11 @@
 import CanvasJSReact from '../../assets/charts/canvasjs.react'
-import $ from 'jquery'
-import React, {Fragment} from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
 import {getDonutData} from "../../utils/api";
 import store from '../../store/index'
 import {Spin} from "antd";
 
 
-// var CanvasJS = CanvasJSReact.CanvasJS;
+
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 export default class DonutChart extends React.Component {
@@ -19,12 +17,10 @@ export default class DonutChart extends React.Component {
             data: [],
             date: store.getState().date
         }
-
         store.subscribe(this.handleStoreChange);
     }
 
     handleStoreChange = () => {
-
         if (this.state.date != store.getState().date) {
             this.setState({
                     date: store.getState().date,
@@ -49,8 +45,7 @@ export default class DonutChart extends React.Component {
         if (pos + neg + neu == 0) {
             return "No Reply"
         }
-        console.log(pos / (pos + neg + neu))
-        console.log(largest, pos, neu, neu)
+
         if (largest == pos) {
             return parseInt(100 * pos / (pos + neg + neu), 10) + "% Positive"
         } else if (largest == neu) {
@@ -69,7 +64,7 @@ export default class DonutChart extends React.Component {
                 isSpinning: false
             })
         })
-        console.log("donut data loaded")
+
     }
 
 
@@ -94,17 +89,15 @@ export default class DonutChart extends React.Component {
                 indexLabelPlacement: "inside",
                 showInLegend: false,
                 indexLabel: "{name}: {y}",
-                // yValueFormatString: "#,###'%'",
+
                 dataPoints: [
-                    {name: "Unsatisfied", y: this.state.data.neg,color:"#b35752"},
-                    {name: "Neutral", y: this.state.data.neu,    color: "#5a81b7"},
-                    {name: "Satisfied", y: this.state.data.pos,color: "#8da259"},
+                    {name: "Unsatisfied", y: this.state.data.neg, color: "#b35752"},
+                    {name: "Neutral", y: this.state.data.neu, color: "#5a81b7"},
+                    {name: "Satisfied", y: this.state.data.pos, color: "#8da259"},
 
                 ]
             }]
         }
-
-        console.log('dashboard donut loaded',this.state.data)
 
         return (
             <div className={'donutChart'}>

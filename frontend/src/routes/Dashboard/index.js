@@ -23,9 +23,6 @@ export default class Dashboard extends React.Component {
         store.subscribe(this.handleStoreChange);
     }
 
-    componentDidMount() {
-        console.log("dashboard rendered")
-    }
 
     //handle date change
     handleStoreChange = () => {

@@ -1,10 +1,7 @@
 import React, {Fragment} from 'react';
-import ReactDOM from 'react-dom';
-import Map from "../../routes/Map";
 import './GoogleMap.css'
-import {Popover, notification} from 'antd'
+import {notification} from 'antd'
 import store from '../../store/index'
-// import geoJsonList from '../../index'
 import ReactDOMServer from 'react-dom/server';
 import wa from '../../assets/GeoJson/WA'
 import nsw from '../../assets/GeoJson/NSW'
@@ -14,8 +11,6 @@ import act from '../../assets/GeoJson/ACT'
 import vic from '../../assets/GeoJson/VIC'
 import sa from '../../assets/GeoJson/SA'
 import na from '../../assets/GeoJson/NA'
-
-import {getLeaderboardData} from "../../utils/api";
 import {calculateSentimentScore} from "../../utils/utils";
 
 
@@ -43,51 +38,20 @@ export default class GoogleMap extends React.Component {
 
     componentDidMount() {
 
-        console.log(window.google);
-
         this.renderMap()
 
     }
 
     renderMap = () => {
         var googleMap = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBEGnKK5sbPBXi2tL4o7LFahhEniTaLQTY&libraries=visualization&callback=initMap'
-        // loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyBEGnKK5sbPBXi2tL4o7LFahhEniTaLQTY&callback=initMap")
         loadScript(googleMap)
         window.initMap = this.initMap
     }
 
-    codeAddress = () => {
-        var geocoder = new window.google.maps.Geocoder;
-        var obj = this
-        // console.log(this.state.map)
-        geocoder.geocode({
-            componentRestrictions: {
-                country: 'AU',
-                postalCode: '2000'
-            }
-        }, function (results, status) {
-            if (status == 'OK') {
-                console.log(results[0].geometry.location.lat, results[0].geometry.location.lng)
-                var marker = new window.google.maps.Marker({
-                    map: obj.state.map,
-                    position: results[0].geometry.location
-                });
-            } else {
-                window.alert('Geocode was not successful for the following reason: ' + status);
-            }
-        });
-    }
-
-    showHeatPoints = () => {
-
-    }
 
     initMap = () => {
 
-        let obj = this
-        // console.log('what?',this)
 
-        var map;
         var AUSTRALIA_BOUNDS = {
             north: -11,
             south: -44.5,
@@ -95,6 +59,7 @@ export default class GoogleMap extends React.Component {
             east: 154,
         };
 
+        // set the default parameter of the google map
         var AUSTRALIA = {lat: -28.734968, lng: 133.489563};
         var map = new window.google.maps.Map(document.getElementById('map'), {
             center: AUSTRALIA,
@@ -115,37 +80,11 @@ export default class GoogleMap extends React.Component {
         });
 
 
-        // map.data.addGeoJson(geoJsonList.wa);
-        // map.data.addGeoJson(geoJsonList.nsw);
-        // map.data.addGeoJson(geoJsonList.ta);
-        // map.data.addGeoJson(geoJsonList.qld);
-        // map.data.addGeoJson(geoJsonList.act);
-        // map.data.addGeoJson(geoJsonList.vic);
-        // map.data.addGeoJson(geoJsonList.sa);
-        // map.data.addGeoJson(geoJsonList.na);
-
         this.loadGeojson(map)
 
-        // var features = map.data.addGeoJson(ta);
-        // console.log(features)
-        //
-
         var centerControlDiv = document.createElement('div');
-        var centerControl = this.CenterControl(centerControlDiv, map);
 
         centerControlDiv.index = 1;
-        // var marker = new window.google.maps.Marker({
-        //     position: window.google.maps.ControlPosition.BOTTOM_LEFT,
-        //     map: map,
-        //     title: 'Uluru (Ayers Rock)'
-        // });
-        //
-        // var infowindow = new window.google.maps.InfoWindow({
-        //     content: "test"
-        // });
-        // marker.addListener('click', function() {
-        //     infowindow.open(map, marker);
-        // });
 
         map.controls[window.google.maps.ControlPosition.LEFT_BOTTOM].push(centerControlDiv);
 
@@ -155,6 +94,7 @@ export default class GoogleMap extends React.Component {
     }
 
 
+    //show statistics
     CenterControl = (controlDiv, map) => {
         var me = this
         // Set CSS for the control border.
@@ -194,20 +134,14 @@ export default class GoogleMap extends React.Component {
             }
         )
 
-        // marker.addListener('mouseover', (function () {
-        //     infoWindow.open(obj.state.map, marker)
-        // }))
-        //
-        // marker.addListener('mouseout', (function () {
-        //     infoWindow.close()
-        // }))
-        // Setup the click event listeners: simply set the map to Chicago.
+
         controlUI.addEventListener('click', function () {
             me.openNotification()
         });
 
     }
 
+    //open statistics
     openNotification = () => {
         notification.open({
             message: <span className={"statistics"}>Potential number of winners of each party(by constituency) till {store.getState().date}</span>,
@@ -217,7 +151,6 @@ export default class GoogleMap extends React.Component {
     };
 
     getStatistics = () => {
-
         var winnerParties = this.getWinners()
 
         var i =0;
@@ -249,16 +182,14 @@ export default class GoogleMap extends React.Component {
 
         var html = <div>
             WOW
-
         </div>
 
         var stringHTML = ReactDOMServer.renderToString(html)
 
-        // console.log(stringHTML)
         return stringHTML
     }
 
-
+    // constituency click event
     polygonLicked = (event) => {
         var action = {
             value: event.feature.getProperty("Sortname"),
@@ -310,109 +241,22 @@ export default class GoogleMap extends React.Component {
 
     }
 
-    // addMarkers = () => {
-    //     let obj = this
-    //
-    //     this.addAMarker(-19.64, 133.48, 'Northern Territory')
-    //     this.addAMarker(-26.16, 121.66, 'Western Australia')
-    //     this.addAMarker(-23.12, 143.89, 'Queensland')
-    //     this.addAMarker(-29.80, 134.71, 'South Australia')
-    //     this.addAMarker(-32.50, 146.29, 'New South Wales')
-    //     this.addAMarker(-19.64, 133.48, 'Northern Territory')
-    //     this.addAMarker(-42.14, 146.54, 'Tasmania')
-    //     this.addAMarker(-35, 149.54, 'Canberra')
-    // }
 
-
-    getImg = (img) => {
-
-        var html = <div>
-
-            <img alt="example" src={img} className="smallImg"/>
-            <img alt="example" src={img} className="smallImg"/>
-        </div>
-
-        var stringHTML = ReactDOMServer.renderToString(html)
-
-        // console.log(stringHTML)
-        return stringHTML
-    }
-
-    // addAMarker = (lat, lng, text) => {
-    //
-    //     let obj = this
-    //     // console.log(this.getImg())
-    //     var infoWindow = new window.google.maps.InfoWindow(
-    //         {
-    //             content: this.getImg('https://pbs.twimg.com/profile_images/1116081523394891776/AYnEcQnG_400x400.png'),
-    //             disableAutoPan: true
-    //         }
-    //     )
-    //
-    //     var marker = new window.google.maps.Marker({
-    //         position: {lat: lat, lng: lng},
-    //         map: this.state.map,
-    //     });
-    //
-    //     marker.addListener('mouseover', (function () {
-    //         infoWindow.open(obj.state.map, marker)
-    //     }))
-    //
-    //     marker.addListener('mouseout', (function () {
-    //         infoWindow.close()
-    //     }))
-    //
-    //     marker.addListener('click', (function () {
-    //         // obj.codeAddress()
-    //         obj.handleMarkerClicked()
-    //         // obj.showHeatPoints()
-    //     }))
-    // }
-
-    generateRandomData = () => {
-        var datalist = []
-        for (var i = 0; i < 200; i++) {
-            var lat = ((Math.floor(Math.random() * 1000) + 1) * 1 + 2000) / -100
-            var lng = ((Math.floor(Math.random() * 35) + 1) + 115)
-            var newCor = new window.google.maps.LatLng(lat, lng)
-            // console.log(lat,lng)
-            datalist.push(newCor)
-        }
-        // console.log(datalist[0].lat,datalist[0].lng)
-        return datalist
-
-        // var a = new window.google.maps.LatLng(-37.8, 144.989563)
-        // return  a
-    }
-
-    handleMarkerClicked = () => {
-        console.log(this.state.heatmap)
-        this.state.heatmap.set('data', (this.generateRandomData()))
-        // var newHeatMap = this.state.heatmap
-        // newHeatMap.set('data',this.generateRandomData())
-        // this.setState({
-        //     data:this.generateRandomData()
-        // })
-        // heatmap.set('radius', heatmap.get('radius') ? null : 20);
-    }
-
+    //unload google map api
     componentWillUnmount() {
         var me = this
         var elem = document.querySelector('#my-google-script');
         elem.parentNode.removeChild(elem);
-        // var elem1 = document.querySelector('#map');
-        // elem1.parentNode.removeChild(elem1);
-        //clear memory
+
         this.state.map.data.forEach(function (feature) {
 
-            // console.log(feature);
             me.state.map.data.remove(feature);
 
         });
-        //
-        // window.google = null
+
     }
 
+    //algorithm to predict winning seats
     getWinners = () => {
         var politicians = this.state.politiciansData
         var regions = new Set()
@@ -452,7 +296,6 @@ export default class GoogleMap extends React.Component {
             var result = {}
 
             for (let key in regionMap) {
-                console.log(regionMap[key][0].sc)
 
                 var curParty = regionMap[key][0].party
                 if(regionMap[key][0].sc >0){
@@ -475,13 +318,12 @@ export default class GoogleMap extends React.Component {
                 return b[1] - a[1];
             });
             return sortedResult
-            // console.log("regions:", result)
+
         }
 
     }
 
     render() {
-        // console.log("map loaded", this.state.politiciansData)
 
         return (
             <Fragment>

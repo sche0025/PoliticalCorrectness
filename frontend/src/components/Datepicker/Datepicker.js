@@ -22,7 +22,6 @@ class Datepicker extends React.Component {
 
     handleDateChange = (value)=>{
 
-        // this.props.changeDate(moment(value).format(config.dateFormat))
         this.setState({
             date:moment(value).format(config.dateFormat)
         },()=>{
@@ -31,24 +30,13 @@ class Datepicker extends React.Component {
         })
     }
 
-    handleDateSubmit = ()=>{
-        this.props.changeDate(this.state.date)
-    }
-
-
     disabledDate=(disabledDate) =>{
-        // Can not select days before today and today
         return disabledDate && (disabledDate < moment(config.dataStartingDate) || disabledDate > moment(config.dataEndingDate));
-        // moment(config.dataStartingDate).format('MMMM Do YYYY')
     }
 
     render() {
-
-        // console.log()
-        // console.log(store.getState());
         return (
             <div className={'datepicker'}>
-
                 <Tooltip title="Select a date to see historical data" placement="right">
                     <DatePicker
                         allowClear={false}
@@ -59,9 +47,6 @@ class Datepicker extends React.Component {
                         showToday={false}
                     />
                 </Tooltip>
-                {/*<Tooltip title="Select a date to see historical data" placement="right">*/}
-                    {/*<Button type={'primary'} onClick={this.handleDateSubmit}><Icon type={"search"}/></Button>*/}
-                {/*</Tooltip>*/}
 
             </div>
         );

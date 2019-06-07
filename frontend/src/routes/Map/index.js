@@ -53,7 +53,6 @@ export default class Map extends React.Component {
         return (
 
             <Fragment>
-
                 <Breadcrumb style={{margin: '16px 0'}}>
                     <Breadcrumb.Item>Home</Breadcrumb.Item>
                     <Breadcrumb.Item>Map</Breadcrumb.Item>

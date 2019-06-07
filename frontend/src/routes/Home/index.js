@@ -28,7 +28,6 @@ class Home extends React.Component {
     }
 
 
-
     //side bar collapse
     onCollapse = (collapsed) => {
         this.setState({collapsed});
@@ -52,7 +51,7 @@ class Home extends React.Component {
 
     //Get the date of update
     getLastUpdateTime = () => {
-        var today = moment().subtract(1,"days").format(config.dateFormat);
+        var today = moment(config.dataEndingDate).format(config.dateFormat);
         return 'Last updated on ' + today
     }
 

@@ -3,7 +3,7 @@ import axios from 'axios';
 export function getLeaderboardData(date) {
     return axios.get(`/api/getleaderboarddata/`+date)
         .then(response => {
-            console.log('getleaderboarddata', response.data);
+
             return response.data;
         })
         .catch(error => {
@@ -15,7 +15,6 @@ export function getPoliticiansData(date) {
 
     return axios.get(`/api/getpoliticiansdata/`+date)
         .then(response => {
-            console.log('getpoliticiansdata', response.data);
             return response.data;
         })
         .catch(error => {
@@ -27,7 +26,6 @@ export function getPartyData(date) {
 
     return axios.get(`/api/getpartydata/`+date)
         .then(response => {
-            // console.log('getPartyData', response.data);
             return response.data;
         })
         .catch(error => {
@@ -39,7 +37,6 @@ export function getTopicTableData(date) {
 
     return axios.get(`/api/toptags/`+date)
         .then(response => {
-            console.log('getpoliticiansdata', response.data);
             return response.data;
         })
         .catch(error => {
@@ -51,7 +48,7 @@ export function getDonutData(date) {
 
     return axios.get(`/api/dashboardDonut/`+date)
         .then(response => {
-            console.log('getDonutData', response.data);
+
             return response.data;
         })
         .catch(error => {
@@ -63,7 +60,7 @@ export function getDashboardBarChartData(date) {
 
     return axios.get(`/api/getleaderboardbarchartdata/`+date)
         .then(response => {
-            console.log('getDashboardBarChartData', response.data);
+
             return response.data;
         })
         .catch(error => {
@@ -81,7 +78,7 @@ export function getDashboardLineChartData(dateList) {
         config:{headers:{'Content-Type':'application/json'}}
     }).then((response) => {
         return response.data
-        console.log('getDashboardLineChartData', response.data);
+
     }).catch((error) => {
         console.log('error', error.message)
     });
@@ -101,7 +98,7 @@ export function getPoliticianLinechartsInfo(dateList,politicianID) {
         config:{headers:{'Content-Type':'application/json'}}
     }).then((response) => {
         return response.data
-        console.log('getpoliticianlinechartreceive', response.data);
+
     }).catch((error) => {
         console.log('error', error.message)
     });

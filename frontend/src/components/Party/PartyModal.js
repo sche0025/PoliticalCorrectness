@@ -49,7 +49,7 @@ export default class PartyModal extends React.Component {
         })
 
         getPartyLinechartsInfo(getPastDayList(store.getState().date),this.props.party.Party).then((data) => {
-            console.log(data)
+
             me.setState({
                 repliesReceived: data.receive,
                 tweetsPosted: data.post,
@@ -65,9 +65,7 @@ export default class PartyModal extends React.Component {
         })
     }
 
-    handleChange = (value) => {
-        console.log(`selected ${value}`);
-    }
+
     getTopLeaders = ()=>{
 
 
@@ -119,12 +117,6 @@ export default class PartyModal extends React.Component {
             spiral: 'archimedean',
             transitionDuration: 1000,
         }
-
-        const data = []
-
-
-
-        console.log(this.state.topLeaders)
 
         return (
             <Fragment>
@@ -221,17 +213,7 @@ export default class PartyModal extends React.Component {
                                                 />
                                             </div>
 
-                                            {/*<div className={'details-heading'}>Do people tweet about these things that*/}
-                                            {/*politicians*/}
-                                            {/*tweet too?*/}
-                                            {/*</div>*/}
-                                            {/*<div className={'word-cloud'}>*/}
-                                            {/*<WordCloud*/}
-                                            {/*data={data}*/}
-                                            {/*fontSizeMapper={fontSizeMapper}*/}
-                                            {/*height={350}*/}
-                                            {/*/>*/}
-                                            {/*</div>*/}
+
 
                                             <div className={'details-heading'}>How did people think of the party in the past 7 days?
                                             </div>

@@ -1,10 +1,8 @@
 import CanvasJSReact from '../../assets/charts/canvasjs.react'
-import $ from 'jquery'
+
 import React, {Fragment} from 'react';
-import ReactDOM from 'react-dom';
 import './PieChart.css'
 
-// var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 export default class PieChart extends React.Component {

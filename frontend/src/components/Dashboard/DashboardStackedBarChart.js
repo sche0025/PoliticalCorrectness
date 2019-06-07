@@ -1,12 +1,9 @@
 import CanvasJSReact from '../../assets/charts/canvasjs.react'
-import $ from 'jquery'
 import React, {Fragment} from 'react';
-import ReactDOM from 'react-dom';
 import './StackedBarChart.css'
 import store from "../../store";
 import {getDashboardBarChartData} from "../../utils/api";
 
-// var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 export default class DashboardStackedBarChart extends React.Component {
@@ -51,7 +48,7 @@ export default class DashboardStackedBarChart extends React.Component {
                 isSpinning: false
             })
         })
-        console.log("dashboard-stack-chart data loaded")
+
     }
 
     toggleDataSeries(e) {
@@ -65,8 +62,7 @@ export default class DashboardStackedBarChart extends React.Component {
 
     getData = () => {
         const oriData = this.state.data
-        // console.log(JSON.parse(JSON.stringify(oriData)) !=[])
-        // console.log(oriData )
+
         var formatedData = []
         if (oriData && oriData.length !== 0) {
             formatedData =

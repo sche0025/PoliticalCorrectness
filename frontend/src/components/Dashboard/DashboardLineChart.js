@@ -1,15 +1,9 @@
 import CanvasJSReact from '../../assets/charts/canvasjs.react'
-import $ from 'jquery'
 import React, {Fragment} from 'react';
-import ReactDOM from 'react-dom';
 import {getDashboardLineChartData} from "../../utils/api";
 import store from '../../store/index'
-import {Spin} from "antd";
 import {getPastDayList} from "../../utils/utils";
-import moment from "moment";
 
-
-// var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 export default class DashboardLineChart extends React.Component {
@@ -54,7 +48,7 @@ export default class DashboardLineChart extends React.Component {
                 isSpinning: false
             })
         })
-        console.log("dashboard-line-chart data loaded")
+
     }
 
     getData=()=>{
@@ -79,7 +73,6 @@ export default class DashboardLineChart extends React.Component {
 
 
     render() {
-        console.log("dashboard-line-chart",this.state.data)
 
         const options = {
             animationEnabled: true,

@@ -6,8 +6,6 @@ import Row from "antd/es/grid/row";
 import Col from "antd/es/grid/col";
 import PartyModal from './PartyModal'
 import store from '../../store/index'
-
-import {Link} from "react-router-dom";
 import {getPartyData} from "../../utils/api";
 import defaultImg from "../../assets/img/defaultImg.png";
 import {calculateReplyCount, calculateSentimentScore, getPartyFlag} from "../../utils/utils";
@@ -29,13 +27,8 @@ export default class PartyCards extends React.Component {
         store.subscribe(this.handleStoreChange);
     }
 
-    handleStoreChange = () => {
-        //
-        // console.log(this.state.input == store.getState().partysFilter.input )
-        // console.log(  this.state.party == store.getState().partysFilter.party )
-        // console.log(    this.state.order == store.getState().partysFilter.order)
-        // console.log(    this.state.order , store.getState().partysFilter.order)
 
+    handleStoreChange = () => {
         if (store.getState().date != this.state.date) {
             this.setState({
                 date: store.getState().date,
@@ -50,12 +43,12 @@ export default class PartyCards extends React.Component {
                         order: store.getState().partyFilter.order
                     })
                 })
-                console.log("parties data loaded")
+
 
 
             })
         }
-        console.log("I should be later")
+
 
         this.setState({})
 
@@ -63,7 +56,7 @@ export default class PartyCards extends React.Component {
     };
 
     componentDidMount() {
-        console.log(this.state.date)
+
         var me = this
         getPartyData(this.state.date).then((data) => {
             me.setState({
@@ -71,18 +64,18 @@ export default class PartyCards extends React.Component {
                 isSpinning: false
             })
         })
-        console.log("parties data loaded")
+
     }
 
-
+    //get modal
     getTitleLink = (party) => {
         return <PartyModal
             party={party}
         />
     }
 
+    // sorting algorithm
     customisedSort = (result, order) => {
-
         switch (order) {
             case "popularity":
                 result.sort(function (a, b) {
@@ -146,6 +139,7 @@ export default class PartyCards extends React.Component {
         }
     }
 
+    //search bar
     filterData = () => {
         if (this.state.data) {
             var originData = this.state.data
@@ -165,20 +159,19 @@ export default class PartyCards extends React.Component {
 
     }
 
+    //get all cards
     getCards = () => {
         if (this.state.isSpinning) {
             return []
         }
-        // var testList = [1, 2, 3, 4, 5]
-        // console.log(this.state.data)
+
         if (this.state.data == [] || !this.state.data) {
             return []
         }
-        // console.log(this.state.data.length)
+
 
 
         var filteredData = this.filterData()
-        // var filteredData =  this.state.data
 
         return filteredData.map((party, key) => (
 
@@ -194,20 +187,13 @@ export default class PartyCards extends React.Component {
                     <Col span={6}>
                         <img src={getPartyFlag(party.Party)}
                              alt={defaultImg}
-                            // onerror={defaultImg}
+
                              className={'card-img'}
                         />
                     </Col>
                     <Col span={18}>
                         <Col span={12}>
-                            {/*<Row className={'heading'}>*/}
-                            {/*<Col span={8} className={'heading-text'}> Tweeter</Col>*/}
-                            {/*<Col span={16} className={'party-text'}> {party.Name}</Col>*/}
-                            {/*</Row>*/}
-                            {/*<Row className={'heading'}>*/}
-                            {/*<Col span={8} className={'heading-text'}> For</Col>*/}
-                            {/*<Col span={16} className={'party-text'}> {party.State}</Col>*/}
-                            {/*</Row>*/}
+
                             <Row className={'heading'}>
                                 <Col span={8} className={'heading-text'}> Party</Col>
                                 <Col span={16} className={'party-text'}> {party.Party}</Col>
@@ -247,13 +233,11 @@ export default class PartyCards extends React.Component {
                 </Row>
             </Card>
         ))
-
     }
 
 
     render() {
 
-        console.log(this.state.data)
         return (
             <div id={'cardList'}>
                 <Spin spinning={this.state.isSpinning}>

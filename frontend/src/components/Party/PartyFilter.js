@@ -23,25 +23,21 @@ export default class PartyFilter extends React.Component {
 
     }
 
-
+    // filter change
     handleInputChange = (e) => {
         this.setState({
             input: e.target.value
         })
     }
 
+    // filter change
     handleOrderChange = (e) => {
         this.setState({
             order: e
         })
-
-        // const action = {
-        //     type: "UPDATE_POLITICIAN_ORDER",
-        //     value: e
-        // };
-        // store.dispatch(action)
     }
 
+    // reset filter
     handleResetClick = () => {
         this.setState({
             input: "",
@@ -52,6 +48,7 @@ export default class PartyFilter extends React.Component {
         })
     }
 
+    //search
     handleSearch = ()=>{
         const action = {
             type: "UPDATE_PARTY_FILTERING",
@@ -65,11 +62,8 @@ export default class PartyFilter extends React.Component {
 
 
     render() {
-        // console.log(this.state)
-        const Search = Input.Search;
         const Option = Select.Option;
-        const RadioButton = Radio.Button;
-        const RadioGroup = Radio.Group;
+
         return (
             <div className={'filters'}>
                 <div>Filter</div>
@@ -88,7 +82,7 @@ export default class PartyFilter extends React.Component {
                 <Select className={'select'}
                         size={'large'}
                         placeholder="Select an order"
-                    // defaultValue={'popularity'}
+
                         value={this.state.order}
                         onChange={(e) => this.handleOrderChange(e)}
                 >
@@ -99,11 +93,7 @@ export default class PartyFilter extends React.Component {
                 </Select>
 
                 <div style={{paddingTop: 10}}>
-                    {/*<RadioGroup style={{display: 'inline'}} defaultValue="a" size="large" className={'radio-group'}>*/}
-                    {/*<RadioButton value="a">All</RadioButton>*/}
-                    {/*<RadioButton value="m">Male</RadioButton>*/}
-                    {/*<RadioButton value="f">Female</RadioButton>*/}
-                    {/*</RadioGroup>*/}
+
                     <Button className={'button'} type="primary" onClick={this.handleSearch}>Search</Button>
                     <Button className={'button'} type="primary" onClick={this.handleResetClick}>Reset</Button>
                 </div>

@@ -1,12 +1,8 @@
 import React, {Fragment} from 'react'
 import {Table, Spin, Tooltip} from 'antd'
 import 'antd/dist/antd.css';
-import Row from "antd/es/grid/row";
-import Col from "antd/es/grid/col";
-import store from '../../store/index'
-import RadioGroup from "antd/es/radio/group";
 import "./TopicTable.css"
-import {getLeaderboardData, getTopicTableData} from "../../utils/api";
+import {getTopicTableData} from "../../utils/api";
 
 
 export default class TopicTable extends React.Component {
@@ -31,7 +27,7 @@ export default class TopicTable extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         var me = this
-        // console.log(nextProps.date)
+
         this.setState(
             {
                 date: nextProps.date,
@@ -52,7 +48,7 @@ export default class TopicTable extends React.Component {
     }
 
     getData = () => {
-        console.log(this.state.data)
+
         var myData = []
 
         if (this.state.data.p_tag && this.state.data.p_tag) {
@@ -85,11 +81,8 @@ export default class TopicTable extends React.Component {
                 }
                 myData.push(newCol)
             }
-
-
-
         }
-        console.log(myData)
+
         return myData
     }
 
@@ -109,8 +102,6 @@ export default class TopicTable extends React.Component {
                 dataIndex: 'u_tag',
             }];
 
-
-        console.log(this.getData())
 
         return (
             <Fragment>

@@ -14,14 +14,13 @@ const defaultState = {
     map:{
        constituency:''
     },
-    //default date: yesterday
     date:moment(config.dataEndingDate).format(config.dateFormat),
     count:0,
     politiciansDate:[]
 }
 
 export default (state=defaultState,action) =>{
-    console.log("action",action.type)
+
     switch (action.type) {
 
         case "UPDATE_POLITICIAN_INPUT":

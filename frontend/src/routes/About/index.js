@@ -1,26 +1,16 @@
 import React, {Fragment} from 'react';
-import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import './style.css';
-import logo from "../../assets/img/unimelbLogo.jpeg"
-import {BackTop} from 'antd'
-import PoliticianCards from '../../components/Politician/PoliticianCards'
-import PoliticianFilter from '../../components/Politician/PoliticianFilter'
+
 import edward from '../../assets/img/edward.jpeg'
 import daniel from '../../assets/img/DanielWu.jpg'
 import banner from '../../assets/img/melbourneunib.png'
 import team from '../../assets/img/team.png'
 
 import {
-    Layout, Menu, Breadcrumb, Icon, Row, Col, Carousel
+    Breadcrumb, Row, Col, Carousel
 } from 'antd';
 import Card from "antd/lib/card";
-import Meta from "antd/es/card/Meta";
-
-const {
-    Header, Content, Footer, Sider,
-} = Layout;
-const SubMenu = Menu.SubMenu;
 
 export default class About extends React.Component {
 
@@ -28,9 +18,8 @@ export default class About extends React.Component {
         super(props)
         this.state = {
             count: 0,
-            edwardCount:0,
-            // myClass:'avatar',
-            edwardAvatar:edward
+            edwardCount: 0,
+            edwardAvatar: edward
         }
     }
 
@@ -44,20 +33,22 @@ export default class About extends React.Component {
         }
     }
 
-    handleSchoolClick = ()=>{
+    //redirect to melbourne eResearch Group
+    handleSchoolClick = () => {
         window.open("https://eresearch.unimelb.edu.au/", "_blank")
     }
 
-    handleMyEasterEgg = ()=>{
+    //handle edward's easter egg
+    handleMyEasterEgg = () => {
         this.setState({
             edwardCount: this.state.edwardCount + 1
         })
 
         if (this.state.edwardCount == 4) {
             this.setState({
-                edwardAvatar:daniel
+                edwardAvatar: daniel
             })
-            console.log()
+
         }
     }
 
@@ -100,13 +91,20 @@ export default class About extends React.Component {
                         <Row className={'about-content'}>
                             <div className={'about-font-heading'}>About the Project</div>
                             <div className={'about-font-body'}>
-                                Our project aims to build a web application to analyze the popularity rating of the candidates of 2019 Australian
-                                election by leveraging the Nectar cloud platform and tweets data. The whole process involves system architecture
-                                design, environment deployment, data harvester, data analysis, and data visualization. We harvested around 5
-                                million data including tweets of 280 election candidates in 143 constituencies, tweets of Twitter users which
-                                mentioned the candidates and tweets which used the popular hashtags of the candidates. The data are cleaned before
-                                saved to MongoDB. Wide range of analysis was performed for different dimensions like date, politician, party,
-                                state, hashtag, and constituency. The analysis results are visualized in our web application.
+                                Our project aims to build a web application to analyze the popularity rating of the
+                                candidates of 2019 Australian
+                                election by leveraging the Nectar cloud platform and tweets data. The whole process
+                                involves system architecture
+                                design, environment deployment, data harvester, data analysis, and data visualization.
+                                We harvested around 5
+                                million data including tweets of 280 election candidates in 143 constituencies, tweets
+                                of Twitter users which
+                                mentioned the candidates and tweets which used the popular hashtags of the candidates.
+                                The data are cleaned before
+                                saved to MongoDB. Wide range of analysis was performed for different dimensions like
+                                date, politician, party,
+                                state, hashtag, and constituency. The analysis results are visualized in our web
+                                application.
                             </div>
                         </Row>
 
@@ -114,13 +112,13 @@ export default class About extends React.Component {
                             <div className={'about-font-heading'}>Project Team</div>
                             <div className={'about-profile'}>
 
-                                <Col lg={12} xxl={6}  style={{padding: '5px'}}>
+                                <Col lg={12} xxl={6} style={{padding: '5px'}}>
                                     <div style={{background: '#ECECEC', padding: '2px'}}>
 
                                         <Card cover={
                                             <img alt="example" className={'avatar'}
 
-                                                          src="https://findanexpert.unimelb.edu.au/pictures/342078picture.jpg"/>
+                                                 src="https://findanexpert.unimelb.edu.au/pictures/342078picture.jpg"/>
                                         }
                                               bordered={true}
                                         >
@@ -148,7 +146,7 @@ export default class About extends React.Component {
                                     </div>
                                 </Col>
 
-                                <Col lg={12} xxl={6}  style={{padding: '5px'}}>
+                                <Col lg={12} xxl={6} style={{padding: '5px'}}>
                                     <div style={{background: '#ECECEC', padding: '2px'}}>
                                         <Card cover={<img
                                             alt="example" className={'avatar'}
@@ -181,7 +179,7 @@ export default class About extends React.Component {
                                     </div>
                                 </Col>
 
-                                <Col lg={12} xxl={6}  style={{padding: '5px'}}>
+                                <Col lg={12} xxl={6} style={{padding: '5px'}}>
                                     <div style={{background: '#ECECEC', padding: '2px'}}>
                                         <Card cover={<img alt="example" className={'avatar'}
 
@@ -212,11 +210,11 @@ export default class About extends React.Component {
                                     </div>
                                 </Col>
 
-                                <Col lg={12} xxl={6}  style={{padding: '5px'}}>
+                                <Col lg={12} xxl={6} style={{padding: '5px'}}>
                                     <div style={{background: '#ECECEC', padding: '2px'}}>
                                         <Card cover={<img alt="example" className={'avatar'}
                                                           src={this.state.edwardAvatar}
-                                                            onClick={this.handleMyEasterEgg}
+                                                          onClick={this.handleMyEasterEgg}
                                         />}
                                               bordered={true}
                                         >

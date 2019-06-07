@@ -1,23 +1,17 @@
 import CanvasJSReact from '../../assets/charts/canvasjs.react'
-import $ from 'jquery'
-import React, {Fragment} from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
 import './DonutChart.css'
 
-// var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 export default class DonutChart extends React.Component {
 
     getCenterText = (pos, neu, neg) => {
         var largest =Math.max(pos, neu, neg)
-        var text = ""
 
         if(pos+neg+neu ==0){
             return "No Reply"
         }
-        console.log(pos/(pos+neg+neu))
-        console.log(largest,pos,neu,neu)
         if (largest == pos) {
             return parseInt(100*pos/(pos+neg+neu),10)+"% Positive"
         } else if (largest == neu) {
@@ -63,9 +57,9 @@ export default class DonutChart extends React.Component {
         return (
             <div className={'donutChart'}>
                 <CanvasJSChart options={options}
-                    /* onRef={ref => this.chart = ref} */
+
                 />
-                {/*You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods*/}
+
             </div>
         );
     }

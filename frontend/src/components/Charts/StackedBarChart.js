@@ -1,10 +1,7 @@
 import CanvasJSReact from '../../assets/charts/canvasjs.react'
-import $ from 'jquery'
 import React, {Fragment} from 'react';
-import ReactDOM from 'react-dom';
 import './StackedBarChart.css'
 
-// var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 export default  class stackedBarChart extends React.Component {
@@ -24,10 +21,7 @@ export default  class stackedBarChart extends React.Component {
     }
 
     getData = (type)=> {
-        // console.log(this.props.posList)
-        // for (var key in this.props.posList) {
-        //     console.log(key, this.props.posList[key]);
-        // }
+
         var data = []
 
         switch (type) {
@@ -46,31 +40,29 @@ export default  class stackedBarChart extends React.Component {
         }
 
 
-        console.log(data)
+
         var stateData = []
         for (var key in data) {
-            console.log({label:key,y:data[key]})
+
             if(key != 'Other Territories'){
                 stateData.push({label:key,y:data[key]})
             }
 
         }
 
-        // for(var i=0;i<data.length;i++){
-        //     stateData.push({label:     data.key ,y:  data.val})
-        // }
+
         stateData.sort(function(a,b) {
             var textA = a.label.toUpperCase();
             var textB = b.label.toUpperCase();
             return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
         });
-        console.log(type,stateData)
+
         return stateData
     }
 
     render() {
 
-        console.log("pos",this.props.posList,"neg",this.props.negList,"neu",this.props.neuList)
+
         const options = {
             animationEnabled: true,
             exportEnabled: true,

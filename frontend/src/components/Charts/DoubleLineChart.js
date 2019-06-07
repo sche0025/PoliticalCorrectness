@@ -1,10 +1,7 @@
 import CanvasJSReact from '../../assets/charts/canvasjs.react'
-import $ from 'jquery'
 import React, {Fragment} from 'react';
-import ReactDOM from 'react-dom';
 import './LineChart.css'
 
-// var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 export default class DoubleLineChartLineChart extends React.Component {
@@ -12,7 +9,7 @@ export default class DoubleLineChartLineChart extends React.Component {
 
     getDataPoint = (type) => {
         if (this.props.data) {
-            // console.log(this.props.data)
+
             var dataPoint = []
             this.props.data.map((dataADay) => {
                 dataPoint.push({
@@ -20,7 +17,6 @@ export default class DoubleLineChartLineChart extends React.Component {
                     y: dataADay.sc[type]
                 })
             })
-            // console.log(dataPoint)
             return dataPoint
         }
 
@@ -29,8 +25,6 @@ export default class DoubleLineChartLineChart extends React.Component {
     }
 
     render() {
-
-        console.log("data is", this.props.data)
 
         const options = {
             animationEnabled: true,

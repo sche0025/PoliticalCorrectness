@@ -1,19 +1,11 @@
 import React, {Fragment} from 'react';
-import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
-import logo from "../../assets/img/unimelbLogo.jpeg"
-import GoogleMap from '../../components/GoogleMap/GoogleMap'
-import MapControl from '../../components/GoogleMap/MapControl'
 import './PartyLeaderCard.css'
 
 import {
-    Layout, Menu, Breadcrumb, Icon, Row, Col, Card
+ Card
 } from 'antd';
 
-const {
-    Header, Content, Footer, Sider,
-} = Layout;
-const SubMenu = Menu.SubMenu;
 
 export default class PartyLeaderCard extends React.Component {
 

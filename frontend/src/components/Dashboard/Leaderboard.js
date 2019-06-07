@@ -1,7 +1,6 @@
 import React, {Fragment} from 'react';
-import ReactDOM from 'react-dom';
 import './Leaderboard.css'
-import {Table, Divider, Tag} from 'antd';
+import {Table} from 'antd';
 import Spin from "antd/es/spin";
 import {getLeaderboardData} from "../../utils/api";
 import Icon from "antd/es/icon";
@@ -31,7 +30,7 @@ export default class Leaderboard extends React.PureComponent {
                 isLeaderboardSpinning: false
             })
         })
-        console.log("leaderboard data loaded")
+
         //    .then(()=>{
         //     this.setState({
         //         isLeaderboardSpinning:false
@@ -50,8 +49,7 @@ export default class Leaderboard extends React.PureComponent {
                         isLeaderboardSpinning: false
                     })
                 })
-                console.log("leaderboard data loaded")
-                console.log(this.state.data)
+
             }
         );
     }
@@ -142,7 +140,7 @@ export default class Leaderboard extends React.PureComponent {
 
     render() {
         var data = this.getData()
-        // console.log("leaderboard rendered")
+
         return (
             <div style={{minWidth: '750px', height: 'auto'}}>
                 {/*<div> {this.state.date}</div>*/}

@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react'
 import './PoliticianModal.css'
-import {Card, Input, Select, Radio, Button, Modal, Statistic} from 'antd'
+import {Modal, Statistic} from 'antd'
 import 'antd/dist/antd.css';
 import Row from "antd/es/grid/row";
 import Col from "antd/es/grid/col";
@@ -10,14 +10,10 @@ import BarChart from '../Charts/StackedBarChart'
 import DonutChart from '../Charts/DonutChart'
 import DoubleLineChart from '../Charts/DoubleLineChart'
 import ReactWordcloud from 'react-wordcloud'
-import $ from 'jquery'
 import {calculateReplyCount, calculateSentimentScore, getPastDayList} from "../../utils/utils";
-import { getPoliticianLinechartReceive, getPoliticianLinechartsInfo} from "../../utils/api";
+import { getPoliticianLinechartsInfo} from "../../utils/api";
 import store from '../../store/index'
-// import ReactJQCloud from 'react-jqcloud'
-// import jQCloud from 'jqcloud2'
-// import jQCloud from 'jqcloud2'
-// import jQCloud from '../../assets/wordcloud/jqcloud'/**/
+
 export default class PoliticianModal extends React.Component {
 
     constructor(props) {
@@ -34,28 +30,17 @@ export default class PoliticianModal extends React.Component {
 
     }
 
+    //handle open modal
     handleOpen = () => {
-        // this.setState({
-        //
-        // })
+
 
         var me = this
-        // getPoliticianLinechartReceive(getPastDayList(store.getState().date),this.props.politician.ID).then((data) => {
-        //     me.setState({
-        //         repliesReceived: data,
-        //
-        //     })
-        // })
+
         me.setState({
 
             visible: true
         })
-        // getPoliticianLinechartPost(getPastDayList(store.getState().date),this.props.politician.ID).then((data) => {
-        //     me.setState({
-        //         repliesPost: data,
-        //
-        //     })
-        // })
+
 
         getPoliticianLinechartsInfo(getPastDayList(store.getState().date),this.props.politician.ID).then((data) => {
             me.setState({
@@ -65,27 +50,18 @@ export default class PoliticianModal extends React.Component {
             })
         })
 
-        // var promise1 =  getPoliticianLinechartReceive(getPastDayList(store.getState().date),this.props.politician.ID)
-        // var promise2 =  getPoliticianLinechartPost(getPastDayList(store.getState().date),this.props.politician.ID)
-        //
-        // Promise.all([promise1, promise2]).then(function(values) {
-        //     console.log("promise test",values);
-        // });
-
     }
 
+    //close modal
     handleCancel = () => {
         this.setState({
             visible: false
         })
     }
 
-    handleChange = (value) => {
-        console.log(`selected ${value}`);
-    }
 
     render() {
-        // console.log(this.state.data)
+
         var options = {
             colors: [
                 '#1f77b4',
@@ -108,11 +84,7 @@ export default class PoliticianModal extends React.Component {
             transitionDuration: 1000,
         }
 
-        const data = [
 
-        ];
-
-        const fontSizeMapper = word => Math.log2(word.value) * 5;
         return (
             <Fragment>
 
@@ -177,7 +149,6 @@ export default class PoliticianModal extends React.Component {
                                                         <ReactWordcloud
                                                             words={this.props.politician.Word_Cloud}
                                                             options={options}
-                                                            // fontSizeMapper={fontSizeMapper}
                                                         /> : <div></div>
                                                     }
                                                 </div>
@@ -215,7 +186,6 @@ export default class PoliticianModal extends React.Component {
                                                                  data={this.state.repliesReceived}
                                                                  yTitle = "Number of netizens"
                                                                  type={"replies"}
-                                                                 // title={"How did internet users think of him/her in the past 7 days?"}
                                                 />
                                             </div>
 
@@ -225,15 +195,12 @@ export default class PoliticianModal extends React.Component {
                                             </div>
                                             <div className={'word-cloud'}>
                                                 <DoubleLineChart height={450}
-                                                                 // title={"What are the sentiment scores of his posts in the past 7 days?"}
                                                                  yTitle={"Number of Tweets"}
                                                                  data={this.state.tweetsPosted}
                                                                  type={"posts"}
                                                 />
                                             </div>
-
                                         </Row>
-
                                     </div>
                                 </Col>
                             </Row>

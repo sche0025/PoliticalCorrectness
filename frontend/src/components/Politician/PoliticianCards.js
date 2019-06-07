@@ -29,11 +29,6 @@ export default class PoliticianCards extends React.Component {
     }
 
     handleStoreChange = () => {
-        //
-        // console.log(this.state.input == store.getState().politiciansFilter.input )
-        // console.log(  this.state.party == store.getState().politiciansFilter.party )
-        // console.log(    this.state.order == store.getState().politiciansFilter.order)
-        // console.log(    this.state.order , store.getState().politiciansFilter.order)
 
         if (store.getState().date != this.state.date) {
             this.setState({
@@ -49,12 +44,12 @@ export default class PoliticianCards extends React.Component {
                         party:store.getState().politiciansFilter.party
                     })
                 })
-                console.log("politicians data loaded")
+
 
 
             })
         }
-        console.log("I should be later")
+
 
         this.setState({
 
@@ -65,7 +60,7 @@ export default class PoliticianCards extends React.Component {
 
 
     componentDidMount() {
-        console.log(this.state.date)
+
         var me = this
         getPoliticiansData(this.state.date).then((data) => {
             me.setState({
@@ -73,7 +68,6 @@ export default class PoliticianCards extends React.Component {
                 isSpinning: false
             })
         })
-        console.log("politicians data loaded")
 
     }
 
@@ -95,7 +89,7 @@ export default class PoliticianCards extends React.Component {
 
 
             var sortedResult =  this.customisedSort(result,order)
-            // console.log(sortedResult)
+
             return sortedResult
         }else {
             return []
@@ -173,12 +167,11 @@ export default class PoliticianCards extends React.Component {
         if( this.state.isSpinning){
             return []
         }
-        // var testList = [1, 2, 3, 4, 5]
-        // console.log(this.state.data)
+
         if (this.state.data == [] || !this.state.data) {
             return []
         }
-        // console.log(this.state.data.length)
+
 
 
         var filteredData =  this.filterData(  )
@@ -196,7 +189,7 @@ export default class PoliticianCards extends React.Component {
                 <Row>
                     <Col span={6}>
                         <img src={politician.Avatar}
-                             // alt={"https://d2ogjlfjkptkow.cloudfront.net/assets/img/board-member-default-image.png"}
+
                              onerror="this.src='https://d2ogjlfjkptkow.cloudfront.net/assets/img/board-member-default-image.png'"
                              className={'card-img'}
                         />
@@ -233,19 +226,19 @@ export default class PoliticianCards extends React.Component {
                             <Col span={12}>
                                 <Row className={'heading'}>
                                     <Statistic
-                                        // title={ <div className={"statistics-title"}> Likes </div>}
+
                                         value={politician.Likes_Count}
                                         title="Likes"
                                     />
                                 </Row>
                                 <Row className={'heading2'}>
-                                    <Statistic title=<div className={"statistics-title"}>Sentiment Score
+                                    <Statistic title={<div className={"statistics-title"}>Sentiment Score
                                         <Tooltip title={"This is calculated by: Number of unique supporters * 1 " +
                                         "+ Number of unique neutrals * 0.1 " +
                                         "- Number of unique dissenters * 0.5"}>
                                             <Icon style={{paddingLeft:"3px"}} type="question-circle"/>
                                         </Tooltip>
-                                    </div>value={calculateSentimentScore(politician)}/>
+                                    </div>} value={calculateSentimentScore(politician)}/>
                                 </Row>
                             </Col>
                         </Col>
@@ -257,11 +250,7 @@ export default class PoliticianCards extends React.Component {
 
     }
 
-
     render() {
-
-        console.log(store.getState())
-        console.log(this.state.isSpinning)
         return (
             <div id={'cardList'}>
                 <Spin spinning={this.state.isSpinning}>
@@ -273,12 +262,3 @@ export default class PoliticianCards extends React.Component {
     }
 }
 
-// const mapStateToProps = (state) => {
-//
-//     console.log(state)
-//     return {
-//         date:state.date
-//     }
-// };
-//
-// export default connect(mapStateToProps)(PoliticianCards)

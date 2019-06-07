@@ -94,26 +94,12 @@ export function getPastDayList(date) {
       dateList.push(endDate.subtract(1,'days').format(config.dateFormat))
     }
 
-
-    console.log(endDate.format(config.dateFormat))
-    console.log(config.dataStartingDate)
     if(endDate.format(config.dateFormat)==moment(config.dataStartingDate).format(config.dateFormat)){
       break;
     }
   }
   return dateList
 }
-
-
-export function randomNum(min, max) {
-  return Math.floor(Math.random() * (max - min) + min);
-}
-
-
-export function calculateWidth(arr){
-  return 30 + arr[0].length*15
-}
-
 
 export function preloadingImages(arr) {
   arr.forEach(item=>{
