@@ -37,21 +37,21 @@ export default class GoogleMap extends React.Component {
     }
 
     componentDidMount() {
-
         this.renderMap()
 
     }
 
     renderMap = () => {
         var googleMap = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBEGnKK5sbPBXi2tL4o7LFahhEniTaLQTY&libraries=visualization&callback=initMap'
+        // loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyBEGnKK5sbPBXi2tL4o7LFahhEniTaLQTY&callback=initMap")
         loadScript(googleMap)
         window.initMap = this.initMap
     }
 
-
     initMap = () => {
 
-
+        let obj = this
+        var map;
         var AUSTRALIA_BOUNDS = {
             north: -11,
             south: -44.5,
@@ -59,7 +59,6 @@ export default class GoogleMap extends React.Component {
             east: 154,
         };
 
-        // set the default parameter of the google map
         var AUSTRALIA = {lat: -28.734968, lng: 133.489563};
         var map = new window.google.maps.Map(document.getElementById('map'), {
             center: AUSTRALIA,
@@ -79,10 +78,10 @@ export default class GoogleMap extends React.Component {
             minZoom: 4.5,
         });
 
-
         this.loadGeojson(map)
 
         var centerControlDiv = document.createElement('div');
+        var centerControl = this.CenterControl(centerControlDiv, map);
 
         centerControlDiv.index = 1;
 
@@ -94,7 +93,6 @@ export default class GoogleMap extends React.Component {
     }
 
 
-    //show statistics
     CenterControl = (controlDiv, map) => {
         var me = this
         // Set CSS for the control border.
@@ -134,14 +132,12 @@ export default class GoogleMap extends React.Component {
             }
         )
 
-
         controlUI.addEventListener('click', function () {
             me.openNotification()
         });
 
     }
 
-    //open statistics
     openNotification = () => {
         notification.open({
             message: <span className={"statistics"}>Potential number of winners of each party(by constituency) till {store.getState().date}</span>,
@@ -151,6 +147,7 @@ export default class GoogleMap extends React.Component {
     };
 
     getStatistics = () => {
+
         var winnerParties = this.getWinners()
 
         var i =0;
@@ -179,17 +176,16 @@ export default class GoogleMap extends React.Component {
     }
 
     getTextInfowindow = () => {
-
         var html = <div>
             WOW
-        </div>
 
+        </div>
         var stringHTML = ReactDOMServer.renderToString(html)
 
         return stringHTML
     }
 
-    // constituency click event
+
     polygonLicked = (event) => {
         var action = {
             value: event.feature.getProperty("Sortname"),
@@ -215,8 +211,6 @@ export default class GoogleMap extends React.Component {
         map.data.setStyle(function (feature) {
             return ({
                 strokeWeight: 1,
-                // fillColor: "white",
-               fillOpacity:0.2
             });
         });
 
@@ -242,21 +236,18 @@ export default class GoogleMap extends React.Component {
     }
 
 
-    //unload google map api
     componentWillUnmount() {
         var me = this
         var elem = document.querySelector('#my-google-script');
         elem.parentNode.removeChild(elem);
 
+        //clear memory
         this.state.map.data.forEach(function (feature) {
 
             me.state.map.data.remove(feature);
-
         });
-
     }
 
-    //algorithm to predict winning seats
     getWinners = () => {
         var politicians = this.state.politiciansData
         var regions = new Set()
@@ -295,23 +286,24 @@ export default class GoogleMap extends React.Component {
             }
             var result = {}
 
-            for (let key in regionMap) {
 
+            for (let key in regionMap) {
                 var curParty = regionMap[key][0].party
                 if(regionMap[key][0].sc >0){
+
                     if (!result.hasOwnProperty(curParty)) {
+
                         result[curParty] = 1
                     } else {
                         result[curParty] = result[curParty] + 1
+
                     }
                 }
             }
 
             var sortedResult = [];
             for (var party in result) {
-
                 sortedResult.push([party, result[party]]);
-
             }
 
             sortedResult.sort(function (a, b) {
@@ -324,6 +316,7 @@ export default class GoogleMap extends React.Component {
     }
 
     render() {
+        // console.log("map loaded", this.state.politiciansData)
 
         return (
             <Fragment>
@@ -342,5 +335,3 @@ var loadScript = (url) => {
     script.defer = true
     index.parentNode.insertBefore(script, index)
 }
-
-

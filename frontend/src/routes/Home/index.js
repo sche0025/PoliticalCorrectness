@@ -3,6 +3,7 @@ import 'antd/dist/antd.css';
 import './style.css';
 import moment from 'moment'
 import logo from "../../assets/img/unimelbLogo.jpeg"
+import logo2 from "../../assets/img/unimelb2.png"
 import Datepicker from '../../components/Datepicker/Datepicker'
 import config from '../../config'
 import store from '../../store/index'
@@ -22,7 +23,8 @@ class Home extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-           date:store.getState().date
+           date:store.getState().date,
+            img:logo
         };
 
     }
@@ -30,6 +32,16 @@ class Home extends React.Component {
 
     //side bar collapse
     onCollapse = (collapsed) => {
+        console.log(collapsed)
+        if(collapsed){
+            this.setState({
+                img:logo2
+            })
+        }else {
+            this.setState({
+                img:logo
+            })
+        }
         this.setState({collapsed});
     }
 
@@ -83,7 +95,7 @@ class Home extends React.Component {
                     collapsed={this.state.collapsed}
                     onCollapse={this.onCollapse}
                 >
-                    <div className="logo"><img className={"img"} src={logo} alt=""/></div>
+                    <div className="logo"><img className={"img"} src={this.state.img} alt=""/></div>
                     <Menu theme="dark" defaultSelectedKeys={[defaultKey]} mode="inline">
                         <Menu.Item key="1">
                             <NavLink to={{pathname:'/home/dashboard', date:this.state.date}} id={"dashboardLink"} >
