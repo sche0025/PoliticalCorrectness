@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import logo from './logo.svg';
 import {Route, Switch} from 'react-router-dom'
 import Login from './routes/Login/index'
 import Home from './routes/Home/index'
@@ -8,7 +7,6 @@ import Dashboard from './routes/Dashboard/index'
 import Politician from './routes/Politician/index'
 import Party from './routes/Party/index'
 import About from './routes/About/index'
-import Test from './components/Test/index'
 import './App.css';
 import './assets/font/iconfont.css'
 
@@ -27,7 +25,7 @@ class App extends Component {
                         <Route path='/home/politician' component={Politician}/>
                         <Route path='/home/party' component={Party}/>
                         <Route path='/home/about' component={About}/>
-                        <Route path='/home/test' component={Test}/>
+
                         <Route exact path='/home' component={Dashboard}/>
                     </Home>
                 }/>

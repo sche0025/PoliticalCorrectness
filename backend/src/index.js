@@ -5,6 +5,7 @@ const router = express.Router();
 const bodyparser = require('body-parser')
 // const customerRoute = require('./routes/api/customer')
 const tweetsRoute = require('./routes/api/Tweets')
+const dailyRoute = require('./routes/api/Daily')
 const PORT = process.env.PORT || 3001;
 
 const logger = (req,res,next) =>{
@@ -18,10 +19,26 @@ app.use(function(req, res, next) {
     next();
 });
 
-// app.use((req,res,next) =>{
-//     console.log('received')
-//     next()
+
+
+// const http = require("http");
+//
+//
+// const server = http.createServer((req,res)=>{
+//
+//     if(req.url ==='/api/tweets/find'){
+//
+//
+//
+//     }
+//     if(req.url ==='/api/politicians/find'){
+//
+//     }
+//
 // })
+//
+// server.listen()
+
 
 // app.use(bodyparser.json);
 app.use(bodyparser.json())
@@ -32,7 +49,7 @@ app.use(bodyparser.json())
 
 // app.use('/api',customerRoute)
 app.use('/api',tweetsRoute)
-
+app.use('/api',dailyRoute)
 // app.use((req, res, next) => {
 //     res.status(404).send('We think you are lost!')
 // })

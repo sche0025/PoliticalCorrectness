@@ -1,8 +1,0 @@
-numpy==1.15.1
-textblob==0.15.3
-tweepy==3.7.0
-pandas==0.23.4
-pymongo[srv]==3.7.2
-tqdm==4.31.1
-
-

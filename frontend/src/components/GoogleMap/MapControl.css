@@ -1,5 +1,40 @@
+.map-control{
+    width: auto ;
+    margin-right: 10px;
+    height:78vh ;
+    min-height: 620px;
+    margin-bottom: 50px;
+}
+
 .map-heading{
     font-size: 15pt;
     color: black;
     font-weight: bold;
+}
+
+.mapControl-candidate{
+    height: 96%;
+    /*background-color: #d84743;*/
+    min-width: 420px;
+    overflow: auto;
+}
+
+.mapControl_img{
+    /*max-height: 80px;*/
+    /*height: auto;*/
+    /*width: 80px;*/
+
+    /*min-width: 50px;*/
+    /*min-height: 50px;*/
+
+    /*max-width: 100px;*/
+    /*max-height: 80px;*/
+
+    height: 90px;
+    width: 100%;
+}
+
+.map-table-header{
+    text-align: center;
+    vertical-align: middle;
 }

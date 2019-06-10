@@ -1,5 +1,19 @@
 .content {
-    overflow: auto;
+    /*overflow: auto;*/
     /*max-height: 100vh;*/
-    height: 83vh;
+
+    /*minHeight:720px*/
 }
+
+
+/*@media (max-width: 1370px) {*/
+    /*.filter-right {*/
+        /*display: none;*/
+    /*}*/
+/*}*/
+
+/*@media (min-width: 1370px) {*/
+    /*.filter-top {*/
+        /*display: none;*/
+    /*}*/
+/*}*/

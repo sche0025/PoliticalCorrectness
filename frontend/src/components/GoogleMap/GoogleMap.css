@@ -1,7 +1,10 @@
 #map{
     width: auto ;
+    min-width: auto;
     margin-right: 10px;
-    height:81vh ;
+    height:79vh ;
+    min-height: 620px;
+
 
 }
 
@@ -12,6 +15,18 @@
 }
 
 .smallImg{
+    padding: 3px;
     height: 70px;
     width: 70px;
+}
+
+.ant-notification-notice{
+    background-color: #5fb9f5;
+}
+
+.statistics{
+    color: white;
+    font-family: Arial;
+    font-weight: bold;
+
 }

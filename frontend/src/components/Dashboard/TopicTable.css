@@ -1,0 +1,9 @@
+.hashTag{
+    whit-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 120px;
+     overflow: hidden;
+    color: #4191f7;
+    cursor: pointer;
+
+}

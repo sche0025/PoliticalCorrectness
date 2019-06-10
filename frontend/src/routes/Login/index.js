@@ -1,17 +1,9 @@
 import React from 'react'
-import BGParticle from '../../utils/BGParticle'
-import {Form, Input, Row, Col, notification, message, Icon} from 'antd'
+import {Form, Input ,message} from 'antd'
 import './style.css'
-import {randomNum, calculateWidth} from '../../utils/utils'
-import PromptBox from '../../components/PromptBox'
-import {withRouter} from 'react-router-dom'
-
-import Loading from '../../components/Loading'
 import Loading2 from '../../components/Loading2'
 import {preloadingImages} from '../../utils/utils'
-
 import 'animate.css'
-
 const url = 'https://github.com/zhangZhiHao1996/image-store/blob/master/react-admin-master/bg1.jpg?raw=true'
 const imgs = [
     'https://github.com/zhangZhiHao1996/image-store/blob/master/react-admin-master/slide1.jpg?raw=true',
@@ -20,77 +12,17 @@ const imgs = [
     'https://github.com/zhangZhiHao1996/image-store/blob/master/react-admin-master/slide4.jpg?raw=true'
 ]
 
-
-class LoginForm extends React.Component {
-    state = {
-        focusItem: -1,
-        code: ''
-    }
-
-    //login
-    loginSubmit = () => {
-
-        this.setState({
-            focusItem: -1
-        })
-
-        this.props.obj.props.history.push("/home/dashboard")
-
-
-    }
-
-
-    render() {
-
-        return (
-            <div className={this.props.className}>
-                <h3 className='title'>Please Login</h3>
-                <Form>
-
-                    <Form.Item>
-                        <Input
-                            onFocus={() => this.setState({focusItem: 0})}
-                            onBlur={() => this.setState({focusItem: -1})}
-                            maxLength={16}
-                            placeholder='username'
-                            addonBefore={<span className='iconfont icon-User' style={styles.focus}/>}/>
-                    </Form.Item>
-
-                    <Form.Item>
-                        <Input
-                            onFocus={() => this.setState({focusItem: 0})}
-                            onBlur={() => this.setState({focusItem: -1})}
-                            maxLength={16}
-                            type='password'
-                            placeholder='password'
-                            addonBefore={<span className='iconfont icon-suo1' style={styles.focus}/>}
-                        />
-                    </Form.Item>
-
-
-                    <div>
-                        <button className='loginBtn' onClick={this.loginSubmit}>Login</button>
-
-                    </div>
-                </Form>
-                <div className='footer'>
-                    <div>Login Page</div>
-                </div>
-            </div>
-        )
-    }
-}
-
-// @inject('appStore') @observer @Form.create()
-
-
-// @withRouter @inject('appStore') @observer
 class Login extends React.Component {
-    state = {
-        showBox: 'login',
-        url: '',
-        loading: false,
-        loading2: false,
+    constructor(props){
+        super(props)
+        this.state = {
+            showBox: 'login',
+            url: '',
+            loading: false,
+            loading2: false,
+            account:"",
+            password:""
+        }
     }
 
     componentDidMount() {
@@ -103,17 +35,10 @@ class Login extends React.Component {
         preloadingImages(imgs)
     }
 
-    componentWillUnmount() {
-        // this.particle && this.particle.destory()
-        // notification.destroy()
-    }
-
-
     initPage = () => {
         this.setState({
             loading: true
         })
-        // this.props.appStore.initUsers()
         this.loadImageAsync(url).then(url => {
             this.setState({
                 loading: false,
@@ -122,11 +47,29 @@ class Login extends React.Component {
         })
     }
 
+    //submit
+    loginSubmit = () => {
 
-    switchShowBox = (box) => {
+        if(this.state.password=='admin' &&this.state.account=='admin'){
+            message.success('Login successfully.')
+            localStorage.setItem("isLoggedIn",'true');
+            this.props.history.push("/home/dashboard")
+        }else {
+            return  message.error('Sorry, invalid combination, please try again.')
+        }
+    }
+
+    handleAccountChange = (e)=>{
+
         this.setState({
-            showBox: box
+            account:e.target.value
         })
+    }
+
+    handlePasswordChange = (e) =>{
+     this.setState({
+         password:e.target.value
+     })
     }
 
     //preload img
@@ -144,7 +87,7 @@ class Login extends React.Component {
     }
 
     render() {
-        const {showBox, loading} = this.state
+        const { loading} = this.state
         return (
             <div id='login-page'>
                 {
@@ -156,10 +99,43 @@ class Login extends React.Component {
                         <div>
                             <div id='backgroundBox' style={styles.backgroundBox}/>
                             <div className='container'>
-                                <LoginForm
-                                    obj={this}
-                                    className={showBox === 'login' ? 'box showBox' : 'box hiddenBox'}
-                                    switchShowBox={this.switchShowBox}/>
+                                <div className={'box showbox'}>
+                                    <h3 className='title'>Please Login</h3>
+                                    <Form>
+
+                                        <Form.Item>
+                                            <Input
+                                                onFocus={() => this.setState({focusItem: 0})}
+                                                onBlur={() => this.setState({focusItem: -1})}
+                                                maxLength={16}
+                                                placeholder='username'
+                                                addonBefore={<span className='iconfont icon-User' style={styles.focus}/>}
+                                                onChange={(e)=>this.handleAccountChange(e)}
+                                            />
+                                        </Form.Item>
+
+                                        <Form.Item>
+                                            <Input
+                                                onFocus={() => this.setState({focusItem: 0})}
+                                                onBlur={() => this.setState({focusItem: -1})}
+                                                maxLength={16}
+                                                type='password'
+                                                placeholder='password'
+                                                onChange={(e)=>this.handlePasswordChange(e)}
+                                                addonBefore={<span className='iconfont icon-suo1' style={styles.focus}/>}
+                                            />
+                                        </Form.Item>
+
+
+                                        <div>
+                                            <button className='loginBtn' onClick={this.loginSubmit}>Login</button>
+
+                                        </div>
+                                    </Form>
+                                    {/*<div className='footer'>*/}
+                                        {/*<div>Login Page</div>*/}
+                                    {/*</div>*/}
+                                </div>
 
                             </div>
                         </div>

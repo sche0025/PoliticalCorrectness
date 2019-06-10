@@ -12,9 +12,9 @@ export default class PartyFilter extends React.Component {
 
     constructor(props) {
         super(props)
-        this.state={
-            input:"",
-            order:"",
+        this.state = {
+            input: store.getState().partyFilter.input,
+            order: store.getState().partyFilter.order
 
         }
     }
@@ -23,73 +23,79 @@ export default class PartyFilter extends React.Component {
 
     }
 
-    handleChange = (value) => {
-        console.log(`selected ${value}`);
-    }
-
-    handleInputChange = (e) =>{
+    // filter change
+    handleInputChange = (e) => {
         this.setState({
-            input:e.target.value
+            input: e.target.value
         })
     }
 
-    handlePartyChange = (e) =>{
-        // console.log(e)
+    // filter change
+    handleOrderChange = (e) => {
         this.setState({
-            order:e
+            order: e
+        })
+    }
+
+    // reset filter
+    handleResetClick = () => {
+        this.setState({
+            input: "",
+
+            order: 'popularity'
         },()=>{
-            const action = {
-                type: "UPDATE_PARTY_ORDER",
-                value: e
-            };
-            store.dispatch(action)
+            this.handleSearch()
         })
     }
 
+    //search
     handleSearch = ()=>{
         const action = {
-            type: "UPDATE_PARTY_INPUT",
-            value: this.state.input
+            type: "UPDATE_PARTY_FILTERING",
+            value: {
+                input:this.state.input,
+                order:this.state.order
+            }
         };
         store.dispatch(action)
     }
 
+
     render() {
-        // console.log(this.state)
-        const Search = Input.Search;
         const Option = Select.Option;
-        const RadioButton = Radio.Button;
-        const RadioGroup = Radio.Group;
+
         return (
             <div className={'filters'}>
-                <Search
-                    placeholder="input politician's name"
-                    enterButton="Search"
+                <div>Filter</div>
+                <Input
+                    placeholder="input party name"
+                    value={this.state.input}
                     size="large"
-                    onSearch={this.handleSearch}
                     className={'search'}
-                    onChange={(e)=>this.handleInputChange(e)}
+                    onChange={(e) => this.handleInputChange(e)}
+                    allowClear={true}
+                    onPressEnter={this.handleSearch}
                 />
 
-                <Select  className={'select'}
-                        size={'large'}
 
-                        // onChange={(e)=>this.handlePartyChange(e)}
+                <div>Sort by</div>
+                <Select className={'select'}
+                        size={'large'}
                         placeholder="Select an order"
+
+                        value={this.state.order}
+                        onChange={(e) => this.handleOrderChange(e)}
                 >
-                    <Option value="all">All</Option>
-                    <Option value="ag">Australian Greens</Option>
-                    <Option value="alp">Australian Labor Party</Option>
-                    <Option value="ca">Centre Alliance</Option>
-                    <Option value="i">Independent</Option>
-                    <Option value="kap">Katter's Australian Party</Option>
-                    <Option value="lpa">Liberal Party of Australia</Option>
-                    <Option value="tn">The Nationals</Option>
+                    <Option value="popularity">Sentiment Score</Option>
+                    <Option value="posts">Total Number of Posts</Option>
+                    <Option value="replies">Total Number of Mentions</Option>
+                    <Option value="likes">Total Number of Likes</Option>
                 </Select>
 
                 <div style={{paddingTop: 10}}>
 
-                    <Button className={'filter_button'} type="primary">Reset</Button>
+                    <Button className={'button'} type="primary" onClick={this.handleSearch}>Search</Button>
+                    <Button className={'button'} type="primary" onClick={this.handleResetClick}>Reset</Button>
                 </div>
             </div>
         );

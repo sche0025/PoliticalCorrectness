@@ -10,6 +10,8 @@
 .profileImg{
     width: 99%;
     height: 40vh;
+    border-style: solid;
+    border-width: 1px;
 }
 
 .profile{
@@ -46,4 +48,20 @@
 
 .detail-pieChart{
     height: 450px;
+}
+
+.party-avatar{
+    /*height: 287px;*/
+    padding: 1px;
+    /*height: 80%;*/
+    /*background-color: #55a532;*/
+}
+.party-avatar-card{
+    padding: 3px;
+}
+
+.party-leaders{
+    border-style: solid;
+    border-width: 1px;
+    background-color: white;
 }

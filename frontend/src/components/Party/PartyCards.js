@@ -1,18 +1,14 @@
 import React, {Fragment} from 'react'
 import './PartyCard.css'
-import {Card, BackTop,Statistic} from 'antd'
+import {Card, BackTop, Statistic, Spin, Icon, Tooltip} from 'antd'
 import 'antd/dist/antd.css';
 import Row from "antd/es/grid/row";
 import Col from "antd/es/grid/col";
 import PartyModal from './PartyModal'
 import store from '../../store/index'
-import greenFlag from '../../assets/img/partyFlags/green.png'
-import caFlag from '../../assets/img/partyFlags/ca.png'
-import kapFlag from '../../assets/img/partyFlags/kap.png'
-import laborFlag from '../../assets/img/partyFlags/labor.png'
-import liberalFlag from '../../assets/img/partyFlags/liberal.png'
-import natinalsFlag from '../../assets/img/partyFlags/nationals.jpg'
-import {Link} from "react-router-dom";
+import {getPartyData} from "../../utils/api";
+import defaultImg from "../../assets/img/defaultImg.png";
+import {calculateReplyCount, calculateSentimentScore, getPartyFlag} from "../../utils/utils";
 
 
 export default class PartyCards extends React.Component {
@@ -20,107 +16,215 @@ export default class PartyCards extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            politicians: [],
-            input:'',
-            party:"all",
-            gender:"all"
+            parties: [],
+            input: '',
+
+            order: "popularity",
+            isSpinning: true,
+            date: store.getState().date,
+            data: []
         };
         store.subscribe(this.handleStoreChange);
     }
 
+
+    handleStoreChange = () => {
+        if (store.getState().date != this.state.date) {
+            this.setState({
+                date: store.getState().date,
+                isSpinning: true
+            }, () => {
+                var me = this
+                getPartyData(this.state.date).then((data) => {
+                    me.setState({
+                        data: data,
+                        isSpinning: false,
+                        input: store.getState().partyFilter.input,
+                        order: store.getState().partyFilter.order
+                    })
+                })
+
+
+
+            })
+        }
+
+
+        this.setState({})
+
+
+    };
+
     componentDidMount() {
 
+        var me = this
+        getPartyData(this.state.date).then((data) => {
+            me.setState({
+                data: data,
+                isSpinning: false
+            })
+        })
+
     }
 
-
-    getTitleLink = (party )=>{
-        return <PartyModal name = {party.name}
-        flag = {party.flag}
+    //get modal
+    getTitleLink = (party) => {
+        return <PartyModal
+            party={party}
         />
+    }
+
+    // sorting algorithm
+    customisedSort = (result, order) => {
+        switch (order) {
+            case "popularity":
+                result.sort(function (a, b) {
+                    return (
+                        (
+                            calculateSentimentScore(b)
+                        )
+                        -
+                        (
+                            calculateSentimentScore(a)
+                        )
+                    )
+                })
+                return result
+
+            case "posts":
+                result.sort(function (a, b) {
+                    return (
+                        (
+                            b.Tweets_Count
+                        )
+                        -
+                        (
+                            a.Tweets_Count
+                        )
+                    )
+                })
+                return result
+
+            case "replies":
+
+                result.sort(function (a, b) {
+                    return (
+                        (
+                            b.Mentioned_Count
+                        )
+                        -
+                        (
+                            a.Mentioned_Count
+                        )
+                    )
+                })
+                return result
+
+            case "likes":
+                result.sort(function (a, b) {
+                    return (
+                        (
+                            b.Likes_Count
+                        )
+                        -
+                        (
+                            a.Likes_Count
+                        )
+                    )
+                })
+                return result
+
+            default:
+                return result
+        }
+    }
+
+    //search bar
+    filterData = () => {
+        if (this.state.data) {
+            var originData = this.state.data
+            var input = store.getState().partyFilter.input
+
+            var order = store.getState().partyFilter.order
+
+            var result = originData.filter(party => party.Party.toLowerCase().includes(input.toLowerCase()));
+
+
+            var sortedResult = this.customisedSort(result, order)
+            // console.log(sortedResult)
+            return sortedResult
+        } else {
+            return []
+        }
 
     }
 
-
+    //get all cards
     getCards = () => {
-        var green = {
-            flag:greenFlag,
-            name:'Australian Greens'
+        if (this.state.isSpinning) {
+            return []
         }
 
-        var ca = {
-            flag:caFlag,
-            name:'Centre Alliance'
-        }
-
-        var labor = {
-            flag:laborFlag,
-            name:'Australian Labor Party'
-        }
-
-        var kap = {
-            flag:kapFlag,
-            name:"1 Katter's Australian Party"
-        }
-
-        var liberal = {
-            flag:liberalFlag,
-            name:'Liberal Party of Australia'
-        }
-
-        var natinals = {
-            flag:natinalsFlag,
-            name:'The Nationals'
+        if (this.state.data == [] || !this.state.data) {
+            return []
         }
 
 
-        var testList = [green,ca,labor,kap,liberal,natinals]
 
+        var filteredData = this.filterData()
 
-        return testList.map(party => (
-            // console.log('1')
+        return filteredData.map((party, key) => (
+
             <Card
                 title={this.getTitleLink(party)}
                 bordered={false}
+                key={key}
                 loading={false}
                 className={'card'}
 
             >
                 <Row>
                     <Col span={6}>
-                        <img src={party.flag}
-                             style={{width: '95%', height: '20vh'}}
+                        <img src={getPartyFlag(party.Party)}
+                             alt={defaultImg}
+
+                             className={'card-img'}
                         />
                     </Col>
                     <Col span={18}>
                         <Col span={12}>
-                            {/*<Row className={'heading'}>*/}
-                                {/*<Col span={8} className={'heading-text'}> Tweeter</Col>*/}
-                                {/*<Col span={16} className={'politician-text'}> @scottMorison</Col>*/}
-                            {/*</Row>*/}
-                            {/*<Row className={'heading'}>*/}
-                                {/*<Col span={8} className={'heading-text'}> For</Col>*/}
-                                {/*<Col span={16} className={'politician-text'}> Canberra</Col>*/}
-                            {/*</Row>*/}
-                            {/*<Row className={'heading'}>*/}
-                                {/*<Col span={8} className={'heading-text'}> Party</Col>*/}
-                                {/*<Col span={16} className={'politician-text'}> Labour</Col>*/}
-                            {/*</Row>*/}
+
+                            <Row className={'heading'}>
+                                <Col span={8} className={'heading-text'}> Party</Col>
+                                <Col span={16} className={'party-text'}> {party.Party}</Col>
+                            </Row>
                         </Col>
                         <Col span={12}>
                             <Col span={12}>
                                 <Row className={'heading'}>
-                                    <Statistic title="Tweets posted" value={112893} />
+                                    <Statistic title="Total Posts" value={party.Tweets_Count}/>
                                 </Row>
                                 <Row className={'heading2'}>
-                                    <Statistic title="Replies Received" value={112893} />
+                                    <Statistic title={<div>Mentions
+                                        <Tooltip title={"The number of netizens who mentioned this party."}>
+                                            <Icon style={{paddingLeft: "3px"}} type="question-circle"/>
+                                        </Tooltip>
+                                    </div>}
+                                               value={calculateReplyCount(party)}/>
                                 </Row>
                             </Col>
                             <Col span={12}>
                                 <Row className={'heading'}>
-                                    <Statistic title="Followers" value={112893} />
+                                    <Statistic title="Likes" value={party.Likes_Count}/>
                                 </Row>
                                 <Row className={'heading2'}>
-                                    <Statistic title="Mean Sentiment Score" value={93} suffix="/ 100" />
+                                    <Statistic title={<div>Sentiment Score
+                                        <Tooltip title={"This is calculated by: Number of unique supporters * 1 " +
+                                        "+ Number of unique neutrals * 0.1 " +
+                                        "- Number of unique dissenters * 0.5"}>
+                                            <Icon style={{paddingLeft: "3px"}} type="question-circle"/>
+                                        </Tooltip>
+                                    </div>} value={calculateSentimentScore(party)}/>
                                 </Row>
                             </Col>
                         </Col>
@@ -131,23 +235,16 @@ export default class PartyCards extends React.Component {
         ))
     }
 
-    handleStoreChange = () => {
-        this.setState({
-            input: store.getState().politiciansFilter.input,
-            party: store.getState().politiciansFilter.party,
-            gender: store.getState().politiciansFilter.gender
-        })
-    };
 
     render() {
 
-        console.log(store.getState().politiciansFilter)
         return (
             <div id={'cardList'}>
+                <Spin spinning={this.state.isSpinning}>
+                    {this.getCards()}
 
-                {this.getCards()}
-
-                <BackTop target={() => document.getElementById('cardList')}/>
+                    <BackTop target={() => document.getElementById('cardList')}/>
+                </Spin>
             </div>
         )
     }

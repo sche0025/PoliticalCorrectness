@@ -2,12 +2,15 @@
     width: 97%;
     height:30vh;
     margin: 10px;
-
+    min-height: 300px;
+    /*min-width: 600px;*/
 }
 
 #cardList{
     overflow: auto;
     max-height: 83vh;
+    /*min-width: 600px;*/
+
 }
 
 
@@ -17,12 +20,15 @@
 }
 
 .heading {
-   padding: 5px;
+    padding-top: 0px;
+    padding-left: 0px;
+
 }
 
 .heading2 {
     padding-top: 50px;
-    padding-left: 5px;
+    padding-left: 0px;
+
 }
 
 .heading-text{
@@ -32,15 +38,30 @@
 }
 
 .politician-text{
-    font-size: 14pt;
+    padding-top: 2px;
+    font-size: 13pt;
     color: black;
 }
 
 .title{
-    font-size: 18pt;
+    font-size: 15pt;
 }
 
 .statistics{
     padding-left: 30px;
     padding-top: 50px;
+}
+
+.card-img{
+    height: 20vh;
+    width: 80%;
+    /*max-height: 180px;*/
+    padding: 10px;
+    min-height: 180px;
+
+}
+
+.statistics-title{
+    padding: 0px;
+    font-size: 12pt;
 }

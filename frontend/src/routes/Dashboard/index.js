@@ -1,5 +1,4 @@
 import React, {Fragment} from 'react';
-import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import './style.css';
 
@@ -7,17 +6,32 @@ import {
     Layout, Menu, Breadcrumb, Icon, Row, Col
 } from 'antd';
 import Leaderboard from '../../components/Dashboard/Leaderboard'
-import LineChart from '../../components/Charts/LineChart'
-import StackedBarChart from '../../components/Charts/StackedBarChart'
-import PieChart from '../../components/Charts/PieChart'
-import DonutChart from '../../components/Charts/DonutChart'
-
-const {
-    Header, Content, Footer, Sider,
-} = Layout;
-const SubMenu = Menu.SubMenu;
+import TopicTable from '../../components/Dashboard/TopicTable'
+import 'bootstrap'
+import store from "../../store";
+import DashboardDonutChart from "../../components/Dashboard/DashboardDonutChart";
+import DashboardStackedBarChart from "../../components/Dashboard/DashboardStackedBarChart";
+import DashboardLineChart from "../../components/Dashboard/DashboardLineChart";
 
 export default class Dashboard extends React.Component {
+
+    constructor(props){
+        super(props);
+        this.state = {
+            date:store.getState().date
+        };
+        store.subscribe(this.handleStoreChange);
+    }
+
+
+    //handle date change
+    handleStoreChange = () => {
+        if(this.state.date != store.getState().date){
+            this.setState({
+                date: store.getState().date
+            })
+        }
+    };
 
     render() {
 
@@ -29,31 +43,33 @@ export default class Dashboard extends React.Component {
                     <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
                 </Breadcrumb>
 
-                <div style={{background: '#fff', height: '100%'}}>
+                <div style={{background: 'white', height: 'auto',minHeight:"720px"
+                    ,minWidth:'750px'
+                }}>
                     <div style={{padding: "15px"}}>
                         <Row>
-                            <Col span={12} style={{background: "", height: '100%'}}>
-                                <Leaderboard/>
+                            <Col  style={{background: "",backdropColor:''}} lg={24} xxl={14}>
+                                <Leaderboard date = {this.state.date}/>
                             </Col>
-                            <Col span={12}>
+                            <Col  style={{maxWidth:'1130px'}} lg={24} xxl={10}>
 
                                 <Row className={'chart-container'}>
 
-                                    <LineChart height={295}/>
-
+                                    <DashboardLineChart height={295}/>
                                 </Row>
                                 <Row className={'chart-container'}>
                                     <Col span={12}>
-                                        <PieChart height={295}/>
+                                        <TopicTable date = {this.state.date}/>
                                     </Col>
+
                                     <Col span={12}>
-                                        <DonutChart height={295}/>
+                                        <DashboardDonutChart height={295}/>
                                     </Col>
 
                                 </Row>
 
                                 <Row className={'chart-container'}>
-                                    <StackedBarChart height={295}/>
+                                    <DashboardStackedBarChart height={295}/>
                                 </Row>
 
                             </Col>

@@ -1,25 +1,28 @@
 .filters{
     margin: 10px;
+    min-width: 200px;
 }
 
 .select{
     padding-top: 10px;
+
     width: 100%;
 }
 
 .search{
     padding-top: 10px;
-
+    padding-bottom: 10px;
 }
 
 .radio-group{
-
+    padding-right: 10px;
     width: 100%;
 }
 
 .filter_button{
-    left: 0px;
-    height: 37px;
+    /*left: 0px;*/
+    /*height: 37px;*/
+
     min-width: 60px;
     width: 25%;
 }

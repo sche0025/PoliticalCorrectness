@@ -1,63 +1,106 @@
-function accMul(arg1, arg2) {
-  let m = 0;
-  const s1 = arg1.toString();
-  const s2 = arg2.toString();
-  m += s1.split(".").length > 1 ? s1.split(".")[1].length : 0;
-  m += s2.split(".").length > 1 ? s2.split(".")[1].length : 0;
-  return Number(s1.replace(".", "")) * Number(s2.replace(".", "")) / 10 ** m;
+import AC from '../assets/img/partyFlags/AC.jpg'
+import AJP from '../assets/img/partyFlags/AJP.png'
+import AG from '../assets/img/partyFlags/AG.png'
+import ALP from '../assets/img/partyFlags/ALP.png'
+import AP from '../assets/img/partyFlags/AP.png'
+import CA from '../assets/img/partyFlags/ca.png'
+import FLUX from '../assets/img/partyFlags/FLUX.jpg'
+import IA from '../assets/img/partyFlags/IA.png'
+import KAP from '../assets/img/partyFlags/kap.png'
+import LNP from '../assets/img/partyFlags/LNP.jpg'
+import NPA from '../assets/img/partyFlags/NPA.jpg'
+import LPA from '../assets/img/partyFlags/LPA.png'
+import PHON from '../assets/img/partyFlags/PHON.png'
+import SA from '../assets/img/partyFlags/SA.png'
+import UAP from '../assets/img/partyFlags/UAP.png'
+import VS from '../assets/img/partyFlags/VS.png'
+import WAP from '../assets/img/partyFlags/WAP.png'
+import ASP from '../assets/img/partyFlags/ASP.png'
+import moment from 'moment'
+import config from '../config'
+
+
+export function calculateSentimentScore(politician) {
+  var score =
+      (politician.Sentiment_Pos*1) +
+      (politician.Sentiment_Neu*0.1) -
+      (politician.Sentiment_Neg*0.5)
+
+  return parseInt(score,10)
 }
 
-export function digitUppercase(n) {
-  const fraction = ['角', '分'];
-  const digit = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖'];
-  const unit = [['元', '万', '亿'], ['', '拾', '佰', '仟', '万']];
-  let num = Math.abs(n);
-  let s = '';
-  fraction.forEach((item, index) => {
-    s += (digit[Math.floor(accMul(num, 10 * 10 ** index)) % 10] + item).replace(/零./, '');
-  });
-  s = s || '整';
-  num = Math.floor(num);
-  for (let i = 0; i < unit[0].length && num > 0; i += 1) {
-    let p = '';
-    for (let j = 0; j < unit[1].length && num > 0; j += 1) {
-      p = digit[num % 10] + unit[1][j] + p;
-      num = Math.floor(num / 10);
-    }
-    s = p.replace(/(零.)*零$/, '').replace(/^$/, '零') + unit[0][i] + s;
+export function calculateReplyCount(politician) {
+  var score =
+      (politician.Sentiment_Pos) +
+      (politician.Sentiment_Neu) +
+      (politician.Sentiment_Neg)
+
+  return parseInt(score,10)
+}
+
+export function getPartyFlag(partyName) {
+
+  switch (partyName.trim().toLowerCase()) {
+    case "centre alliance":
+      return CA
+    case 'animal justice party':
+      return AJP
+    case 'australian christians':
+      return AC
+    case 'australian greens':
+      return AG
+    case 'australian labor party':
+      return ALP
+    case 'australian progressives':
+      return AP
+    case 'flux':
+      return FLUX
+    case 'independent':
+      return IA
+    case "katter's australian party":
+      return KAP
+    case "liberal national party":
+      return LNP
+    case "liberal party of australia":
+      return LPA
+    case "national party of australia":
+      return NPA
+    case "pauline hanson's one nation":
+      return PHON
+    case "science party":
+      return ASP
+    case "sustainable australia":
+      return SA
+    case "united australia party":
+      return UAP
+    case "victorian socialists":
+      return VS
+    case "western australia party":
+      return WAP
+
+    default:
+      return ""
   }
-
-  return s
-    .replace(/(零.)*零元/, '元')
-    .replace(/(零.)+/g, '零')
-    .replace(/^整$/, '零元整');
 }
 
+export function getPastDayList(date) {
 
-/**
- * 生成指定区间的随机整数
- * @param min
- * @param max
- * @returns {number}
- */
-export function randomNum(min, max) {
-  return Math.floor(Math.random() * (max - min) + min);
+  var endDate = moment(date)
+  var dateList = []
+  for (var i =0;i<7;i++){
+    if(i==0){
+      dateList.push(endDate.subtract(0,'days').format(config.dateFormat))
+    }else {
+      dateList.push(endDate.subtract(1,'days').format(config.dateFormat))
+    }
+
+    if(endDate.format(config.dateFormat)==moment(config.dataStartingDate).format(config.dateFormat)){
+      break;
+    }
+  }
+  return dateList
 }
 
-/**
- * 计算提示框的宽度
- * @param str
- * @returns {number}
- */
-export function calculateWidth(arr){
-  return 30 + arr[0].length*15
-}
-
-/**
- * 图片预加载
- * @param arr
- * @constructor
- */
 export function preloadingImages(arr) {
   arr.forEach(item=>{
     const img = new Image()

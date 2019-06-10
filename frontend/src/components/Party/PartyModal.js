@@ -5,175 +5,246 @@ import 'antd/dist/antd.css';
 import Row from "antd/es/grid/row";
 import Col from "antd/es/grid/col";
 import {Link} from "react-router-dom";
-import WordCloud from 'react-d3-cloud';
+import PartyLeaderCard from './PartyLeaderCard'
 import BarChart from '../Charts/StackedBarChart'
 import DonutChart from '../Charts/DonutChart'
 import DoubleLineChart from '../Charts/DoubleLineChart'
-
-
+import ReactWordcloud from 'react-wordcloud'
+import {calculateReplyCount, calculateSentimentScore, getPartyFlag, getPastDayList} from "../../utils/utils";
+import {getPartyLinechartsInfo, getPoliticianLinechartReceive, getTopLeadersInParty} from "../../utils/api";
+import store from "../../store";
+// import testdata from './word_cloud_one_day'
 
 export default class PartyModal extends React.Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            visible: false
+            visible: false,
+            topLeaders:[],
+            repliesReceived:[],
+            repliesPost:[]
         }
 
     }
 
     componentDidMount() {
 
+
     }
 
     handleOpen = () => {
+
         this.setState({
             visible: true
         })
+
+
+        var me = this
+        getTopLeadersInParty(this.props.party.Party,store.getState().date).then((data) => {
+            me.setState({
+                topLeaders: data.reverse(),
+                // isSpinning: false
+            })
+        })
+
+        getPartyLinechartsInfo(getPastDayList(store.getState().date),this.props.party.Party).then((data) => {
+
+            me.setState({
+                repliesReceived: data.receive,
+                tweetsPosted: data.post,
+            })
+        })
+
     }
 
     handleCancel = () => {
         this.setState({
-            visible: false
+            visible: false,
+            data: []
         })
     }
 
-    handleChange = (value) => {
-        console.log(`selected ${value}`);
-    }
 
+    getTopLeaders = ()=>{
+
+
+        if(!this.state.topLeaders){
+            return <Row></Row>
+        }
+
+        return <Row>
+        {
+            this.state.topLeaders.map((politician,key)=>{
+
+                return   <Col className="party-avatar-card" span={8}>
+                    <PartyLeaderCard name={politician.Name}
+                        img = {politician.Avatar}
+                                     sc = {calculateSentimentScore({
+                                         Sentiment_Pos:politician.Sentiment_Pos,
+                                         Sentiment_Neu:politician.Sentiment_Neu,
+                                         Sentiment_Neg:politician.Sentiment_Neg,
+
+                                     })}
+                                     myKey = {key}
+                    />
+                </Col>
+            })
+        }
+        </Row>
+    }
 
     render() {
 
-        const data = [
-            { text: 'Hey', value: 1000 },
-            { text: 'lol', value: 200 },
-            { text: 'first impression', value: 800 },
-            { text: 'very cool', value: 10000 },
-            { text: 'duck', value: 10 },
-            { text: 'Hey2', value: 1000 },
-            { text: 'lo3l', value: 200 },
-            { text: 'fi1rst impression', value: 800 },
-            { text: 'ver3y cool', value: 10000 },
-            { text: 'du4ck', value: 10 },
-            { text: 'Heye', value: 1000 },
-            { text: 'loql', value: 200 },
-            { text: 'firdst impression', value: 800 },
-            { text: 'very cfool', value: 10000 },
-            { text: 'ducsk', value: 101 },
-            { text: 'He21y', value: 1000 },
-            { text: 'l312ol', value: 200 },
-            { text: 'firewrst impression', value: 800 },
-            { text: 'veqerry cool', value: 10000 },
-            { text: 'duwqreck', value: 10 },
-            { text: 'Hedsfy2', value: 1000 },
-            { text: 'loafg3l', value: 200 },
-            { text: 'fi1rfagst impression', value: 800 },
-            { text: 'verdsaf3y cool', value: 10000 },
-            { text: 'du4adsfck', value: 10 },
-            { text: 'Heyfgde', value: 1000 },
-            { text: 'loqgfdl', value: 200 },
-            { text: 'firdafdst impression', value: 800 },
-            { text: 'very sdafcfool', value: 10000 },
-            { text: 'ducdsfsk', value: 101 },
-        ];
+        var options = {
+            colors: [
+                '#1f77b4',
+                '#ff7f0e',
+                '#2ca02c',
+                '#d62728',
+                '#9467bd',
+                '#8c564b',
+            ],
+            enableTooltip: true,
+            fontFamily: 'impact',
+            fontSizes: [20, 80],
+            fontStyle: 'normal',
+            fontWeight: 'normal',
+            padding: 1,
+            rotations: 3,
+            rotationAngles: [0, 90],
+            scale: 'sqrt',
+            spiral: 'archimedean',
+            transitionDuration: 1000,
+        }
 
-        const fontSizeMapper = word => Math.log2(word.value) * 5;
         return (
             <Fragment>
-                <Link onClick={this.handleOpen} className={'title'}>{this.props.name}</Link>
-                <Modal
-                    title={this.props.name}
-                    visible={this.state.visible}
-                    onCancel={this.handleCancel}
-                    footer={null}
-                    className={'modal'}
-                    centered={true}
-                    width={'85%'}
-                >
+                <Link onClick={this.handleOpen} className={'title'}>{this.props.party.Party}</Link>
+                {this.state.visible ?
+                    <Modal
+                        title={this.props.name}
+                        visible={this.state.visible}
+                        onCancel={this.handleCancel}
+                        footer={null}
+                        className={'modal'}
+                        centered={true}
+                        width={'85%'}
+                    >
 
-                    <div className={'contain'}>
-                        <Row>
-                            <Col span={6}>
-                                <div className={'profile'}>
-                                    <img src={this.props.flag}
-                                         className={'profileImg'}
-                                    />
-
-
-                                    <div className={'statistics'}>
-                                        <Col span={12}>
-                                            <Row className={'heading'}>
-                                                <Statistic title="Tweets posted" value={112893} />
-                                            </Row>
-                                            <Row className={'heading2'}>
-                                                <Statistic title="Replies Received" value={112893} />
-                                            </Row>
-                                        </Col>
-                                        <Col span={12}>
-                                            <Row className={'heading'}>
-                                                <Statistic title="Followers" value={112893} />
-                                            </Row>
-                                            <Row className={'heading2'}>
-                                                <Statistic title="Mean Sentiment Score" value={93} suffix="/ 100" />
-                                            </Row>
-                                        </Col>
-
+                        <div className={'contain'}>
+                            <Row>
+                                <Col span={6}>
+                                    <div className={'profile'}>
+                                        <img src={getPartyFlag(this.props.party.Party)}
+                                             className={'profileImg'}
+                                        />
+                                        <div className={'statistics'}>
+                                            <Col span={12}>
+                                                <Row className={'heading'}>
+                                                    <Statistic title="Total Posts"
+                                                               value={this.props.party.Tweets_Count}/>
+                                                </Row>
+                                                <Row className={'heading2'}>
+                                                    <Statistic title="Mentions"
+                                                               value={calculateReplyCount(this.props.party)}/>
+                                                </Row>
+                                            </Col>
+                                            <Col span={12}>
+                                                <Row className={'heading'}>
+                                                    <Statistic title="Likes" value={this.props.party.Likes_Count}/>
+                                                </Row>
+                                                <Row className={'heading2'}>
+                                                    <Statistic title="Sentiment Score"
+                                                               value={calculateSentimentScore(this.props.party)}/>
+                                                </Row>
+                                            </Col>
+                                        </div>
                                     </div>
-                                </div>
+
+                                </Col>
+                                <Col span={18}>
+                                    <div className={'details'}>
+                                        <Row>
+                                            <div className={'details-heading'}>Who are the most popular politicians in this
+                                                party?
+                                                <div className={'party-leaders'}>
+                                                    {this.getTopLeaders()}
+
+                                                </div>
+
+                                            </div>
 
 
-                            </Col>
-                            <Col span={18}>
-                                <div className={'details'}>
-                                    <Row>
-                                        <div className={'details-heading'}>What's his/her most frequently used words?</div>
-                                        <div className={'word-cloud'}>
-                                            <WordCloud
-                                                data={data}
-                                                fontSizeMapper={fontSizeMapper}
-                                                width={1200}
-                                                height={350}
-                                            />
-                                        </div>
-
-                                        <div className={'details-heading'}>How do people think of him/her nationwide?</div>
-                                        <div className={'detail-barChart'}>
-                                            <BarChart height={450} />
-                                        </div>
-
-                                        <div className={'details-heading'}>Do people in their local constituency agree/disagree with them?</div>
-                                        <div className={'detail-pieChart'}>
-                                            < DonutChart height={450}/>
-                                        </div>
-
-                                        <div className={'details-heading'}>Do people tweet about these things that politicians
-                                            tweet too?
-                                        </div>
-                                        <div className={'word-cloud'}>
-                                            <WordCloud
-                                                data={data}
-                                                fontSizeMapper={fontSizeMapper}
-                                                width={1200}
-                                                height={350}
-                                            />
-                                        </div>
-
-                                        <div className={'word-cloud'}>
-                                            <div className={'details-heading'}>How did internet users think of him/her in the past 7 days?
+                                            <div className={'details-heading'}>What are the party members' most
+                                                frequently used words?
                                             </div>
                                             <div className={'word-cloud'}>
-                                                <DoubleLineChart height={450}/>
+                                                {this.state.visible ?
+                                                    <ReactWordcloud
+                                                        words={this.props.party.Word_Cloud}
+                                                        options={options}
+
+                                                    /> : <div></div>
+                                                }
                                             </div>
-                                        </div>
 
-                                    </Row>
+                                            <div className={'details-heading'}>How do people from different
+                                                state
+                                                think of this party?
+                                            </div>
+                                            <div className={'detail-barChart'}>
+                                                <BarChart height={450}
+                                                          posList ={this.props.party.State_Pos[0]}
+                                                          negList ={this.props.party.State_Neg[0]}
+                                                          neuList ={this.props.party.State_Neu[0]}
+                                                />
+                                            </div>
 
-                                </div>
-                            </Col>
-                        </Row>
-                    </div>
-                </Modal>
+                                            <div className={'details-heading'}>How do people think of the party
+                                                overall?
+                                            </div>
+                                            <div className={'detail-pieChart'}>
+                                                < DonutChart height={450}
+                                                             pos={this.props.party.Sentiment_Pos}
+                                                             neg={this.props.party.Sentiment_Neg}
+                                                             neu={this.props.party.Sentiment_Neu}
+
+                                                />
+                                            </div>
+
+
+
+                                            <div className={'details-heading'}>How did people think of the party in the past 7 days?
+                                            </div>
+                                            <div className={'word-cloud'}>
+                                                <DoubleLineChart height={450}
+                                                                 data={this.state.repliesReceived}
+                                                                 yTitle={"Number of netizens"}
+                                                                 type={"replies"}
+                                                />
+                                            </div>
+
+                                            <div className={'details-heading'}>
+
+                                                What were the sentiment of this party members' posts in the past 7 days?
+                                            </div>
+                                            <div className={'word-cloud'}>
+                                                <DoubleLineChart height={450}
+                                                                 yTitle={"Number of tweets"}
+                                                                 data={this.state.tweetsPosted}
+                                                                 type={"posts"}
+                                                />
+                                            </div>
+
+                                        </Row>
+                                    </div>
+                                </Col>
+                            </Row>
+                        </div>
+                    </Modal>:<div></div>
+
+                }
             </Fragment>
         )
     }

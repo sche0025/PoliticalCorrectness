@@ -1,14 +1,18 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import './style.css';
 import moment from 'moment'
 import logo from "../../assets/img/unimelbLogo.jpeg"
+import logo2 from "../../assets/img/unimelb2.png"
+import Datepicker from '../../components/Datepicker/Datepicker'
+import config from '../../config'
+import store from '../../store/index'
 
 import {
-    Layout, Menu, Breadcrumb, Icon, Row, Col
+    Layout, Menu, Icon, Row, Col
 } from 'antd';
 import {NavLink} from "react-router-dom";
+import Redirect from "react-router-dom/es/Redirect";
 
 const {
     Header, Content, Footer, Sider,
@@ -16,57 +20,85 @@ const {
 const SubMenu = Menu.SubMenu;
 
 class Home extends React.Component {
-    state = {
-        collapsed: false,
-    };
+    constructor(props){
+        super(props)
+        this.state = {
+           date:store.getState().date,
+            img:logo
+        };
+
+    }
+
 
     //side bar collapse
     onCollapse = (collapsed) => {
+        console.log(collapsed)
+        if(collapsed){
+            this.setState({
+                img:logo2
+            })
+        }else {
+            this.setState({
+                img:logo
+            })
+        }
         this.setState({collapsed});
     }
 
     // get default highlighted NavLink
     getActivatedKey = () => {
         var path = window.location.pathname
-        console.log(path,path.endsWith('politician'))
-        if(path.endsWith('dashboard')){
+        if (path.endsWith('dashboard')) {
             return '1'
-        }else if(path.endsWith('map')){
+        } else if (path.endsWith('map')) {
             return '2'
-        }else if(path.endsWith('party')){
+        } else if (path.endsWith('party')) {
             return '3'
-        }else if(path.endsWith('politician')){
+        } else if (path.endsWith('politician')) {
             return '4'
-        }else if(path.endsWith('about')){
+        } else if (path.endsWith('about')) {
             return '5'
         }
     }
 
     //Get the date of update
-    getLastUpdateTime=()=>{
-        var today = moment().format('MMMM Do YYYY');
-        return 'Last updated on '+ today
+    getLastUpdateTime = () => {
+        var today = moment(config.dataEndingDate).format(config.dateFormat);
+        return 'Last updated on ' + today
     }
 
+    handleLogout=()=>{
+        localStorage.removeItem("isLoggedIn");
+        window.location.reload();
+    }
+
+    componentDidMount() {
+        var path = window.location.pathname
+        if (path.endsWith('dashboard')){
+            document.getElementById("dashboardLink").click()
+        }
+
+    }
 
     render() {
-
-
+        let isLoggedIn = localStorage.getItem("isLoggedIn");
+        if (isLoggedIn !='true') return <Redirect to='/'/>
         var defaultKey = this.getActivatedKey()
-        // console.log(defaultKey)
+
+
         return (
-            <Layout style={{minHeight: '100vh'}}>
+            <Layout style={{height: '100vh'}}>
 
                 <Sider
-                    width={"15%"}
+                    width={200}
                     collapsible
                     collapsed={this.state.collapsed}
                     onCollapse={this.onCollapse}
                 >
-                    <div className="logo"><img className={"img"} src={logo} alt=""/></div>
+                    <div className="logo"><img className={"img"} src={this.state.img} alt=""/></div>
                     <Menu theme="dark" defaultSelectedKeys={[defaultKey]} mode="inline">
                         <Menu.Item key="1">
-                            <NavLink to={'/home/dashboard'}>
+                            <NavLink to={{pathname:'/home/dashboard', date:this.state.date}} id={"dashboardLink"} >
                                 <Icon type="pie-chart"/>
                                 <span>Dashboard</span>
                             </NavLink>
@@ -77,12 +109,6 @@ class Home extends React.Component {
                                 <span>Map</span>
                             </NavLink>
                         </Menu.Item>
-                        <Menu.Item key="3">
-                            <NavLink to={'/home/party'}>
-                                <Icon type="flag"/>
-                                <span>Parties</span>
-                            </NavLink>
-                        </Menu.Item>
 
                         <Menu.Item key="4">
                             <NavLink to={'/home/politician'}>
@@ -90,6 +116,15 @@ class Home extends React.Component {
                                 <span>Politicians</span>
                             </NavLink>
                         </Menu.Item>
+
+                        <Menu.Item key="3">
+                            <NavLink to={'/home/party'}>
+                                <Icon type="flag"/>
+                                <span>Parties</span>
+                            </NavLink>
+                        </Menu.Item>
+
+
                         <Menu.Item key="5">
                             <NavLink to={'/home/about'}>
                                 <Icon type="team"/>
@@ -97,36 +132,39 @@ class Home extends React.Component {
                             </NavLink>
                         </Menu.Item>
 
-                        <Menu.Item key="6">
-                            <NavLink to={'/home/test'}>
-                                <Icon type="file"/>
-                                <span>Chart Test</span>
-                            </NavLink>
-                        </Menu.Item>
                     </Menu>
                 </Sider>
                 <Layout>
-                    <Header style={{background: '#fff', padding: "0px 10px"}}>
-                        <Row>
-                            <Col span={12} className={'updateTime'}> {this.getLastUpdateTime()} </Col>
-                            <Col span={12} style={{textAlign: "right"}}>
-                                <span>  Welcome Richard</span>
-                                <a className={"text"} href={'#'}>Logout </a>
-                            </Col>
+                    <Header style={{background: '#fff', padding: "0px 10px",
 
+                    }}>
+                        <Row>
+                            <Col>
+                                <div className={'home-time'}>
+                                    <Datepicker/>
+                                </div>
+                                <div className={'home-time'}>
+                                    {this.getLastUpdateTime()}
+                                </div>
+
+                                <div className={'user'}>
+                                    <span>  Welcome Admin</span>
+                                    <a className={"text"} onClick={this.handleLogout}>Logout </a>
+                                </div>
+                            </Col>
                         </Row>
                     </Header>
 
-                    <Content style={{margin: '0 16px'}}>
-                        <div style={{margin: '0 16px', height: '95%'}}>
+                    <Content style={{margin: '0 16px',height:'auto',
+                        width:'98%'
+                    }}>
+                        <div style={{margin: '0 16px'
+                            ,overflow: "auto",
+                            // overflowY:'auto'
+                            }} date="test">
                             {this.props.children}
                         </div>
                     </Content>
-                    <Footer style={{textAlign: 'center'}}>
-                        NLP: Political Correctness ©2019 The University of Melbourne
-                    </Footer>
-
-
                 </Layout>
             </Layout>
         );
