@@ -5,7 +5,6 @@ This is a fullstack MFRN (MongoDB, Flask, React and Node) app
 Pre-Requisite:
   - node 8+
   - nvm 0.34+
-  - virtualenv 16+
   - git latest
   - yarn 1.16.0
 
