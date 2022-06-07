@@ -5,7 +5,7 @@
   "dependencies": {
     "animate.css": "^3.6.1",
     "antd": "^3.16.2",
-    "axios": "^0.18.0",
+    "axios": "^0.21.2",
     "bodymovin": "^4.13.0",
     "bootstrap": "^4.3.1",
     "chart.js": "^2.8.0",
